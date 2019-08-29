@@ -1,0 +1,16 @@
+name: firestore_ref
+description: Support using src safely by helper classes.
+version: 0.0.1
+author: Masayuki Ono <mono0926@gmail.com>
+homepage: https://github.com/mono0926/flutter_firestore_ref
+environment:
+  sdk: ">=2.2.2 <3.0.0"
+dependencies:
+  flutter:
+    sdk: flutter
+  cloud_firestore: ^0.12.9
+  simple_logger: ^1.5.1
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+flutter:
