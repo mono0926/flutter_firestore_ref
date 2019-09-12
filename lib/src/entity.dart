@@ -42,3 +42,20 @@ DateTime _parseTimestamp({
 }) {
   return json[key] == null ? null : (json[key] as Timestamp).toDate();
 }
+
+Map<String, dynamic> parseJson(
+  Map<String, dynamic> json, {
+  @required String key,
+}) {
+  final value = json[key] as Map;
+  return value == null ? null : Map<String, dynamic>.from(value as Map);
+}
+
+T parse<T>(
+  Map<String, dynamic> json, {
+  @required String key,
+  @required T Function(Map<String, dynamic>) fromJson,
+}) {
+  final parsedJson = parseJson(json, key: key);
+  return parsedJson == null ? null : fromJson(parsedJson);
+}
