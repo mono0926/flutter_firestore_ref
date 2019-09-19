@@ -5,3 +5,4 @@ export 'src/collection_ref.dart';
 export 'src/document.dart';
 export 'src/document_ref.dart';
 export 'src/entity.dart';
+export 'src/functions.dart';

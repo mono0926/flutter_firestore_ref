@@ -38,37 +38,53 @@ class DocumentRef<E extends Entity, D extends Document<E>> {
 
   /// すでにあるデータに対して
   /// マージと似ているがそのキーの配下のものは置き換わる
-  Future<void> update(E entity) {
-    return ref.updateData(encoder.encode(entity));
+  Future<void> update(E entity, {WriteBatch batch}) {
+    return updateJson(encoder.encode(entity), batch: batch);
   }
 
   /// すでにあるデータに対して
   /// マージと似ているがそのキーの配下のものは置き換わる
-  Future<void> updateJson(Map<String, dynamic> json) {
-    return ref.updateData(json);
+  Future<void> updateJson(Map<String, dynamic> json, {WriteBatch batch}) {
+    if (batch == null) {
+      return ref.updateData(json);
+    } else {
+      batch.updateData(ref, json);
+    }
   }
 
   /// 全置き換え
-  Future<void> set(E entity) {
-    return ref.setData(encoder.encode(entity));
+  Future<void> set(E entity, {WriteBatch batch}) {
+    return setJson(encoder.encode(entity), batch: batch);
   }
 
   /// 全置き換え
-  Future<void> setJson(Map<String, dynamic> json) {
-    return ref.setData(json);
+  Future<void> setJson(Map<String, dynamic> json, {WriteBatch batch}) {
+    if (batch == null) {
+      return ref.setData(json);
+    } else {
+      batch.setData(ref, json);
+    }
   }
 
   /// マージ
-  Future<void> merge(E entity) {
-    return ref.setData(encoder.encode(entity), merge: true);
+  Future<void> merge(E entity, {WriteBatch batch}) {
+    return mergeJson(encoder.encode(entity), batch: batch);
   }
 
   /// マージ
-  Future<void> mergeJson(Map<String, dynamic> json) {
-    return ref.setData(json, merge: true);
+  Future<void> mergeJson(Map<String, dynamic> json, {WriteBatch batch}) {
+    if (batch == null) {
+      return ref.setData(json, merge: true);
+    } else {
+      batch.setData(ref, json, merge: true);
+    }
   }
 
-  Future<void> delete() {
-    return ref.delete();
+  Future<void> delete({WriteBatch batch}) {
+    if (batch == null) {
+      return ref.delete();
+    } else {
+      batch.delete(ref);
+    }
   }
 }
