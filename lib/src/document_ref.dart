@@ -49,6 +49,7 @@ class DocumentRef<E extends Entity, D extends Document<E>> {
       return ref.updateData(json);
     } else {
       batch.updateData(ref, json);
+      return Future.value(null);
     }
   }
 
@@ -63,6 +64,7 @@ class DocumentRef<E extends Entity, D extends Document<E>> {
       return ref.setData(json);
     } else {
       batch.setData(ref, json);
+      return Future.value(null);
     }
   }
 
@@ -77,6 +79,7 @@ class DocumentRef<E extends Entity, D extends Document<E>> {
       return ref.setData(json, merge: true);
     } else {
       batch.setData(ref, json, merge: true);
+      return Future.value(null);
     }
   }
 
@@ -85,6 +88,7 @@ class DocumentRef<E extends Entity, D extends Document<E>> {
       return ref.delete();
     } else {
       batch.delete(ref);
+      return Future.value(null);
     }
   }
 }

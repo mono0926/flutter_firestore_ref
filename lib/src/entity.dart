@@ -48,7 +48,7 @@ Map<String, dynamic> parseJson(
   @required String key,
 }) {
   final value = json[key] as Map;
-  return value == null ? null : Map<String, dynamic>.from(value as Map);
+  return value == null ? null : Map<String, dynamic>.from(value);
 }
 
 T parse<T>(
