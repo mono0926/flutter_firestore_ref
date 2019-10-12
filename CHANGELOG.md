@@ -1,3 +1,7 @@
+## [0.0.4]
+
+- Support for web.
+
 ## [0.0.3]
 
 - Support batch write.
