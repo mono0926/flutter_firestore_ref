@@ -11,6 +11,7 @@ dependencies:
   cloud_firestore: ^0.12.9
   firebase: ^5.0.4
   simple_logger: ^1.5.1
+  meta: ^1.1.7
 dev_dependencies:
   flutter_test:
     sdk: flutter
