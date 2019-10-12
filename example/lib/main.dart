@@ -6,6 +6,7 @@ import 'app.dart';
 import 'model/service/service.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   configureFirestore(persistenceEnabled: true);
   runApp(
     MultiProvider(
