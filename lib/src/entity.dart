@@ -15,6 +15,17 @@ abstract class Entity {
           EntityField.createdAt: FieldValue.serverTimestamp(),
         EntityField.updatedAt: FieldValue.serverTimestamp(),
       };
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is Entity &&
+          runtimeType == other.runtimeType &&
+          createdAt == other.createdAt &&
+          updatedAt == other.updatedAt;
+
+  @override
+  int get hashCode => createdAt.hashCode ^ updatedAt.hashCode;
 }
 
 @immutable

@@ -1,0 +1,20 @@
+name: example
+description: A new Flutter application.
+version: 1.0.0+1
+environment:
+  sdk: ">=2.5.0 <3.0.0"
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^0.1.2
+  fb_auth: any
+  mono_kit: any
+  provider: any
+  firestore_ref:
+    path: ../../flutter_firestore_ref
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  pedantic_mono: any
+flutter:
+  uses-material-design: true
