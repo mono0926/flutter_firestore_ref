@@ -1,6 +1,10 @@
-## [0.0.4]
+## [0.2.0]
 
 - Support for web.
+
+## [0.1.0]
+
+- Several enhancements.
 
 ## [0.0.3]
 
