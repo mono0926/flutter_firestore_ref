@@ -1,6 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firestore_ref/firestore_ref.dart';
+import 'package:firestore_ref/src/helper/helper.dart';
 import 'package:meta/meta.dart';
+
+import 'firestore.dart';
 
 typedef MakeQuery = Query Function(CollectionReference collectionRef);
 
@@ -20,16 +22,17 @@ class CollectionRef<E extends Entity, D extends Document<E>> {
   final EntityEncoder<E> encoder;
 
   Stream<QuerySnapshot> snapshots(MakeQuery makeQuery) {
-    return makeQuery(ref).snapshots();
+    return queryToSnapshots(makeQuery(ref));
   }
 
   Stream<List<D>> documents(MakeQuery makeQuery) {
-    return snapshots(makeQuery)
-        .map((snap) => snap.documents.map(decoder.decode).toList());
+    return snapshots(makeQuery).map(
+        (snap) => queryToDocumentSnapshot(snap).map(decoder.decode).toList());
   }
 
   @protected
-  DocumentReference docRefRaw([String id]) => ref.document(id);
+  DocumentReference docRefRaw([String id]) =>
+      collectionToDocumentReference(ref, id: id);
 
   DocumentRef<E, D> docRef([String id]) {
     return DocumentRef<E, D>(

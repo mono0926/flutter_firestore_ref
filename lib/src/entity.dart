@@ -1,5 +1,7 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firestore_ref/firestore_ref.dart';
 import 'package:meta/meta.dart';
+
+import 'firestore.dart';
 
 @immutable
 abstract class Entity {
@@ -40,18 +42,11 @@ class EntityField {
 }
 
 DateTime parseCreatedAt(Map<String, dynamic> json) {
-  return _parseTimestamp(json: json, key: EntityField.createdAt);
+  return parseTimestamp(json: json, key: EntityField.createdAt);
 }
 
 DateTime parseUpdatedAt(Map<String, dynamic> json) {
-  return _parseTimestamp(json: json, key: EntityField.updatedAt);
-}
-
-DateTime _parseTimestamp({
-  @required Map<String, dynamic> json,
-  @required String key,
-}) {
-  return json[key] == null ? null : (json[key] as Timestamp).toDate();
+  return parseTimestamp(json: json, key: EntityField.updatedAt);
 }
 
 Map<String, dynamic> parseJson(

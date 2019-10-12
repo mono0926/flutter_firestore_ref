@@ -1,7 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firestore_ref/firestore_ref.dart';
 import 'package:meta/meta.dart';
 import 'package:simple_logger/simple_logger.dart';
+
+import 'firestore.dart';
 
 SimpleLogger get _logger => SimpleLogger();
 
@@ -18,9 +19,9 @@ class DocumentRef<E extends Entity, D extends Document<E>> {
   final EntityEncoder<E> encoder;
 
   Stream<D> document() {
-    return ref.snapshots().map((snapshot) {
+    return documentRefToSnapshots(ref).map((snapshot) {
       if (!snapshot.exists) {
-        _logger.warning('$D not found(id: ${ref.documentID})');
+        _logger.warning('$D not found(id: ${getDocumentId(ref)})');
         return null;
       }
       return decoder.decode(snapshot);
@@ -30,7 +31,7 @@ class DocumentRef<E extends Entity, D extends Document<E>> {
   Future<D> get() async {
     final snapshot = await ref.get();
     if (!snapshot.exists) {
-      _logger.warning('$D not found(id: ${ref.documentID})');
+      _logger.warning('$D not found(id: ${getDocumentId(ref)})');
       return null;
     }
     return decoder.decode(snapshot);
@@ -45,42 +46,42 @@ class DocumentRef<E extends Entity, D extends Document<E>> {
   /// すでにあるデータに対して
   /// マージと似ているがそのキーの配下のものは置き換わる
   Future<void> updateJson(Map<String, dynamic> json, {WriteBatch batch}) {
-    if (batch == null) {
-      return ref.updateData(json);
-    } else {
-      batch.updateData(ref, json);
-      return Future.value(null);
-    }
+    return updateRef(ref, data: json, batch: batch);
   }
 
   /// 全置き換え
   Future<void> set(E entity, {WriteBatch batch}) {
-    return setJson(encoder.encode(entity), batch: batch);
+    return setJson(
+      encoder.encode(entity),
+      batch: batch,
+    );
   }
 
   /// 全置き換え
   Future<void> setJson(Map<String, dynamic> json, {WriteBatch batch}) {
-    if (batch == null) {
-      return ref.setData(json);
-    } else {
-      batch.setData(ref, json);
-      return Future.value(null);
-    }
+    return setRef(
+      ref,
+      data: json,
+      batch: batch,
+    );
   }
 
   /// マージ
   Future<void> merge(E entity, {WriteBatch batch}) {
-    return mergeJson(encoder.encode(entity), batch: batch);
+    return mergeJson(
+      encoder.encode(entity),
+      batch: batch,
+    );
   }
 
   /// マージ
   Future<void> mergeJson(Map<String, dynamic> json, {WriteBatch batch}) {
-    if (batch == null) {
-      return ref.setData(json, merge: true);
-    } else {
-      batch.setData(ref, json, merge: true);
-      return Future.value(null);
-    }
+    return setRef(
+      ref,
+      data: json,
+      batch: batch,
+      merge: true,
+    );
   }
 
   Future<void> delete({WriteBatch batch}) {

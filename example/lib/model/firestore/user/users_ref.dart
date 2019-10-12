@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter/foundation.dart';
 
@@ -21,7 +20,7 @@ class UsersRef extends CollectionRef<User, UserDoc> {
 
   factory UsersRef.ref() {
     return UsersRef._(
-      ref: Firestore.instance.collection(collection),
+      ref: collectionRef(collection),
       decoder: _UserDocDecoder(),
       encoder: _UserEncoder(),
     );
@@ -42,9 +41,9 @@ class UsersRef extends CollectionRef<User, UserDoc> {
 class _UserDocDecoder extends DocumentDecoder<UserDoc> {
   @override
   UserDoc decode(DocumentSnapshot snapshot) {
-    final data = snapshot.data;
+    final data = getSnapshotData(snapshot);
     return UserDoc(
-      snapshot.documentID,
+      getSnapshotId(snapshot),
       User.fromJson(data),
     );
   }
