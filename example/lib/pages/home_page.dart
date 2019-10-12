@@ -76,6 +76,7 @@ class _Users extends StatelessWidget {
       itemBuilder: (context, index) {
         final doc = docs[index];
         return Container(
+          key: ValueKey(doc.id),
           color: authenticator.user?.uid == doc.id ? Colors.green[100] : null,
           child: ListTile(
             title: Text(doc.id),
