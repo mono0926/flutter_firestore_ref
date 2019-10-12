@@ -81,3 +81,7 @@ Query orderBy(
 }) {
   return ref.orderBy(field, descending: descending);
 }
+
+void configureFirestore({bool persistenceEnabled}) {
+  Firestore.instance.settings(persistenceEnabled: persistenceEnabled);
+}

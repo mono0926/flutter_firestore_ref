@@ -67,12 +67,14 @@ DateTime parseTimestamp({
   return json[key] as DateTime;
 }
 
+final _firestore = firestore();
+
 CollectionReference collectionRef(String path) {
-  return firestore().collection(path);
+  return _firestore.collection(path);
 }
 
 WriteBatch getBatch() {
-  return firestore().batch();
+  return _firestore.batch();
 }
 
 Query orderBy(
@@ -81,4 +83,10 @@ Query orderBy(
   bool descending = false,
 }) {
   return ref.orderBy(field, descending ? 'desc' : 'asc');
+}
+
+void configureFirestore({bool persistenceEnabled}) {
+  if (persistenceEnabled) {
+    _firestore.enablePersistence();
+  }
 }
