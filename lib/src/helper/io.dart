@@ -73,3 +73,11 @@ CollectionReference collectionRef(String path) {
 WriteBatch getBatch() {
   return Firestore.instance.batch();
 }
+
+Query orderBy(
+  CollectionReference ref, {
+  @required String field,
+  bool descending = false,
+}) {
+  return ref.orderBy(field, descending: descending);
+}

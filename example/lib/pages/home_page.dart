@@ -1,6 +1,7 @@
 import 'package:example/main.dart';
 import 'package:example/model/service/service.dart';
 import 'package:example/model/service/user_notifier.dart';
+import 'package:example/model/service/users_notofier.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -19,6 +20,12 @@ class HomePage extends StatelessWidget {
             child: const _MyCounter(),
           ),
           const Divider(),
+          Expanded(
+            child: ChangeNotifierProvider(
+              builder: (context) => UsersNotifier(),
+              child: const _Users(),
+            ),
+          ),
         ],
       ),
     );
@@ -54,6 +61,29 @@ class _MyCounter extends StatelessWidget {
           Provider.of<UserNotifier>(context, listen: false).increment();
         },
       ),
+    );
+  }
+}
+
+class _Users extends StatelessWidget {
+  const _Users({Key key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    final authenticator = Provider.of<Authenticator>(context);
+    final notifier = Provider.of<UsersNotifier>(context);
+    final docs = notifier.userDocs;
+    return ListView.builder(
+      itemBuilder: (context, index) {
+        final doc = docs[index];
+        return Container(
+          color: authenticator.user?.uid == doc.id ? Colors.green[100] : null,
+          child: ListTile(
+            title: Text(doc.id),
+            subtitle: Text('count: ${doc.entity.count}'),
+          ),
+        );
+      },
+      itemCount: docs.length,
     );
   }
 }
