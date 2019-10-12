@@ -1,5 +1,5 @@
 import 'package:firebase/firebase.dart' hide Query;
-import 'package:firestore_ref/firestore_ref.dart';
+import 'package:firebase/firestore.dart';
 import 'package:flutter/foundation.dart';
 
 Stream<QuerySnapshot> queryToSnapshots(Query query) {
