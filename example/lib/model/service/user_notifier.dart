@@ -1,6 +1,6 @@
 import 'package:example/model/firestore/firestore.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:mono_kit/mono_kit.dart';
+import 'package:flutter/foundation.dart';
+import 'package:subscription_holder/subscription_holder.dart';
 
 class UserNotifier extends ChangeNotifier {
   UserNotifier({@required UserDoc doc}) {

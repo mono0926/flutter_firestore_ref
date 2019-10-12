@@ -8,7 +8,7 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^0.1.2
   fb_auth: any
-  mono_kit: any
+  subscription_holder: any
   provider: any
   firestore_ref:
     path: ../../flutter_firestore_ref
