@@ -13,7 +13,7 @@ class UsersNotifier extends ChangeNotifier {
                 r,
                 field: EntityField.updatedAt,
                 descending: true,
-              ))
+              ).limit(100))
           .listen((docs) {
         _userDocs = docs;
         notifyListeners();
