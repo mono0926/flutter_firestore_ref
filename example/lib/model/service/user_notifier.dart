@@ -1,4 +1,5 @@
 import 'package:example/model/firestore/firestore.dart';
+import 'package:example/util/util.dart';
 import 'package:flutter/foundation.dart';
 import 'package:subscription_holder/subscription_holder.dart';
 
@@ -20,6 +21,7 @@ class UserNotifier extends ChangeNotifier {
   UserNotifier.fromId(String id) : this(doc: UserDoc(id, null));
 
   void increment() {
+    logger.info(DateTime.now());
     _ref.merge(user.copyWith(count: count + 1));
   }
 
