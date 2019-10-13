@@ -1,5 +1,4 @@
 import 'package:firestore_ref/firestore_ref.dart';
-import 'package:flutter/foundation.dart';
 
 import 'user.dart';
 import 'user_doc.dart';
@@ -8,23 +7,12 @@ import 'user_ref.dart';
 export 'user_ref.dart';
 
 class UsersRef extends CollectionRef<User, UserDoc> {
-  const UsersRef._({
-    @required CollectionReference ref,
-    @required DocumentDecoder<UserDoc> decoder,
-    @required EntityEncoder<User> encoder,
-  }) : super(
-          ref: ref,
-          decoder: decoder,
-          encoder: encoder,
+  UsersRef.ref()
+      : super(
+          ref: collectionRef(collection),
+          decoder: _UserDocDecoder(),
+          encoder: _UserEncoder(),
         );
-
-  factory UsersRef.ref() {
-    return UsersRef._(
-      ref: collectionRef(collection),
-      decoder: _UserDocDecoder(),
-      encoder: _UserEncoder(),
-    );
-  }
 
   static const collection = 'users';
 
@@ -51,7 +39,5 @@ class _UserDocDecoder extends DocumentDecoder<UserDoc> {
 
 class _UserEncoder extends EntityEncoder<User> {
   @override
-  Map<String, dynamic> encode(User entity) {
-    return entity.toJson();
-  }
+  Map<String, dynamic> encode(User entity) => entity.toJson();
 }
