@@ -1,9 +1,7 @@
 import 'package:example/main.dart';
 import 'package:example/model/service/service.dart';
-import 'package:example/model/service/user_notifier.dart';
-import 'package:example/model/service/users_notofier.dart';
+import 'package:example/util/util.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key key}) : super(key: key);
