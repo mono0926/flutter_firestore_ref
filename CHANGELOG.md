@@ -1,3 +1,7 @@
+## [0.2.1]
+
+- Rename to data from json
+
 ## [0.2.0]
 
 - Support for web.
