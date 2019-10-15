@@ -85,7 +85,8 @@ Query orderBy(
   return ref.orderBy(field, descending ? 'desc' : 'asc');
 }
 
-void configureFirestore({bool persistenceEnabled}) {
+void configureFirestore({bool persistenceEnabled = true}) {
+  assert(persistenceEnabled != null, 'persistenceEnabled should not be null');
   if (persistenceEnabled) {
     _firestore.enablePersistence();
   }

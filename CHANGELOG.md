@@ -1,3 +1,7 @@
+## [0.2.2]
+
+- Set `configureFirestore`'s `persistenceEnabled` default value to `true`.
+
 ## [0.2.1]
 
 - Rename to data from json
