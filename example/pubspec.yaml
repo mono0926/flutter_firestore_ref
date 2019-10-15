@@ -2,7 +2,7 @@ name: example
 description: A new Flutter application.
 version: 1.0.0+1
 environment:
-  sdk: ">=2.5.0 <3.0.0"
+  sdk: ">=2.6.0-dev <3.0.0"
 dependencies:
   flutter:
     sdk: flutter
@@ -12,6 +12,8 @@ dependencies:
   provider: any
   firestore_ref:
     path: ../../flutter_firestore_ref
+dependency_overrides:
+  firebase: ^6.0.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
