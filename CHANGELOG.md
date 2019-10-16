@@ -1,6 +1,7 @@
-## [3.0.0]
+## [0.3.0]
 
 - Update to firebase 6.0.0
+- Support collection group query for web
 
 ## [0.2.2]
 

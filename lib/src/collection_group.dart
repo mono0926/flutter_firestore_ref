@@ -8,7 +8,7 @@ class CollectionGroup<E extends Entity, D extends Document<E>> {
     @required String path,
     @required this.decoder,
     @required this.encoder,
-  }) : query = Firestore.instance.collectionGroup(path);
+  }) : query = firestoreInstance.collectionGroup(path);
   @protected
   final Query query;
   @protected
@@ -17,11 +17,11 @@ class CollectionGroup<E extends Entity, D extends Document<E>> {
   final EntityEncoder<E> encoder;
 
   Stream<QuerySnapshot> snapshots(MakeGroupQuery makeQuery) {
-    return makeQuery(query).snapshots();
+    return queryToSnapshots(makeQuery(query));
   }
 
   Stream<List<D>> documents(MakeGroupQuery makeQuery) {
-    return snapshots(makeQuery)
-        .map((snap) => snap.documents.map(decoder.decode).toList());
+    return snapshots(makeQuery).map(
+        (snap) => queryToDocumentSnapshot(snap).map(decoder.decode).toList());
   }
 }

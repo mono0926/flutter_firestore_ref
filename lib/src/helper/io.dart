@@ -1,6 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 
+final Firestore firestoreInstance = Firestore.instance;
+
+void configureFirestore({bool persistenceEnabled = true}) {
+  assert(persistenceEnabled != null, 'persistenceEnabled should not be null');
+  firestoreInstance.settings(persistenceEnabled: persistenceEnabled);
+}
+
 Stream<QuerySnapshot> queryToSnapshots(Query query) {
   return query.snapshots();
 }
@@ -66,23 +73,10 @@ DateTime parseTimestamp({
   return json[key] == null ? null : (json[key] as Timestamp).toDate();
 }
 
-CollectionReference collectionRef(String path) {
-  return Firestore.instance.collection(path);
-}
-
-WriteBatch getBatch() {
-  return Firestore.instance.batch();
-}
-
 Query orderBy(
   CollectionReference ref, {
   @required String field,
   bool descending = false,
 }) {
   return ref.orderBy(field, descending: descending);
-}
-
-void configureFirestore({bool persistenceEnabled = true}) {
-  assert(persistenceEnabled != null, 'persistenceEnabled should not be null');
-  Firestore.instance.settings(persistenceEnabled: persistenceEnabled);
 }

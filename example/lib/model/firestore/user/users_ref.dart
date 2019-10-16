@@ -9,7 +9,7 @@ export 'user_ref.dart';
 class UsersRef extends CollectionRef<User, UserDoc> {
   UsersRef.ref()
       : super(
-          ref: collectionRef(collection),
+          ref: firestoreInstance.collection(collection),
           decoder: _UserDocDecoder(),
           encoder: _UserEncoder(),
         );
