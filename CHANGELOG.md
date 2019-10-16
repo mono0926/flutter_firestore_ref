@@ -1,3 +1,7 @@
+## [3.0.0]
+
+- Update to firebase 6.0.0
+
 ## [0.2.2]
 
 - Set `configureFirestore`'s `persistenceEnabled` default value to `true`.
