@@ -11,7 +11,7 @@ dependencies:
   subscription_holder: any
   provider: any
   firestore_ref:
-    path: ../../flutter_firestore_ref
+    path: ..
 dependency_overrides:
   firebase: ^6.0.0
 dev_dependencies:
