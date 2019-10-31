@@ -1,3 +1,8 @@
+## [0.4.0]
+
+- Dart version: >=2.6.0-dev
+- Use extension
+
 ## [0.3.0]
 
 - Update to firebase 6.0.0
