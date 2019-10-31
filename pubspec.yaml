@@ -4,7 +4,7 @@ version: 0.3.0
 author: Masayuki Ono <mono0926@gmail.com>
 homepage: https://github.com/mono0926/flutter_firestore_ref
 environment:
-  sdk: ">=2.5.0 <3.0.0"
+  sdk: ">=2.6.0-dev <3.0.0"
 dependencies:
   flutter:
     sdk: flutter

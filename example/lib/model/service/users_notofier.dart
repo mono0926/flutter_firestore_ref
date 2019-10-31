@@ -10,11 +10,12 @@ class UsersNotifier extends ChangeNotifier {
   UsersNotifier() {
     _subscriptionHolder.add(
       UsersRef.ref()
-          .documents((r) => orderBy(
-                r,
-                field: EntityField.updatedAt,
+          .documents((r) => FirRefCollectionReferenceEx(r)
+              .orderBy(
+                EntityField.updatedAt,
                 descending: true,
-              ).limit(100))
+              )
+              .limit(100))
           .listen((docs) {
         logger.info(DateTime.now());
         _userDocs = docs;

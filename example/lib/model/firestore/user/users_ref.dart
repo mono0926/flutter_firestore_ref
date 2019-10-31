@@ -29,10 +29,9 @@ class UsersRef extends CollectionRef<User, UserDoc> {
 class _UserDocDecoder extends DocumentDecoder<UserDoc> {
   @override
   UserDoc decode(DocumentSnapshot snapshot) {
-    final data = getSnapshotData(snapshot);
     return UserDoc(
-      getSnapshotId(snapshot),
-      User.fromJson(data),
+      snapshot.documentID,
+      User.fromJson(FirRefDocumentSnapshotEx(snapshot).data),
     );
   }
 }

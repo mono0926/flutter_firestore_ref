@@ -13,6 +13,7 @@ class HomePage extends StatelessWidget {
         children: [
           const _AccountStatus(),
           ChangeNotifierProxyProvider<Authenticator, UserNotifier>(
+            initialBuilder: null,
             builder: (context, authenticator, previous) =>
                 UserNotifier.fromId(authenticator.user?.uid),
             child: const _MyCounter(),

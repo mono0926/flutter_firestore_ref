@@ -19,9 +19,9 @@ class DocumentRef<E extends Entity, D extends Document<E>> {
   final EntityEncoder<E> encoder;
 
   Stream<D> document() {
-    return documentRefToSnapshots(ref).map((snapshot) {
+    return ref.snapshots().map((snapshot) {
       if (!snapshot.exists) {
-        _logger.warning('$D not found(id: ${getDocumentId(ref)})');
+        _logger.warning('$D not found(id: ${ref.documentID})');
         return null;
       }
       return decoder.decode(snapshot);
@@ -31,7 +31,7 @@ class DocumentRef<E extends Entity, D extends Document<E>> {
   Future<D> get() async {
     final snapshot = await ref.get();
     if (!snapshot.exists) {
-      _logger.warning('$D not found(id: ${getDocumentId(ref)})');
+      _logger.warning('$D not found(id: ${ref.documentID})');
       return null;
     }
     return decoder.decode(snapshot);
@@ -46,7 +46,12 @@ class DocumentRef<E extends Entity, D extends Document<E>> {
   /// すでにあるデータに対して
   /// マージと似ているがそのキーの配下のものは置き換わる
   Future<void> updateData(Map<String, dynamic> data, {WriteBatch batch}) {
-    return updateRef(ref, data: data, batch: batch);
+    if (batch == null) {
+      return updateData(data);
+    } else {
+      batch.updateData(ref, data);
+      return Future.value(null);
+    }
   }
 
   /// 全置き換え
@@ -59,11 +64,12 @@ class DocumentRef<E extends Entity, D extends Document<E>> {
 
   /// 全置き換え
   Future<void> setData(Map<String, dynamic> data, {WriteBatch batch}) {
-    return setRef(
-      ref,
-      data: data,
-      batch: batch,
-    );
+    if (batch == null) {
+      return ref.setData(data);
+    } else {
+      batch.setData(ref, data);
+      return Future.value(null);
+    }
   }
 
   /// マージ
@@ -76,12 +82,12 @@ class DocumentRef<E extends Entity, D extends Document<E>> {
 
   /// マージ
   Future<void> mergeData(Map<String, dynamic> data, {WriteBatch batch}) {
-    return setRef(
-      ref,
-      data: data,
-      batch: batch,
-      merge: true,
-    );
+    if (batch == null) {
+      return ref.setData(data, merge: true);
+    } else {
+      batch.setData(ref, data, merge: true);
+      return Future.value(null);
+    }
   }
 
   Future<void> delete({WriteBatch batch}) {

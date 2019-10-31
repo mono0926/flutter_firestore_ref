@@ -17,11 +17,11 @@ class CollectionGroup<E extends Entity, D extends Document<E>> {
   final EntityEncoder<E> encoder;
 
   Stream<QuerySnapshot> snapshots(MakeGroupQuery makeQuery) {
-    return queryToSnapshots(makeQuery(query));
+    return makeQuery(query).snapshots();
   }
 
   Stream<List<D>> documents(MakeGroupQuery makeQuery) {
-    return snapshots(makeQuery).map(
-        (snap) => queryToDocumentSnapshot(snap).map(decoder.decode).toList());
+    return snapshots(makeQuery)
+        .map((snap) => snap.documents.map(decoder.decode).toList());
   }
 }

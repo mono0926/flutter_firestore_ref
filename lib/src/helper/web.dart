@@ -11,62 +11,56 @@ void configureFirestore({bool persistenceEnabled = true}) {
   }
 }
 
-Stream<QuerySnapshot> queryToSnapshots(Query query) {
-  return query.onSnapshot;
+extension FirRefQueryEx on Query {
+  Stream<QuerySnapshot> snapshots() => onSnapshot;
 }
 
-Stream<DocumentSnapshot> documentRefToSnapshots(DocumentReference ref) {
-  return ref.onSnapshot;
+extension FirRefDocumentReferenceEx on DocumentReference {
+  Stream<DocumentSnapshot> snapshots() => onSnapshot;
+  String get documentID => id;
+
+  Future<void> updateData(Map<String, dynamic> data) => update(data: data);
+
+  Future<void> setData(Map<String, dynamic> data, {bool merge = false}) =>
+      set(data, SetOptions(merge: merge));
 }
 
-List<DocumentSnapshot> queryToDocumentSnapshot(QuerySnapshot snapshot) {
-  return snapshot.docs;
+extension FirRefBatchEx on WriteBatch {
+  void updateData(DocumentReference document, Map<String, dynamic> data) =>
+      update(
+        document,
+        data: data,
+      );
+
+  void setData(
+    DocumentReference document,
+    Map<String, dynamic> data, {
+    bool merge = false,
+  }) =>
+      set(
+        document,
+        data,
+        SetOptions(merge: merge),
+      );
 }
 
-DocumentReference collectionToDocumentReference(
-  CollectionReference ref, {
-  @required String id,
-}) {
-  return ref.doc(id);
+extension FirRefQuerySnapshotEx on QuerySnapshot {
+  List<DocumentSnapshot> get documents => docs;
 }
 
-String getDocumentId(DocumentReference ref) {
-  return ref.id;
+extension FirRefCollectionReferenceEx on CollectionReference {
+  DocumentReference document([String path]) => doc(id);
+
+  Query orderBy(
+    String field, {
+    bool descending = false,
+  }) =>
+      this.orderBy(field, descending ? 'desc' : 'asc');
 }
 
-String getSnapshotId(DocumentSnapshot snapshot) {
-  return snapshot.id;
-}
-
-Map<String, dynamic> getSnapshotData(DocumentSnapshot snapshot) {
-  return snapshot.data();
-}
-
-Future<void> updateRef(
-  DocumentReference ref, {
-  @required Map<String, dynamic> data,
-  @required WriteBatch batch,
-}) {
-  if (batch == null) {
-    return ref.update(data: data);
-  } else {
-    batch.update(ref, data: data);
-    return Future.value(null);
-  }
-}
-
-Future<void> setRef(
-  DocumentReference ref, {
-  Map<String, dynamic> data,
-  bool merge = false,
-  WriteBatch batch,
-}) {
-  if (batch == null) {
-    return ref.set(data, SetOptions(merge: merge));
-  } else {
-    batch.set(ref, data, SetOptions(merge: merge));
-    return Future.value(null);
-  }
+extension FirRefDocumentSnapshotEx on DocumentSnapshot {
+  String get documentID => id;
+  Map<String, dynamic> get data => this.data();
 }
 
 DateTime parseTimestamp({
@@ -74,12 +68,4 @@ DateTime parseTimestamp({
   @required String key,
 }) {
   return json[key] as DateTime;
-}
-
-Query orderBy(
-  CollectionReference ref, {
-  @required String field,
-  bool descending = false,
-}) {
-  return ref.orderBy(field, descending ? 'desc' : 'asc');
 }

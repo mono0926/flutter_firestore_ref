@@ -1,5 +1,4 @@
 import 'package:firestore_ref/firestore_ref.dart';
-import 'package:firestore_ref/src/helper/helper.dart';
 import 'package:meta/meta.dart';
 
 import 'firestore.dart';
@@ -22,17 +21,16 @@ class CollectionRef<E extends Entity, D extends Document<E>> {
   final EntityEncoder<E> encoder;
 
   Stream<QuerySnapshot> snapshots(MakeQuery makeQuery) {
-    return queryToSnapshots(makeQuery(ref));
+    return makeQuery(ref).snapshots();
   }
 
   Stream<List<D>> documents(MakeQuery makeQuery) {
-    return snapshots(makeQuery).map(
-        (snap) => queryToDocumentSnapshot(snap).map(decoder.decode).toList());
+    return snapshots(makeQuery)
+        .map((snap) => snap.documents.map(decoder.decode).toList());
   }
 
   @protected
-  DocumentReference docRefRaw([String id]) =>
-      collectionToDocumentReference(ref, id: id);
+  DocumentReference docRefRaw([String id]) => ref.document(id);
 
   DocumentRef<E, D> docRef([String id]) {
     return DocumentRef<E, D>(
