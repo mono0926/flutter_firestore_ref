@@ -49,7 +49,7 @@ extension FirRefQuerySnapshotEx on QuerySnapshot {
 }
 
 extension FirRefCollectionReferenceEx on CollectionReference {
-  DocumentReference document([String path]) => doc(id);
+  DocumentReference document([String path]) => doc(path);
 
   Query orderBy(
     String field, {

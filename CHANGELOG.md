@@ -1,3 +1,7 @@
+## [0.4.1]
+
+- Fix documentID bug
+
 ## [0.4.0]
 
 - Dart version: >=2.6.0-dev
