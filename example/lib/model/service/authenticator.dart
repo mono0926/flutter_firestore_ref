@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 
 class Authenticator extends ChangeNotifier {
   Authenticator() {
-    _auth.state.listen((state) {
+    _auth.listen((state) {
       _state = state;
       notifyListeners();
     });
@@ -17,6 +17,6 @@ class Authenticator extends ChangeNotifier {
       state is LoggedInState ? (state as LoggedInState).user : null;
 
   void signInAnonymously() {
-    _auth.dispatch(LoginGuest());
+    _auth.add(LoginGuest());
   }
 }

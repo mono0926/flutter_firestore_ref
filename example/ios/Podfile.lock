@@ -138,7 +138,7 @@ DEPENDENCIES:
   - path_provider (from `.symlinks/plugins/path_provider/ios`)
 
 SPEC REPOS:
-  trunk:
+  https://cdn.cocoapods.org/:
     - BoringSSL-GRPC
     - Firebase
     - FirebaseAnalytics
@@ -159,6 +159,9 @@ SPEC REPOS:
     - leveldb-library
     - nanopb
     - Protobuf
+  https://github.com/CocoaPods/Specs.git:
+    - GoogleUtilities
+    - nanopb
 
 EXTERNAL SOURCES:
   cloud_firestore:
@@ -174,10 +177,10 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   BoringSSL-GRPC: db8764df3204ccea016e1c8dd15d9a9ad63ff318
-  cloud_firestore: c9493dd01ad88934d926e18cc5a92a0129bf2c32
+  cloud_firestore: c6e28e89a1bf98faab7fc8fdec20dc6020799cd1
   Firebase: 5e6b7b12bf9adb90986688edc06b156c37e109cd
-  firebase_auth: 1e3b7bdd37b9fbd4ef75ba1d985b00be09e02d3d
-  firebase_core: ae55ea92448ec8675d325da4db22cf3b4d58a54d
+  firebase_auth: d99b993c1405096e66c58211b1cd956c23eed1c5
+  firebase_core: 15d27cd74b2e40f8c29540707c0486bb561a92e8
   FirebaseAnalytics: 0e3ecff2c5d86070f7d4325e21f1edabfbd558dc
   FirebaseAuth: c66e990f79d1d3429165391f6cd70ace6143c25e
   FirebaseAuthInterop: 0ffa57668be100582bb7643d4fcb7615496c41fc
@@ -196,7 +199,7 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 61bb0f61a4cb560030f1222021178008a5727a23
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
-  path_provider: f96fff6166a8867510d2c25fdcc346327cc4b259
+  path_provider: fb74bd0465e96b594bb3b5088ee4a4e7bb1f2a9d
   Protobuf: a4dc852ad69c027ca2166ed287b856697814375b
 
 PODFILE CHECKSUM: 1b66dae606f75376c5f2135a8290850eeb09ae83
