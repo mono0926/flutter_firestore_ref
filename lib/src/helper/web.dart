@@ -4,11 +4,21 @@ import 'package:flutter/foundation.dart';
 
 final Firestore firestoreInstance = firestore();
 
-void configureFirestore({bool persistenceEnabled = true}) {
+void configureFirestore({
+  bool persistenceEnabled = true,
+  String host,
+  bool sslEnabled,
+  int cacheSizeBytes,
+}) {
   assert(persistenceEnabled != null, 'persistenceEnabled should not be null');
   if (persistenceEnabled) {
     firestoreInstance.enablePersistence();
   }
+  firestoreInstance.settings(Settings(
+    host: host,
+    ssl: sslEnabled,
+    cacheSizeBytes: cacheSizeBytes,
+  ));
 }
 
 extension FirRefQueryEx on Query {

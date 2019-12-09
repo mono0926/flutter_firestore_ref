@@ -2,10 +2,19 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 
 final Firestore firestoreInstance = Firestore.instance;
-
-void configureFirestore({bool persistenceEnabled = true}) {
+void configureFirestore({
+  bool persistenceEnabled = true,
+  String host,
+  bool sslEnabled,
+  int cacheSizeBytes,
+}) {
   assert(persistenceEnabled != null, 'persistenceEnabled should not be null');
-  firestoreInstance.settings(persistenceEnabled: persistenceEnabled);
+  firestoreInstance.settings(
+    persistenceEnabled: persistenceEnabled,
+    host: host,
+    sslEnabled: sslEnabled,
+    cacheSizeBytes: cacheSizeBytes,
+  );
 }
 
 extension FirRefDocumentSnapshotEx on DocumentSnapshot {
