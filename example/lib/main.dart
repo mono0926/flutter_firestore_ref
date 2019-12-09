@@ -12,9 +12,9 @@ void main() {
   runApp(
     MultiProvider(
       providers: [
-        Provider(builder: (context) => AppInfo()),
+        Provider(create: (context) => AppInfo()),
         ChangeNotifierProvider(
-          builder: (context) => Authenticator()..signInAnonymously(),
+          create: (context) => Authenticator()..signInAnonymously(),
         ),
       ],
       child: App(),

@@ -13,15 +13,15 @@ class HomePage extends StatelessWidget {
         children: [
           const _AccountStatus(),
           ChangeNotifierProxyProvider<Authenticator, UserNotifier>(
-            initialBuilder: null,
-            builder: (context, authenticator, previous) =>
+            create: null,
+            update: (context, authenticator, previous) =>
                 UserNotifier.fromId(authenticator.user?.uid),
             child: const _MyCounter(),
           ),
           const Divider(),
           Expanded(
             child: ChangeNotifierProvider(
-              builder: (context) => UsersNotifier(),
+              create: (context) => UsersNotifier(),
               child: const _Users(),
             ),
           ),

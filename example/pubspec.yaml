@@ -12,8 +12,9 @@ dependencies:
   provider: any
   firestore_ref:
     path: ..
+# fb_authのために指定
 dependency_overrides:
-  firebase: ^7.0.0
+  firebase: ^7.1.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

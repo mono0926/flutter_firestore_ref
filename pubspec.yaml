@@ -8,8 +8,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  cloud_firestore: ^0.12.10
-  firebase: ^7.0.0
+  cloud_firestore: ^0.12.11
+  firebase: ^7.1.0
   simple_logger: ^1.5.1
   meta: ^1.1.7
 dev_dependencies:
