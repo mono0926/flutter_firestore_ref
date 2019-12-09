@@ -2,14 +2,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 
 final Firestore firestoreInstance = Firestore.instance;
-void configureFirestore({
+Future<void> configureFirestore({
   bool persistenceEnabled = true,
   String host,
   bool sslEnabled,
   int cacheSizeBytes,
-}) {
+}) async {
   assert(persistenceEnabled != null, 'persistenceEnabled should not be null');
-  firestoreInstance.settings(
+  await firestoreInstance.settings(
     persistenceEnabled: persistenceEnabled,
     host: host,
     sslEnabled: sslEnabled,
