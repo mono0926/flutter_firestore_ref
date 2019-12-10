@@ -6,9 +6,9 @@ final Firestore firestoreInstance = firestore();
 
 Future<void> configureFirestore({
   bool persistenceEnabled = true,
-  String host,
-  bool sslEnabled,
-  int cacheSizeBytes,
+  String host = 'firestore.googleapis.com',
+  bool sslEnabled = true,
+  int cacheSizeBytes = 40 * 1024 * 1024, // 40MB
 }) async {
   assert(persistenceEnabled != null, 'persistenceEnabled should not be null');
   if (persistenceEnabled) {
