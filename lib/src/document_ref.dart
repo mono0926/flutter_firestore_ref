@@ -47,7 +47,7 @@ class DocumentRef<E extends Entity, D extends Document<E>> {
   /// マージと似ているがそのキーの配下のものは置き換わる
   Future<void> updateData(Map<String, dynamic> data, {WriteBatch batch}) {
     if (batch == null) {
-      return updateData(data);
+      return ref.updateData(data);
     } else {
       batch.updateData(ref, data);
       return Future.value(null);
