@@ -1,3 +1,9 @@
+## [0.5.1]
+
+- Fix updateData
+    - https://github.com/mono0926/flutter_firestore_ref/pull/2
+    - Thanks to [@takuyaohashi](https://github.com/takuyaohashi)
+
 ## [0.5.0]
 
 - Update dependencies
