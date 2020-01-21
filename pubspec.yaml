@@ -9,6 +9,7 @@ dependencies:
     sdk: flutter
   cloud_firestore: ^0.13.0
   firebase: ^7.1.0
+  json_annotation: ^3.0.1
   simple_logger: ^1.5.1
   meta: ^1.1.7
 dev_dependencies:

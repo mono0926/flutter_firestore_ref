@@ -19,10 +19,10 @@ class User with Entity, HasTimestamp {
 
   final int count;
   @override
-  @JsonKey(fromJson: dateFromTimestampValue)
+  @timestampJsonKey
   final DateTime createdAt;
   @override
-  @JsonKey(fromJson: dateFromTimestampValue)
+  @timestampJsonKey
   final DateTime updatedAt;
 
   Map<String, dynamic> toJson() => <String, dynamic>{

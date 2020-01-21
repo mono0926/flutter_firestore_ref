@@ -1,4 +1,5 @@
 import 'package:firestore_ref/firestore_ref.dart';
+import 'package:json_annotation/json_annotation.dart';
 import 'package:meta/meta.dart';
 
 mixin HasTimestamp {
@@ -50,3 +51,8 @@ DateTime dateFromTimestampValue(dynamic value) =>
 
 Timestamp timestampFromDateValue(dynamic value) =>
     value is DateTime ? Timestamp.fromDate(value) : null;
+
+const timestampJsonKey = JsonKey(
+  fromJson: dateFromTimestampValue,
+  toJson: timestampFromDateValue,
+);

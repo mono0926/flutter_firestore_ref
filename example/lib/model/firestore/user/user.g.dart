@@ -16,6 +16,6 @@ User _$UserFromJson(Map<String, dynamic> json) {
 
 Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
       'count': instance.count,
-      'createdAt': instance.createdAt?.toIso8601String(),
-      'updatedAt': instance.updatedAt?.toIso8601String(),
+      'createdAt': timestampFromDateValue(instance.createdAt),
+      'updatedAt': timestampFromDateValue(instance.updatedAt),
     };
