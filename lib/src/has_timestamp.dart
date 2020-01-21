@@ -1,14 +1,17 @@
 import 'package:firestore_ref/firestore_ref.dart';
+import 'package:meta/meta.dart';
 
 mixin HasTimestamp {
   DateTime get createdAt;
   DateTime get updatedAt;
 
-  Map<String, dynamic> get timestampJson => <String, dynamic>{
-        if (createdAt == null)
-          TimestampField.createdAt: FieldValue.serverTimestamp(),
-        TimestampField.updatedAt: FieldValue.serverTimestamp(),
-      };
+  Map<String, dynamic> get timestampJson {
+    return <String, dynamic>{
+      if (createdAt == null)
+        TimestampField.createdAt: FieldValue.serverTimestamp(),
+      TimestampField.updatedAt: FieldValue.serverTimestamp(),
+    };
+  }
 
   static DateTime parseCreatedAt(Map<String, dynamic> json) {
     return parseTimestamp(json: json, key: TimestampField.createdAt);
@@ -34,3 +37,12 @@ class TimestampField {
   static const createdAt = 'createdAt';
   static const updatedAt = 'updatedAt';
 }
+
+DateTime parseTimestamp({
+  @required Map<String, dynamic> json,
+  @required String key,
+}) {
+  return parseTimestampValue(json[key]);
+}
+
+DateTime parseTimestampValue(dynamic value) => (value as Timestamp)?.toDate();
