@@ -4,24 +4,25 @@ import 'package:flutter/foundation.dart';
 export 'user_doc.dart';
 export 'users_ref.dart';
 
-class User extends Entity {
-  const User({
+class User with Entity, HasTimestamp {
+  User({
     @required this.count,
-    DateTime createdAt,
-    DateTime updatedAt,
-  }) : super(
-          createdAt: createdAt,
-          updatedAt: updatedAt,
-        );
+    this.createdAt,
+    this.updatedAt,
+  });
 
   User.fromJson(Map<String, dynamic> json)
       : this(
           count: json[UserField.count] as int,
-          createdAt: parseCreatedAt(json),
-          updatedAt: parseUpdatedAt(json),
+          createdAt: HasTimestamp.parseCreatedAt(json),
+          updatedAt: HasTimestamp.parseUpdatedAt(json),
         );
 
   final int count;
+  @override
+  final DateTime createdAt;
+  @override
+  final DateTime updatedAt;
 
   Map<String, dynamic> toJson() => <String, dynamic>{
         UserField.count: count,

@@ -12,7 +12,7 @@ class UsersNotifier extends ChangeNotifier {
       UsersRef.ref()
           .documents((r) => FirRefCollectionReferenceEx(r)
               .orderBy(
-                EntityField.updatedAt,
+                TimestampField.updatedAt,
                 descending: true,
               )
               .limit(100))
