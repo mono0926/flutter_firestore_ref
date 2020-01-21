@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/foundation.dart';
 
 final Firestore firestoreInstance = Firestore.instance;
 Future<void> configureFirestore({
@@ -27,11 +26,4 @@ extension FirRefCollectionReferenceEx on CollectionReference {
     bool descending = false,
   }) =>
       this.orderBy(field, descending: descending);
-}
-
-DateTime parseTimestamp({
-  @required Map<String, dynamic> json,
-  @required String key,
-}) {
-  return json[key] == null ? null : (json[key] as Timestamp).toDate();
 }
