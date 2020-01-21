@@ -9,8 +9,8 @@ part of 'user.dart';
 User _$UserFromJson(Map<String, dynamic> json) {
   return User(
     count: json['count'] as int,
-    createdAt: parseTimestampValue(json['createdAt']),
-    updatedAt: parseTimestampValue(json['updatedAt']),
+    createdAt: dateFromTimestampValue(json['createdAt']),
+    updatedAt: dateFromTimestampValue(json['updatedAt']),
   );
 }
 
