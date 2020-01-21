@@ -1,9 +1,13 @@
 import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter/foundation.dart';
+import 'package:json_annotation/json_annotation.dart';
 
 export 'user_doc.dart';
 export 'users_ref.dart';
 
+part 'user.g.dart';
+
+@JsonSerializable()
 class User with Entity, HasTimestamp {
   User({
     @required this.count,
@@ -11,21 +15,18 @@ class User with Entity, HasTimestamp {
     this.updatedAt,
   });
 
-  User.fromJson(Map<String, dynamic> json)
-      : this(
-          count: json[UserField.count] as int,
-          createdAt: HasTimestamp.parseCreatedAt(json),
-          updatedAt: HasTimestamp.parseUpdatedAt(json),
-        );
+  factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 
   final int count;
   @override
+  @JsonKey(fromJson: parseTimestampValue)
   final DateTime createdAt;
   @override
+  @JsonKey(fromJson: parseTimestampValue)
   final DateTime updatedAt;
 
   Map<String, dynamic> toJson() => <String, dynamic>{
-        UserField.count: count,
+        ..._$UserToJson(this)..remove(TimestampField.createdAt),
         ...timestampJson,
       };
 
