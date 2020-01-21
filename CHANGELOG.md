@@ -1,3 +1,9 @@
+## [0.6.0]
+
+- Split out HasTimestamp from Entity
+- Change Entity to mixin from abstract class
+- See: https://github.com/mono0926/flutter_firestore_ref/commit/45ff00de4ce6ec7502eaa4248b2dbf5084e09837
+
 ## [0.5.1]
 
 - Fix updateData
