@@ -47,3 +47,6 @@ DateTime parseTimestamp({
 
 DateTime dateFromTimestampValue(dynamic value) =>
     (value as Timestamp)?.toDate();
+
+Timestamp timestampFromDateValue(dynamic value) =>
+    value is DateTime ? Timestamp.fromDate(value) : null;
