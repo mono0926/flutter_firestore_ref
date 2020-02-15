@@ -7,7 +7,7 @@ dependencies:
   flutter:
     sdk: flutter
   json_annotation: any
-  cupertino_icons: ^0.1.2
+  cupertino_icons: ^0.1.3
   fb_auth: any
   subscription_holder: any
   provider: any
@@ -15,7 +15,7 @@ dependencies:
     path: ..
 # fb_authのために指定
 dependency_overrides:
-  firebase: ^7.1.0
+  firebase: ^7.2.1
 dev_dependencies:
   flutter_test:
     sdk: flutter

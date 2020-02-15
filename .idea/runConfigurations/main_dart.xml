@@ -1,6 +1,8 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="main.dart" type="FlutterRunConfigurationType" factoryName="Flutter" singleton="false">
     <option name="filePath" value="$PROJECT_DIR$/example/lib/main.dart" />
-    <method v="2" />
+    <method v="2">
+      <option name="ToolBeforeRunTask" enabled="true" actionId="Tool_External Tools_aaaa" />
+    </method>
   </configuration>
 </component>
