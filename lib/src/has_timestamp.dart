@@ -6,14 +6,6 @@ import 'package:meta/meta.dart';
 mixin HasTimestamp {
   DateTime get createdAt;
   DateTime get updatedAt;
-
-  static Map<String, dynamic> _timestampJson(DateTime createdAt) {
-    return <String, dynamic>{
-      if (createdAt == null)
-        TimestampField.createdAt: FieldValue.serverTimestamp(),
-      TimestampField.updatedAt: FieldValue.serverTimestamp(),
-    };
-  }
 }
 
 class TimestampField {
@@ -27,7 +19,9 @@ Map<String, dynamic> replacingTimestamp({
 }) =>
     <String, dynamic>{
       ...json..remove(TimestampField.createdAt),
-      ...HasTimestamp._timestampJson(createdAt),
+      if (createdAt == null)
+        TimestampField.createdAt: FieldValue.serverTimestamp(),
+      TimestampField.updatedAt: FieldValue.serverTimestamp(),
     };
 
 DateTime parseTimestamp({
