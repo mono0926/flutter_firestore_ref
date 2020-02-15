@@ -6,7 +6,7 @@ import 'package:simple_logger/simple_logger.dart';
 SimpleLogger get _logger => SimpleLogger();
 
 @immutable
-class DocumentRef<E, D extends Document<E>> {
+abstract class DocumentRef<E, D extends Document<E>> {
   const DocumentRef({
     @required this.ref,
     @required this.decoder,

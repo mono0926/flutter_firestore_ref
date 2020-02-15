@@ -5,7 +5,7 @@ import 'package:meta/meta.dart';
 typedef MakeQuery = Query Function(CollectionReference collectionRef);
 
 @immutable
-class CollectionRef<E, D extends Document<E>> {
+abstract class CollectionRef<E, D extends Document<E>> {
   const CollectionRef({
     @required this.ref,
     @required this.decoder,
@@ -31,11 +31,5 @@ class CollectionRef<E, D extends Document<E>> {
   @protected
   DocumentReference docRefRaw([String id]) => ref.document(id);
 
-  DocumentRef<E, D> docRef([String id]) {
-    return DocumentRef<E, D>(
-      ref: docRefRaw(id),
-      decoder: decoder,
-      encoder: encoder,
-    );
-  }
+  DocumentRef<E, D> docRef([String id]);
 }
