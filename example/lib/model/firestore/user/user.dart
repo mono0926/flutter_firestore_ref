@@ -16,14 +16,6 @@ abstract class User with _$User, Entity, HasTimestamp {
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 }
 
-extension UserEx on User {
-  Map<String, dynamic> toJsonReplacingTimestamp() =>
-      HasTimestamp.replacingTimestamp(
-        json: toJson(),
-        createdAt: createdAt,
-      );
-}
-
 class UserDoc extends Document<User> {
   const UserDoc(
     String id,
