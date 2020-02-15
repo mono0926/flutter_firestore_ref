@@ -2,6 +2,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firestore_ref/firestore_ref.dart';
 import 'package:meta/meta.dart';
 
+typedef DocumentDecoder<D extends Document<dynamic>> = D Function(
+    DocumentSnapshot snapshot);
+
+typedef EntityEncoder<E> = Map<String, dynamic> Function(
+  E entity,
+);
+
 @immutable
 abstract class Document<E> {
   const Document(
@@ -23,6 +30,3 @@ abstract class Document<E> {
   @override
   int get hashCode => id.hashCode ^ entity.hashCode;
 }
-
-typedef DocumentDecoder<D extends Document<dynamic>> = D Function(
-    DocumentSnapshot snapshot);
