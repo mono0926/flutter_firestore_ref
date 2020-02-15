@@ -46,7 +46,7 @@ class UsersRef extends CollectionRef<User, UserDoc> {
             snap.documentID,
             User.fromJson(snap.data),
           ),
-          encoder: (entity) => HasTimestamp.replacingTimestamp(
+          encoder: (entity) => replacingTimestamp(
             json: entity.toJson(),
             createdAt: entity.createdAt,
           ),

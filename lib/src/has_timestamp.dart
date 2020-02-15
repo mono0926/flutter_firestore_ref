@@ -14,29 +14,21 @@ mixin HasTimestamp {
       TimestampField.updatedAt: FieldValue.serverTimestamp(),
     };
   }
-
-  static Map<String, dynamic> replacingTimestamp({
-    @required Map<String, dynamic> json,
-    @required DateTime createdAt,
-  }) =>
-      <String, dynamic>{
-        ...json..remove(TimestampField.createdAt),
-        ...HasTimestamp._timestampJson(createdAt),
-      };
-
-  static DateTime parseCreatedAt(Map<String, dynamic> json) {
-    return parseTimestamp(json: json, key: TimestampField.createdAt);
-  }
-
-  static DateTime parseUpdatedAt(Map<String, dynamic> json) {
-    return parseTimestamp(json: json, key: TimestampField.updatedAt);
-  }
 }
 
 class TimestampField {
   static const createdAt = 'createdAt';
   static const updatedAt = 'updatedAt';
 }
+
+Map<String, dynamic> replacingTimestamp({
+  @required Map<String, dynamic> json,
+  @required DateTime createdAt,
+}) =>
+    <String, dynamic>{
+      ...json..remove(TimestampField.createdAt),
+      ...HasTimestamp._timestampJson(createdAt),
+    };
 
 DateTime parseTimestamp({
   @required Map<String, dynamic> json,
