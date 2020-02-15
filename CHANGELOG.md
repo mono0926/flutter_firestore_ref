@@ -1,3 +1,8 @@
+## [0.8.0-dev]
+
+- Use freezed at example
+- Refactor encoder/decoder
+
 ## [0.7.0]
 
 - Delete helper methods in favor of cloud_firestore_web
