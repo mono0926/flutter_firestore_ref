@@ -23,7 +23,7 @@ class DocumentRef<E extends Entity, D extends Document<E>> {
         _logger.warning('$D not found(id: ${ref.documentID})');
         return null;
       }
-      return decoder.decode(snapshot);
+      return decoder(snapshot);
     });
   }
 
@@ -33,13 +33,13 @@ class DocumentRef<E extends Entity, D extends Document<E>> {
       _logger.warning('$D not found(id: ${ref.documentID})');
       return null;
     }
-    return decoder.decode(snapshot);
+    return decoder(snapshot);
   }
 
   /// すでにあるデータに対して
   /// マージと似ているがそのキーの配下のものは置き換わる
   Future<void> update(E entity, {WriteBatch batch}) {
-    return updateData(encoder.encode(entity), batch: batch);
+    return updateData(encoder(entity), batch: batch);
   }
 
   /// すでにあるデータに対して
@@ -56,7 +56,7 @@ class DocumentRef<E extends Entity, D extends Document<E>> {
   /// 全置き換え
   Future<void> set(E entity, {WriteBatch batch}) {
     return setData(
-      encoder.encode(entity),
+      encoder(entity),
       batch: batch,
     );
   }
@@ -74,7 +74,7 @@ class DocumentRef<E extends Entity, D extends Document<E>> {
   /// マージ
   Future<void> merge(E entity, {WriteBatch batch}) {
     return mergeData(
-      encoder.encode(entity),
+      encoder(entity),
       batch: batch,
     );
   }

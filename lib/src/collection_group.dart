@@ -23,6 +23,6 @@ class CollectionGroup<E extends Entity, D extends Document<E>> {
 
   Stream<List<D>> documents(MakeGroupQuery makeQuery) {
     return snapshots(makeQuery)
-        .map((snap) => snap.documents.map(decoder.decode).toList());
+        .map((snap) => snap.documents.map(decoder).toList());
   }
 }

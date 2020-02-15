@@ -24,8 +24,5 @@ abstract class Document<E extends Entity> {
   int get hashCode => id.hashCode ^ entity.hashCode;
 }
 
-@immutable
-// ignore: one_member_abstracts
-abstract class DocumentDecoder<D extends Document> {
-  D decode(DocumentSnapshot snapshot);
-}
+typedef DocumentDecoder<D extends Document> = D Function(
+    DocumentSnapshot snapshot);

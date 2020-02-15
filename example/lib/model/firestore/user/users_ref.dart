@@ -10,8 +10,11 @@ class UsersRef extends CollectionRef<User, UserDoc> {
   UsersRef.ref()
       : super(
           ref: Firestore.instance.collection(collection),
-          decoder: _UserDocDecoder(),
-          encoder: _UserEncoder(),
+          decoder: (snap) => UserDoc(
+            snap.documentID,
+            User.fromJson(snap.data),
+          ),
+          encoder: (entity) => entity.toJsonReplacingTimestamp(),
         );
 
   static const collection = 'users';
@@ -24,19 +27,4 @@ class UsersRef extends CollectionRef<User, UserDoc> {
       decoder: decoder,
     );
   }
-}
-
-class _UserDocDecoder extends DocumentDecoder<UserDoc> {
-  @override
-  UserDoc decode(DocumentSnapshot snapshot) {
-    return UserDoc(
-      snapshot.documentID,
-      User.fromJson(snapshot.data),
-    );
-  }
-}
-
-class _UserEncoder extends EntityEncoder<User> {
-  @override
-  Map<String, dynamic> encode(User entity) => entity.toJsonReplacingTimestamp();
 }
