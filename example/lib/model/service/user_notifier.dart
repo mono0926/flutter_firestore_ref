@@ -29,7 +29,7 @@ class UserNotifier extends ChangeNotifier {
   UserDoc _doc;
   UserDoc get doc => _doc;
   String get id => doc.id;
-  User get user => doc.entity ?? User(count: 0);
+  User get user => doc.entity ?? const User(count: 0);
   int get count => user.count;
   UserRef get _ref => UsersRef.ref().docRef(id);
 

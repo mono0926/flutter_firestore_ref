@@ -1,57 +1,28 @@
 import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter/foundation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 export 'user_doc.dart';
 export 'users_ref.dart';
 
+part 'user.freezed.dart';
 part 'user.g.dart';
 
-@JsonSerializable()
-class User with Entity, HasTimestamp {
-  User({
-    @required this.count,
-    this.createdAt,
-    this.updatedAt,
-  });
-
+@freezed
+abstract class User with _$User, Entity, HasTimestamp {
+  const factory User({
+    @required int count,
+    @timestampJsonKey DateTime createdAt,
+    @timestampJsonKey DateTime updatedAt,
+  }) = _User;
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
-
-  final int count;
-  @override
-  @timestampJsonKey
-  final DateTime createdAt;
-  @override
-  @timestampJsonKey
-  final DateTime updatedAt;
-
-  Map<String, dynamic> toJson() => <String, dynamic>{
-        ..._$UserToJson(this)..remove(TimestampField.createdAt),
-        ...timestampJson,
-      };
-
-  User copyWith({
-    int count,
-  }) {
-    return User(
-      count: count ?? this.count,
-      createdAt: createdAt,
-      updatedAt: updatedAt,
-    );
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is User &&
-          runtimeType == other.runtimeType &&
-          super == other &&
-          count == other.count;
-
-  @override
-  int get hashCode => count.hashCode ^ super.hashCode;
 }
 
-class UserField {
-  static const count = 'count';
+extension UserEx on User {
+  Map<String, dynamic> toJsonReplacingTimestamp() =>
+      HasTimestamp.replacingTimestamp(
+        json: toJson(),
+        createdAt: createdAt,
+      );
 }

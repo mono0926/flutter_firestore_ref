@@ -38,5 +38,5 @@ class _UserDocDecoder extends DocumentDecoder<UserDoc> {
 
 class _UserEncoder extends EntityEncoder<User> {
   @override
-  Map<String, dynamic> encode(User entity) => entity.toJson();
+  Map<String, dynamic> encode(User entity) => entity.toJsonReplacingTimestamp();
 }

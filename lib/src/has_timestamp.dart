@@ -7,13 +7,22 @@ mixin HasTimestamp {
   DateTime get createdAt;
   DateTime get updatedAt;
 
-  Map<String, dynamic> get timestampJson {
+  static Map<String, dynamic> _timestampJson(DateTime createdAt) {
     return <String, dynamic>{
       if (createdAt == null)
         TimestampField.createdAt: FieldValue.serverTimestamp(),
       TimestampField.updatedAt: FieldValue.serverTimestamp(),
     };
   }
+
+  static Map<String, dynamic> replacingTimestamp({
+    @required Map<String, dynamic> json,
+    @required DateTime createdAt,
+  }) =>
+      <String, dynamic>{
+        ...json..remove(TimestampField.createdAt),
+        ...HasTimestamp._timestampJson(createdAt),
+      };
 
   static DateTime parseCreatedAt(Map<String, dynamic> json) {
     return parseTimestamp(json: json, key: TimestampField.createdAt);
@@ -22,17 +31,6 @@ mixin HasTimestamp {
   static DateTime parseUpdatedAt(Map<String, dynamic> json) {
     return parseTimestamp(json: json, key: TimestampField.updatedAt);
   }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is HasTimestamp &&
-          runtimeType == other.runtimeType &&
-          createdAt == other.createdAt &&
-          updatedAt == other.updatedAt;
-
-  @override
-  int get hashCode => createdAt.hashCode ^ updatedAt.hashCode;
 }
 
 class TimestampField {
