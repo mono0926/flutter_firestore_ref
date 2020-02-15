@@ -1,3 +1,7 @@
+## [0.7.0]
+
+- Delete helper methods in favor of cloud_firestore_web
+
 ## [0.6.0]
 
 - Split out HasTimestamp from Entity
