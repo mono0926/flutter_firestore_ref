@@ -3,7 +3,7 @@ import 'package:firestore_ref/firestore_ref.dart';
 import 'package:meta/meta.dart';
 
 @immutable
-abstract class Document<E extends Entity> {
+abstract class Document<E> {
   const Document(
     this.id,
     this.entity,
@@ -24,5 +24,5 @@ abstract class Document<E extends Entity> {
   int get hashCode => id.hashCode ^ entity.hashCode;
 }
 
-typedef DocumentDecoder<D extends Document> = D Function(
+typedef DocumentDecoder<D extends Document<dynamic>> = D Function(
     DocumentSnapshot snapshot);

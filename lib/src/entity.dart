@@ -1,7 +1,5 @@
 import 'package:meta/meta.dart';
 
-mixin Entity {}
-
 Map<String, dynamic> parseJson(
   Map<String, dynamic> json, {
   @required String key,
@@ -19,6 +17,6 @@ T parse<T>(
   return parsedJson == null ? null : fromJson(parsedJson);
 }
 
-typedef EntityEncoder<E extends Entity> = Map<String, dynamic> Function(
+typedef EntityEncoder<E> = Map<String, dynamic> Function(
   E entity,
 );

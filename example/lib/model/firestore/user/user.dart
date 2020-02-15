@@ -7,7 +7,7 @@ part 'user.freezed.dart';
 part 'user.g.dart';
 
 @freezed
-abstract class User with _$User, Entity {
+abstract class User with _$User {
   const factory User({
     @required int count,
     @timestampJsonKey DateTime createdAt,

@@ -5,7 +5,7 @@ import 'package:meta/meta.dart';
 typedef MakeQuery = Query Function(CollectionReference collectionRef);
 
 @immutable
-class CollectionRef<E extends Entity, D extends Document<E>> {
+class CollectionRef<E, D extends Document<E>> {
   const CollectionRef({
     @required this.ref,
     @required this.decoder,

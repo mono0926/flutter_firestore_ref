@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 
 typedef MakeGroupQuery = Query Function(Query collectionRef);
 
-class CollectionGroup<E extends Entity, D extends Document<E>> {
+class CollectionGroup<E, D extends Document<E>> {
   CollectionGroup({
     @required String path,
     @required this.decoder,
