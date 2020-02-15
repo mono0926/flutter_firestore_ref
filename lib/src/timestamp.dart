@@ -3,11 +3,6 @@ import 'package:firestore_ref/firestore_ref.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:meta/meta.dart';
 
-mixin HasTimestamp {
-  DateTime get createdAt;
-  DateTime get updatedAt;
-}
-
 class TimestampField {
   static const createdAt = 'createdAt';
   static const updatedAt = 'updatedAt';

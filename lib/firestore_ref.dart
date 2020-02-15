@@ -8,4 +8,4 @@ export 'src/document.dart';
 export 'src/document_ref.dart';
 export 'src/entity.dart';
 export 'src/functions.dart';
-export 'src/has_timestamp.dart';
+export 'src/timestamp.dart';
