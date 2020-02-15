@@ -10,7 +10,7 @@ class UsersNotifier extends ChangeNotifier {
   UsersNotifier() {
     _subscriptionHolder.add(
       UsersRef.ref()
-          .documents((r) => FirRefCollectionReferenceEx(r)
+          .documents((r) => r
               .orderBy(
                 TimestampField.updatedAt,
                 descending: true,

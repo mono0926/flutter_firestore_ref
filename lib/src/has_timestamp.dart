@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firestore_ref/firestore_ref.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:meta/meta.dart';

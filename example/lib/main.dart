@@ -8,7 +8,7 @@ import 'util/util.dart';
 void main() {
   logger.fine('start');
   WidgetsFlutterBinding.ensureInitialized();
-  configureFirestore(persistenceEnabled: true);
+  Firestore.instance.settings(persistenceEnabled: true);
   runApp(
     MultiProvider(
       providers: [

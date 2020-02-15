@@ -9,7 +9,7 @@ export 'user_ref.dart';
 class UsersRef extends CollectionRef<User, UserDoc> {
   UsersRef.ref()
       : super(
-          ref: firestoreInstance.collection(collection),
+          ref: Firestore.instance.collection(collection),
           decoder: _UserDocDecoder(),
           encoder: _UserEncoder(),
         );
@@ -31,7 +31,7 @@ class _UserDocDecoder extends DocumentDecoder<UserDoc> {
   UserDoc decode(DocumentSnapshot snapshot) {
     return UserDoc(
       snapshot.documentID,
-      User.fromJson(FirRefDocumentSnapshotEx(snapshot).data),
+      User.fromJson(snapshot.data),
     );
   }
 }

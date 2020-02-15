@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter/foundation.dart';
 
@@ -8,7 +9,7 @@ class CollectionGroup<E extends Entity, D extends Document<E>> {
     @required String path,
     @required this.decoder,
     @required this.encoder,
-  }) : query = firestoreInstance.collectionGroup(path);
+  }) : query = Firestore.instance.collectionGroup(path);
   @protected
   final Query query;
   @protected

@@ -1,7 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firestore_ref/firestore_ref.dart';
 import 'package:meta/meta.dart';
-
-import 'firestore.dart';
 
 typedef MakeQuery = Query Function(CollectionReference collectionRef);
 
