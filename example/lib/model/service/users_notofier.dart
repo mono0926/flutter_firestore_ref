@@ -9,7 +9,7 @@ import 'package:subscription_holder/subscription_holder.dart';
 class UsersNotifier extends ChangeNotifier {
   UsersNotifier() {
     _subscriptionHolder.add(
-      UsersRef.ref()
+      usersRef
           .documents((r) => r
               .orderBy(
                 TimestampField.updatedAt,

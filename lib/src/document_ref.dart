@@ -8,14 +8,12 @@ SimpleLogger get _logger => SimpleLogger();
 @immutable
 class DocumentRef<E, D extends Document<E>> {
   const DocumentRef({
+    @required this.collectionRef,
     @required this.ref,
-    @required this.decoder,
-    @required this.encoder,
   });
 
+  final CollectionRef<E, D> collectionRef;
   final DocumentReference ref;
-  final DocumentDecoder<D> decoder;
-  final EntityEncoder<E> encoder;
 
   Stream<D> document() {
     return ref.snapshots().map((snapshot) {
@@ -23,7 +21,7 @@ class DocumentRef<E, D extends Document<E>> {
         _logger.warning('$D not found(id: ${ref.documentID})');
         return null;
       }
-      return decoder(snapshot);
+      return collectionRef.decoder(snapshot);
     });
   }
 
@@ -33,13 +31,13 @@ class DocumentRef<E, D extends Document<E>> {
       _logger.warning('$D not found(id: ${ref.documentID})');
       return null;
     }
-    return decoder(snapshot);
+    return collectionRef.decoder(snapshot);
   }
 
   /// すでにあるデータに対して
   /// マージと似ているがそのキーの配下のものは置き換わる
   Future<void> update(E entity, {WriteBatch batch}) {
-    return updateData(encoder(entity), batch: batch);
+    return updateData(collectionRef.encoder(entity), batch: batch);
   }
 
   /// すでにあるデータに対して
@@ -56,7 +54,7 @@ class DocumentRef<E, D extends Document<E>> {
   /// 全置き換え
   Future<void> set(E entity, {WriteBatch batch}) {
     return setData(
-      encoder(entity),
+      collectionRef.encoder(entity),
       batch: batch,
     );
   }
@@ -74,7 +72,7 @@ class DocumentRef<E, D extends Document<E>> {
   /// マージ
   Future<void> merge(E entity, {WriteBatch batch}) {
     return mergeData(
-      encoder(entity),
+      collectionRef.encoder(entity),
       batch: batch,
     );
   }

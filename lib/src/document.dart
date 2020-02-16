@@ -1,13 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firestore_ref/firestore_ref.dart';
 import 'package:meta/meta.dart';
-
-typedef DocumentDecoder<D extends Document<dynamic>> = D Function(
-    DocumentSnapshot snapshot);
-
-typedef EntityEncoder<E> = Map<String, dynamic> Function(
-  E entity,
-);
 
 @immutable
 class Document<E> {

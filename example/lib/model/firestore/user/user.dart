@@ -16,19 +16,15 @@ abstract class User with _$User {
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 }
 
-class UsersRef extends CollectionRef<User, Document<User>> {
-  UsersRef.ref()
-      : super(
-          ref: Firestore.instance.collection(collection),
-          decoder: (snap) => Document<User>(
-            snap.documentID,
-            User.fromJson(snap.data),
-          ),
-          encoder: (entity) => replacingTimestamp(
-            json: entity.toJson(),
-            createdAt: entity.createdAt,
-          ),
-        );
-
-  static const collection = 'users';
-}
+final CollectionRef<User, Document<User>> usersRef =
+    CollectionRef<User, Document<User>>(
+  Firestore.instance.collection('users'),
+  decoder: (snap) => Document<User>(
+    snap.documentID,
+    User.fromJson(snap.data),
+  ),
+  encoder: (entity) => replacingTimestamp(
+    json: entity.toJson(),
+    createdAt: entity.createdAt,
+  ),
+);

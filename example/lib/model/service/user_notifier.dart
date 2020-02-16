@@ -32,7 +32,7 @@ class UserNotifier extends ChangeNotifier {
   String get id => doc.id;
   User get user => doc.entity ?? const User(count: 0);
   int get count => user.count;
-  DocumentRef<User, Document<User>> get _ref => UsersRef.ref().docRef(id);
+  DocumentRef<User, Document<User>> get _ref => usersRef.docRef(id);
 
   @override
   void dispose() {

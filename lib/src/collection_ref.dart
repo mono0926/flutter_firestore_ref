@@ -3,20 +3,22 @@ import 'package:firestore_ref/firestore_ref.dart';
 import 'package:meta/meta.dart';
 
 typedef MakeQuery = Query Function(CollectionReference collectionRef);
+typedef DocumentDecoder<D extends Document<dynamic>> = D Function(
+    DocumentSnapshot snapshot);
+typedef EntityEncoder<E> = Map<String, dynamic> Function(
+  E entity,
+);
 
 @immutable
-abstract class CollectionRef<E, D extends Document<E>> {
-  const CollectionRef({
-    @required this.ref,
+class CollectionRef<E, D extends Document<E>> {
+  const CollectionRef(
+    this.ref, {
     @required this.decoder,
     @required this.encoder,
   });
 
-  @protected
   final CollectionReference ref;
-  @protected
   final DocumentDecoder<D> decoder;
-  @protected
   final EntityEncoder<E> encoder;
 
   Stream<QuerySnapshot> snapshots(MakeQuery makeQuery) {
@@ -33,9 +35,8 @@ abstract class CollectionRef<E, D extends Document<E>> {
 
   DocumentRef<E, D> docRef([String id]) {
     return DocumentRef<E, D>(
+      collectionRef: this,
       ref: docRefRaw(id),
-      decoder: decoder,
-      encoder: encoder,
     );
   }
 }
