@@ -30,13 +30,10 @@ class CollectionRef<E, D extends Document<E>> {
         .map((snap) => snap.documents.map(decoder).toList());
   }
 
-  @protected
-  DocumentReference docRefRaw([String id]) => ref.document(id);
-
   DocumentRef<E, D> docRef([String id]) {
     return DocumentRef<E, D>(
+      id: id,
       collectionRef: this,
-      ref: docRefRaw(id),
     );
   }
 }

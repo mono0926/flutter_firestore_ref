@@ -7,10 +7,10 @@ SimpleLogger get _logger => SimpleLogger();
 
 @immutable
 class DocumentRef<E, D extends Document<E>> {
-  const DocumentRef({
+  DocumentRef({
+    @required String id,
     @required this.collectionRef,
-    @required this.ref,
-  });
+  }) : ref = collectionRef.ref.document(id);
 
   final CollectionRef<E, D> collectionRef;
   final DocumentReference ref;
