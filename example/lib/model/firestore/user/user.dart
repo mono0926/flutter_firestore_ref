@@ -18,13 +18,13 @@ abstract class User with _$User {
 
 final CollectionRef<User, Document<User>> usersRef = CollectionRef(
   Firestore.instance.collection('users'),
-  decoder: (snap) => Document(
-    snap.documentID,
-    User.fromJson(snap.data),
+  decoder: (snapshot) => Document(
+    snapshot.documentID,
+    User.fromJson(snapshot.data),
   ),
-  encoder: (entity) => replacingTimestamp(
-    json: entity.toJson(),
-    createdAt: entity.createdAt,
+  encoder: (user) => replacingTimestamp(
+    json: user.toJson(),
+    createdAt: user.createdAt,
   ),
 );
 
@@ -33,13 +33,13 @@ final CollectionRef<User, Document<User>> usersRef = CollectionRef(
 //  UsersRef()
 //      : super(
 //          Firestore.instance.collection('users'),
-//          decoder: (snap) => Document<User>(
-//            snap.documentID,
-//            User.fromJson(snap.data),
+//          decoder: (snapshot) => Document<User>(
+//            snapshot.documentID,
+//            User.fromJson(snapshot.data),
 //          ),
-//          encoder: (entity) => replacingTimestamp(
-//            json: entity.toJson(),
-//            createdAt: entity.createdAt,
+//          encoder: (user) => replacingTimestamp(
+//            json: user.toJson(),
+//            createdAt: user.createdAt,
 //          ),
 //        );
 //}
