@@ -26,18 +26,6 @@ class UserDoc extends Document<User> {
         );
 }
 
-class UserRef extends DocumentRef<User, UserDoc> {
-  const UserRef({
-    @required DocumentReference ref,
-    @required DocumentDecoder<UserDoc> decoder,
-    @required EntityEncoder<User> encoder,
-  }) : super(
-          ref: ref,
-          decoder: decoder,
-          encoder: encoder,
-        );
-}
-
 class UsersRef extends CollectionRef<User, UserDoc> {
   UsersRef.ref()
       : super(
@@ -53,13 +41,4 @@ class UsersRef extends CollectionRef<User, UserDoc> {
         );
 
   static const collection = 'users';
-
-  @override
-  UserRef docRef([String id]) {
-    return UserRef(
-      ref: docRefRaw(id),
-      encoder: encoder,
-      decoder: decoder,
-    );
-  }
 }

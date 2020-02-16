@@ -1,5 +1,6 @@
 import 'package:example/model/firestore/firestore.dart';
 import 'package:example/util/util.dart';
+import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter/foundation.dart';
 import 'package:subscription_holder/subscription_holder.dart';
 
@@ -31,7 +32,7 @@ class UserNotifier extends ChangeNotifier {
   String get id => doc.id;
   User get user => doc.entity ?? const User(count: 0);
   int get count => user.count;
-  UserRef get _ref => UsersRef.ref().docRef(id);
+  DocumentRef<User, UserDoc> get _ref => UsersRef.ref().docRef(id);
 
   @override
   void dispose() {

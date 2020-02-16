@@ -31,5 +31,11 @@ abstract class CollectionRef<E, D extends Document<E>> {
   @protected
   DocumentReference docRefRaw([String id]) => ref.document(id);
 
-  DocumentRef<E, D> docRef([String id]);
+  DocumentRef<E, D> docRef([String id]) {
+    return DocumentRef<E, D>(
+      ref: docRefRaw(id),
+      decoder: decoder,
+      encoder: encoder,
+    );
+  }
 }
