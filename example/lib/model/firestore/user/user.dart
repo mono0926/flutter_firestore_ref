@@ -16,10 +16,9 @@ abstract class User with _$User {
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 }
 
-final CollectionRef<User, Document<User>> usersRef =
-    CollectionRef<User, Document<User>>(
+final CollectionRef<User, Document<User>> usersRef = CollectionRef(
   Firestore.instance.collection('users'),
-  decoder: (snap) => Document<User>(
+  decoder: (snap) => Document(
     snap.documentID,
     User.fromJson(snap.data),
   ),
