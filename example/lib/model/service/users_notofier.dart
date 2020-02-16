@@ -25,8 +25,8 @@ class UsersNotifier extends ChangeNotifier {
   }
 
   final _subscriptionHolder = SubscriptionHolder();
-  List<UserDoc> _userDocs = [];
-  List<UserDoc> get userDocs => UnmodifiableListView(_userDocs);
+  List<Document<User>> _userDocs = [];
+  List<Document<User>> get userDocs => UnmodifiableListView(_userDocs);
 
   @override
   void dispose() {

@@ -5,7 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:subscription_holder/subscription_holder.dart';
 
 class UserNotifier extends ChangeNotifier {
-  UserNotifier({@required UserDoc doc}) {
+  UserNotifier({@required Document<User> doc}) {
     _doc = doc;
     if (id != null) {
       _subscriptionHolder.add(
@@ -19,7 +19,7 @@ class UserNotifier extends ChangeNotifier {
     }
   }
 
-  UserNotifier.fromId(String id) : this(doc: UserDoc(id, null));
+  UserNotifier.fromId(String id) : this(doc: Document<User>(id, null));
 
   void increment() {
     logger.info(DateTime.now());
@@ -27,12 +27,12 @@ class UserNotifier extends ChangeNotifier {
   }
 
   final _subscriptionHolder = SubscriptionHolder();
-  UserDoc _doc;
-  UserDoc get doc => _doc;
+  Document<User> _doc;
+  Document<User> get doc => _doc;
   String get id => doc.id;
   User get user => doc.entity ?? const User(count: 0);
   int get count => user.count;
-  DocumentRef<User, UserDoc> get _ref => UsersRef.ref().docRef(id);
+  DocumentRef<User, Document<User>> get _ref => UsersRef.ref().docRef(id);
 
   @override
   void dispose() {

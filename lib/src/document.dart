@@ -10,7 +10,7 @@ typedef EntityEncoder<E> = Map<String, dynamic> Function(
 );
 
 @immutable
-abstract class Document<E> {
+class Document<E> {
   const Document(
     this.id,
     this.entity,
