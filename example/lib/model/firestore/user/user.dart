@@ -28,3 +28,19 @@ final CollectionRef<User, Document<User>> usersRef =
     createdAt: entity.createdAt,
   ),
 );
+
+//Or this:
+//class UsersRef extends CollectionRef<User, Document<User>> {
+//  UsersRef()
+//      : super(
+//          Firestore.instance.collection('users'),
+//          decoder: (snap) => Document<User>(
+//            snap.documentID,
+//            User.fromJson(snap.data),
+//          ),
+//          encoder: (entity) => replacingTimestamp(
+//            json: entity.toJson(),
+//            createdAt: entity.createdAt,
+//          ),
+//        );
+//}
