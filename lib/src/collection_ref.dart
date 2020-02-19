@@ -21,8 +21,8 @@ class CollectionRef<E, D extends Document<E>> {
   final DocumentDecoder<D> decoder;
   final EntityEncoder<E> encoder;
 
-  Stream<QuerySnapshot> snapshots(MakeQuery makeQuery) {
-    return makeQuery(ref).snapshots();
+  Stream<QuerySnapshot> snapshots([MakeQuery makeQuery]) {
+    return (makeQuery ?? (r) => r)(ref).snapshots();
   }
 
   Stream<List<D>> documents(MakeQuery makeQuery) {
