@@ -25,8 +25,8 @@ class CollectionRef<E, D extends Document<E>> {
     return (makeQuery ?? (r) => r)(ref).snapshots();
   }
 
-  Stream<List<D>> documents(MakeQuery makeQuery) {
-    return snapshots(makeQuery)
+  Stream<List<D>> documents([MakeQuery makeQuery]) {
+    return snapshots(makeQuery ?? (r) => r)
         .map((snap) => snap.documents.map(decoder).toList());
   }
 
