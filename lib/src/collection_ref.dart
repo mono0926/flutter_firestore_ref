@@ -30,6 +30,15 @@ class CollectionRef<E, D extends Document<E>> {
         .map((snap) => snap.documents.map(decoder).toList());
   }
 
+  Future<QuerySnapshot> getSnapshots([MakeQuery makeQuery]) {
+    return (makeQuery ?? (r) => r)(ref).getDocuments();
+  }
+
+  Future<List<D>> getDocuments([MakeQuery makeQuery]) async {
+    final snapshots = await getSnapshots(makeQuery);
+    return snapshots.documents.map(decoder).toList();
+  }
+
   DocumentRef<E, D> docRef([String id]) {
     return DocumentRef<E, D>(
       id: id,
