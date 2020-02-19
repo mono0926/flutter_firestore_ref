@@ -13,17 +13,19 @@ const timestampJsonKey = JsonKey(
 );
 
 Set<DocumentReference> documentReferenceSetFromListValue(dynamic value) {
-  return Set.from(
-      (value as List).cast<DocumentReference>() ?? <DocumentReference>[]);
+  return value == null
+      ? null
+      : Set.from((value as List).cast<DocumentReference>());
 }
 
 List<DocumentReference> documentReferenceListFromSetValue(dynamic value) {
-  return List.from(
-      (value as Set).cast<DocumentReference>() ?? <DocumentReference>{});
+  return value == null
+      ? null
+      : List.from((value as Set).cast<DocumentReference>());
 }
 
 List<DocumentReference> documentReferenceListFromListValue(dynamic value) {
-  return (value as List).cast();
+  return value == null ? null : (value as List).cast();
 }
 
 const documentReferenceSetJsonKey = JsonKey(
