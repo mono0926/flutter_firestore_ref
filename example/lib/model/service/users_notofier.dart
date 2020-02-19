@@ -17,7 +17,7 @@ class UsersNotifier extends ChangeNotifier {
               )
               .limit(100))
           .listen((docs) {
-        logger.info(DateTime.now());
+        logger..info(DateTime.now())..info(docs.join(',\n'));
         _userDocs = docs;
         notifyListeners();
       }),

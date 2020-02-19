@@ -20,4 +20,13 @@ class Document<E> {
 
   @override
   int get hashCode => id.hashCode ^ entity.hashCode;
+
+  @override
+  String toString() {
+    return '''
+Document<$E>(
+  id: $id, 
+  entity: $entity
+)''';
+  }
 }
