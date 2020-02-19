@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firestore_ref/firestore_ref.dart';
-import 'package:json_annotation/json_annotation.dart';
 import 'package:meta/meta.dart';
 
 class TimestampField {
@@ -25,14 +24,3 @@ DateTime parseTimestamp({
 }) {
   return dateFromTimestampValue(json[key]);
 }
-
-DateTime dateFromTimestampValue(dynamic value) =>
-    (value as Timestamp)?.toDate();
-
-Timestamp timestampFromDateValue(dynamic value) =>
-    value is DateTime ? Timestamp.fromDate(value) : null;
-
-const timestampJsonKey = JsonKey(
-  fromJson: dateFromTimestampValue,
-  toJson: timestampFromDateValue,
-);
