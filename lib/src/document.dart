@@ -29,4 +29,14 @@ Document<$E>(
   entity: $entity
 )''';
   }
+
+  Document<E> copyWith({
+    String id,
+    E entity,
+  }) {
+    return Document<E>(
+      id ?? this.id,
+      entity ?? this.entity,
+    );
+  }
 }
