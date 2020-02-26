@@ -45,4 +45,9 @@ class CollectionRef<E, D extends Document<E>> {
       collectionRef: this,
     );
   }
+
+  Future<DocumentRef<E, D>> add(E entity) async {
+    final rawRef = await ref.add(encoder(entity));
+    return docRef(rawRef.documentID);
+  }
 }
