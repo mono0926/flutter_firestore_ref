@@ -7,7 +7,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  cloud_firestore: ^0.13.2+1
+  cloud_firestore: ^0.13.4
   firebase: ^7.2.1
   json_annotation: ^3.0.1
   simple_logger: ^1.6.0+1
