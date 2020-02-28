@@ -16,6 +16,7 @@ dependencies:
 # fb_authのために指定
 dependency_overrides:
   firebase: ^7.2.1
+  firebase_auth: ^0.15.5
 dev_dependencies:
   flutter_test:
     sdk: flutter
