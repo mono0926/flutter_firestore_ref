@@ -1,29 +1,22 @@
 import 'dart:io';
 
-import 'package:fb_auth/fb_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 
 class Authenticator extends ChangeNotifier {
   Authenticator() {
-    _auth.listen((state) {
-      _state = state;
+    _auth.onAuthStateChanged.listen((user) {
+      _user = user;
       notifyListeners();
     });
   }
 
-  final _auth = AuthBloc(app: null);
-  AuthState _state;
+  final _auth = FirebaseAuth.instance;
+  FirebaseUser _user;
 
-  AuthState get state => _state;
-  AuthUser get user {
-    // TODO(mono): 認証部分が動かないので暫定処置(Webだとnullなのでtrue比較)
-    if (Platform.isMacOS == true) {
-      return AuthUser(uid: 'macOS');
-    }
-    return state is LoggedInState ? (state as LoggedInState).user : null;
-  }
+  FirebaseUser get user => Platform.isMacOS == true ? null : _user;
 
   void signInAnonymously() {
-    _auth.add(LoginGuest());
+    _auth.signInAnonymously();
   }
 }
