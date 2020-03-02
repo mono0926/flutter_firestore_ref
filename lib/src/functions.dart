@@ -24,3 +24,9 @@ T parse<T>(
   final parsedJson = parseJson(json, key: key);
   return parsedJson == null ? null : fromJson(parsedJson);
 }
+
+Future<void> executeBatch<T>(Future<T> Function(WriteBatch batch) f) async {
+  final batch = Firestore.instance.batch();
+  await f(batch);
+  await batch.commit();
+}
