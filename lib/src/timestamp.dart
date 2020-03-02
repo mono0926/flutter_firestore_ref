@@ -15,7 +15,8 @@ Map<String, dynamic> replacingTimestamp({
       ...json..remove(TimestampField.createdAt),
       if (createdAt == null)
         TimestampField.createdAt: FieldValue.serverTimestamp(),
-      TimestampField.updatedAt: FieldValue.serverTimestamp(),
+      if (json[TimestampField.updatedAt] != null)
+        TimestampField.updatedAt: FieldValue.serverTimestamp(),
     };
 
 DateTime parseTimestamp({
