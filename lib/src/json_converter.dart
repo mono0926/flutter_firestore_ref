@@ -1,16 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-DateTime dateFromTimestampValue(dynamic value) =>
-    (value as Timestamp)?.toDate();
+class TimestampConverter implements JsonConverter<DateTime, Timestamp> {
+  const TimestampConverter();
 
-Timestamp timestampFromDateValue(dynamic value) =>
-    value is DateTime ? Timestamp.fromDate(value) : null;
+  @override
+  DateTime fromJson(Timestamp json) => json?.toDate();
 
-const timestampJsonKey = JsonKey(
-  fromJson: dateFromTimestampValue,
-  toJson: timestampFromDateValue,
-);
+  @override
+  Timestamp toJson(DateTime object) =>
+      object == null ? null : Timestamp.fromDate(object);
+}
 
 Set<DocumentReference> documentReferenceSetFromListValue(dynamic value) {
   return value == null
@@ -37,3 +37,18 @@ const documentReferenceListJsonKey = JsonKey(
   fromJson: documentReferenceListFromListValue,
   toJson: documentReferenceListFromListValue,
 );
+
+class DocumentReferenceConverter
+    extends PassthroughConverter<DocumentReference> {
+  const DocumentReferenceConverter();
+}
+
+class PassthroughConverter<T> implements JsonConverter<T, T> {
+  const PassthroughConverter();
+
+  @override
+  T fromJson(T json) => json;
+
+  @override
+  T toJson(T object) => object;
+}

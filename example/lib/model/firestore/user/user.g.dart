@@ -9,13 +9,15 @@ part of 'user.dart';
 _$_User _$_$_UserFromJson(Map<String, dynamic> json) {
   return _$_User(
     count: json['count'] as int,
-    createdAt: dateFromTimestampValue(json['createdAt']),
-    updatedAt: dateFromTimestampValue(json['updatedAt']),
+    createdAt:
+        const TimestampConverter().fromJson(json['createdAt'] as Timestamp),
+    updatedAt:
+        const TimestampConverter().fromJson(json['updatedAt'] as Timestamp),
   );
 }
 
 Map<String, dynamic> _$_$_UserToJson(_$_User instance) => <String, dynamic>{
       'count': instance.count,
-      'createdAt': timestampFromDateValue(instance.createdAt),
-      'updatedAt': timestampFromDateValue(instance.updatedAt),
+      'createdAt': const TimestampConverter().toJson(instance.createdAt),
+      'updatedAt': const TimestampConverter().toJson(instance.updatedAt),
     };

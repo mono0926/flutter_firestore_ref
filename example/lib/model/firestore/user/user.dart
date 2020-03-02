@@ -10,8 +10,8 @@ part 'user.g.dart';
 abstract class User with _$User {
   const factory User({
     @required int count,
-    @timestampJsonKey DateTime createdAt,
-    @timestampJsonKey DateTime updatedAt,
+    @TimestampConverter() DateTime createdAt,
+    @TimestampConverter() DateTime updatedAt,
   }) = _User;
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 }

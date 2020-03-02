@@ -22,5 +22,5 @@ DateTime parseTimestamp({
   @required Map<String, dynamic> json,
   @required String key,
 }) {
-  return dateFromTimestampValue(json[key]);
+  return (json[key] as Timestamp)?.toDate();
 }
