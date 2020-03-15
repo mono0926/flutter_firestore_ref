@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firestore_ref/firestore_ref.dart';
 import 'package:meta/meta.dart';
@@ -11,23 +13,23 @@ typedef EntityEncoder<E> = Map<String, dynamic> Function(
 
 @immutable
 class CollectionRef<E, D extends Document<E>> {
-  const CollectionRef(
+  CollectionRef(
     this.ref, {
     @required this.decoder,
     @required this.encoder,
-  });
+  }) : _documentList = _DocumentList(decoder: decoder);
 
   final CollectionReference ref;
   final DocumentDecoder<D> decoder;
   final EntityEncoder<E> encoder;
+  final _DocumentList<E, D> _documentList;
 
   Stream<QuerySnapshot> snapshots([MakeQuery makeQuery]) {
     return (makeQuery ?? (r) => r)(ref).snapshots();
   }
 
-  Stream<List<D>> documents([MakeQuery makeQuery]) {
-    return snapshots(makeQuery ?? (r) => r)
-        .map((snap) => snap.documents.map(decoder).toList());
+  Stream<UnmodifiableListView<D>> documents([MakeQuery makeQuery]) {
+    return snapshots(makeQuery ?? (r) => r).map(_documentList.appliedSnapshot);
   }
 
   Future<QuerySnapshot> getSnapshots([MakeQuery makeQuery]) {
@@ -49,5 +51,37 @@ class CollectionRef<E, D extends Document<E>> {
   Future<DocumentRef<E, D>> add(E entity) async {
     final rawRef = await ref.add(encoder(entity));
     return docRef(rawRef.documentID);
+  }
+}
+
+class _DocumentList<E, D extends Document<E>> {
+  _DocumentList({
+    @required this.decoder,
+  });
+  final DocumentDecoder<D> decoder;
+  final _documents = <D>[];
+
+  UnmodifiableListView<D> appliedSnapshot(QuerySnapshot snapshot) {
+    for (final change in snapshot.documentChanges) {
+      switch (change.type) {
+        case DocumentChangeType.added:
+          _documents.insert(
+            change.newIndex,
+            decoder(change.document),
+          );
+          break;
+        case DocumentChangeType.removed:
+          _documents.removeAt(change.oldIndex);
+          break;
+        case DocumentChangeType.modified:
+          _documents.removeAt(change.oldIndex);
+          _documents.insert(
+            change.newIndex,
+            decoder(change.document),
+          );
+          break;
+      }
+    }
+    return UnmodifiableListView(_documents);
   }
 }
