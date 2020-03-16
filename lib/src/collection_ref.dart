@@ -82,6 +82,6 @@ class _DocumentList<E, D extends Document<E>> {
           break;
       }
     }
-    return UnmodifiableListView(_documents);
+    return List.unmodifiable(_documents);
   }
 }
