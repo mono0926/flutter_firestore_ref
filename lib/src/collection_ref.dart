@@ -29,7 +29,7 @@ class CollectionRef<E, D extends Document<E>> {
   }
 
   Stream<List<D>> documents([MakeQuery makeQuery]) {
-    return snapshots(makeQuery ?? (r) => r).map(_documentList.appliedSnapshot);
+    return snapshots(makeQuery ?? (r) => r).map(_documentList.applyingSnapshot);
   }
 
   Future<QuerySnapshot> getSnapshots([MakeQuery makeQuery]) {
@@ -61,7 +61,7 @@ class _DocumentList<E, D extends Document<E>> {
   final DocumentDecoder<D> decoder;
   final _documents = <D>[];
 
-  List<D> appliedSnapshot(QuerySnapshot snapshot) {
+  List<D> applyingSnapshot(QuerySnapshot snapshot) {
     for (final change in snapshot.documentChanges) {
       switch (change.type) {
         case DocumentChangeType.added:
