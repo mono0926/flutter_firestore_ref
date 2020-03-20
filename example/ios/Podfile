@@ -77,9 +77,3 @@ target 'Runner' do
     pod name, :path => File.join(symlink, 'ios')
   end
 end
-
-# Prevent Cocoapods from embedding a second Flutter framework and causing an error with the new Xcode build system.
-install! 'cocoapods',
-    disable_input_output_paths: true,
-    generate_multiple_pod_projects: true,
-    incremental_installation: true
