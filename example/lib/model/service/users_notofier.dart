@@ -1,7 +1,6 @@
 import 'dart:collection';
 
 import 'package:example/model/firestore/firestore.dart';
-import 'package:example/util/util.dart';
 import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter/foundation.dart';
 import 'package:subscription_holder/subscription_holder.dart';
@@ -17,7 +16,6 @@ class UsersNotifier extends ChangeNotifier {
               )
               .limit(100))
           .listen((docs) {
-        logger..info(DateTime.now())..info(docs.join(',\n'));
         _userDocs = docs;
         notifyListeners();
       }),

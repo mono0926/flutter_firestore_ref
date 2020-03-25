@@ -2,6 +2,7 @@
 
 - Use freezed at example
 - Refactor encoder/decoder
+- Support transaction
 
 ## [0.7.0]
 

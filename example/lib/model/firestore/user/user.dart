@@ -28,6 +28,10 @@ final CollectionRef<User, Document<User>> usersRef = CollectionRef(
   ),
 );
 
+class UserField {
+  static const count = 'count';
+}
+
 //Or this:
 //class UsersRef extends CollectionRef<User, Document<User>> {
 //  UsersRef()

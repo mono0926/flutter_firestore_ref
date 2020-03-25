@@ -9,7 +9,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: context.select((AppInfo info) => info.title),
-      home: const HomePage(),
+      home: HomePage.wrapped(),
     );
   }
 }

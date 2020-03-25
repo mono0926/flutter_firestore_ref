@@ -1,10 +1,19 @@
 import 'package:example/main.dart';
 import 'package:example/model/service/service.dart';
 import 'package:example/util/util.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({Key key}) : super(key: key);
+  const HomePage._({Key key}) : super(key: key);
+
+  static Widget wrapped() {
+    return ChangeNotifierProvider(
+      create: (context) => HomePageController(),
+      child: const HomePage._(),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,11 +24,30 @@ class HomePage extends StatelessWidget {
       ),
       body: Column(
         children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 16),
+            child: CupertinoSlidingSegmentedControl<UpdateType>(
+              children: const {
+                UpdateType.add: Text('Add'),
+                UpdateType.increment: Text('Incr'),
+                UpdateType.batch: Text('Batch'),
+                UpdateType.transaction: Text('Tran'),
+              },
+              onValueChanged: (type) {
+                context.read<HomePageController>().changeUpdateType(type);
+              },
+              groupValue:
+                  context.select((HomePageController c) => c.updateType),
+            ),
+          ),
+          const Divider(height: 0),
           const _AccountStatus(),
           ChangeNotifierProxyProvider<Authenticator, UserNotifier>(
             create: null,
-            update: (context, authenticator, previous) =>
-                UserNotifier.fromId(authenticator.user?.uid),
+            update: (context, authenticator, previous) => UserNotifier(
+              id: authenticator.user?.uid,
+              read: context.read,
+            ),
             child: const _MyCounter(),
           ),
           const Divider(),
@@ -92,4 +120,22 @@ class _Users extends StatelessWidget {
       itemCount: docs.length,
     );
   }
+}
+
+class HomePageController with ChangeNotifier {
+  var _updateType = UpdateType.add;
+
+  UpdateType get updateType => _updateType;
+
+  void changeUpdateType(UpdateType type) {
+    _updateType = type;
+    notifyListeners();
+  }
+}
+
+enum UpdateType {
+  add,
+  increment,
+  batch,
+  transaction,
 }
