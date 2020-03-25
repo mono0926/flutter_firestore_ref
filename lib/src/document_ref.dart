@@ -136,7 +136,7 @@ class DocumentRef<E, D extends Document<E>> {
     }
     if (transaction != null) {
       throw UnsupportedError(
-        'Not supported currently: '
+        'Unsupported currently: '
         'https://github.com/FirebaseExtended/flutterfire/issues/1212',
       );
 //      transaction.set(ref, data, merge: true);
