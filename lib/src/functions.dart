@@ -2,10 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firestore_ref/firestore_ref.dart';
 import 'package:meta/meta.dart';
 
-Future<void> runBatchWrite(Future Function(WriteBatch batch) f) async {
+Future<T> runBatchWrite<T>(Future<T> Function(WriteBatch batch) f) async {
   final batch = Firestore.instance.batch();
-  await f(batch);
+  final result = await f(batch);
   await batch.commit();
+  return result;
 }
 
 Map<String, dynamic> parseJson(
@@ -23,11 +24,4 @@ T parse<T>(
 }) {
   final parsedJson = parseJson(json, key: key);
   return parsedJson == null ? null : fromJson(parsedJson);
-}
-
-Future<T> executeBatch<T>(Future<T> Function(WriteBatch batch) f) async {
-  final batch = Firestore.instance.batch();
-  final result = await f(batch);
-  await batch.commit();
-  return result;
 }
