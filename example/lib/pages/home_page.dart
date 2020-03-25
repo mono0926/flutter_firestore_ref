@@ -8,7 +8,11 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(Provider.of<AppInfo>(context).title)),
+      appBar: AppBar(
+        title: Text(
+          context.select((AppInfo info) => info.title),
+        ),
+      ),
       body: Column(
         children: [
           const _AccountStatus(),
@@ -35,7 +39,7 @@ class _AccountStatus extends StatelessWidget {
   const _AccountStatus({Key key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    final authenticator = Provider.of<Authenticator>(context);
+    final authenticator = context.watch<Authenticator>();
 
     return ListTile(
       title: const Text('User ID'),
@@ -52,12 +56,14 @@ class _MyCounter extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       title: const Text('My Count'),
-      subtitle: Text(Provider.of<UserNotifier>(context).count.toString()),
+      subtitle: Text(
+        context.select((UserNotifier n) => n.count.toString()),
+      ),
       trailing: IconButton(
         color: Theme.of(context).primaryColor,
         icon: Icon(Icons.add),
         onPressed: () {
-          Provider.of<UserNotifier>(context, listen: false).increment();
+          context.read<UserNotifier>().increment();
         },
       ),
     );
@@ -68,8 +74,8 @@ class _Users extends StatelessWidget {
   const _Users({Key key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    final authenticator = Provider.of<Authenticator>(context);
-    final notifier = Provider.of<UsersNotifier>(context);
+    final authenticator = context.watch<Authenticator>();
+    final notifier = context.watch<UsersNotifier>();
     final docs = notifier.userDocs;
     return ListView.builder(
       itemBuilder: (context, index) {

@@ -8,7 +8,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: Provider.of<AppInfo>(context).title,
+      title: context.select((AppInfo info) => info.title),
       home: const HomePage(),
     );
   }

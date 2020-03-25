@@ -9,7 +9,7 @@ dependencies:
   freezed_annotation:
   cupertino_icons: ^0.1.3
   subscription_holder: any
-  provider: any
+  provider: ^4.1.0-dev
   firebase_auth:
   firestore_ref:
     path: ..
