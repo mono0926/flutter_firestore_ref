@@ -9,6 +9,12 @@ class UsersNotifier extends ChangeNotifier {
   UsersNotifier() {
     _subscriptionHolder.add(
       usersRef
+          // TODO(mono): Make Collection Group example
+//      CollectionGroup<User, Document<User>>(
+//        path: 'users',
+//        decoder: usersRef.decoder,
+//        encoder: usersRef.encoder,
+//      )
           .documents((r) => r
               .orderBy(
                 TimestampField.updatedAt,
