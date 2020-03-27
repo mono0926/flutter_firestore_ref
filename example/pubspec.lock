@@ -245,7 +245,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "0.8.0-dev+23"
+    version: "0.8.0-dev+24"
   fixnum:
     dependency: transitive
     description:
@@ -519,7 +519,7 @@ packages:
       name: simple_logger
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.6.0+1"
+    version: "1.7.0"
   sky_engine:
     dependency: transitive
     description: flutter
