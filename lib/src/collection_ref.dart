@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firestore_ref/firestore_ref.dart';
 import 'package:meta/meta.dart';
 
+import 'document_list.dart';
+
 typedef MakeQuery = Query Function(CollectionReference collectionRef);
 typedef DocumentDecoder<D extends Document<dynamic>> = D Function(
     DocumentSnapshot snapshot);
@@ -15,19 +17,19 @@ class CollectionRef<E, D extends Document<E>> {
     this.ref, {
     @required this.decoder,
     @required this.encoder,
-  }) : _documentList = _DocumentList(decoder: decoder);
+  }) : _documentList = DocumentList(decoder: decoder);
 
   final CollectionReference ref;
   final DocumentDecoder<D> decoder;
   final EntityEncoder<E> encoder;
-  final _DocumentList<E, D> _documentList;
+  final DocumentList<E, D> _documentList;
 
   Stream<QuerySnapshot> snapshots([MakeQuery makeQuery]) {
     return (makeQuery ?? (r) => r)(ref).snapshots();
   }
 
   Stream<List<D>> documents([MakeQuery makeQuery]) {
-    return snapshots(makeQuery ?? (r) => r).map(_documentList.applyingSnapshot);
+    return snapshots(makeQuery).map(_documentList.applyingSnapshot);
   }
 
   Future<QuerySnapshot> getSnapshots([MakeQuery makeQuery]) {
@@ -49,37 +51,5 @@ class CollectionRef<E, D extends Document<E>> {
   Future<DocumentRef<E, D>> add(E entity) async {
     final rawRef = await ref.add(encoder(entity));
     return docRef(rawRef.documentID);
-  }
-}
-
-class _DocumentList<E, D extends Document<E>> {
-  _DocumentList({
-    @required this.decoder,
-  });
-  final DocumentDecoder<D> decoder;
-  final _documents = <D>[];
-
-  List<D> applyingSnapshot(QuerySnapshot snapshot) {
-    for (final change in snapshot.documentChanges) {
-      switch (change.type) {
-        case DocumentChangeType.added:
-          _documents.insert(
-            change.newIndex,
-            decoder(change.document),
-          );
-          break;
-        case DocumentChangeType.removed:
-          _documents.removeAt(change.oldIndex);
-          break;
-        case DocumentChangeType.modified:
-          _documents.removeAt(change.oldIndex);
-          _documents.insert(
-            change.newIndex,
-            decoder(change.document),
-          );
-          break;
-      }
-    }
-    return List.unmodifiable(_documents);
   }
 }
