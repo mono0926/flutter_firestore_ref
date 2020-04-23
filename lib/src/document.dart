@@ -17,17 +17,17 @@ class Document<E> {
       identical(this, other) ||
       other is Document &&
           runtimeType == other.runtimeType &&
-          id == other.id &&
+          ref == other.ref &&
           entity == other.entity;
 
   @override
-  int get hashCode => id.hashCode ^ entity.hashCode;
+  int get hashCode => ref.hashCode ^ entity.hashCode;
 
   @override
   String toString() {
     return '''
 Document<$E>(
-  id: $id, 
+  ref: $ref, 
   entity: $entity
 )''';
   }
