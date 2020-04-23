@@ -89,7 +89,7 @@ class _MyCounter extends StatelessWidget {
       ),
       trailing: IconButton(
         color: Theme.of(context).primaryColor,
-        icon: Icon(Icons.add),
+        icon: const Icon(Icons.add),
         onPressed: () {
           context.read<UserNotifier>().increment();
         },

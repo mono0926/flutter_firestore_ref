@@ -10,7 +10,7 @@ class UserNotifier extends ChangeNotifier {
     @required String id,
     @required this.read,
   }) {
-    _doc = Document<User>(id, null);
+    _doc = Document<User>(usersRef.docRef(id).ref, null);
     if (id != null) {
       _subscriptionHolder.add(
         _ref.document().listen((doc) {

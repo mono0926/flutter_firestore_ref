@@ -3,6 +3,7 @@
 - Use freezed at example
 - Refactor encoder/decoder
 - Support transaction
+- Change Document id(String) to ref(DocumentReference)
 
 ## [0.7.0]
 

@@ -1,14 +1,16 @@
+import 'package:firestore_ref/firestore_ref.dart';
 import 'package:meta/meta.dart';
 
 @immutable
 class Document<E> {
   const Document(
-    this.id,
+    this.ref,
     this.entity,
   );
 
-  final String id;
+  final DocumentReference ref;
   final E entity;
+  String get id => ref.documentID;
 
   @override
   bool operator ==(Object other) =>
@@ -31,11 +33,11 @@ Document<$E>(
   }
 
   Document<E> copyWith({
-    String id,
+    DocumentReference ref,
     E entity,
   }) {
     return Document<E>(
-      id ?? this.id,
+      ref ?? this.ref,
       entity ?? this.entity,
     );
   }
