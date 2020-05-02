@@ -7,23 +7,9 @@ part of 'user.dart';
 // FreezedGenerator
 // **************************************************************************
 
+T _$identity<T>(T value) => value;
 User _$UserFromJson(Map<String, dynamic> json) {
   return _User.fromJson(json);
-}
-
-mixin _$User {
-  int get count;
-  @TimestampConverter()
-  DateTime get createdAt;
-  @TimestampConverter()
-  DateTime get updatedAt;
-
-  User copyWith(
-      {int count,
-      @TimestampConverter() DateTime createdAt,
-      @TimestampConverter() DateTime updatedAt});
-
-  Map<String, dynamic> toJson();
 }
 
 class _$UserTearOff {
@@ -41,7 +27,85 @@ class _$UserTearOff {
   }
 }
 
+// ignore: unused_element
 const $User = _$UserTearOff();
+
+mixin _$User {
+  int get count;
+  @TimestampConverter()
+  DateTime get createdAt;
+  @TimestampConverter()
+  DateTime get updatedAt;
+
+  Map<String, dynamic> toJson();
+  $UserCopyWith<User> get copyWith;
+}
+
+abstract class $UserCopyWith<$Res> {
+  factory $UserCopyWith(User value, $Res Function(User) then) =
+      _$UserCopyWithImpl<$Res>;
+  $Res call(
+      {int count,
+      @TimestampConverter() DateTime createdAt,
+      @TimestampConverter() DateTime updatedAt});
+}
+
+class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
+  _$UserCopyWithImpl(this._value, this._then);
+
+  final User _value;
+  // ignore: unused_field
+  final $Res Function(User) _then;
+
+  @override
+  $Res call({
+    Object count = freezed,
+    Object createdAt = freezed,
+    Object updatedAt = freezed,
+  }) {
+    return _then(_value.copyWith(
+      count: count == freezed ? _value.count : count as int,
+      createdAt:
+          createdAt == freezed ? _value.createdAt : createdAt as DateTime,
+      updatedAt:
+          updatedAt == freezed ? _value.updatedAt : updatedAt as DateTime,
+    ));
+  }
+}
+
+abstract class _$UserCopyWith<$Res> implements $UserCopyWith<$Res> {
+  factory _$UserCopyWith(_User value, $Res Function(_User) then) =
+      __$UserCopyWithImpl<$Res>;
+  @override
+  $Res call(
+      {int count,
+      @TimestampConverter() DateTime createdAt,
+      @TimestampConverter() DateTime updatedAt});
+}
+
+class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
+    implements _$UserCopyWith<$Res> {
+  __$UserCopyWithImpl(_User _value, $Res Function(_User) _then)
+      : super(_value, (v) => _then(v as _User));
+
+  @override
+  _User get _value => super._value as _User;
+
+  @override
+  $Res call({
+    Object count = freezed,
+    Object createdAt = freezed,
+    Object updatedAt = freezed,
+  }) {
+    return _then(_User(
+      count: count == freezed ? _value.count : count as int,
+      createdAt:
+          createdAt == freezed ? _value.createdAt : createdAt as DateTime,
+      updatedAt:
+          updatedAt == freezed ? _value.updatedAt : updatedAt as DateTime,
+    ));
+  }
+}
 
 @JsonSerializable()
 class _$_User with DiagnosticableTreeMixin implements _User {
@@ -100,17 +164,8 @@ class _$_User with DiagnosticableTreeMixin implements _User {
       const DeepCollectionEquality().hash(updatedAt);
 
   @override
-  _$_User copyWith({
-    Object count = freezed,
-    Object createdAt = freezed,
-    Object updatedAt = freezed,
-  }) {
-    return _$_User(
-      count: count == freezed ? this.count : count as int,
-      createdAt: createdAt == freezed ? this.createdAt : createdAt as DateTime,
-      updatedAt: updatedAt == freezed ? this.updatedAt : updatedAt as DateTime,
-    );
-  }
+  _$UserCopyWith<_User> get copyWith =>
+      __$UserCopyWithImpl<_User>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -134,10 +189,6 @@ abstract class _User implements User {
   @override
   @TimestampConverter()
   DateTime get updatedAt;
-
   @override
-  _User copyWith(
-      {int count,
-      @TimestampConverter() DateTime createdAt,
-      @TimestampConverter() DateTime updatedAt});
+  _$UserCopyWith<_User> get copyWith;
 }
