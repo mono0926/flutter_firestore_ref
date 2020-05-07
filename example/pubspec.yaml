@@ -7,9 +7,9 @@ dependencies:
   flutter:
     sdk: flutter
   freezed_annotation:
-  cupertino_icons: ^0.1.3
+  cupertino_icons:
   subscription_holder: any
-  provider: ^4.1.0-dev
+  provider:
   firebase_auth:
   firestore_ref:
     path: ..

@@ -189,7 +189,7 @@ packages:
       name: disposable_provider
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.1.1"
+    version: "2.2.0"
   fake_async:
     dependency: transitive
     description:
@@ -252,7 +252,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "0.8.0-dev+26"
+    version: "0.8.0"
   fixnum:
     dependency: transitive
     description:
@@ -281,7 +281,7 @@ packages:
       name: freezed
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.10.7"
+    version: "0.10.8"
   freezed_annotation:
     dependency: "direct main"
     description:
@@ -456,7 +456,7 @@ packages:
       name: provider
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.1.0-dev+3"
+    version: "4.1.0"
   pub_semver:
     dependency: transitive
     description:
@@ -484,7 +484,7 @@ packages:
       name: rxdart
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.23.1"
+    version: "0.24.0"
   shelf:
     dependency: transitive
     description:
@@ -559,7 +559,7 @@ packages:
       name: subscription_holder
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.2.0+1"
+    version: "1.2.0+2"
   term_glyph:
     dependency: transitive
     description:
@@ -618,4 +618,4 @@ packages:
     version: "2.2.1"
 sdks:
   dart: ">=2.7.0 <3.0.0"
-  flutter: ">=1.15.17-pre.5 <2.0.0"
+  flutter: ">=1.17.0 <2.0.0"

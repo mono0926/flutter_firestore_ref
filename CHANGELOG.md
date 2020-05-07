@@ -1,4 +1,4 @@
-## [0.8.0-dev]
+## [0.8.0]
 
 - Use freezed at example
 - Refactor encoder/decoder
