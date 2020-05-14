@@ -14,7 +14,7 @@ class Authenticator extends ChangeNotifier {
   final _auth = FirebaseAuth.instance;
   FirebaseUser _user;
 
-  FirebaseUser get user => Platform.isMacOS == true ? null : _user;
+  FirebaseUser get user => (!kIsWeb && Platform.isMacOS == true) ? null : _user;
 
   void signInAnonymously() {
     _auth.signInAnonymously();
