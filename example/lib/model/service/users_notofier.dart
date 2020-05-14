@@ -32,6 +32,14 @@ class UsersNotifier extends ChangeNotifier {
   List<Document<User>> _userDocs = [];
   List<Document<User>> get userDocs => UnmodifiableListView(_userDocs);
 
+  void deleteAll() {
+    print('[Start] deleteAll');
+    usersRef.deleteAllDocuments(
+      batchSize: 2,
+    );
+    print('[End] deleteAll');
+  }
+
   @override
   void dispose() {
     _subscriptionHolder.dispose();

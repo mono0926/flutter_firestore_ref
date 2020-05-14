@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firestore_ref/firestore_ref.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:meta/meta.dart';
 
 import 'document_list.dart';
@@ -51,5 +52,39 @@ class CollectionRef<E, D extends Document<E>> {
   Future<DocumentRef<E, D>> add(E entity) async {
     final rawRef = await ref.add(encoder(entity));
     return docRef(rawRef.documentID);
+  }
+
+  Future<void> deleteAllDocuments({
+    int batchSize = 500,
+  }) async {
+    await _deleteQueryBatch(
+      query: ref.orderBy(FieldPath.documentId).limit(batchSize),
+      batchSize: batchSize,
+    );
+  }
+
+  Future<void> _deleteQueryBatch({
+    @required Query query,
+    @required int batchSize,
+  }) async {
+    final snapshots = await query.getDocuments();
+    final docs = snapshots.documents;
+    if (docs.isEmpty) {
+      return;
+    }
+
+    await runBatchWrite<void>((batch) {
+      for (final doc in docs) {
+        batch.delete(doc.reference);
+      }
+      return;
+    });
+
+    print('deleted count: ${docs.length}');
+
+    return _deleteQueryBatch(
+      query: query,
+      batchSize: batchSize,
+    );
   }
 }

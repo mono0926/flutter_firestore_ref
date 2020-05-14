@@ -1,3 +1,7 @@
+## [0.8.1]
+
+- Add deleteAllDocuments to CollectionRef
+
 ## [0.8.0]
 
 - Use freezed at example

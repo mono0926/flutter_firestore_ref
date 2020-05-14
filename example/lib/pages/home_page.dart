@@ -8,8 +8,11 @@ class HomePage extends StatelessWidget {
   const HomePage._({Key key}) : super(key: key);
 
   static Widget wrapped() {
-    return ChangeNotifierProvider(
-      create: (context) => HomePageController(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => UsersNotifier()),
+        ChangeNotifierProvider(create: (context) => HomePageController()),
+      ],
       child: const HomePage._(),
     );
   }
@@ -21,6 +24,9 @@ class HomePage extends StatelessWidget {
         title: Text(
           context.select((AppInfo info) => info.title),
         ),
+        actions: const [
+          _DropdownButton(),
+        ],
       ),
       body: Column(
         children: [
@@ -51,14 +57,37 @@ class HomePage extends StatelessWidget {
             child: const _MyCounter(),
           ),
           const Divider(),
-          Expanded(
-            child: ChangeNotifierProvider(
-              create: (context) => UsersNotifier(),
-              child: const _Users(),
-            ),
+          const Expanded(
+            child: _Users(),
           ),
         ],
       ),
+    );
+  }
+}
+
+class _DropdownButton extends StatelessWidget {
+  const _DropdownButton({Key key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+    return PopupMenuButton<String>(
+      itemBuilder: (context) => [
+        PopupMenuItem(
+          child: Text(
+            'Delete All',
+            style: TextStyle(
+              color: colorScheme.error,
+            ),
+          ),
+          value: 'deleteAll',
+        ),
+      ],
+      onSelected: (value) {
+        logger.info(value);
+        context.read<UsersNotifier>().deleteAll();
+      },
     );
   }
 }
