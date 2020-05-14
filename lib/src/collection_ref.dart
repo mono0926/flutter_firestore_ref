@@ -54,23 +54,29 @@ class CollectionRef<E, D extends Document<E>> {
     return docRef(rawRef.documentID);
   }
 
-  Future<void> deleteAllDocuments({
+  /// Delete all documents
+  ///
+  /// Default value of [batchSize] is 500, which is max limit of Batch Write.
+  /// Return value is deleted document ids.
+  Future<List<String>> deleteAllDocuments({
     int batchSize = 500,
   }) async {
-    await _deleteQueryBatch(
+    return _deleteQueryBatch(
       query: ref.orderBy(FieldPath.documentId).limit(batchSize),
       batchSize: batchSize,
+      deletedIds: [],
     );
   }
 
-  Future<void> _deleteQueryBatch({
+  Future<List<String>> _deleteQueryBatch({
     @required Query query,
     @required int batchSize,
+    @required List<String> deletedIds,
   }) async {
     final snapshots = await query.getDocuments();
     final docs = snapshots.documents;
     if (docs.isEmpty) {
-      return;
+      return deletedIds;
     }
 
     await runBatchWrite<void>((batch) {
@@ -85,6 +91,10 @@ class CollectionRef<E, D extends Document<E>> {
     return _deleteQueryBatch(
       query: query,
       batchSize: batchSize,
+      deletedIds: [
+        ...deletedIds,
+        ...docs.map((d) => d.documentID),
+      ],
     );
   }
 }

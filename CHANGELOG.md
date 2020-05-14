@@ -1,3 +1,7 @@
+## [0.8.2]
+
+- Change deleteAllDocuments return type to Future<List<String>>, which is deleted document ids
+
 ## [0.8.1]
 
 - Add deleteAllDocuments to CollectionRef

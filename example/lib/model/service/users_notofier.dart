@@ -32,12 +32,13 @@ class UsersNotifier extends ChangeNotifier {
   List<Document<User>> _userDocs = [];
   List<Document<User>> get userDocs => UnmodifiableListView(_userDocs);
 
-  void deleteAll() {
+  Future<void> deleteAll() async {
     print('[Start] deleteAll');
-    usersRef.deleteAllDocuments(
+    final deletedIds = await usersRef.deleteAllDocuments(
       batchSize: 2,
     );
     print('[End] deleteAll');
+    print('Deleted ids: $deletedIds');
   }
 
   @override
