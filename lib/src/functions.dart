@@ -10,7 +10,7 @@ Future<T> runBatchWrite<T>(Future<T> Function(WriteBatch batch) f) async {
   return result;
 }
 
-Future<void> deleteDocuments<T>({
+Future<void> deleteDocuments({
   @required List<DocumentReference> references,
   int batchSize = 500,
 }) {
