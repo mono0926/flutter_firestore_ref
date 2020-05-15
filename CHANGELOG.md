@@ -1,3 +1,7 @@
+## [0.8.5]
+
+- Add `deleteAllDocuments` function
+
 ## [0.8.4]
 
 - Add `dryRun`(default: false) to `deleteAllDocuments`
