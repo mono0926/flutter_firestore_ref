@@ -1,14 +1,6 @@
-## [0.8.6]
+## [0.8.7]
 
-- Rename to `deleteDocuments`
-
-## [0.8.5]
-
-- Add `deleteAllDocuments` function
-
-## [0.8.4]
-
-- Add `dryRun`(default: false) to `deleteAllDocuments`
+- Some cleanup
 
 ## [0.8.3]
 
