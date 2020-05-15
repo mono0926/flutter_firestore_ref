@@ -1,12 +1,27 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firestore_ref/firestore_ref.dart';
 import 'package:meta/meta.dart';
+import 'package:quiver/iterables.dart';
 
 Future<T> runBatchWrite<T>(Future<T> Function(WriteBatch batch) f) async {
   final batch = Firestore.instance.batch();
   final result = await f(batch);
   await batch.commit();
   return result;
+}
+
+Future<void> deleteDocuments({
+  @required List<DocumentReference> references,
+  int batchSize = 500,
+}) {
+  return Future.wait(
+    partition(references, batchSize).map(
+      (chunked) => runBatchWrite<void>((batch) {
+        chunked.forEach(batch.delete);
+        return;
+      }),
+    ),
+  );
 }
 
 Map<String, dynamic> parseJson(

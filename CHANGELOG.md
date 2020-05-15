@@ -1,3 +1,7 @@
+## [0.8.8]
+
+- Add `deleteDocuments` function
+
 ## [0.8.7]
 
 - Some cleanup
