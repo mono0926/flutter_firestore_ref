@@ -1,3 +1,7 @@
+## [0.8.3]
+
+- Change deleteAllDocuments return type to Future<List<DocumentReference>>
+
 ## [0.8.2]
 
 - Change deleteAllDocuments return type to Future<List<String>>, which is deleted document ids
