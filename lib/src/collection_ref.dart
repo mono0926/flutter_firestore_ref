@@ -60,11 +60,13 @@ class CollectionRef<E, D extends Document<E>> {
   /// Return value is deleted document references.
   Future<List<DocumentReference>> deleteAllDocuments({
     int batchSize = 500,
+    bool dryRun = false,
   }) async {
     return _deleteQueryBatch(
       query: ref.orderBy(FieldPath.documentId).limit(batchSize),
       batchSize: batchSize,
       deletedRefs: [],
+      dryRun: dryRun,
     );
   }
 
@@ -72,6 +74,7 @@ class CollectionRef<E, D extends Document<E>> {
     @required Query query,
     @required int batchSize,
     @required List<DocumentReference> deletedRefs,
+    bool dryRun = false,
   }) async {
     final snapshots = await query.getDocuments();
     final docs = snapshots.documents;
@@ -79,14 +82,16 @@ class CollectionRef<E, D extends Document<E>> {
       return deletedRefs;
     }
 
-    await runBatchWrite<void>((batch) {
-      for (final doc in docs) {
-        batch.delete(doc.reference);
-      }
-      return;
-    });
+    if (!dryRun) {
+      await runBatchWrite<void>((batch) {
+        for (final doc in docs) {
+          batch.delete(doc.reference);
+        }
+        return;
+      });
+    }
 
-    print('deleted count: ${docs.length}');
+    print('deleted count${dryRun ? ' (dryRun)' : ''}: ${docs.length}');
 
     return _deleteQueryBatch(
       query: query,
@@ -95,6 +100,7 @@ class CollectionRef<E, D extends Document<E>> {
         ...deletedRefs,
         ...docs.map((d) => d.reference),
       ],
+      dryRun: dryRun,
     );
   }
 }

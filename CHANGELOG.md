@@ -1,3 +1,7 @@
+## [0.8.4]
+
+- Add `dryRun`(default: false) to `deleteAllDocuments`
+
 ## [0.8.3]
 
 - Change deleteAllDocuments return type to Future<List<DocumentReference>>
