@@ -1,3 +1,7 @@
+## [0.8.6]
+
+- Rename to `deleteDocuments`
+
 ## [0.8.5]
 
 - Add `deleteAllDocuments` function
