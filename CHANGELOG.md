@@ -1,3 +1,7 @@
+## [0.8.9]
+
+- Fix `Document`'s `id` error when `ref` is null
+
 ## [0.8.8]
 
 - Add `deleteDocuments` function

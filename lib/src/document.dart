@@ -10,7 +10,7 @@ class Document<E> {
 
   final DocumentReference ref;
   final E entity;
-  String get id => ref.documentID;
+  String get id => ref?.documentID;
 
   @override
   bool operator ==(Object other) =>
