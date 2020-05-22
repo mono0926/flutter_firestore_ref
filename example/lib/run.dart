@@ -10,6 +10,7 @@ void run({bool isEmulator = false}) {
   WidgetsFlutterBinding.ensureInitialized();
   // For web
   Firestore.instance.settings(persistenceEnabled: true);
+  // TODO(mono): Emulator対応
   runApp(
     MultiProvider(
       providers: [
