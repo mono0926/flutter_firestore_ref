@@ -8,6 +8,7 @@ import 'util/util.dart';
 void run({bool isEmulator = false}) {
   logger.fine('start');
   WidgetsFlutterBinding.ensureInitialized();
+  // For web
   Firestore.instance.settings(persistenceEnabled: true);
   runApp(
     MultiProvider(
