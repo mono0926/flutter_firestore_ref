@@ -6,7 +6,7 @@ import 'model/service/service.dart';
 import 'util/util.dart';
 
 void run({bool isEmulator = false}) {
-  logger.fine('start');
+  logger.fine('start(isEmulator: $isEmulator)');
   WidgetsFlutterBinding.ensureInitialized();
   // For web
   Firestore.instance.settings(persistenceEnabled: true);
