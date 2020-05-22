@@ -14,8 +14,9 @@ Future<void> run({bool isEmulator = false}) async {
   WidgetsFlutterBinding.ensureInitialized();
 
   if (isEmulator) {
-    CloudFunctions.instance
-        .useFunctionsEmulator(origin: 'http://$emulatorDomain:5001');
+    CloudFunctions.instance.useFunctionsEmulator(
+      origin: 'http://$emulatorDomain:5001',
+    );
     await useFirestoreEmulator();
   } else if (kIsWeb) {
     await Firestore.instance.settings(persistenceEnabled: true);
