@@ -1,3 +1,7 @@
+## [0.8.10]
+
+- Add `useFirestoreEmulator` function
+
 ## [0.8.9]
 
 - Fix `Document`'s `id` error when `ref` is null
