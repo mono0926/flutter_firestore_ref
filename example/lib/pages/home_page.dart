@@ -1,3 +1,4 @@
+import 'package:cloud_functions/cloud_functions.dart';
 import 'package:example/model/service/service.dart';
 import 'package:example/util/util.dart';
 import 'package:flutter/cupertino.dart';
@@ -120,8 +121,13 @@ class _MyCounter extends StatelessWidget {
       trailing: IconButton(
         color: Theme.of(context).primaryColor,
         icon: const Icon(Icons.add),
-        onPressed: () {
+        onPressed: () async {
           context.read<UserNotifier>().increment();
+
+          final result = await CloudFunctions.instance
+              .getHttpsCallable(functionName: 'now')
+              .call();
+          logger.info(result.data);
         },
       ),
     );
