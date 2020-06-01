@@ -14,7 +14,7 @@ typedef EntityEncoder<E> = Map<String, dynamic> Function(
 
 @immutable
 class CollectionRef<E, D extends Document<E>> {
-  CollectionRef(
+  const CollectionRef(
     this.ref, {
     @required this.decoder,
     @required this.encoder,
