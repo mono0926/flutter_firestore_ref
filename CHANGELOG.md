@@ -1,3 +1,7 @@
+## [0.8.11]
+
+- Fix a bug when `documents` is called multiple times
+
 ## [0.8.10]
 
 - Add `useFirestoreEmulator` function

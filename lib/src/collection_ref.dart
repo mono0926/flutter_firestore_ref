@@ -18,19 +18,19 @@ class CollectionRef<E, D extends Document<E>> {
     this.ref, {
     @required this.decoder,
     @required this.encoder,
-  }) : _documentList = DocumentList(decoder: decoder);
+  });
 
   final CollectionReference ref;
   final DocumentDecoder<D> decoder;
   final EntityEncoder<E> encoder;
-  final DocumentList<E, D> _documentList;
 
   Stream<QuerySnapshot> snapshots([MakeQuery makeQuery]) {
     return (makeQuery ?? (r) => r)(ref).snapshots();
   }
 
   Stream<List<D>> documents([MakeQuery makeQuery]) {
-    return snapshots(makeQuery).map(_documentList.applyingSnapshot);
+    final documentList = DocumentList<E, D>(decoder: decoder);
+    return snapshots(makeQuery).map(documentList.applyingSnapshot);
   }
 
   Future<QuerySnapshot> getSnapshots([MakeQuery makeQuery]) {

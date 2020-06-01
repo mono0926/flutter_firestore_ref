@@ -11,20 +11,19 @@ class CollectionGroup<E, D extends Document<E>> {
     @required String path,
     @required this.decoder,
     @required this.encoder,
-  })  : query = Firestore.instance.collectionGroup(path),
-        _documentList = DocumentList(decoder: decoder);
+  }) : query = Firestore.instance.collectionGroup(path);
 
   final Query query;
   final DocumentDecoder<D> decoder;
   final EntityEncoder<E> encoder;
-  final DocumentList<E, D> _documentList;
 
   Stream<QuerySnapshot> snapshots([MakeGroupQuery makeQuery]) {
     return (makeQuery ?? (r) => r)(query).snapshots();
   }
 
   Stream<List<D>> documents([MakeGroupQuery makeQuery]) {
-    return snapshots(makeQuery).map(_documentList.applyingSnapshot);
+    final documentList = DocumentList<E, D>(decoder: decoder);
+    return snapshots(makeQuery).map(documentList.applyingSnapshot);
   }
 
   Future<QuerySnapshot> getSnapshots([MakeGroupQuery makeQuery]) {
