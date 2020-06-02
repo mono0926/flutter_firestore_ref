@@ -8,7 +8,7 @@ import 'document_list.dart';
 class CollectionPagingController<E, D extends Document<E>> with Disposable {
   CollectionPagingController({
     @required CollectionRef<E, D> ref,
-    MakeQuery makeQuery,
+    QueryBuilder queryBuilder,
     int initialSize = 10,
     this.defaultPagingSize = 10,
   }) {
@@ -23,7 +23,7 @@ class CollectionPagingController<E, D extends Document<E>> with Disposable {
         return doc;
       });
       return ref
-          .snapshots((r) => (makeQuery ?? (r) => r)(r).limit(limit))
+          .snapshots((r) => (queryBuilder ?? (r) => r)(r).limit(limit))
           .map(documentList.applyingSnapshot);
     }).pipe(_documentsController);
 
