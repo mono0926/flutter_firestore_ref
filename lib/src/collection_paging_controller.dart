@@ -30,7 +30,7 @@ class CollectionPagingController<E, D extends Document<E>> with Disposable {
     _limitController.add(initialSize);
 
     _documentsController
-        .map((documents) => documents.length > _limitController.value)
+        .map((documents) => documents.length >= _limitController.value)
         .pipe(_hasMoreController);
   }
 
