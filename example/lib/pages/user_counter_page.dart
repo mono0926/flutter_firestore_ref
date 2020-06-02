@@ -5,8 +5,6 @@ import 'package:example/util/util.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../run.dart';
-
 class UserCounterPage extends StatelessWidget {
   const UserCounterPage._({Key key}) : super(key: key);
 
