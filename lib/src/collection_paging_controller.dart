@@ -13,7 +13,8 @@ class CollectionPagingController<E, D extends Document<E>> with Disposable {
     @required QueryBuilder queryBuilder,
     @required int initialSize,
     @required this.defaultPagingSize,
-  }) : assert(initialSize != null) {
+  })  : assert(initialSize != null),
+        _limitController = BehaviorSubject.seeded(initialSize) {
     _limitController.stream.switchMap((limit) {
       final documentList = DocumentList<E, D>(decoder: (snapshot) {
         final cached = _documentsCache[snapshot.reference];
@@ -34,14 +35,12 @@ class CollectionPagingController<E, D extends Document<E>> with Disposable {
     _documentsController
         .map((documents) => documents.length >= _limitController.value)
         .pipe(_hasMoreController);
-
-    _limitController.add(initialSize);
   }
 
   final int defaultPagingSize;
+  final BehaviorSubject<int> _limitController;
 
   final _documentsController = BehaviorSubject<List<D>>.seeded([]);
-  final _limitController = BehaviorSubject<int>();
   final _hasMoreController = BehaviorSubject<bool>.seeded(true);
   final _documentsCache = <DocumentReference, D>{};
 
