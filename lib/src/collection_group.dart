@@ -4,8 +4,6 @@ import 'package:flutter/foundation.dart';
 
 import 'document_list.dart';
 
-typedef MakeGroupQuery = Query Function(Query collectionRef);
-
 // TODO(mono): pagingController対応
 class CollectionGroup<E, D extends Document<E>> {
   CollectionGroup({
