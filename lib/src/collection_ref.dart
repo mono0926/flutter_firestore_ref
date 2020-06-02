@@ -50,7 +50,8 @@ class CollectionRef<E, D extends Document<E>> {
     int defaultPagingSize = 10,
   }) {
     return CollectionPagingController(
-      ref: this,
+      snapshotBuilder: snapshots,
+      decoder: decoder,
       queryBuilder: queryBuilder,
       initialSize: initialSize,
       defaultPagingSize: defaultPagingSize,

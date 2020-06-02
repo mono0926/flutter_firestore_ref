@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter/foundation.dart';
 
+import 'collection_paging_controller.dart';
 import 'document_list.dart';
 
 // TODO(mono): pagingController対応
@@ -32,5 +33,19 @@ class CollectionGroup<E, D extends Document<E>> {
   Future<List<D>> getDocuments([QueryBuilder makeQuery]) async {
     final snapshots = await getSnapshots(makeQuery);
     return snapshots.documents.map(decoder).toList();
+  }
+
+  CollectionPagingController<E, D> pagingController({
+    QueryBuilder queryBuilder,
+    int initialSize = 10,
+    int defaultPagingSize = 10,
+  }) {
+    return CollectionPagingController(
+      snapshotBuilder: snapshots,
+      decoder: decoder,
+      queryBuilder: queryBuilder,
+      initialSize: initialSize,
+      defaultPagingSize: defaultPagingSize,
+    );
   }
 }
