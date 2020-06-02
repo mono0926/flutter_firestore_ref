@@ -69,8 +69,10 @@ class _ListView extends StatelessWidget {
     return ListView.builder(
       itemCount: count,
       itemBuilder: (context, index) {
-        if (index > 0 && index >= docs.length) {
-          controller.loadMore();
+        if (index >= docs.length) {
+          if (index > 0) {
+            controller.loadMore();
+          }
           return const ListTile(
             title: Center(child: CircularProgressIndicator()),
           );
