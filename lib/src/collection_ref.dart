@@ -7,7 +7,7 @@ import 'package:meta/meta.dart';
 import 'collection_paging_controller.dart';
 import 'document_list.dart';
 
-typedef QueryBuilder = Query Function(CollectionReference collectionRef);
+typedef QueryBuilder = Query Function(Query collectionRef);
 typedef DocumentDecoder<D extends Document<dynamic>> = D Function(
     DocumentSnapshot snapshot);
 typedef EntityEncoder<E> = Map<String, dynamic> Function(
