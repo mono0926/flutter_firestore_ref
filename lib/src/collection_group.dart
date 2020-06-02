@@ -41,7 +41,7 @@ class CollectionGroup<E, D extends Document<E>> {
     int defaultPagingSize = 10,
   }) {
     return CollectionPagingController(
-      snapshotBuilder: snapshots,
+      query: query,
       decoder: decoder,
       queryBuilder: queryBuilder,
       initialSize: initialSize,
