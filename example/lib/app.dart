@@ -13,8 +13,14 @@ class App extends StatelessWidget {
         : MaterialApp(
             title: context.select((AppInfo info) => info.title),
             onGenerateRoute: context.watch<Router>().onGenerateRoute,
-            theme: ThemeData.from(colorScheme: ColorScheme.light()),
-            darkTheme: ThemeData.from(colorScheme: ColorScheme.dark()),
+            theme: ThemeData.from(
+              colorScheme: const ColorScheme.light(),
+            ).copyWith(
+              dividerColor: Colors.black54,
+            ),
+            darkTheme: ThemeData.from(
+              colorScheme: const ColorScheme.dark(),
+            ),
           );
   }
 }
