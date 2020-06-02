@@ -18,7 +18,7 @@ class CollectionPagingController<E, D extends Document<E>> with Disposable {
       final documentList = DocumentList<E, D>(decoder: (snapshot) {
         final cached = _documentsCache[snapshot.reference];
         if (cached != null && snapshot.metadata.isFromCache) {
-          logger.info('cache hit (id: ${cached.id})');
+          logger.fine('cache hit (id: ${cached.id})');
           return cached;
         }
         final doc = decoder(snapshot);
