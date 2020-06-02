@@ -27,8 +27,9 @@ class CollectionPagingController<E, D extends Document<E>> with Disposable {
         _documentsCache[snapshot.reference] = doc;
         return doc;
       });
-      return snapshotBuilder((r) => (queryBuilder ?? (r) => r)(r).limit(limit))
-          .map(documentList.applyingSnapshot);
+      return snapshotBuilder(
+        (query) => (queryBuilder ?? (q) => q)(query).limit(limit),
+      ).map(documentList.applyingSnapshot);
     }).pipe(_documentsController);
 
     _documentsController
