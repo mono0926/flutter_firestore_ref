@@ -1,4 +1,5 @@
 import 'package:example/pages/home_page.dart';
+import 'package:example/pages/paging_page/paging_page.dart';
 import 'package:example/pages/user_counter_page.dart';
 import 'package:flutter/material.dart';
 import 'package:recase/recase.dart';
@@ -17,6 +18,7 @@ class Router {
   final _routes = <String, WidgetPageBuilder>{
     root: (_, __) => const HomePage(),
     UserCounterPage.routeName: (_, __) => UserCounterPage.wrapped(),
+    PagingPage.routeName: (_, __) => PagingPage.wrapped(),
   };
   final _modalRoutes = <String, WidgetPageBuilder>{};
 
@@ -56,5 +58,6 @@ class PageInfo {
 
   static const all = [
     PageInfo(routeName: UserCounterPage.routeName),
+    PageInfo(routeName: PagingPage.routeName),
   ];
 }
