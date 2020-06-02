@@ -10,9 +10,9 @@ class CollectionPagingController<E, D extends Document<E>> with Disposable {
   CollectionPagingController({
     @required Query query,
     @required DocumentDecoder<D> decoder,
-    QueryBuilder queryBuilder,
-    int initialSize = 10,
-    this.defaultPagingSize = 10,
+    @required QueryBuilder queryBuilder,
+    @required int initialSize,
+    @required this.defaultPagingSize,
   }) {
     _limitController.stream.switchMap((limit) {
       final documentList = DocumentList<E, D>(decoder: (snapshot) {
