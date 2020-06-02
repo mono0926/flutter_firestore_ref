@@ -16,20 +16,20 @@ class CollectionGroup<E, D extends Document<E>> {
   final DocumentDecoder<D> decoder;
   final EntityEncoder<E> encoder;
 
-  Stream<QuerySnapshot> snapshots([MakeGroupQuery makeQuery]) {
+  Stream<QuerySnapshot> snapshots([QueryBuilder makeQuery]) {
     return (makeQuery ?? (r) => r)(query).snapshots();
   }
 
-  Stream<List<D>> documents([MakeGroupQuery makeQuery]) {
+  Stream<List<D>> documents([QueryBuilder makeQuery]) {
     final documentList = DocumentList<E, D>(decoder: decoder);
     return snapshots(makeQuery).map(documentList.applyingSnapshot);
   }
 
-  Future<QuerySnapshot> getSnapshots([MakeGroupQuery makeQuery]) {
+  Future<QuerySnapshot> getSnapshots([QueryBuilder makeQuery]) {
     return (makeQuery ?? (r) => r)(query).getDocuments();
   }
 
-  Future<List<D>> getDocuments([MakeGroupQuery makeQuery]) async {
+  Future<List<D>> getDocuments([QueryBuilder makeQuery]) async {
     final snapshots = await getSnapshots(makeQuery);
     return snapshots.documents.map(decoder).toList();
   }
