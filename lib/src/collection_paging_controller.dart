@@ -8,7 +8,9 @@ import 'document_list.dart';
 
 class CollectionPagingController<E, D extends Document<E>> with Disposable {
   CollectionPagingController({
-    Stream<QuerySnapshot> Function(QueryBuilder queryBuilder) snapshotBuilder,
+    @required
+        Stream<QuerySnapshot> Function(QueryBuilder queryBuilder)
+            snapshotBuilder,
     @required DocumentDecoder<D> decoder,
     QueryBuilder queryBuilder,
     int initialSize = 10,
