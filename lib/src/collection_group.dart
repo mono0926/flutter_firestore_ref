@@ -5,7 +5,6 @@ import 'package:flutter/foundation.dart';
 import 'collection_paging_controller.dart';
 import 'document_list.dart';
 
-// TODO(mono): pagingController対応
 class CollectionGroup<E, D extends Document<E>> {
   CollectionGroup({
     @required String path,
