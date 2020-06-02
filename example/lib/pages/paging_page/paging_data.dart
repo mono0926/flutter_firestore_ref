@@ -27,7 +27,7 @@ class PagingDataDoc extends Document<PagingData> {
 class PagingDatasRef extends CollectionRef<PagingData, PagingDataDoc> {
   PagingDatasRef()
       : super(
-          Firestore.instance.collection('paging_datas'),
+          Firestore.instance.collection('pagings'),
           decoder: (snapshot) => PagingDataDoc(
             snapshot.reference,
             PagingData.fromJson(snapshot.data),
