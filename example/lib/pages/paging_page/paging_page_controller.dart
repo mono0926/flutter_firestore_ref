@@ -85,6 +85,7 @@ class PagingPageController extends StateNotifier<PagingPageState>
 
   @override
   void dispose() {
+    _pagingController.dispose();
     _sh.dispose();
 
     super.dispose();
