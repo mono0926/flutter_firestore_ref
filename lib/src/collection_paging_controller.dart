@@ -1,5 +1,6 @@
 import 'package:disposable_provider/disposable_provider.dart';
 import 'package:firestore_ref/firestore_ref.dart';
+import 'package:firestore_ref/src/utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -16,6 +17,7 @@ class CollectionPagingController<E, D extends Document<E>> with Disposable {
       final documentList = DocumentList<E, D>(decoder: (snapshot) {
         final cached = _documentsCache[snapshot.reference];
         if (cached != null && snapshot.metadata.isFromCache) {
+          logger.info('cache hit (id: ${cached.id})');
           return cached;
         }
         final doc = ref.decoder(snapshot);
