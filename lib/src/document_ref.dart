@@ -96,14 +96,14 @@ class DocumentRef<E, D extends Document<E>> {
     }
     if (batch != null) {
       batch.setData(ref, data);
-      return null;
+      return Future.value(null);
     }
     if (transaction != null) {
       transaction.set(ref, data);
-      return null;
+      return Future.value(null);
     }
     assert(false);
-    return null;
+    return Future.value(null);
   }
 
   /// マージ
@@ -131,7 +131,7 @@ class DocumentRef<E, D extends Document<E>> {
     }
     if (batch != null) {
       batch.setData(ref, data, merge: true);
-      return null;
+      return Future.value(null);
     }
     if (transaction != null) {
       throw UnsupportedError(
@@ -139,10 +139,10 @@ class DocumentRef<E, D extends Document<E>> {
         'https://github.com/FirebaseExtended/flutterfire/issues/1212',
       );
 //      transaction.set(ref, data, merge: true);
-//      return null;
+//      return Future.value(null);
     }
     assert(false);
-    return null;
+    return Future.value(null);
   }
 
   Future<void> delete({
@@ -155,13 +155,13 @@ class DocumentRef<E, D extends Document<E>> {
     }
     if (batch != null) {
       batch.delete(ref);
-      return null;
+      return Future.value(null);
     }
     if (transaction != null) {
       transaction.delete(ref);
-      return null;
+      return Future.value(null);
     }
     assert(false);
-    return null;
+    return Future.value(null);
   }
 }
