@@ -48,13 +48,11 @@ class CollectionPagingController<E, D extends Document<E>> with Disposable {
   ValueStream<bool> get hasMore => _hasMoreController.stream;
 
   bool loadMore({int pagingSize}) {
-    if (!hasMore.value) {
-      return false;
+    final hasMore = this.hasMore.value;
+    if (hasMore) {
+      _limitController.value += pagingSize ?? defaultPagingSize;
     }
-    _limitController.add(
-      _limitController.value + (pagingSize ?? defaultPagingSize),
-    );
-    return true;
+    return hasMore;
   }
 
   @override
