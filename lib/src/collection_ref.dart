@@ -3,6 +3,7 @@ import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:meta/meta.dart';
 
+import 'collection_paging_controller.dart';
 import 'document_list.dart';
 
 typedef MakeQuery = Query Function(CollectionReference collectionRef);
@@ -40,6 +41,13 @@ class CollectionRef<E, D extends Document<E>> {
   Future<List<D>> getDocuments([MakeQuery makeQuery]) async {
     final snapshots = await getSnapshots(makeQuery);
     return snapshots.documents.map(decoder).toList();
+  }
+
+  CollectionPagingController pagingController([MakeQuery makeQuery]) {
+    return CollectionPagingController<E, D>(
+      ref: this,
+      makeQuery: makeQuery,
+    );
   }
 
   DocumentRef<E, D> docRef([String id]) {
