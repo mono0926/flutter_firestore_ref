@@ -29,11 +29,11 @@ class CollectionPagingController<E, D extends Document<E>> with Disposable {
           .map(documentList.applyingSnapshot);
     }).pipe(_documentsController);
 
-    _limitController.add(initialSize);
-
     _documentsController
         .map((documents) => documents.length >= _limitController.value)
         .pipe(_hasMoreController);
+
+    _limitController.add(initialSize);
   }
 
   final int defaultPagingSize;
