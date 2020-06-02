@@ -16,6 +16,12 @@ class PagingPageController extends StateNotifier<PagingPageState>
   PagingPageController() : super(PagingPageState());
 
   static final _collectionRef = PagingDatasRef();
+  // `_collectionGroup` can be used to access pagingController
+//  static final _collectionGroup = CollectionGroup(
+//    decoder: _collectionRef.decoder,
+//    encoder: _collectionRef.encoder,
+//    path: 'pagings',
+//  );
   final _sh = SubscriptionHolder();
 
   final _pagingController = _collectionRef.pagingController(
