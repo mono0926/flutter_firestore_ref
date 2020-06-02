@@ -94,7 +94,7 @@ class CollectionRef<E, D extends Document<E>> {
       return;
     });
 
-    print('deleted count: ${docs.length}');
+    logger.fine('deleted count: ${docs.length}');
 
     return _deleteQueryBatch(
       query: query,
