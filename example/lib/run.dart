@@ -1,4 +1,5 @@
 import 'package:cloud_functions/cloud_functions.dart';
+import 'package:example/router.dart';
 import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +25,7 @@ Future<void> run({bool isEmulator = false}) async {
     MultiProvider(
       providers: [
         Provider(create: (context) => AppInfo()),
+        Provider(create: (context) => Router()),
         ChangeNotifierProvider(
           create: (context) => Authenticator()..signInAnonymously(),
         ),
@@ -34,5 +36,5 @@ Future<void> run({bool isEmulator = false}) async {
 }
 
 class AppInfo {
-  String get title => 'Firebase Counter';
+  String get title => 'firestore_ref example';
 }

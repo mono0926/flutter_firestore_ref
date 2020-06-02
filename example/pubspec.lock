@@ -119,7 +119,7 @@ packages:
       name: cloud_firestore
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.13.5"
+    version: "0.13.6"
   cloud_firestore_platform_interface:
     dependency: transitive
     description:
@@ -273,7 +273,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "0.8.11"
+    version: "0.8.12"
   fixnum:
     dependency: transitive
     description:
@@ -286,6 +286,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_state_notifier:
+    dependency: "direct main"
+    description:
+      name: flutter_state_notifier
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.4.2"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -499,6 +506,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.3"
+  recase:
+    dependency: "direct main"
+    description:
+      name: recase
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.0.0"
   rxdart:
     dependency: transitive
     description:
@@ -553,6 +567,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.9.3"
+  state_notifier:
+    dependency: "direct main"
+    description:
+      name: state_notifier
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.4.0"
   stream_channel:
     dependency: transitive
     description:

@@ -14,6 +14,9 @@ dependencies:
   firebase_auth:
   firestore_ref:
     path: ..
+  recase:
+  state_notifier:
+  flutter_state_notifier:
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -1,9 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firestore_ref/firestore_ref.dart';
 import 'package:meta/meta.dart';
-import 'package:simple_logger/simple_logger.dart';
 
-SimpleLogger get _logger => SimpleLogger();
+import 'utils.dart';
 
 @immutable
 class DocumentRef<E, D extends Document<E>> {
@@ -18,7 +17,7 @@ class DocumentRef<E, D extends Document<E>> {
   Stream<D> document() {
     return ref.snapshots().map((snapshot) {
       if (!snapshot.exists) {
-        _logger.warning('$D not found(id: ${ref.documentID})');
+        logger.warning('$D not found(id: ${ref.documentID})');
         return null;
       }
       return collectionRef.decoder(snapshot);
@@ -29,7 +28,7 @@ class DocumentRef<E, D extends Document<E>> {
     final snapshot =
         await (transaction == null ? ref.get() : transaction.get(ref));
     if (!snapshot.exists) {
-      _logger.warning('$D not found(id: ${ref.documentID})');
+      logger.warning('$D not found(id: ${ref.documentID})');
       return null;
     }
     return collectionRef.decoder(snapshot);
@@ -97,14 +96,14 @@ class DocumentRef<E, D extends Document<E>> {
     }
     if (batch != null) {
       batch.setData(ref, data);
-      return null;
+      return Future.value(null);
     }
     if (transaction != null) {
       transaction.set(ref, data);
-      return null;
+      return Future.value(null);
     }
     assert(false);
-    return null;
+    return Future.value(null);
   }
 
   /// マージ
@@ -132,7 +131,7 @@ class DocumentRef<E, D extends Document<E>> {
     }
     if (batch != null) {
       batch.setData(ref, data, merge: true);
-      return null;
+      return Future.value(null);
     }
     if (transaction != null) {
       throw UnsupportedError(
@@ -140,10 +139,10 @@ class DocumentRef<E, D extends Document<E>> {
         'https://github.com/FirebaseExtended/flutterfire/issues/1212',
       );
 //      transaction.set(ref, data, merge: true);
-//      return null;
+//      return Future.value(null);
     }
     assert(false);
-    return null;
+    return Future.value(null);
   }
 
   Future<void> delete({
@@ -156,13 +155,13 @@ class DocumentRef<E, D extends Document<E>> {
     }
     if (batch != null) {
       batch.delete(ref);
-      return null;
+      return Future.value(null);
     }
     if (transaction != null) {
       transaction.delete(ref);
-      return null;
+      return Future.value(null);
     }
     assert(false);
-    return null;
+    return Future.value(null);
   }
 }

@@ -1,3 +1,7 @@
+## [0.8.12]
+
+- Support paging
+
 ## [0.8.11]
 
 - Fix a bug when `documents` is called multiple times

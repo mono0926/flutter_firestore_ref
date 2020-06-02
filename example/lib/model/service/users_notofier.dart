@@ -1,6 +1,7 @@
 import 'dart:collection';
 
 import 'package:example/model/firestore/firestore.dart';
+import 'package:example/util/util.dart';
 import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter/foundation.dart';
 import 'package:subscription_holder/subscription_holder.dart';
@@ -33,12 +34,11 @@ class UsersNotifier extends ChangeNotifier {
   List<Document<User>> get userDocs => UnmodifiableListView(_userDocs);
 
   Future<void> deleteAll() async {
-    print('[Start] deleteAll');
+    logger.info('[Start] deleteAll');
     final deletedIds = await usersRef.deleteAllDocuments(
       batchSize: 2,
     );
-    print('[End] deleteAll');
-    print('Deleted ids: $deletedIds');
+    logger..info('[End] deleteAll')..info('Deleted ids: $deletedIds');
   }
 
   @override

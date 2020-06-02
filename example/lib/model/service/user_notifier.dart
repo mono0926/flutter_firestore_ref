@@ -1,5 +1,5 @@
 import 'package:example/model/firestore/firestore.dart';
-import 'package:example/pages/home_page.dart';
+import 'package:example/pages/user_counter_page.dart';
 import 'package:example/util/util.dart';
 import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter/foundation.dart';
