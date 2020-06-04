@@ -15,22 +15,25 @@ class CollectionPagingController<E, D extends Document<E>> with Disposable {
     @required this.defaultPagingSize,
   })  : assert(initialSize != null),
         _limitController = BehaviorSubject.seeded(initialSize) {
-    _limitController.stream.switchMap((limit) {
-      final documentList = DocumentList<E, D>(decoder: (snapshot) {
-        final cached = _documentsCache[snapshot.reference];
-        if (cached != null && snapshot.metadata.isFromCache) {
-          logger.fine('cache hit (id: ${cached.id})');
-          return cached;
-        }
-        final doc = decoder(snapshot);
-        _documentsCache[snapshot.reference] = doc;
-        return doc;
-      });
-      return (queryBuilder ?? (q) => q)(query)
-          .limit(limit)
-          .snapshots()
-          .map(documentList.applyingSnapshot);
-    }).pipe(_documentsController);
+    _limitController.stream
+        .switchMap((limit) {
+          final documentList = DocumentList<E, D>(decoder: (snapshot) {
+            final cached = _documentsCache[snapshot.reference];
+            if (cached != null && snapshot.metadata.isFromCache) {
+              logger.fine('cache hit (id: ${cached.id})');
+              return cached;
+            }
+            final doc = decoder(snapshot);
+            _documentsCache[snapshot.reference] = doc;
+            return doc;
+          });
+          return (queryBuilder ?? (q) => q)(query)
+              .limit(limit)
+              .snapshots()
+              .map(documentList.applyingSnapshot);
+        })
+        .map((r) => r.list)
+        .pipe(_documentsController);
 
     _documentsController
         .map((documents) => documents.length >= _limitController.value)

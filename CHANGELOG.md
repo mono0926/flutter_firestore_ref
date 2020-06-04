@@ -1,3 +1,7 @@
+## [0.8.13]
+
+- Add map version of `documents`, which is updated efficiently same as list
+
 ## [0.8.12]
 
 - Support paging

@@ -7,28 +7,48 @@ class DocumentList<E, D extends Document<E>> {
   });
   final DocumentDecoder<D> decoder;
   final _documents = <D>[];
+  final _map = <DocumentReference, D>{};
 
-  List<D> applyingSnapshot(QuerySnapshot snapshot) {
+  DocumentListResult<D> applyingSnapshot(QuerySnapshot snapshot) {
     for (final change in snapshot.documentChanges) {
+      final doc = change.document;
       switch (change.type) {
         case DocumentChangeType.added:
+          final decoded = decoder(doc);
           _documents.insert(
             change.newIndex,
-            decoder(change.document),
+            decoded,
           );
+          _map[doc.reference] = decoded;
           break;
         case DocumentChangeType.removed:
           _documents.removeAt(change.oldIndex);
+          _map.remove(doc.reference);
           break;
         case DocumentChangeType.modified:
+          final decoded = decoder(doc);
           _documents.removeAt(change.oldIndex);
           _documents.insert(
             change.newIndex,
-            decoder(change.document),
+            decoded,
           );
+          _map[doc.reference] = decoded;
           break;
       }
     }
-    return List.unmodifiable(_documents);
+    return DocumentListResult(
+      list: List.unmodifiable(_documents),
+      map: Map.unmodifiable(_map),
+    );
   }
+}
+
+class DocumentListResult<D> {
+  DocumentListResult({
+    @required this.list,
+    @required this.map,
+  });
+
+  final List<D> list;
+  final Map<DocumentReference, D> map;
 }

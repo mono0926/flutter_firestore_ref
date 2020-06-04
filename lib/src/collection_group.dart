@@ -16,21 +16,29 @@ class CollectionGroup<E, D extends Document<E>> {
   final DocumentDecoder<D> decoder;
   final EntityEncoder<E> encoder;
 
-  Stream<QuerySnapshot> snapshots([QueryBuilder makeQuery]) {
-    return (makeQuery ?? (r) => r)(query).snapshots();
+  Stream<QuerySnapshot> snapshots([QueryBuilder queryBuilder]) {
+    return (queryBuilder ?? (r) => r)(query).snapshots();
   }
 
-  Stream<List<D>> documents([QueryBuilder makeQuery]) {
+  Stream<List<D>> documents([QueryBuilder queryBuilder]) {
+    return _documents(queryBuilder).map((r) => r.list);
+  }
+
+  Stream<Map<DocumentReference, D>> documentMap([QueryBuilder queryBuilder]) {
+    return _documents(queryBuilder).map((r) => r.map);
+  }
+
+  Stream<DocumentListResult<D>> _documents([QueryBuilder queryBuilder]) {
     final documentList = DocumentList<E, D>(decoder: decoder);
-    return snapshots(makeQuery).map(documentList.applyingSnapshot);
+    return snapshots(queryBuilder).map(documentList.applyingSnapshot);
   }
 
-  Future<QuerySnapshot> getSnapshots([QueryBuilder makeQuery]) {
-    return (makeQuery ?? (r) => r)(query).getDocuments();
+  Future<QuerySnapshot> getSnapshots([QueryBuilder queryBuilder]) {
+    return (queryBuilder ?? (r) => r)(query).getDocuments();
   }
 
-  Future<List<D>> getDocuments([QueryBuilder makeQuery]) async {
-    final snapshots = await getSnapshots(makeQuery);
+  Future<List<D>> getDocuments([QueryBuilder queryBuilder]) async {
+    final snapshots = await getSnapshots(queryBuilder);
     return snapshots.documents.map(decoder).toList();
   }
 
