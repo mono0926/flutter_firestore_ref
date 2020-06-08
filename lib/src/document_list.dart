@@ -42,13 +42,3 @@ class DocumentList<E, D extends Document<E>> {
     );
   }
 }
-
-class DocumentListResult<D> {
-  DocumentListResult({
-    @required this.list,
-    @required this.map,
-  });
-
-  final List<D> list;
-  final Map<DocumentReference, D> map;
-}
