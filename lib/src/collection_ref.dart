@@ -31,14 +31,15 @@ class CollectionRef<E, D extends Document<E>> {
   }
 
   Stream<List<D>> documents([QueryBuilder queryBuilder]) {
-    return _documents(queryBuilder).map((r) => r.list);
+    return documentListResult(queryBuilder).map((r) => r.list);
   }
 
   Stream<Map<DocumentReference, D>> documentMap([QueryBuilder queryBuilder]) {
-    return _documents(queryBuilder).map((r) => r.map);
+    return documentListResult(queryBuilder).map((r) => r.map);
   }
 
-  Stream<DocumentListResult<D>> _documents([QueryBuilder queryBuilder]) {
+  Stream<DocumentListResult<D>> documentListResult(
+      [QueryBuilder queryBuilder]) {
     final documentList = DocumentList<E, D>(decoder: decoder);
     return snapshots(queryBuilder).map(documentList.applyingSnapshot);
   }
