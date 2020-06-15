@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -41,4 +43,12 @@ class DocumentReferenceListConverter
 class DocumentReferenceConverter
     extends PassthroughConverter<DocumentReference> {
   const DocumentReferenceConverter();
+}
+
+class ColorConverter implements JsonConverter<Color, int> {
+  const ColorConverter();
+  @override
+  Color fromJson(int json) => Color(json);
+  @override
+  int toJson(Color object) => object.value;
 }

@@ -1,3 +1,7 @@
+## [0.8.15]
+
+- Add ColorConverter
+
 ## [0.8.14]
 
 - Rename to documentListResult and make it public 
