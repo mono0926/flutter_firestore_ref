@@ -36,8 +36,13 @@ class DocumentReferenceSetConverter
 }
 
 class DocumentReferenceListConverter
-    extends PassthroughConverter<List<DocumentReference>> {
+    implements JsonConverter<List<DocumentReference>, List> {
   const DocumentReferenceListConverter();
+  @override
+  List<DocumentReference> fromJson(List json) => json.cast();
+
+  @override
+  List toJson(List<DocumentReference> json) => json;
 }
 
 class DocumentReferenceConverter

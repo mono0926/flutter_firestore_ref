@@ -1,3 +1,7 @@
+## [0.8.16]
+
+- Fix DocumentReferenceListConverter
+
 ## [0.8.15]
 
 - Add ColorConverter
