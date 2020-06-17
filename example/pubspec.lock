@@ -273,7 +273,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "0.8.15"
+    version: "0.8.15+1"
   fixnum:
     dependency: transitive
     description:
