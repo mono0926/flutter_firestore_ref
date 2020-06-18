@@ -273,7 +273,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "0.8.16"
+    version: "0.8.17"
   fixnum:
     dependency: transitive
     description:
@@ -309,14 +309,14 @@ packages:
       name: freezed
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.10.9"
+    version: "0.11.0"
   freezed_annotation:
     dependency: "direct main"
     description:
       name: freezed_annotation
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.7.1"
+    version: "0.11.0"
   glob:
     dependency: transitive
     description:
@@ -372,7 +372,7 @@ packages:
       name: js
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.6.1+1"
+    version: "0.6.2"
   json_annotation:
     dependency: transitive
     description:

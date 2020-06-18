@@ -32,10 +32,7 @@ class PagingDatasRef extends CollectionRef<PagingData, PagingDataDoc> {
             snapshot.reference,
             PagingData.fromJson(snapshot.data),
           ),
-          encoder: (data) => replacingTimestamp(
-            json: data.toJson(),
-            createdAt: data.createdAt,
-          ),
+          encoder: (data) => replacingTimestamp(json: data.toJson()),
         );
 
   @override

@@ -22,10 +22,7 @@ final CollectionRef<User, Document<User>> usersRef = CollectionRef(
     snapshot.reference,
     User.fromJson(snapshot.data),
   ),
-  encoder: (user) => replacingTimestamp(
-    json: user.toJson(),
-    createdAt: user.createdAt,
-  ),
+  encoder: (user) => replacingTimestamp(json: user.toJson()),
 );
 
 class UserField {

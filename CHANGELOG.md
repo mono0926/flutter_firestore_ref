@@ -1,3 +1,7 @@
+## [0.8.17]
+
+- Omit `createdAt` of `replacingTimestamp`
+
 ## [0.8.16]
 
 - Fix DocumentReferenceListConverter

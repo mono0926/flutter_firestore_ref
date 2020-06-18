@@ -9,14 +9,12 @@ class TimestampField {
 
 Map<String, dynamic> replacingTimestamp({
   @required Map<String, dynamic> json,
-  @required DateTime createdAt,
 }) =>
     <String, dynamic>{
-      ...json..remove(TimestampField.createdAt),
-      if (createdAt == null)
+      ...json,
+      if (json[TimestampField.createdAt] == null)
         TimestampField.createdAt: FieldValue.serverTimestamp(),
-      if (json.containsKey(TimestampField.updatedAt))
-        TimestampField.updatedAt: FieldValue.serverTimestamp(),
+      TimestampField.updatedAt: FieldValue.serverTimestamp(),
     };
 
 DateTime parseTimestamp({
