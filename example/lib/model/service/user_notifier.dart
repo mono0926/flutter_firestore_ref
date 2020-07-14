@@ -47,7 +47,7 @@ class UserNotifier extends ChangeNotifier {
         });
         break;
       case UpdateType.transaction:
-        Firestore.instance.runTransaction((transaction) {
+        FirebaseFirestore.instance.runTransaction((transaction) {
           // TODO(mono): merge isn't supported
           // https://github.com/FirebaseExtended/flutterfire/issues/1212
           return _ref.update(

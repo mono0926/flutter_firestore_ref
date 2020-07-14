@@ -17,10 +17,10 @@ abstract class User with _$User {
 }
 
 final CollectionRef<User, Document<User>> usersRef = CollectionRef(
-  Firestore.instance.collection('users'),
+  FirebaseFirestore.instance.collection('users'),
   decoder: (snapshot) => Document(
     snapshot.reference,
-    User.fromJson(snapshot.data),
+    User.fromJson(snapshot.data()),
   ),
   encoder: (user) => replacingTimestamp(json: user.toJson()),
 );

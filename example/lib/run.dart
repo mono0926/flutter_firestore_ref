@@ -1,24 +1,28 @@
 import 'package:cloud_functions/cloud_functions.dart';
-import 'package:example/router.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'app.dart';
 import 'model/service/service.dart';
+import 'router.dart';
 import 'util/util.dart';
 
 Future<void> run({bool isEmulator = false}) async {
   logger.fine('start(isEmulator: $isEmulator)');
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
 
   if (isEmulator) {
     CloudFunctions.instance.useFunctionsEmulator(
       origin: 'http://$emulatorDomain:5001',
     );
-    await useFirestoreEmulator();
+    useFirestoreEmulator();
   } else if (kIsWeb) {
-    await Firestore.instance.settings(persistenceEnabled: true);
+    FirebaseFirestore.instance.settings = const Settings(
+      persistenceEnabled: true,
+    );
   }
 
   runApp(
