@@ -122,4 +122,14 @@ class CollectionRef<E, D extends Document<E>> {
       ],
     );
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is CollectionRef &&
+          runtimeType == other.runtimeType &&
+          ref == other.ref;
+
+  @override
+  int get hashCode => ref.hashCode;
 }

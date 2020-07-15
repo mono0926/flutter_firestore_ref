@@ -164,4 +164,14 @@ class DocumentRef<E, D extends Document<E>> {
     assert(false);
     return Future.value(null);
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is DocumentRef &&
+          runtimeType == other.runtimeType &&
+          ref == other.ref;
+
+  @override
+  int get hashCode => ref.hashCode;
 }

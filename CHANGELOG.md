@@ -1,3 +1,7 @@
+## [0.8.18]
+
+- Add == and hashCode to DocumentRef and CollectionRef
+
 ## [0.8.17]
 
 - Omit `createdAt` of `replacingTimestamp`
