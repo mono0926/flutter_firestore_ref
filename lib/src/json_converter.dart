@@ -25,15 +25,15 @@ class TimestampConverter implements JsonConverter<DateTime, Timestamp> {
 }
 
 class DocumentReferenceSetConverter
-    implements JsonConverter<Set<DocumentReference>, List<DocumentReference>> {
+    implements JsonConverter<Set<DocumentReference>, List> {
   const DocumentReferenceSetConverter();
   @override
-  Set<DocumentReference> fromJson(List<DocumentReference> json) =>
-      Set.from(json);
+  Set<DocumentReference> fromJson(List json) =>
+      json == null ? null : Set.from(json);
 
   @override
-  List<DocumentReference> toJson(Set<DocumentReference> object) =>
-      List.from(object);
+  List toJson(Set<DocumentReference> refs) =>
+      refs == null ? null : List<dynamic>.from(refs);
 }
 
 class DocumentReferenceListConverter
@@ -43,7 +43,7 @@ class DocumentReferenceListConverter
   List<DocumentReference> fromJson(List json) => json.cast();
 
   @override
-  List toJson(List<DocumentReference> json) => json;
+  List toJson(List<DocumentReference> refs) => refs;
 }
 
 class DocumentReferenceConverter
