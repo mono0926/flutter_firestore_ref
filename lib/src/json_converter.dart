@@ -25,7 +25,8 @@ class TimestampConverter implements JsonConverter<DateTime, Timestamp> {
 }
 
 class DocumentReferenceSetConverter
-    extends JsonConverter<Set<DocumentReference>, List<DocumentReference>> {
+    implements JsonConverter<Set<DocumentReference>, List<DocumentReference>> {
+  const DocumentReferenceSetConverter();
   @override
   Set<DocumentReference> fromJson(List<DocumentReference> json) =>
       Set.from(json);

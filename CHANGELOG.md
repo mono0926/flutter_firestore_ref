@@ -1,3 +1,7 @@
+## [0.8.19]
+
+- Make DocumentReferenceSetConverter to const
+
 ## [0.8.18]
 
 - Add == and hashCode to DocumentRef and CollectionRef
