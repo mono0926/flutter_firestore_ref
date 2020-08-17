@@ -1,3 +1,7 @@
+## 0.8.20
+
+- Add emptyCollectionIfNull to DocumentReferenceSetConverter/DocumentReferenceListConverter
+
 ## [0.8.19]
 
 - Make DocumentReferenceSetConverter to const

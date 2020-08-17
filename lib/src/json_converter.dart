@@ -26,24 +26,37 @@ class TimestampConverter implements JsonConverter<DateTime, Timestamp> {
 
 class DocumentReferenceSetConverter
     implements JsonConverter<Set<DocumentReference>, List> {
-  const DocumentReferenceSetConverter();
-  @override
-  Set<DocumentReference> fromJson(List json) =>
-      json == null ? null : Set.from(json);
+  const DocumentReferenceSetConverter({
+    this.emptyCollectionIfNull = true,
+  });
+
+  final bool emptyCollectionIfNull;
 
   @override
-  List toJson(Set<DocumentReference> refs) =>
-      refs == null ? null : List<dynamic>.from(refs);
+  Set<DocumentReference> fromJson(List json) =>
+      json == null ? (emptyCollectionIfNull ? {} : null) : Set.from(json);
+
+  @override
+  List toJson(Set<DocumentReference> refs) => refs == null
+      ? (emptyCollectionIfNull ? <dynamic>[] : null)
+      : List<dynamic>.from(refs);
 }
 
 class DocumentReferenceListConverter
     implements JsonConverter<List<DocumentReference>, List> {
-  const DocumentReferenceListConverter();
-  @override
-  List<DocumentReference> fromJson(List json) => json.cast();
+  const DocumentReferenceListConverter({
+    this.emptyCollectionIfNull = true,
+  });
+
+  final bool emptyCollectionIfNull;
 
   @override
-  List toJson(List<DocumentReference> refs) => refs;
+  List<DocumentReference> fromJson(List json) =>
+      emptyCollectionIfNull ? json?.cast() ?? [] : json.cast();
+
+  @override
+  List toJson(List<DocumentReference> refs) =>
+      emptyCollectionIfNull ? refs ?? <dynamic>[] : refs;
 }
 
 class DocumentReferenceConverter
