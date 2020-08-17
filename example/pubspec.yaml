@@ -25,10 +25,5 @@ dev_dependencies:
   freezed: any
   json_serializable: any
   pedantic_mono: any
-dependency_overrides:
-  flutter_state_notifier:
-    git:
-      url: https://github.com/rrousselGit/state_notifier.git
-      path: packages/flutter_state_notifier
 flutter:
   uses-material-design: true
