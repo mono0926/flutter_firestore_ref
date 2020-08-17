@@ -8,8 +8,8 @@ final String emulatorDomain =
 
 const defaultEmulatorPort = 8080;
 
-Future<void> useFirestoreEmulator({int port = defaultEmulatorPort}) {
-  return Firestore.instance.settings(
+void useFirestoreEmulator({int port = defaultEmulatorPort}) {
+  FirebaseFirestore.instance.settings = Settings(
     persistenceEnabled: false,
     host: '$emulatorDomain:$port',
     sslEnabled: false,

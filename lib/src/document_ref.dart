@@ -9,7 +9,7 @@ class DocumentRef<E, D extends Document<E>> {
   DocumentRef({
     @required String id,
     @required this.collectionRef,
-  }) : ref = collectionRef.ref.document(id);
+  }) : ref = collectionRef.ref.doc(id);
 
   final CollectionRef<E, D> collectionRef;
   final DocumentReference ref;
@@ -17,7 +17,7 @@ class DocumentRef<E, D extends Document<E>> {
   Stream<D> document() {
     return ref.snapshots().map((snapshot) {
       if (!snapshot.exists) {
-        logger.warning('$D not found(id: ${ref.documentID})');
+        logger.warning('$D not found(id: ${ref.id})');
         return null;
       }
       return collectionRef.decoder(snapshot);
@@ -28,7 +28,7 @@ class DocumentRef<E, D extends Document<E>> {
     final snapshot =
         await (transaction == null ? ref.get() : transaction.get(ref));
     if (!snapshot.exists) {
-      logger.warning('$D not found(id: ${ref.documentID})');
+      logger.warning('$D not found(id: ${ref.id})');
       return Future.value(null);
     }
     return collectionRef.decoder(snapshot);
@@ -57,10 +57,10 @@ class DocumentRef<E, D extends Document<E>> {
   }) {
     assert(batch == null || transaction == null);
     if (batch == null && transaction == null) {
-      return ref.updateData(data);
+      return ref.update(data);
     }
     if (batch != null) {
-      batch.updateData(ref, data);
+      batch.update(ref, data);
       return Future.value(null);
     }
     if (transaction != null) {
@@ -92,10 +92,10 @@ class DocumentRef<E, D extends Document<E>> {
   }) {
     assert(batch == null || transaction == null);
     if (batch == null && transaction == null) {
-      return ref.setData(data);
+      return ref.set(data);
     }
     if (batch != null) {
-      batch.setData(ref, data);
+      batch.set(ref, data);
       return Future.value(null);
     }
     if (transaction != null) {
@@ -127,10 +127,10 @@ class DocumentRef<E, D extends Document<E>> {
   }) {
     assert(batch == null || transaction == null);
     if (batch == null && transaction == null) {
-      return ref.setData(data, merge: true);
+      return ref.set(data, SetOptions(merge: true));
     }
     if (batch != null) {
-      batch.setData(ref, data, merge: true);
+      batch.set(ref, data, SetOptions(merge: true));
       return Future.value(null);
     }
     if (transaction != null) {

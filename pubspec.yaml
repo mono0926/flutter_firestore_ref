@@ -1,13 +1,13 @@
 name: firestore_ref
 description: Firestore reference/document typed acccess helpers. You can write organized safe code by this.
-version: 0.8.20
+version: 0.9.0-dev
 homepage: https://github.com/mono0926/flutter_firestore_ref
 environment:
   sdk: ">=2.6.0 <3.0.0"
 dependencies:
   flutter:
     sdk: flutter
-  cloud_firestore: ^0.13.6
+  cloud_firestore: ^0.14.0-dev
   disposable_provider: ^2.2.0
   firebase: ^7.3.0
   json_annotation: ^3.0.1

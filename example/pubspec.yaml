@@ -8,6 +8,7 @@ dependencies:
     sdk: flutter
   freezed_annotation:
   cupertino_icons:
+  cloud_firestore:
   cloud_functions:
   subscription_holder: any
   provider:
@@ -24,5 +25,7 @@ dev_dependencies:
   freezed: any
   json_serializable: any
   pedantic_mono: any
+dependency_overrides:
+  firebase_core: ^0.5.0-dev
 flutter:
   uses-material-design: true

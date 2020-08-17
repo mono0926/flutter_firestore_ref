@@ -10,8 +10,8 @@ class DocumentList<E, D extends Document<E>> {
   final _map = <DocumentReference, D>{};
 
   DocumentListResult<D> applyingSnapshot(QuerySnapshot snapshot) {
-    for (final change in snapshot.documentChanges) {
-      final doc = change.document;
+    for (final change in snapshot.docChanges) {
+      final doc = change.doc;
       switch (change.type) {
         case DocumentChangeType.added:
           final decoded = decoder(doc);

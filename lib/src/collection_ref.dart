@@ -45,12 +45,12 @@ class CollectionRef<E, D extends Document<E>> {
   }
 
   Future<QuerySnapshot> getSnapshots([QueryBuilder queryBuilder]) {
-    return (queryBuilder ?? (r) => r)(ref).getDocuments();
+    return (queryBuilder ?? (r) => r)(ref).get();
   }
 
   Future<List<D>> getDocuments([QueryBuilder queryBuilder]) async {
     final snapshots = await getSnapshots(queryBuilder);
-    return snapshots.documents.map(decoder).toList();
+    return snapshots.docs.map(decoder).toList();
   }
 
   CollectionPagingController<E, D> pagingController({
@@ -76,7 +76,7 @@ class CollectionRef<E, D extends Document<E>> {
 
   Future<DocumentRef<E, D>> add(E entity) async {
     final rawRef = await ref.add(encoder(entity));
-    return docRef(rawRef.documentID);
+    return docRef(rawRef.id);
   }
 
   /// Delete all documents
@@ -98,8 +98,8 @@ class CollectionRef<E, D extends Document<E>> {
     @required int batchSize,
     @required List<DocumentReference> deletedRefs,
   }) async {
-    final snapshots = await query.getDocuments();
-    final docs = snapshots.documents;
+    final snapshots = await query.get();
+    final docs = snapshots.docs;
     if (docs.isEmpty) {
       return deletedRefs;
     }
