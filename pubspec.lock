@@ -197,7 +197,7 @@ packages:
       name: pedantic_mono
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.9.1"
+    version: "1.10.0+2"
   plugin_platform_interface:
     dependency: transitive
     description:
@@ -211,7 +211,7 @@ packages:
       name: provider
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.3.1"
+    version: "4.3.2"
   quiver:
     dependency: "direct main"
     description:
