@@ -9,10 +9,10 @@ dependencies:
   freezed_annotation:
   cupertino_icons:
   cloud_firestore:
-  cloud_functions:
+  cloud_functions: ^0.6.0-dev
   subscription_holder: any
   provider:
-  firebase_auth:
+  firebase_auth: ^0.17.0-dev
   firestore_ref:
     path: ..
   recase:
@@ -25,7 +25,5 @@ dev_dependencies:
   freezed: any
   json_serializable: any
   pedantic_mono: any
-dependency_overrides:
-  firebase_core: ^0.5.0-dev
 flutter:
   uses-material-design: true
