@@ -21,6 +21,7 @@ class FirestoreOperationCounter {
 
   int get read => _read;
   int get readFromCache => _readFromCache;
+  int get readTotal => _read + _readFromCache;
   int get write => _write;
   int get delete => _delete;
   double get readPriceUsCentralInUSD => _read * 0.06 / 100000;
@@ -30,7 +31,7 @@ class FirestoreOperationCounter {
       readPriceUsCentralInUSD +
       writePriceUsCentralInUSD +
       deletePriceUsCentralInUSD;
-  double get cacheHitRatio => readFromCache / (read + readFromCache);
+  double get cacheHitRatio => readTotal == 0 ? 0 : readFromCache / readTotal;
 
   void recordRead({@required bool isFromCache, int count = 1}) {
     isFromCache ? _readFromCache += count : _read += count;
