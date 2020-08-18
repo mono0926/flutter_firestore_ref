@@ -27,10 +27,10 @@ class PagingDataDoc extends Document<PagingData> {
 class PagingDatasRef extends CollectionRef<PagingData, PagingDataDoc> {
   PagingDatasRef()
       : super(
-          Firestore.instance.collection('pagings'),
+          FirebaseFirestore.instance.collection('pagings'),
           decoder: (snapshot) => PagingDataDoc(
             snapshot.reference,
-            PagingData.fromJson(snapshot.data),
+            PagingData.fromJson(snapshot.data()),
           ),
           encoder: (data) => replacingTimestamp(json: data.toJson()),
         );

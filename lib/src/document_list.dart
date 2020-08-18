@@ -14,11 +14,11 @@ class DocumentList<E, D extends Document<E>> {
     if (recordFirestoreOperationCount) {
       FirestoreOperationCounter.instance.recordRead(
         isFromCache: snapshot.metadata.isFromCache,
-        count: snapshot.documentChanges.length,
+        count: snapshot.docChanges.length,
       );
     }
-    for (final change in snapshot.documentChanges) {
-      final doc = change.document;
+    for (final change in snapshot.docChanges) {
+      final doc = change.doc;
       switch (change.type) {
         case DocumentChangeType.added:
           final decoded = decoder(doc);

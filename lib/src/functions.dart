@@ -5,7 +5,7 @@ import 'package:meta/meta.dart';
 import 'package:quiver/iterables.dart';
 
 Future<T> runBatchWrite<T>(Future<T> Function(WriteBatch batch) f) async {
-  final batch = Firestore.instance.batch();
+  final batch = FirebaseFirestore.instance.batch();
   final result = await f(batch);
   await batch.commit();
   return result;

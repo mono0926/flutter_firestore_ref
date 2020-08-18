@@ -10,7 +10,7 @@ class CollectionGroup<E, D extends Document<E>> {
     @required String path,
     @required this.decoder,
     @required this.encoder,
-  }) : query = Firestore.instance.collectionGroup(path);
+  }) : query = FirebaseFirestore.instance.collectionGroup(path);
 
   final Query query;
   final DocumentDecoder<D> decoder;
@@ -35,9 +35,9 @@ class CollectionGroup<E, D extends Document<E>> {
   }
 
   Future<QuerySnapshot> getSnapshots([QueryBuilder queryBuilder]) async {
-    final result = await (queryBuilder ?? (r) => r)(query).getDocuments();
+    final result = await (queryBuilder ?? (r) => r)(query).get();
     if (recordFirestoreOperationCount) {
-      final count = result.documents.length;
+      final count = result.docs.length;
       FirestoreOperationCounter.instance.recordRead(
         isFromCache: result.metadata.isFromCache,
         count: count,
@@ -48,7 +48,7 @@ class CollectionGroup<E, D extends Document<E>> {
 
   Future<List<D>> getDocuments([QueryBuilder queryBuilder]) async {
     final snapshots = await getSnapshots(queryBuilder);
-    return snapshots.documents.map(decoder).toList();
+    return snapshots.docs.map(decoder).toList();
   }
 
   CollectionPagingController<E, D> pagingController({
