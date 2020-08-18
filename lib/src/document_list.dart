@@ -5,6 +5,7 @@ class DocumentList<E, D extends Document<E>> {
   DocumentList({
     @required this.decoder,
   });
+
   final DocumentDecoder<D> decoder;
   final _documents = <D>[];
   final _map = <DocumentReference, D>{};
