@@ -11,7 +11,7 @@ class UsersNotifier extends ChangeNotifier {
     _subscriptionHolder.add(
       usersRef
           // TODO(mono): Make Collection Group example
-//      CollectionGroup<User, Document<User>>(
+//      CollectionGroup<User, UserDoc>(
 //        path: 'users',
 //        decoder: usersRef.decoder,
 //        encoder: usersRef.encoder,
@@ -30,8 +30,8 @@ class UsersNotifier extends ChangeNotifier {
   }
 
   final _subscriptionHolder = SubscriptionHolder();
-  List<Document<User>> _userDocs = [];
-  List<Document<User>> get userDocs => UnmodifiableListView(_userDocs);
+  List<UserDoc> _userDocs = [];
+  List<UserDoc> get userDocs => UnmodifiableListView(_userDocs);
 
   Future<void> deleteAll() async {
     logger.info('[Start] deleteAll');

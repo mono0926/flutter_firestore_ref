@@ -42,21 +42,21 @@ packages:
       name: cloud_firestore
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.14.0"
+    version: "0.14.0+1"
   cloud_firestore_platform_interface:
     dependency: transitive
     description:
       name: cloud_firestore_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.0"
+    version: "2.0.1"
   cloud_firestore_web:
     dependency: transitive
     description:
       name: cloud_firestore_web
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.2.0"
+    version: "0.2.0+1"
   collection:
     dependency: transitive
     description:
@@ -252,6 +252,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.10.0-nullsafety"
+  state_notifier:
+    dependency: transitive
+    description:
+      name: state_notifier
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.6.0"
   stream_channel:
     dependency: transitive
     description:
@@ -266,6 +273,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.0-nullsafety"
+  subscription_holder:
+    dependency: "direct main"
+    description:
+      name: subscription_holder
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.0+3"
   term_glyph:
     dependency: transitive
     description:

@@ -34,7 +34,7 @@ class PagingPageController extends StateNotifier<PagingPageState>
   void addDocs(int count) {
     runBatchWrite<void>((batch) async {
       for (final _ in List.generate(count, (i) => i)) {
-        await _collectionRef.docRef().set(
+        await _collectionRef.docRefWithId().set(
               const PagingData(),
               batch: batch,
             );
@@ -57,11 +57,11 @@ class PagingPageController extends StateNotifier<PagingPageState>
 
   void increment({@required PagingDataDoc doc}) {
     final data = doc.entity;
-    _collectionRef.docRef(doc.id).merge(
-          data.copyWith(
-            count: data.count + 1,
-          ),
-        );
+    doc.pagingDataRef.merge(
+      data.copyWith(
+        count: data.count + 1,
+      ),
+    );
   }
 
   @override

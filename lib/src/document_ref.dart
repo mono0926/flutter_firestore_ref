@@ -5,18 +5,20 @@ import 'utils.dart';
 
 @immutable
 class DocumentRef<E, D extends Document<E>> {
-  DocumentRef({
-    @required String id,
+  const DocumentRef({
+    @required this.ref,
     @required this.collectionRef,
-  }) : ref = collectionRef.ref.doc(id);
+  })  : assert(ref != null),
+        assert(collectionRef != null);
 
-  final CollectionRef<E, D> collectionRef;
+  final QueryRef<E, D, DocumentRef<E, D>> collectionRef;
   final DocumentReference ref;
+  String get id => ref.id;
 
   Stream<D> document() {
     return ref.snapshots().map((snapshot) {
-      if (recordFirestoreOperationCount) {
-        FirestoreOperationCounter.instance.recordRead(
+      if (firestoreOperationCounter.enabled) {
+        firestoreOperationCounter.recordRead(
           isFromCache: snapshot.metadata.isFromCache,
         );
       }
@@ -24,15 +26,18 @@ class DocumentRef<E, D extends Document<E>> {
         logger.warning('$D not found(id: ${ref.id})');
         return null;
       }
-      return collectionRef.decoder(snapshot);
+      return collectionRef.decode(
+        snapshot,
+        this,
+      );
     });
   }
 
   Future<D> get({Transaction transaction}) async {
     final snapshot =
         await (transaction == null ? ref.get() : transaction.get(ref));
-    if (recordFirestoreOperationCount) {
-      FirestoreOperationCounter.instance.recordRead(
+    if (firestoreOperationCounter.enabled) {
+      firestoreOperationCounter.recordRead(
         isFromCache: snapshot.metadata.isFromCache,
       );
     }
@@ -40,7 +45,10 @@ class DocumentRef<E, D extends Document<E>> {
       logger.warning('$D not found(id: ${ref.id})');
       return Future.value(null);
     }
-    return collectionRef.decoder(snapshot);
+    return collectionRef.decode(
+      snapshot,
+      this,
+    );
   }
 
   /// すでにあるデータに対して
@@ -51,7 +59,7 @@ class DocumentRef<E, D extends Document<E>> {
     Transaction transaction,
   }) {
     return updateData(
-      collectionRef.encoder(entity),
+      collectionRef.encode(entity),
       batch: batch,
       transaction: transaction,
     );
@@ -65,8 +73,8 @@ class DocumentRef<E, D extends Document<E>> {
     Transaction transaction,
   }) {
     assert(batch == null || transaction == null);
-    if (recordFirestoreOperationCount) {
-      FirestoreOperationCounter.instance.recordWrite();
+    if (firestoreOperationCounter.enabled) {
+      firestoreOperationCounter.recordWrite();
     }
     if (batch == null && transaction == null) {
       return ref.update(data);
@@ -90,7 +98,7 @@ class DocumentRef<E, D extends Document<E>> {
     Transaction transaction,
   }) {
     return setData(
-      collectionRef.encoder(entity),
+      collectionRef.encode(entity),
       batch: batch,
       transaction: transaction,
     );
@@ -103,8 +111,8 @@ class DocumentRef<E, D extends Document<E>> {
     Transaction transaction,
   }) {
     assert(batch == null || transaction == null);
-    if (recordFirestoreOperationCount) {
-      FirestoreOperationCounter.instance.recordWrite();
+    if (firestoreOperationCounter.enabled) {
+      firestoreOperationCounter.recordWrite();
     }
     if (batch == null && transaction == null) {
       return ref.set(data);
@@ -128,7 +136,7 @@ class DocumentRef<E, D extends Document<E>> {
     Transaction transaction,
   }) {
     return mergeData(
-      collectionRef.encoder(entity),
+      collectionRef.encode(entity),
       batch: batch,
       transaction: transaction,
     );
@@ -141,8 +149,8 @@ class DocumentRef<E, D extends Document<E>> {
     Transaction transaction,
   }) {
     assert(batch == null || transaction == null);
-    if (recordFirestoreOperationCount) {
-      FirestoreOperationCounter.instance.recordWrite();
+    if (firestoreOperationCounter.enabled) {
+      firestoreOperationCounter.recordWrite();
     }
     if (batch == null && transaction == null) {
       return ref.set(data, SetOptions(merge: true));
@@ -152,12 +160,8 @@ class DocumentRef<E, D extends Document<E>> {
       return Future.value(null);
     }
     if (transaction != null) {
-      throw UnsupportedError(
-        'Unsupported currently: '
-        'https://github.com/FirebaseExtended/flutterfire/issues/1212',
-      );
-//      transaction.set(ref, data, merge: true);
-//      return Future.value(null);
+      transaction.set(ref, data, SetOptions(merge: true));
+      return Future.value(null);
     }
     assert(false);
     return Future.value(null);
@@ -168,8 +172,8 @@ class DocumentRef<E, D extends Document<E>> {
     Transaction transaction,
   }) {
     assert(batch == null || transaction == null);
-    if (recordFirestoreOperationCount) {
-      FirestoreOperationCounter.instance.recordDelete();
+    if (firestoreOperationCounter.enabled) {
+      firestoreOperationCounter.recordDelete();
     }
     if (batch == null && transaction == null) {
       return ref.delete();

@@ -13,7 +13,7 @@ Future<void> main() async {
   const isEmulator = bool.fromEnvironment('IS_EMULATOR');
   logger.fine('start(isEmulator: $isEmulator)');
 
-  recordFirestoreOperationCount = true;
+  firestoreOperationCounter.enabled = true;
 
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();

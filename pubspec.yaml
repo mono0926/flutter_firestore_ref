@@ -7,7 +7,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  cloud_firestore: ^0.14.0
+  cloud_firestore: ^0.14.0+1
   disposable_provider: ^2.2.0
   firebase: ^7.3.0
   json_annotation: ^3.0.1
@@ -15,6 +15,7 @@ dependencies:
   meta: ^1.2.2
   quiver: ^2.1.3
   rxdart: ^0.24.1
+  subscription_holder: ^2.0.0+3
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -8,9 +8,9 @@ class Document<E> {
     this.entity,
   );
 
-  final DocumentReference ref;
+  final DocumentRef<E, Document<E>> ref;
   final E entity;
-  String get id => ref?.id;
+  String get id => ref?.ref?.id;
 
   @override
   bool operator ==(Object other) =>
@@ -32,12 +32,9 @@ Document<$E>(
 )''';
   }
 
-  Document<E> copyWith({
-    DocumentReference ref,
-    E entity,
-  }) {
+  Document<E> copyWith(E entity) {
     return Document<E>(
-      ref ?? this.ref,
+      ref,
       entity ?? this.entity,
     );
   }

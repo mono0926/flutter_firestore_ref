@@ -2,16 +2,10 @@ import 'package:firestore_ref/src/utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:simple_logger/simple_logger.dart';
 
-bool recordFirestoreOperationCount = false;
+final firestoreOperationCounter = _FirestoreOperationCounter();
 
-class FirestoreOperationCounter {
-  FirestoreOperationCounter._();
-
-  static FirestoreOperationCounter _instance;
-  // ignore: prefer_constructors_over_static_methods
-  static FirestoreOperationCounter get instance =>
-      _instance ??= FirestoreOperationCounter._();
-
+class _FirestoreOperationCounter {
+  bool enabled = false;
   Level traceLogLevel = Level.FINE;
 
   var _read = 0;
@@ -34,16 +28,22 @@ class FirestoreOperationCounter {
   double get cacheHitRatio => readTotal == 0 ? 0 : readFromCache / readTotal;
 
   void recordRead({@required bool isFromCache, int count = 1}) {
+    logger.log(
+      traceLogLevel,
+      'recordRead(isFromCache: $isFromCache, count: $count)',
+    );
     isFromCache ? _readFromCache += count : _read += count;
     logger.log(traceLogLevel, this);
   }
 
   void recordWrite({int count = 1}) {
+    logger.log(traceLogLevel, 'recordWrite(count: $count)');
     _write += count;
     logger.log(traceLogLevel, this);
   }
 
   void recordDelete({int count = 1}) {
+    logger.log(traceLogLevel, 'recordDelete(count: $count)');
     _delete += count;
     logger.log(traceLogLevel, this);
   }

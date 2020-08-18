@@ -133,21 +133,21 @@ packages:
       name: cloud_firestore
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.14.0"
+    version: "0.14.0+1"
   cloud_firestore_platform_interface:
     dependency: transitive
     description:
       name: cloud_firestore_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.0"
+    version: "2.0.1"
   cloud_firestore_web:
     dependency: transitive
     description:
       name: cloud_firestore_web
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.2.0"
+    version: "0.2.0+1"
   cloud_functions:
     dependency: "direct main"
     description:
@@ -175,7 +175,7 @@ packages:
       name: code_builder
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.4.0"
+    version: "3.4.1"
   collection:
     dependency: transitive
     description:
@@ -245,21 +245,21 @@ packages:
       name: firebase_auth
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.18.0"
+    version: "0.18.0+1"
   firebase_auth_platform_interface:
     dependency: transitive
     description:
       name: firebase_auth_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.0"
+    version: "2.0.1"
   firebase_auth_web:
     dependency: transitive
     description:
       name: firebase_auth_web
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.3.0"
+    version: "0.3.0+1"
   firebase_core:
     dependency: "direct main"
     description:
