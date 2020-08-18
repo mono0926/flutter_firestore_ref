@@ -56,7 +56,7 @@ AccessCounter{
   readFromCache: $readFromCache (cache hit: ${(cacheHitRatio * 100).toStringAsPrecision(3)} %)
   write: $write (\$${writePriceUsCentralInUSD.toStringAsPrecision(3)})
   delete: $delete (\$${deletePriceUsCentralInUSD.toStringAsPrecision(3)})
-  totalPriceUsCentralInUSD: ${totalPriceUsCentralInUSD.toStringAsPrecision(3)}
+  totalPrice(UsCentral): \$${totalPriceUsCentralInUSD.toStringAsPrecision(3)}
 }
     ''';
   }
