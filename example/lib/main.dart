@@ -11,6 +11,9 @@ import 'util/util.dart';
 Future<void> main() async {
   const isEmulator = bool.fromEnvironment('IS_EMULATOR');
   logger.fine('start(isEmulator: $isEmulator)');
+
+  recordFirestoreOperationCount = true;
+
   WidgetsFlutterBinding.ensureInitialized();
 
   if (isEmulator) {
