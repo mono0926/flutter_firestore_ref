@@ -1,9 +1,7 @@
 import 'package:example/model/service/authenticator.dart';
 import 'package:example/router.dart';
 import 'package:example/util/util.dart';
-import 'package:flutter/material.dart';
-
-import 'run.dart';
+import 'package:flutter/material.dart' hide Router;
 
 class App extends StatelessWidget {
   @override
@@ -23,4 +21,8 @@ class App extends StatelessWidget {
             ),
           );
   }
+}
+
+class AppInfo {
+  String get title => 'firestore_ref example';
 }

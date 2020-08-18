@@ -1,5 +1,5 @@
+import 'package:example/app.dart';
 import 'package:example/router.dart';
-import 'package:example/run.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
