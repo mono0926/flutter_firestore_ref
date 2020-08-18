@@ -16,6 +16,11 @@ class DocumentRef<E, D extends Document<E>> {
 
   Stream<D> document() {
     return ref.snapshots().map((snapshot) {
+      if (recordFirestoreOperationCount) {
+        FirestoreOperationCounter.instance.recordRead(
+          isFromCache: snapshot.metadata.isFromCache,
+        );
+      }
       if (!snapshot.exists) {
         logger.warning('$D not found(id: ${ref.documentID})');
         return null;
@@ -27,6 +32,11 @@ class DocumentRef<E, D extends Document<E>> {
   Future<D> get({Transaction transaction}) async {
     final snapshot =
         await (transaction == null ? ref.get() : transaction.get(ref));
+    if (recordFirestoreOperationCount) {
+      FirestoreOperationCounter.instance.recordRead(
+        isFromCache: snapshot.metadata.isFromCache,
+      );
+    }
     if (!snapshot.exists) {
       logger.warning('$D not found(id: ${ref.documentID})');
       return Future.value(null);
@@ -56,6 +66,9 @@ class DocumentRef<E, D extends Document<E>> {
     Transaction transaction,
   }) {
     assert(batch == null || transaction == null);
+    if (recordFirestoreOperationCount) {
+      FirestoreOperationCounter.instance.recordWrite();
+    }
     if (batch == null && transaction == null) {
       return ref.updateData(data);
     }
@@ -91,6 +104,9 @@ class DocumentRef<E, D extends Document<E>> {
     Transaction transaction,
   }) {
     assert(batch == null || transaction == null);
+    if (recordFirestoreOperationCount) {
+      FirestoreOperationCounter.instance.recordWrite();
+    }
     if (batch == null && transaction == null) {
       return ref.setData(data);
     }
@@ -126,6 +142,9 @@ class DocumentRef<E, D extends Document<E>> {
     Transaction transaction,
   }) {
     assert(batch == null || transaction == null);
+    if (recordFirestoreOperationCount) {
+      FirestoreOperationCounter.instance.recordWrite();
+    }
     if (batch == null && transaction == null) {
       return ref.setData(data, merge: true);
     }
@@ -150,6 +169,9 @@ class DocumentRef<E, D extends Document<E>> {
     Transaction transaction,
   }) {
     assert(batch == null || transaction == null);
+    if (recordFirestoreOperationCount) {
+      FirestoreOperationCounter.instance.recordDelete();
+    }
     if (batch == null && transaction == null) {
       return ref.delete();
     }

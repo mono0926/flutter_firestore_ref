@@ -11,6 +11,12 @@ class DocumentList<E, D extends Document<E>> {
   final _map = <DocumentReference, D>{};
 
   DocumentListResult<D> applyingSnapshot(QuerySnapshot snapshot) {
+    if (recordFirestoreOperationCount) {
+      FirestoreOperationCounter.instance.recordRead(
+        isFromCache: snapshot.metadata.isFromCache,
+        count: snapshot.documentChanges.length,
+      );
+    }
     for (final change in snapshot.documentChanges) {
       final doc = change.document;
       switch (change.type) {

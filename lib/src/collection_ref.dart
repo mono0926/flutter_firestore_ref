@@ -44,8 +44,16 @@ class CollectionRef<E, D extends Document<E>> {
     return snapshots(queryBuilder).map(documentList.applyingSnapshot);
   }
 
-  Future<QuerySnapshot> getSnapshots([QueryBuilder queryBuilder]) {
-    return (queryBuilder ?? (r) => r)(ref).getDocuments();
+  Future<QuerySnapshot> getSnapshots([QueryBuilder queryBuilder]) async {
+    final result = await (queryBuilder ?? (r) => r)(ref).getDocuments();
+    if (recordFirestoreOperationCount) {
+      final count = result.documents.length;
+      FirestoreOperationCounter.instance.recordRead(
+        isFromCache: result.metadata.isFromCache,
+        count: count,
+      );
+    }
+    return result;
   }
 
   Future<List<D>> getDocuments([QueryBuilder queryBuilder]) async {
@@ -102,6 +110,12 @@ class CollectionRef<E, D extends Document<E>> {
     final docs = snapshots.documents;
     if (docs.isEmpty) {
       return deletedRefs;
+    }
+
+    if (recordFirestoreOperationCount) {
+      FirestoreOperationCounter.instance.recordDelete(
+        count: docs.length,
+      );
     }
 
     await runBatchWrite<void>((batch) {

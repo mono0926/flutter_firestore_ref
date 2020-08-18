@@ -34,8 +34,16 @@ class CollectionGroup<E, D extends Document<E>> {
     return snapshots(queryBuilder).map(documentList.applyingSnapshot);
   }
 
-  Future<QuerySnapshot> getSnapshots([QueryBuilder queryBuilder]) {
-    return (queryBuilder ?? (r) => r)(query).getDocuments();
+  Future<QuerySnapshot> getSnapshots([QueryBuilder queryBuilder]) async {
+    final result = await (queryBuilder ?? (r) => r)(query).getDocuments();
+    if (recordFirestoreOperationCount) {
+      final count = result.documents.length;
+      FirestoreOperationCounter.instance.recordRead(
+        isFromCache: result.metadata.isFromCache,
+        count: count,
+      );
+    }
+    return result;
   }
 
   Future<List<D>> getDocuments([QueryBuilder queryBuilder]) async {

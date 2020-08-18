@@ -1,3 +1,8 @@
+## 0.8.21
+
+- Add `FirestoreOperationCounter`
+  - If `recordFirestoreOperationCount`(default: false) is true, all operations is logged on memory and trace them.
+
 ## 0.8.20
 
 - Add emptyCollectionIfNull to DocumentReferenceSetConverter/DocumentReferenceListConverter
