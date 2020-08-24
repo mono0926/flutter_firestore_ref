@@ -175,7 +175,10 @@ class DocumentListResult<E, D extends Document<E>,
     @required this.list,
     @required this.map,
   });
+  DocumentListResult.empty() : this(list: [], map: {});
 
   final List<D> list;
   final Map<DocRef, D> map;
+
+  bool get isEmpty => list.isEmpty && map.isEmpty;
 }
