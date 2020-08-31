@@ -1,6 +1,7 @@
 ## 0.9.0
 
 - Upgrade cloud_firestore to ^0.14.0
+- There are some breaking changes to change DocumentRef to more strong typed
 
 ## 0.8.21
 

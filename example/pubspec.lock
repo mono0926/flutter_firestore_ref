@@ -133,7 +133,7 @@ packages:
       name: cloud_firestore
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.14.0+1"
+    version: "0.14.0+2"
   cloud_firestore_platform_interface:
     dependency: transitive
     description:
@@ -287,7 +287,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "0.8.21+2"
+    version: "0.9.0"
   fixnum:
     dependency: transitive
     description:
@@ -323,7 +323,7 @@ packages:
       name: freezed
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.11.5"
+    version: "0.11.6"
   freezed_annotation:
     dependency: "direct main"
     description:
@@ -407,7 +407,7 @@ packages:
       name: json_serializable
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.4.0"
+    version: "3.4.1"
   logging:
     dependency: transitive
     description:
@@ -505,7 +505,7 @@ packages:
       name: provider
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.3.2"
+    version: "4.3.2+1"
   pub_semver:
     dependency: transitive
     description:
