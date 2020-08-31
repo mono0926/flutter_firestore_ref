@@ -19,37 +19,49 @@ abstract class PagingData with _$PagingData {
 
 class PagingDataDoc extends Document<PagingData> {
   const PagingDataDoc(
-    DocumentReference ref,
+    this.pagingDataRef,
     PagingData entity,
-  ) : super(ref, entity);
+  ) : super(pagingDataRef, entity);
+
+  final PagingDataRef pagingDataRef;
 }
 
-class PagingDatasRef extends CollectionRef<PagingData, PagingDataDoc> {
+class PagingDatasRef
+    extends CollectionRef<PagingData, PagingDataDoc, PagingDataRef> {
   PagingDatasRef()
       : super(
-          Firestore.instance.collection('pagings'),
-          decoder: (snapshot) => PagingDataDoc(
-            snapshot.reference,
-            PagingData.fromJson(snapshot.data),
-          ),
-          encoder: (data) => replacingTimestamp(json: data.toJson()),
+          FirebaseFirestore.instance.collection('pagings'),
         );
 
   @override
-  PagingDataRef docRef([String id]) {
+  PagingDataRef docRef(DocumentReference ref) {
     return PagingDataRef(
-      id: id,
+      ref: ref,
       collectionRef: this,
     );
+  }
+
+  @override
+  PagingDataDoc decode(DocumentSnapshot snapshot, PagingDataRef docRef) {
+    assert(docRef != null);
+    return PagingDataDoc(
+      docRef,
+      PagingData.fromJson(snapshot.data()),
+    );
+  }
+
+  @override
+  Map<String, dynamic> encode(PagingData data) {
+    return replacingTimestamp(json: data.toJson());
   }
 }
 
 class PagingDataRef extends DocumentRef<PagingData, PagingDataDoc> {
-  PagingDataRef({
-    @required String id,
+  const PagingDataRef({
+    @required DocumentReference ref,
     @required PagingDatasRef collectionRef,
   }) : super(
-          id: id,
+          ref: ref,
           collectionRef: collectionRef,
         );
 }

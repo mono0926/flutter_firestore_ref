@@ -8,47 +8,55 @@ import 'collection_paging_controller.dart';
 import 'document_list.dart';
 
 typedef QueryBuilder = Query Function(Query collectionRef);
-typedef DocumentDecoder<D extends Document<dynamic>> = D Function(
-    DocumentSnapshot snapshot);
-typedef EntityEncoder<E> = Map<String, dynamic> Function(
-  E entity,
+typedef DocumentDecoder<E, D extends Document<E>,
+        DocRef extends DocumentRef<E, D>>
+    = D Function(
+  DocumentSnapshot snapshot,
+  DocRef docRef,
 );
+typedef DocRefCreator<E, D extends Document<E>,
+        DocRef extends DocumentRef<E, D>>
+    = DocRef Function(DocumentReference ref);
 
 @immutable
-class CollectionRef<E, D extends Document<E>> {
-  const CollectionRef(
-    this.ref, {
-    @required this.decoder,
-    @required this.encoder,
-  });
+abstract class QueryRef<E, D extends Document<E>,
+    DocRef extends DocumentRef<E, D>> {
+  const QueryRef(this.query);
 
-  final CollectionReference ref;
-  final DocumentDecoder<D> decoder;
-  final EntityEncoder<E> encoder;
+  final Query query;
+
+  D decode(DocumentSnapshot snapshot, DocRef docRef);
+
+  DocRef docRef(DocumentReference ref);
+
+  Map<String, dynamic> encode(E data);
 
   Stream<QuerySnapshot> snapshots([QueryBuilder queryBuilder]) {
-    return (queryBuilder ?? (r) => r)(ref).snapshots();
+    return (queryBuilder ?? (r) => r)(query).snapshots();
   }
 
   Stream<List<D>> documents([QueryBuilder queryBuilder]) {
     return documentListResult(queryBuilder).map((r) => r.list);
   }
 
-  Stream<Map<DocumentReference, D>> documentMap([QueryBuilder queryBuilder]) {
+  Stream<Map<DocRef, D>> documentMap([QueryBuilder queryBuilder]) {
     return documentListResult(queryBuilder).map((r) => r.map);
   }
 
-  Stream<DocumentListResult<D>> documentListResult(
+  Stream<DocumentListResult<E, D, DocRef>> documentListResult(
       [QueryBuilder queryBuilder]) {
-    final documentList = DocumentList<E, D>(decoder: decoder);
+    final documentList = DocumentList<E, D, DocRef>(
+      docRefCreator: docRef,
+      decoder: decode,
+    );
     return snapshots(queryBuilder).map(documentList.applyingSnapshot);
   }
 
   Future<QuerySnapshot> getSnapshots([QueryBuilder queryBuilder]) async {
-    final result = await (queryBuilder ?? (r) => r)(ref).getDocuments();
-    if (recordFirestoreOperationCount) {
-      final count = result.documents.length;
-      FirestoreOperationCounter.instance.recordRead(
+    final result = await (queryBuilder ?? (r) => r)(query).get();
+    if (firestoreOperationCounter.enabled) {
+      final count = result.docs.length;
+      firestoreOperationCounter.recordRead(
         isFromCache: result.metadata.isFromCache,
         count: count,
       );
@@ -58,33 +66,22 @@ class CollectionRef<E, D extends Document<E>> {
 
   Future<List<D>> getDocuments([QueryBuilder queryBuilder]) async {
     final snapshots = await getSnapshots(queryBuilder);
-    return snapshots.documents.map(decoder).toList();
+    return snapshots.docs
+        .map((snap) => decode(snap, docRef(snap.reference)))
+        .toList();
   }
 
-  CollectionPagingController<E, D> pagingController({
+  CollectionPagingController<E, D, DocRef> pagingController({
     QueryBuilder queryBuilder,
     int initialSize = 10,
     int defaultPagingSize = 10,
   }) {
     return CollectionPagingController(
-      query: ref,
-      decoder: decoder,
+      queryRef: this,
       queryBuilder: queryBuilder,
       initialSize: initialSize,
       defaultPagingSize: defaultPagingSize,
     );
-  }
-
-  DocumentRef<E, D> docRef([String id]) {
-    return DocumentRef<E, D>(
-      id: id,
-      collectionRef: this,
-    );
-  }
-
-  Future<DocumentRef<E, D>> add(E entity) async {
-    final rawRef = await ref.add(encoder(entity));
-    return docRef(rawRef.documentID);
   }
 
   /// Delete all documents
@@ -95,7 +92,7 @@ class CollectionRef<E, D extends Document<E>> {
     int batchSize = 500,
   }) async {
     return _deleteQueryBatch(
-      query: ref.orderBy(FieldPath.documentId).limit(batchSize),
+      query: query.orderBy(FieldPath.documentId).limit(batchSize),
       batchSize: batchSize,
       deletedRefs: [],
     );
@@ -106,14 +103,14 @@ class CollectionRef<E, D extends Document<E>> {
     @required int batchSize,
     @required List<DocumentReference> deletedRefs,
   }) async {
-    final snapshots = await query.getDocuments();
-    final docs = snapshots.documents;
+    final snapshots = await query.get();
+    final docs = snapshots.docs;
     if (docs.isEmpty) {
       return deletedRefs;
     }
 
-    if (recordFirestoreOperationCount) {
-      FirestoreOperationCounter.instance.recordDelete(
+    if (firestoreOperationCounter.enabled) {
+      firestoreOperationCounter.recordDelete(
         count: docs.length,
       );
     }
@@ -140,10 +137,48 @@ class CollectionRef<E, D extends Document<E>> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is CollectionRef &&
+      other is QueryRef &&
           runtimeType == other.runtimeType &&
-          ref == other.ref;
+          query == other.query;
 
   @override
-  int get hashCode => ref.hashCode;
+  int get hashCode => query.hashCode;
+}
+
+@immutable
+abstract class CollectionGroupRef<E, D extends Document<E>,
+    DocRef extends DocumentRef<E, D>> extends QueryRef<E, D, DocRef> {
+  CollectionGroupRef(String collectionPath)
+      : super(FirebaseFirestore.instance.collectionGroup(collectionPath));
+}
+
+@immutable
+abstract class CollectionRef<E, D extends Document<E>,
+    DocRef extends DocumentRef<E, D>> extends QueryRef<E, D, DocRef> {
+  const CollectionRef(this.ref) : super(ref);
+
+  final CollectionReference ref;
+
+  DocRef docRefWithId([String id]) {
+    return docRef(ref.doc(id));
+  }
+
+  Future<DocRef> add(E entity) async {
+    final rawRef = await ref.add(encode(entity));
+    return docRef(rawRef);
+  }
+}
+
+class DocumentListResult<E, D extends Document<E>,
+    DocRef extends DocumentRef<E, D>> {
+  DocumentListResult({
+    @required this.list,
+    @required this.map,
+  });
+  DocumentListResult.empty() : this(list: [], map: {});
+
+  final List<D> list;
+  final Map<DocRef, D> map;
+
+  bool get isEmpty => list.isEmpty && map.isEmpty;
 }

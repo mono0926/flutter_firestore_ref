@@ -11,6 +11,7 @@ dependencies:
   cloud_functions:
   subscription_holder: any
   provider:
+  firebase_core:
   firebase_auth:
   firestore_ref:
     path: ..

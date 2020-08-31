@@ -10,7 +10,7 @@ class UserNotifier extends ChangeNotifier {
     @required String id,
     @required this.read,
   }) {
-    _doc = Document<User>(usersRef.docRef(id).ref, null);
+    _doc = UserDoc(usersRef.docRefWithId(id), null);
     if (id != null) {
       _subscriptionHolder.add(
         _ref.document().listen((doc) {
@@ -34,7 +34,7 @@ class UserNotifier extends ChangeNotifier {
         break;
       case UpdateType.increment:
         _ref.mergeData(
-          _ref.collectionRef.encoder(user)
+          _ref.collectionRef.encode(user)
             ..[UserField.count] = FieldValue.increment(1),
         );
         break;
@@ -47,7 +47,7 @@ class UserNotifier extends ChangeNotifier {
         });
         break;
       case UpdateType.transaction:
-        Firestore.instance.runTransaction((transaction) {
+        FirebaseFirestore.instance.runTransaction((transaction) {
           // TODO(mono): merge isn't supported
           // https://github.com/FirebaseExtended/flutterfire/issues/1212
           return _ref.update(
@@ -60,12 +60,12 @@ class UserNotifier extends ChangeNotifier {
   }
 
   final _subscriptionHolder = SubscriptionHolder();
-  Document<User> _doc;
-  Document<User> get doc => _doc;
+  UserDoc _doc;
+  UserDoc get doc => _doc;
   String get id => doc.id;
   User get user => doc.entity ?? const User(count: 0);
   int get count => user.count;
-  DocumentRef<User, Document<User>> get _ref => usersRef.docRef(id);
+  UserRef get _ref => _doc.userRef;
 
   @override
   void dispose() {

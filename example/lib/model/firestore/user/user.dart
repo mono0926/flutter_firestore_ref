@@ -16,31 +16,52 @@ abstract class User with _$User {
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 }
 
-final CollectionRef<User, Document<User>> usersRef = CollectionRef(
-  Firestore.instance.collection('users'),
-  decoder: (snapshot) => Document(
-    snapshot.reference,
-    User.fromJson(snapshot.data),
-  ),
-  encoder: (user) => replacingTimestamp(json: user.toJson()),
-);
-
 class UserField {
   static const count = 'count';
 }
 
-//Or this:
-//class UsersRef extends CollectionRef<User, Document<User>> {
-//  UsersRef()
-//      : super(
-//          Firestore.instance.collection('users'),
-//          decoder: (snapshot) => Document<User>(
-//            snapshot.documentID,
-//            User.fromJson(snapshot.data),
-//          ),
-//          encoder: (user) => replacingTimestamp(
-//            json: user.toJson(),
-//            createdAt: user.createdAt,
-//          ),
-//        );
-//}
+final usersRef = UsersRef();
+
+class UsersRef extends CollectionRef<User, UserDoc, UserRef> {
+  UsersRef() : super(FirebaseFirestore.instance.collection('users'));
+
+  @override
+  Map<String, dynamic> encode(User data) =>
+      replacingTimestamp(json: data.toJson());
+
+  @override
+  UserDoc decode(DocumentSnapshot snapshot, UserRef docRef) {
+    assert(docRef != null);
+    return UserDoc(
+      docRef,
+      User.fromJson(snapshot.data()),
+    );
+  }
+
+  @override
+  UserRef docRef(DocumentReference ref) => UserRef(
+        ref: ref,
+        usersRef: this,
+      );
+}
+
+class UserRef extends DocumentRef<User, UserDoc> {
+  const UserRef({
+    @required DocumentReference ref,
+    @required this.usersRef,
+  }) : super(
+          ref: ref,
+          collectionRef: usersRef,
+        );
+
+  final UsersRef usersRef;
+}
+
+class UserDoc extends Document<User> {
+  const UserDoc(
+    this.userRef,
+    User entity,
+  ) : super(userRef, entity);
+
+  final UserRef userRef;
+}
