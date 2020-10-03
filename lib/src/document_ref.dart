@@ -33,9 +33,13 @@ class DocumentRef<E, D extends Document<E>> {
     });
   }
 
-  Future<D> get({Transaction transaction}) async {
+  /// [options] doesn't work with [transaction]
+  Future<D> get({
+    GetOptions options,
+    Transaction transaction,
+  }) async {
     final snapshot =
-        await (transaction == null ? ref.get() : transaction.get(ref));
+        await (transaction == null ? ref.get(options) : transaction.get(ref));
     if (firestoreOperationCounter.enabled) {
       firestoreOperationCounter.recordRead(
         isFromCache: snapshot.metadata.isFromCache,

@@ -52,8 +52,11 @@ abstract class QueryRef<E, D extends Document<E>,
     return snapshots(queryBuilder).map(documentList.applyingSnapshot);
   }
 
-  Future<QuerySnapshot> getSnapshots([QueryBuilder queryBuilder]) async {
-    final result = await (queryBuilder ?? (r) => r)(query).get();
+  Future<QuerySnapshot> getSnapshots([
+    QueryBuilder queryBuilder,
+    GetOptions options,
+  ]) async {
+    final result = await (queryBuilder ?? (r) => r)(query).get(options);
     if (firestoreOperationCounter.enabled) {
       final count = result.docs.length;
       firestoreOperationCounter.recordRead(

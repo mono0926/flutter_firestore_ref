@@ -1,3 +1,7 @@
+## 0.9.1
+
+- Support `GetOptions`
+
 ## 0.9.0
 
 - Upgrade cloud_firestore to ^0.14.0
