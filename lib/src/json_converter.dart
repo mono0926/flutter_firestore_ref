@@ -24,6 +24,16 @@ class TimestampConverter implements JsonConverter<DateTime, Timestamp> {
       object == null ? null : Timestamp.fromDate(object);
 }
 
+class ISO8601Converter implements JsonConverter<DateTime, String> {
+  const ISO8601Converter();
+
+  @override
+  DateTime fromJson(String json) => json == null ? null : DateTime.parse(json);
+
+  @override
+  String toJson(DateTime object) => object?.toIso8601String();
+}
+
 class DocumentReferenceSetConverter
     implements JsonConverter<Set<DocumentReference>, List> {
   const DocumentReferenceSetConverter({
