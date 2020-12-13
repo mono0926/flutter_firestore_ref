@@ -23,6 +23,7 @@ dev_dependencies:
     sdk: flutter
   build_runner: any
   freezed: any
+  integration_test: any
   json_serializable: any
   pedantic_mono: any
 flutter:
