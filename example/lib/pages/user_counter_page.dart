@@ -125,9 +125,8 @@ class _MyCounter extends StatelessWidget {
         onPressed: () async {
           context.read<UserNotifier>().increment();
 
-          final result = await CloudFunctions.instance
-              .getHttpsCallable(functionName: 'now')
-              .call();
+          final result =
+              await FirebaseFunctions.instance.httpsCallable('now').call<Map>();
           logger.info(result.data);
         },
       ),

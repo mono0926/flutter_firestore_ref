@@ -19,7 +19,7 @@ Future<void> main() async {
   await Firebase.initializeApp();
 
   if (isEmulator) {
-    CloudFunctions.instance.useFunctionsEmulator(
+    FirebaseFunctions.instance.useFunctionsEmulator(
       origin: 'http://$emulatorDomain:5001',
     );
     useFirestoreEmulator();
