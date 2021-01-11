@@ -27,11 +27,8 @@ class PagingDataDoc extends Document<PagingData> {
 }
 
 class PagingDatasRef
-    extends CollectionRef<PagingData, PagingDataDoc, PagingDataRef> {
-  PagingDatasRef()
-      : super(
-          FirebaseFirestore.instance.collection('pagings'),
-        );
+    extends CollectionGroupRef<PagingData, PagingDataDoc, PagingDataRef> {
+  PagingDatasRef() : super('pagings');
 
   @override
   PagingDataRef docRef(DocumentReference ref) {

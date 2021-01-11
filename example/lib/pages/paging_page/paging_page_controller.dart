@@ -34,7 +34,9 @@ class PagingPageController extends StateNotifier<PagingPageState>
   void addDocs(int count) {
     runBatchWrite<void>((batch) async {
       for (final _ in List.generate(count, (i) => i)) {
-        await _collectionRef.docRefWithId().set(
+        await _collectionRef
+            .docRef(FirebaseFirestore.instance.collection('pagings').doc())
+            .set(
               const PagingData(),
               batch: batch,
             );
