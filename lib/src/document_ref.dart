@@ -6,16 +6,15 @@ import 'utils.dart';
 @immutable
 class DocumentRef<E, D extends Document<E>> {
   const DocumentRef({
-    @required this.ref,
-    @required this.collectionRef,
-  })  : assert(ref != null),
-        assert(collectionRef != null);
+    required this.ref,
+    required this.collectionRef,
+  });
 
   final QueryRef<E, D, DocumentRef<E, D>> collectionRef;
   final DocumentReference ref;
   String get id => ref.id;
 
-  Stream<D> document() {
+  Stream<D?> document() {
     return ref.snapshots().map((snapshot) {
       if (firestoreOperationCounter.enabled) {
         firestoreOperationCounter.recordRead(
@@ -35,8 +34,8 @@ class DocumentRef<E, D extends Document<E>> {
 
   /// [options] doesn't work with [transaction]
   Future<D> get({
-    GetOptions options,
-    Transaction transaction,
+    GetOptions? options,
+    Transaction? transaction,
   }) async {
     final snapshot =
         await (transaction == null ? ref.get(options) : transaction.get(ref));
@@ -59,8 +58,8 @@ class DocumentRef<E, D extends Document<E>> {
   /// マージと似ているがそのキーの配下のものは置き換わる
   Future<void> update(
     E entity, {
-    WriteBatch batch,
-    Transaction transaction,
+    WriteBatch? batch,
+    Transaction? transaction,
   }) {
     return updateData(
       collectionRef.encode(entity),
@@ -73,8 +72,8 @@ class DocumentRef<E, D extends Document<E>> {
   /// マージと似ているがそのキーの配下のものは置き換わる
   Future<void> updateData(
     Map<String, dynamic> data, {
-    WriteBatch batch,
-    Transaction transaction,
+    WriteBatch? batch,
+    Transaction? transaction,
   }) {
     assert(batch == null || transaction == null);
     if (firestoreOperationCounter.enabled) {
@@ -98,8 +97,8 @@ class DocumentRef<E, D extends Document<E>> {
   /// 全置き換え
   Future<void> set(
     E entity, {
-    WriteBatch batch,
-    Transaction transaction,
+    WriteBatch? batch,
+    Transaction? transaction,
   }) {
     return setData(
       collectionRef.encode(entity),
@@ -111,8 +110,8 @@ class DocumentRef<E, D extends Document<E>> {
   /// 全置き換え
   Future<void> setData(
     Map<String, dynamic> data, {
-    WriteBatch batch,
-    Transaction transaction,
+    WriteBatch? batch,
+    Transaction? transaction,
   }) {
     assert(batch == null || transaction == null);
     if (firestoreOperationCounter.enabled) {
@@ -136,8 +135,8 @@ class DocumentRef<E, D extends Document<E>> {
   /// マージ
   Future<void> merge(
     E entity, {
-    WriteBatch batch,
-    Transaction transaction,
+    WriteBatch? batch,
+    Transaction? transaction,
   }) {
     return mergeData(
       collectionRef.encode(entity),
@@ -149,8 +148,8 @@ class DocumentRef<E, D extends Document<E>> {
   /// マージ
   Future<void> mergeData(
     Map<String, dynamic> data, {
-    WriteBatch batch,
-    Transaction transaction,
+    WriteBatch? batch,
+    Transaction? transaction,
   }) {
     assert(batch == null || transaction == null);
     if (firestoreOperationCounter.enabled) {
@@ -172,8 +171,8 @@ class DocumentRef<E, D extends Document<E>> {
   }
 
   Future<void> delete({
-    WriteBatch batch,
-    Transaction transaction,
+    WriteBatch? batch,
+    Transaction? transaction,
   }) {
     assert(batch == null || transaction == null);
     if (firestoreOperationCounter.enabled) {

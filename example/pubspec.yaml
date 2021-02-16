@@ -4,24 +4,24 @@ version: 1.0.0+1
 environment:
   sdk: ">=2.6.0 <3.0.0"
 dependencies:
-  flutter:
-    sdk: flutter
-  freezed_annotation:
-  cupertino_icons:
   cloud_functions:
-  subscription_holder: any
-  provider:
+  cupertino_icons:
+  firebase_auth:
   firebase_core:
-  firebase_auth: '>=0.20.0'
   firestore_ref:
     path: ..
+  flutter:
+    sdk: flutter
+  flutter_state_notifier:
+  freezed_annotation:
+  provider:
   recase:
   state_notifier:
-  flutter_state_notifier:
+  subscription_holder: any
 dev_dependencies:
+  build_runner: any
   flutter_test:
     sdk: flutter
-  build_runner: any
   freezed: any
   json_serializable: any
   pedantic_mono: any
