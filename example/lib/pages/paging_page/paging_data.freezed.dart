@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
 
 part of 'paging_data.dart';
 
@@ -12,46 +12,54 @@ PagingData _$PagingDataFromJson(Map<String, dynamic> json) {
   return _PagingData.fromJson(json);
 }
 
+/// @nodoc
 class _$PagingDataTearOff {
   const _$PagingDataTearOff();
 
-// ignore: unused_element
   _PagingData call(
       {int count = 0,
-      @TimestampConverter() DateTime createdAt,
-      @TimestampConverter() DateTime updatedAt}) {
+      @TimestampConverter() DateTime? createdAt,
+      @TimestampConverter() DateTime? updatedAt}) {
     return _PagingData(
       count: count,
       createdAt: createdAt,
       updatedAt: updatedAt,
     );
   }
+
+  PagingData fromJson(Map<String, Object> json) {
+    return PagingData.fromJson(json);
+  }
 }
 
-// ignore: unused_element
+/// @nodoc
 const $PagingData = _$PagingDataTearOff();
 
+/// @nodoc
 mixin _$PagingData {
   int get count;
   @TimestampConverter()
-  DateTime get createdAt;
+  DateTime? get createdAt;
   @TimestampConverter()
-  DateTime get updatedAt;
+  DateTime? get updatedAt;
 
   Map<String, dynamic> toJson();
+  @JsonKey(ignore: true)
   $PagingDataCopyWith<PagingData> get copyWith;
 }
 
+/// @nodoc
 abstract class $PagingDataCopyWith<$Res> {
   factory $PagingDataCopyWith(
           PagingData value, $Res Function(PagingData) then) =
       _$PagingDataCopyWithImpl<$Res>;
   $Res call(
       {int count,
-      @TimestampConverter() DateTime createdAt,
-      @TimestampConverter() DateTime updatedAt});
+      @TimestampConverter() DateTime? createdAt,
+      @TimestampConverter() DateTime? updatedAt});
 }
 
+/// @nodoc
 class _$PagingDataCopyWithImpl<$Res> implements $PagingDataCopyWith<$Res> {
   _$PagingDataCopyWithImpl(this._value, this._then);
 
@@ -61,20 +69,21 @@ class _$PagingDataCopyWithImpl<$Res> implements $PagingDataCopyWith<$Res> {
 
   @override
   $Res call({
-    Object count = freezed,
-    Object createdAt = freezed,
-    Object updatedAt = freezed,
+    Object? count = freezed,
+    Object? createdAt = freezed,
+    Object? updatedAt = freezed,
   }) {
     return _then(_value.copyWith(
       count: count == freezed ? _value.count : count as int,
       createdAt:
-          createdAt == freezed ? _value.createdAt : createdAt as DateTime,
+          createdAt == freezed ? _value.createdAt : createdAt as DateTime?,
       updatedAt:
-          updatedAt == freezed ? _value.updatedAt : updatedAt as DateTime,
+          updatedAt == freezed ? _value.updatedAt : updatedAt as DateTime?,
     ));
   }
 }
 
+/// @nodoc
 abstract class _$PagingDataCopyWith<$Res> implements $PagingDataCopyWith<$Res> {
   factory _$PagingDataCopyWith(
           _PagingData value, $Res Function(_PagingData) then) =
@@ -82,10 +91,11 @@ abstract class _$PagingDataCopyWith<$Res> implements $PagingDataCopyWith<$Res> {
   @override
   $Res call(
       {int count,
-      @TimestampConverter() DateTime createdAt,
-      @TimestampConverter() DateTime updatedAt});
+      @TimestampConverter() DateTime? createdAt,
+      @TimestampConverter() DateTime? updatedAt});
 }
 
+/// @nodoc
 class __$PagingDataCopyWithImpl<$Res> extends _$PagingDataCopyWithImpl<$Res>
     implements _$PagingDataCopyWith<$Res> {
   __$PagingDataCopyWithImpl(
@@ -97,27 +107,28 @@ class __$PagingDataCopyWithImpl<$Res> extends _$PagingDataCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object count = freezed,
-    Object createdAt = freezed,
-    Object updatedAt = freezed,
+    Object? count = freezed,
+    Object? createdAt = freezed,
+    Object? updatedAt = freezed,
   }) {
     return _then(_PagingData(
       count: count == freezed ? _value.count : count as int,
       createdAt:
-          createdAt == freezed ? _value.createdAt : createdAt as DateTime,
+          createdAt == freezed ? _value.createdAt : createdAt as DateTime?,
       updatedAt:
-          updatedAt == freezed ? _value.updatedAt : updatedAt as DateTime,
+          updatedAt == freezed ? _value.updatedAt : updatedAt as DateTime?,
     ));
   }
 }
 
 @JsonSerializable()
+
+/// @nodoc
 class _$_PagingData with DiagnosticableTreeMixin implements _PagingData {
   const _$_PagingData(
       {this.count = 0,
       @TimestampConverter() this.createdAt,
-      @TimestampConverter() this.updatedAt})
-      : assert(count != null);
+      @TimestampConverter() this.updatedAt});
 
   factory _$_PagingData.fromJson(Map<String, dynamic> json) =>
       _$_$_PagingDataFromJson(json);
@@ -127,10 +138,10 @@ class _$_PagingData with DiagnosticableTreeMixin implements _PagingData {
   final int count;
   @override
   @TimestampConverter()
-  final DateTime createdAt;
+  final DateTime? createdAt;
   @override
   @TimestampConverter()
-  final DateTime updatedAt;
+  final DateTime? updatedAt;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -168,6 +179,7 @@ class _$_PagingData with DiagnosticableTreeMixin implements _PagingData {
       const DeepCollectionEquality().hash(createdAt) ^
       const DeepCollectionEquality().hash(updatedAt);
 
+  @JsonKey(ignore: true)
   @override
   _$PagingDataCopyWith<_PagingData> get copyWith =>
       __$PagingDataCopyWithImpl<_PagingData>(this, _$identity);
@@ -181,8 +193,8 @@ class _$_PagingData with DiagnosticableTreeMixin implements _PagingData {
 abstract class _PagingData implements PagingData {
   const factory _PagingData(
       {int count,
-      @TimestampConverter() DateTime createdAt,
-      @TimestampConverter() DateTime updatedAt}) = _$_PagingData;
+      @TimestampConverter() DateTime? createdAt,
+      @TimestampConverter() DateTime? updatedAt}) = _$_PagingData;
 
   factory _PagingData.fromJson(Map<String, dynamic> json) =
       _$_PagingData.fromJson;
@@ -191,10 +203,11 @@ abstract class _PagingData implements PagingData {
   int get count;
   @override
   @TimestampConverter()
-  DateTime get createdAt;
+  DateTime? get createdAt;
   @override
   @TimestampConverter()
-  DateTime get updatedAt;
+  DateTime? get updatedAt;
   @override
+  @JsonKey(ignore: true)
   _$PagingDataCopyWith<_PagingData> get copyWith;
 }

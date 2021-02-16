@@ -8,9 +8,9 @@ class Document<E> {
     this.entity,
   );
 
-  final DocumentRef<E, Document<E>>? ref;
-  final E entity;
-  String? get id => ref?.ref.id;
+  final DocumentRef<E, Document<E>> ref;
+  final E? entity;
+  String get id => ref.ref.id;
 
   @override
   bool operator ==(Object other) =>

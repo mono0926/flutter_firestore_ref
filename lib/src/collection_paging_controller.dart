@@ -61,7 +61,9 @@ class CollectionPagingController<E, D extends Document<E>,
   bool loadMore({int? pagingSize}) {
     final hasMore = this.hasMore.hasValue;
     if (hasMore) {
-      _limitController.add(pagingSize ?? defaultPagingSize);
+      _limitController.add(
+        _limitController.requireValue + (pagingSize ?? defaultPagingSize),
+      );
     }
     return hasMore;
   }

@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
 
 part of 'paging_page_state.dart';
 
@@ -9,10 +9,10 @@ part of 'paging_page_state.dart';
 
 T _$identity<T>(T value) => value;
 
+/// @nodoc
 class _$PagingPageStateTearOff {
   const _$PagingPageStateTearOff();
 
-// ignore: unused_element
   _PagingPageState call(
       {List<PagingDataDoc> docs = const <PagingDataDoc>[],
       bool hasMore = true}) {
@@ -23,16 +23,19 @@ class _$PagingPageStateTearOff {
   }
 }
 
-// ignore: unused_element
+/// @nodoc
 const $PagingPageState = _$PagingPageStateTearOff();
 
+/// @nodoc
 mixin _$PagingPageState {
   List<PagingDataDoc> get docs;
   bool get hasMore;
 
+  @JsonKey(ignore: true)
   $PagingPageStateCopyWith<PagingPageState> get copyWith;
 }
 
+/// @nodoc
 abstract class $PagingPageStateCopyWith<$Res> {
   factory $PagingPageStateCopyWith(
           PagingPageState value, $Res Function(PagingPageState) then) =
@@ -40,6 +43,7 @@ abstract class $PagingPageStateCopyWith<$Res> {
   $Res call({List<PagingDataDoc> docs, bool hasMore});
 }
 
+/// @nodoc
 class _$PagingPageStateCopyWithImpl<$Res>
     implements $PagingPageStateCopyWith<$Res> {
   _$PagingPageStateCopyWithImpl(this._value, this._then);
@@ -50,8 +54,8 @@ class _$PagingPageStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object docs = freezed,
-    Object hasMore = freezed,
+    Object? docs = freezed,
+    Object? hasMore = freezed,
   }) {
     return _then(_value.copyWith(
       docs: docs == freezed ? _value.docs : docs as List<PagingDataDoc>,
@@ -60,6 +64,7 @@ class _$PagingPageStateCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 abstract class _$PagingPageStateCopyWith<$Res>
     implements $PagingPageStateCopyWith<$Res> {
   factory _$PagingPageStateCopyWith(
@@ -69,6 +74,7 @@ abstract class _$PagingPageStateCopyWith<$Res>
   $Res call({List<PagingDataDoc> docs, bool hasMore});
 }
 
+/// @nodoc
 class __$PagingPageStateCopyWithImpl<$Res>
     extends _$PagingPageStateCopyWithImpl<$Res>
     implements _$PagingPageStateCopyWith<$Res> {
@@ -81,8 +87,8 @@ class __$PagingPageStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object docs = freezed,
-    Object hasMore = freezed,
+    Object? docs = freezed,
+    Object? hasMore = freezed,
   }) {
     return _then(_PagingPageState(
       docs: docs == freezed ? _value.docs : docs as List<PagingDataDoc>,
@@ -91,12 +97,10 @@ class __$PagingPageStateCopyWithImpl<$Res>
   }
 }
 
-class _$_PagingPageState
-    with DiagnosticableTreeMixin
-    implements _PagingPageState {
+/// @nodoc
+class _$_PagingPageState extends _PagingPageState with DiagnosticableTreeMixin {
   _$_PagingPageState({this.docs = const <PagingDataDoc>[], this.hasMore = true})
-      : assert(docs != null),
-        assert(hasMore != null);
+      : super._();
 
   @JsonKey(defaultValue: const <PagingDataDoc>[])
   @override
@@ -105,21 +109,9 @@ class _$_PagingPageState
   @override
   final bool hasMore;
 
-  bool _didinfo = false;
-  String _info;
-
-  @override
-  String get info {
-    if (_didinfo == false) {
-      _didinfo = true;
-      _info = '${docs.length} / ${hasMore ? '?' : docs.length}';
-    }
-    return _info;
-  }
-
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'PagingPageState(docs: $docs, hasMore: $hasMore, info: $info)';
+    return 'PagingPageState(docs: $docs, hasMore: $hasMore)';
   }
 
   @override
@@ -128,8 +120,7 @@ class _$_PagingPageState
     properties
       ..add(DiagnosticsProperty('type', 'PagingPageState'))
       ..add(DiagnosticsProperty('docs', docs))
-      ..add(DiagnosticsProperty('hasMore', hasMore))
-      ..add(DiagnosticsProperty('info', info));
+      ..add(DiagnosticsProperty('hasMore', hasMore));
   }
 
   @override
@@ -148,12 +139,14 @@ class _$_PagingPageState
       const DeepCollectionEquality().hash(docs) ^
       const DeepCollectionEquality().hash(hasMore);
 
+  @JsonKey(ignore: true)
   @override
   _$PagingPageStateCopyWith<_PagingPageState> get copyWith =>
       __$PagingPageStateCopyWithImpl<_PagingPageState>(this, _$identity);
 }
 
-abstract class _PagingPageState implements PagingPageState {
+abstract class _PagingPageState extends PagingPageState {
+  _PagingPageState._() : super._();
   factory _PagingPageState({List<PagingDataDoc> docs, bool hasMore}) =
       _$_PagingPageState;
 
@@ -162,5 +155,6 @@ abstract class _PagingPageState implements PagingPageState {
   @override
   bool get hasMore;
   @override
+  @JsonKey(ignore: true)
   _$PagingPageStateCopyWith<_PagingPageState> get copyWith;
 }
