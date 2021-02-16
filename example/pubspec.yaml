@@ -12,7 +12,7 @@ dependencies:
   subscription_holder: any
   provider:
   firebase_core:
-  firebase_auth:
+  firebase_auth: '>=0.20.0'
   firestore_ref:
     path: ..
   recase:
