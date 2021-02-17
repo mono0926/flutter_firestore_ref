@@ -1,16 +1,18 @@
 import 'package:example/model/service/authenticator.dart';
 import 'package:example/router.dart';
-import 'package:example/util/util.dart';
 import 'package:flutter/material.dart' hide Router;
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class App extends StatelessWidget {
+class App extends HookWidget {
   @override
   Widget build(BuildContext context) {
-    return context.select((Authenticator a) => a.user == null)
+    return useProvider(
+            authenticator.select((Authenticator a) => a.user == null))
         ? const Center(child: CircularProgressIndicator())
         : MaterialApp(
-            title: context.select((AppInfo info) => info.title),
-            onGenerateRoute: context.watch<Router>().onGenerateRoute,
+            title: useProvider(appInfo).title,
+            onGenerateRoute: useProvider(router).onGenerateRoute,
             theme: ThemeData.from(
               colorScheme: const ColorScheme.light(),
             ).copyWith(
@@ -22,6 +24,8 @@ class App extends StatelessWidget {
           );
   }
 }
+
+final appInfo = Provider((_) => AppInfo());
 
 class AppInfo {
   String get title => 'firestore_ref example';

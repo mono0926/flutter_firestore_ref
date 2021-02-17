@@ -1,3 +1,7 @@
+## 0.10.0
+
+- Migrate to null safety
+
 ## 0.9.2
 
 - Add ISO8601Converter

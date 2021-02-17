@@ -13,60 +13,72 @@ class PassthroughConverter<T> implements JsonConverter<T, T> {
   T toJson(T object) => object;
 }
 
-class TimestampConverter implements JsonConverter<DateTime, Timestamp> {
+class TimestampConverter implements JsonConverter<DateTime?, Timestamp?> {
   const TimestampConverter();
 
   @override
-  DateTime fromJson(Timestamp json) => json?.toDate();
+  DateTime? fromJson(Timestamp? json) => json?.toDate();
 
   @override
-  Timestamp toJson(DateTime object) =>
+  Timestamp? toJson(DateTime? object) =>
       object == null ? null : Timestamp.fromDate(object);
 }
 
-class ISO8601Converter implements JsonConverter<DateTime, String> {
+class ISO8601Converter implements JsonConverter<DateTime?, String?> {
   const ISO8601Converter();
 
   @override
-  DateTime fromJson(String json) => json == null ? null : DateTime.parse(json);
+  DateTime? fromJson(String? json) =>
+      json == null ? null : DateTime?.parse(json);
 
   @override
-  String toJson(DateTime object) => object?.toIso8601String();
+  String? toJson(DateTime? object) => object?.toIso8601String();
 }
 
 class DocumentReferenceSetConverter
     implements JsonConverter<Set<DocumentReference>, List> {
-  const DocumentReferenceSetConverter({
-    this.emptyCollectionIfNull = true,
-  });
-
-  final bool emptyCollectionIfNull;
+  const DocumentReferenceSetConverter();
 
   @override
-  Set<DocumentReference> fromJson(List json) =>
-      json == null ? (emptyCollectionIfNull ? {} : null) : Set.from(json);
+  Set<DocumentReference> fromJson(List json) => Set.from(json);
 
   @override
-  List toJson(Set<DocumentReference> refs) => refs == null
-      ? (emptyCollectionIfNull ? <dynamic>[] : null)
-      : List<dynamic>.from(refs);
+  List toJson(Set<DocumentReference> refs) => List<dynamic>.from(refs);
+}
+
+class DocumentReferenceSetNullableConverter
+    implements JsonConverter<Set<DocumentReference>?, List?> {
+  const DocumentReferenceSetNullableConverter();
+
+  @override
+  Set<DocumentReference>? fromJson(List? json) =>
+      json == null ? null : Set.from(json);
+
+  @override
+  List? toJson(Set<DocumentReference>? refs) =>
+      refs == null ? null : List<dynamic>.from(refs);
 }
 
 class DocumentReferenceListConverter
     implements JsonConverter<List<DocumentReference>, List> {
-  const DocumentReferenceListConverter({
-    this.emptyCollectionIfNull = true,
-  });
-
-  final bool emptyCollectionIfNull;
+  const DocumentReferenceListConverter();
 
   @override
-  List<DocumentReference> fromJson(List json) =>
-      emptyCollectionIfNull ? json?.cast() ?? [] : json.cast();
+  List<DocumentReference> fromJson(List json) => json.cast();
 
   @override
-  List toJson(List<DocumentReference> refs) =>
-      emptyCollectionIfNull ? refs ?? <dynamic>[] : refs;
+  List toJson(List<DocumentReference> refs) => refs;
+}
+
+class DocumentReferenceListNullableConverter
+    implements JsonConverter<List<DocumentReference>?, List?> {
+  const DocumentReferenceListNullableConverter();
+
+  @override
+  List<DocumentReference>? fromJson(List? json) => json?.cast();
+
+  @override
+  List? toJson(List<DocumentReference>? refs) => refs;
 }
 
 class DocumentReferenceConverter

@@ -9,9 +9,9 @@ part 'user.g.dart';
 @freezed
 abstract class User with _$User {
   const factory User({
-    @required int count,
-    @TimestampConverter() DateTime createdAt,
-    @TimestampConverter() DateTime updatedAt,
+    required int count,
+    @TimestampConverter() DateTime? createdAt,
+    @TimestampConverter() DateTime? updatedAt,
   }) = _User;
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 }
@@ -31,10 +31,9 @@ class UsersRef extends CollectionRef<User, UserDoc, UserRef> {
 
   @override
   UserDoc decode(DocumentSnapshot snapshot, UserRef docRef) {
-    assert(docRef != null);
     return UserDoc(
       docRef,
-      User.fromJson(snapshot.data()),
+      User.fromJson(snapshot.data()!),
     );
   }
 
@@ -47,8 +46,8 @@ class UsersRef extends CollectionRef<User, UserDoc, UserRef> {
 
 class UserRef extends DocumentRef<User, UserDoc> {
   const UserRef({
-    @required DocumentReference ref,
-    @required this.usersRef,
+    required DocumentReference ref,
+    required this.usersRef,
   }) : super(
           ref: ref,
           collectionRef: usersRef,
@@ -60,7 +59,7 @@ class UserRef extends DocumentRef<User, UserDoc> {
 class UserDoc extends Document<User> {
   const UserDoc(
     this.userRef,
-    User entity,
+    User? entity,
   ) : super(userRef, entity);
 
   final UserRef userRef;

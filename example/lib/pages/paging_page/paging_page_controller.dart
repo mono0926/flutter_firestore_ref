@@ -1,9 +1,7 @@
 import 'package:example/pages/paging_page/paging_data.dart';
 import 'package:example/util/util.dart';
 import 'package:firestore_ref/firestore_ref.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_state_notifier/flutter_state_notifier.dart';
-import 'package:provider/single_child_widget.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:state_notifier/state_notifier.dart';
 import 'package:subscription_holder/subscription_holder.dart';
 
@@ -11,9 +9,28 @@ import 'paging_page_state.dart';
 
 export 'paging_page_state.dart';
 
-class PagingPageController extends StateNotifier<PagingPageState>
-    with LocatorMixin {
-  PagingPageController() : super(PagingPageState());
+final pagingPageController = StateNotifierProvider.autoDispose(
+  (ref) => PagingPageController(),
+);
+
+class PagingPageController extends StateNotifier<PagingPageState> {
+  PagingPageController() : super(PagingPageState()) {
+    _sh
+      ..add(
+        _pagingController.documents.listen((docs) {
+          state = state.copyWith(
+            docs: docs,
+          );
+        }),
+      )
+      ..add(
+        _pagingController.hasMore.listen((hasMore) {
+          state = state.copyWith(
+            hasMore: hasMore,
+          );
+        }),
+      );
+  }
 
   static final _collectionRef = PagingDatasRef();
   // `_collectionGroup` can be used to access pagingController
@@ -55,8 +72,8 @@ class PagingPageController extends StateNotifier<PagingPageState>
     logger..info('[End] deleteAll')..info('Deleted ids: $deletedIds');
   }
 
-  void increment({@required PagingDataDoc doc}) {
-    final data = doc.entity;
+  void increment({required PagingDataDoc doc}) {
+    final data = doc.entity!;
     doc.pagingDataRef.merge(
       data.copyWith(
         count: data.count + 1,
@@ -65,39 +82,10 @@ class PagingPageController extends StateNotifier<PagingPageState>
   }
 
   @override
-  void initState() {
-    _sh
-      ..add(
-        _pagingController.documents.listen((docs) {
-          state = state.copyWith(
-            docs: docs,
-          );
-        }),
-      )
-      ..add(
-        _pagingController.hasMore.listen((hasMore) {
-          state = state.copyWith(
-            hasMore: hasMore,
-          );
-        }),
-      );
-  }
-
-  @override
   void dispose() {
     _pagingController.dispose();
     _sh.dispose();
 
     super.dispose();
-  }
-
-  static SingleChildWidget provider({
-    Widget child,
-    PagingPageController value,
-  }) {
-    return StateNotifierProvider<PagingPageController, PagingPageState>(
-      create: (context) => PagingPageController(),
-      child: child,
-    );
   }
 }

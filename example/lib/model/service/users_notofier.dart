@@ -4,7 +4,11 @@ import 'package:example/model/firestore/firestore.dart';
 import 'package:example/util/util.dart';
 import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter/foundation.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:subscription_holder/subscription_holder.dart';
+
+final usersNotifier =
+    ChangeNotifierProvider.autoDispose((ref) => UsersNotifier());
 
 class UsersNotifier extends ChangeNotifier {
   UsersNotifier() {

@@ -10,12 +10,11 @@ import 'document_list.dart';
 class CollectionPagingController<E, D extends Document<E>,
     DocRef extends DocumentRef<E, D>> with Disposable {
   CollectionPagingController({
-    @required QueryRef<E, D, DocRef> queryRef,
-    @required QueryBuilder queryBuilder,
-    @required int initialSize,
-    @required this.defaultPagingSize,
-  })  : assert(initialSize != null),
-        _limitController = BehaviorSubject.seeded(initialSize) {
+    required QueryRef<E, D, DocRef> queryRef,
+    @required QueryBuilder? queryBuilder,
+    required int initialSize,
+    required this.defaultPagingSize,
+  }) : _limitController = BehaviorSubject.seeded(initialSize) {
     _sh
       ..add(
         _limitController.stream
@@ -23,7 +22,6 @@ class CollectionPagingController<E, D extends Document<E>,
               final documentList = DocumentList<E, D, DocRef>(
                   docRefCreator: queryRef.docRef,
                   decoder: (snapshot, docRef) {
-                    assert(docRef != null);
                     final cached = _documentsCache[snapshot.reference];
                     if (cached != null && snapshot.metadata.isFromCache) {
                       logger.fine('cache hit (id: ${cached.id})');
@@ -43,7 +41,8 @@ class CollectionPagingController<E, D extends Document<E>,
       )
       ..add(
         _documentsController
-            .map((documents) => documents.length >= _limitController.value)
+            .map((documents) =>
+                documents.length >= _limitController.requireValue)
             .listen(_hasMoreController.add),
       );
   }
@@ -59,11 +58,11 @@ class CollectionPagingController<E, D extends Document<E>,
   ValueStream<List<D>> get documents => _documentsController.stream;
   ValueStream<bool> get hasMore => _hasMoreController.stream;
 
-  bool loadMore({int pagingSize}) {
-    final hasMore = this.hasMore.value;
+  bool loadMore({int? pagingSize}) {
+    final hasMore = this.hasMore.hasValue;
     if (hasMore) {
       _limitController.add(
-        _limitController.value + pagingSize ?? defaultPagingSize,
+        _limitController.requireValue + (pagingSize ?? defaultPagingSize),
       );
     }
     return hasMore;

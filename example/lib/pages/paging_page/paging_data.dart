@@ -10,8 +10,8 @@ part 'paging_data.g.dart';
 abstract class PagingData with _$PagingData {
   const factory PagingData({
     @Default(0) int count,
-    @TimestampConverter() DateTime createdAt,
-    @TimestampConverter() DateTime updatedAt,
+    @TimestampConverter() DateTime? createdAt,
+    @TimestampConverter() DateTime? updatedAt,
   }) = _PagingData;
   factory PagingData.fromJson(Map<String, dynamic> json) =>
       _$PagingDataFromJson(json);
@@ -43,10 +43,9 @@ class PagingDatasRef
 
   @override
   PagingDataDoc decode(DocumentSnapshot snapshot, PagingDataRef docRef) {
-    assert(docRef != null);
     return PagingDataDoc(
       docRef,
-      PagingData.fromJson(snapshot.data()),
+      PagingData.fromJson(snapshot.data()!),
     );
   }
 
@@ -58,8 +57,8 @@ class PagingDatasRef
 
 class PagingDataRef extends DocumentRef<PagingData, PagingDataDoc> {
   const PagingDataRef({
-    @required DocumentReference ref,
-    @required PagingDatasRef collectionRef,
+    required DocumentReference ref,
+    required PagingDatasRef collectionRef,
   }) : super(
           ref: ref,
           collectionRef: collectionRef,

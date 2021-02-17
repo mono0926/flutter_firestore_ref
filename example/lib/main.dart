@@ -1,12 +1,11 @@
 import 'package:cloud_functions/cloud_functions.dart';
-import 'package:example/router.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' hide Router;
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'app.dart';
-import 'model/service/service.dart';
 import 'util/util.dart';
 
 Future<void> main() async {
@@ -28,16 +27,13 @@ Future<void> main() async {
       persistenceEnabled: true,
     );
   }
+  // TODO: https://github.com/FirebaseExtended/flutterfire/issues/4948#issuecomment-779636797
+  else {
+    FirebaseFirestore.instance.settings = const Settings();
+  }
 
   runApp(
-    MultiProvider(
-      providers: [
-        Provider(create: (context) => AppInfo()),
-        Provider(create: (context) => Router()),
-        ChangeNotifierProvider(
-          create: (context) => Authenticator()..signInAnonymously(),
-        ),
-      ],
+    ProviderScope(
       child: App(),
     ),
   );

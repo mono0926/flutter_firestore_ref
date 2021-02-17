@@ -4,21 +4,13 @@ import 'package:example/router.dart';
 import 'package:example/util/util.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class UserCounterPage extends StatelessWidget {
-  const UserCounterPage._({Key key}) : super(key: key);
+class UserCounterPage extends HookWidget {
+  const UserCounterPage({Key? key}) : super(key: key);
 
   static const routeName = '/user_counter';
-
-  static Widget wrapped() {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (context) => UsersNotifier()),
-        ChangeNotifierProvider(create: (context) => HomePageController()),
-      ],
-      child: const UserCounterPage._(),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,22 +35,15 @@ class UserCounterPage extends StatelessWidget {
                 UpdateType.transaction: Text('Tran'),
               },
               onValueChanged: (type) {
-                context.read<HomePageController>().changeUpdateType(type);
+                context.read(homePageController).changeUpdateType(type!);
               },
               groupValue:
-                  context.select((HomePageController c) => c.updateType),
+                  useProvider(homePageController.select((c) => c.updateType)),
             ),
           ),
           const Divider(height: 0),
           const _AccountStatus(),
-          ChangeNotifierProxyProvider<Authenticator, UserNotifier>(
-            create: null,
-            update: (context, authenticator, previous) => UserNotifier(
-              id: authenticator.user?.uid,
-              read: context.read,
-            ),
-            child: const _MyCounter(),
-          ),
+          const _MyCounter(),
           const Divider(),
           const Expanded(
             child: _Users(),
@@ -70,7 +55,7 @@ class UserCounterPage extends StatelessWidget {
 }
 
 class _DropdownButton extends StatelessWidget {
-  const _DropdownButton({Key key}) : super(key: key);
+  const _DropdownButton({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -89,42 +74,43 @@ class _DropdownButton extends StatelessWidget {
       ],
       onSelected: (value) {
         logger.info(value);
-        context.read<UsersNotifier>().deleteAll();
+        context.read(usersNotifier).deleteAll();
       },
     );
   }
 }
 
-class _AccountStatus extends StatelessWidget {
-  const _AccountStatus({Key key}) : super(key: key);
+class _AccountStatus extends HookWidget {
+  const _AccountStatus({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    final authenticator = context.watch<Authenticator>();
-
     return ListTile(
       title: const Text('User ID'),
       subtitle: Text(
-        authenticator.user?.uid ?? '0',
+        useProvider(
+          authenticator
+              .select((authenticator) => authenticator.user?.uid ?? '0'),
+        ),
       ),
     );
   }
 }
 
-class _MyCounter extends StatelessWidget {
-  const _MyCounter({Key key}) : super(key: key);
+class _MyCounter extends HookWidget {
+  const _MyCounter({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return ListTile(
       title: const Text('My Count'),
       subtitle: Text(
-        context.select((UserNotifier n) => n.count.toString()),
+        useProvider(myNotifier.select((n) => '${n.count}')),
       ),
       trailing: IconButton(
         color: Theme.of(context).primaryColor,
         icon: const Icon(Icons.add),
         onPressed: () async {
-          context.read<UserNotifier>().increment();
-
+          context.read(myNotifier).increment();
           final result =
               await FirebaseFunctions.instance.httpsCallable('now').call<Map>();
           logger.info(result.data);
@@ -134,22 +120,22 @@ class _MyCounter extends StatelessWidget {
   }
 }
 
-class _Users extends StatelessWidget {
-  const _Users({Key key}) : super(key: key);
+class _Users extends HookWidget {
+  const _Users({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    final authenticator = context.watch<Authenticator>();
-    final notifier = context.watch<UsersNotifier>();
+    final notifier = useProvider(usersNotifier);
     final docs = notifier.userDocs;
+    final myId = useProvider(authenticator).user?.uid;
     return ListView.builder(
       itemBuilder: (context, index) {
         final doc = docs[index];
         return Container(
           key: ValueKey(doc.id),
-          color: authenticator.user?.uid == doc.id ? Colors.green[100] : null,
+          color: myId == doc.id ? Colors.green[100] : null,
           child: ListTile(
             title: Text(doc.id),
-            subtitle: Text('count: ${doc.entity.count}'),
+            subtitle: Text('count: ${doc.entity!.count}'),
           ),
         );
       },
@@ -157,6 +143,10 @@ class _Users extends StatelessWidget {
     );
   }
 }
+
+final homePageController = ChangeNotifierProvider.autoDispose(
+  (ref) => HomePageController(),
+);
 
 class HomePageController with ChangeNotifier {
   var _updateType = UpdateType.add;

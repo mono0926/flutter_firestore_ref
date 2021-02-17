@@ -1,5 +1,4 @@
 import 'package:firestore_ref/src/utils.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:simple_logger/simple_logger.dart';
 
 final firestoreOperationCounter = _FirestoreOperationCounter();
@@ -27,7 +26,7 @@ class _FirestoreOperationCounter {
       deletePriceUsCentralInUSD;
   double get cacheHitRatio => readTotal == 0 ? 0 : readFromCache / readTotal;
 
-  void recordRead({@required bool isFromCache, int count = 1}) {
+  void recordRead({required bool isFromCache, int count = 1}) {
     logger.log(
       traceLogLevel,
       'recordRead(isFromCache: $isFromCache, count: $count)',

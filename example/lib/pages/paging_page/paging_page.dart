@@ -1,27 +1,19 @@
 import 'package:example/router.dart';
 import 'package:example/util/util.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'paging_page_controller.dart';
 
-class PagingPage extends StatelessWidget {
-  const PagingPage._({Key key}) : super(key: key);
+class PagingPage extends HookWidget {
+  const PagingPage({Key? key}) : super(key: key);
 
   static const routeName = '/paging_page';
 
-  static Widget wrapped() {
-    return MultiProvider(
-      providers: [
-        PagingPageController.provider(),
-      ],
-      child: const PagingPage._(),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
-    final controller = context.watch<PagingPageController>();
+    final controller = useProvider(pagingPageController);
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -41,7 +33,7 @@ class PagingPage extends StatelessWidget {
           ListTile(
             title: Center(
               child: Text(
-                context.select((PagingPageState s) => s.info),
+                useProvider(pagingPageController.state.select((s) => s.info)),
               ),
             ),
           ),
@@ -55,15 +47,15 @@ class PagingPage extends StatelessWidget {
   }
 }
 
-class _ListView extends StatelessWidget {
-  const _ListView({Key key}) : super(key: key);
+class _ListView extends HookWidget {
+  const _ListView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    final controller = context.watch<PagingPageController>();
-    final docs = context.select((PagingPageState s) => s.docs);
-    final count = context.select(
-      (PagingPageState s) => docs.length + (s.hasMore ? 1 : 0),
-    );
+    final controller = useProvider(pagingPageController);
+    final docs = useProvider(pagingPageController.state.select((s) => s.docs));
+    final count = useProvider(pagingPageController.state.select(
+      (s) => docs.length + (s.hasMore ? 1 : 0),
+    ));
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
     return ListView.builder(
@@ -79,7 +71,7 @@ class _ListView extends StatelessWidget {
         }
         final doc = docs[index];
         return ListTile(
-          title: Text('${doc.entity.count}'),
+          title: Text('${doc.entity!.count}'),
           trailing: IconButton(
             color: colorScheme.primaryVariant,
             icon: const Icon(Icons.add),
@@ -91,13 +83,13 @@ class _ListView extends StatelessWidget {
   }
 }
 
-class _DropdownButton extends StatelessWidget {
-  const _DropdownButton({Key key}) : super(key: key);
+class _DropdownButton extends HookWidget {
+  const _DropdownButton({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
-    final controller = context.watch<PagingPageController>();
+    final controller = useProvider(pagingPageController);
     return PopupMenuButton<String>(
       itemBuilder: (context) => [
         PopupMenuItem(

@@ -10,9 +10,9 @@ _$_User _$_$_UserFromJson(Map<String, dynamic> json) {
   return _$_User(
     count: json['count'] as int,
     createdAt:
-        const TimestampConverter().fromJson(json['createdAt'] as Timestamp),
+        const TimestampConverter().fromJson(json['createdAt'] as Timestamp?),
     updatedAt:
-        const TimestampConverter().fromJson(json['updatedAt'] as Timestamp),
+        const TimestampConverter().fromJson(json['updatedAt'] as Timestamp?),
   );
 }
 

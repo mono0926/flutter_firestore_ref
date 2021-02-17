@@ -31,20 +31,20 @@ abstract class QueryRef<E, D extends Document<E>,
 
   Map<String, dynamic> encode(E data);
 
-  Stream<QuerySnapshot> snapshots([QueryBuilder queryBuilder]) {
+  Stream<QuerySnapshot> snapshots([QueryBuilder? queryBuilder]) {
     return (queryBuilder ?? (r) => r)(query).snapshots();
   }
 
-  Stream<List<D>> documents([QueryBuilder queryBuilder]) {
+  Stream<List<D>> documents([QueryBuilder? queryBuilder]) {
     return documentListResult(queryBuilder).map((r) => r.list);
   }
 
-  Stream<Map<DocRef, D>> documentMap([QueryBuilder queryBuilder]) {
+  Stream<Map<DocRef, D>> documentMap([QueryBuilder? queryBuilder]) {
     return documentListResult(queryBuilder).map((r) => r.map);
   }
 
   Stream<DocumentListResult<E, D, DocRef>> documentListResult(
-      [QueryBuilder queryBuilder]) {
+      [QueryBuilder? queryBuilder]) {
     final documentList = DocumentList<E, D, DocRef>(
       docRefCreator: docRef,
       decoder: decode,
@@ -53,8 +53,8 @@ abstract class QueryRef<E, D extends Document<E>,
   }
 
   Future<QuerySnapshot> getSnapshots([
-    QueryBuilder queryBuilder,
-    GetOptions options,
+    QueryBuilder? queryBuilder,
+    GetOptions? options,
   ]) async {
     final result = await (queryBuilder ?? (r) => r)(query).get(options);
     if (firestoreOperationCounter.enabled) {
@@ -67,7 +67,7 @@ abstract class QueryRef<E, D extends Document<E>,
     return result;
   }
 
-  Future<List<D>> getDocuments([QueryBuilder queryBuilder]) async {
+  Future<List<D>> getDocuments([QueryBuilder? queryBuilder]) async {
     final snapshots = await getSnapshots(queryBuilder);
     return snapshots.docs
         .map((snap) => decode(snap, docRef(snap.reference)))
@@ -75,7 +75,7 @@ abstract class QueryRef<E, D extends Document<E>,
   }
 
   CollectionPagingController<E, D, DocRef> pagingController({
-    QueryBuilder queryBuilder,
+    QueryBuilder? queryBuilder,
     int initialSize = 10,
     int defaultPagingSize = 10,
   }) {
@@ -102,9 +102,9 @@ abstract class QueryRef<E, D extends Document<E>,
   }
 
   Future<List<DocumentReference>> _deleteQueryBatch({
-    @required Query query,
-    @required int batchSize,
-    @required List<DocumentReference> deletedRefs,
+    required Query query,
+    required int batchSize,
+    required List<DocumentReference> deletedRefs,
   }) async {
     final snapshots = await query.get();
     final docs = snapshots.docs;
@@ -122,7 +122,7 @@ abstract class QueryRef<E, D extends Document<E>,
       for (final doc in docs) {
         batch.delete(doc.reference);
       }
-      return;
+      return Future.value();
     });
 
     logger.fine('deleted count: ${docs.length}');
@@ -162,7 +162,7 @@ abstract class CollectionRef<E, D extends Document<E>,
 
   final CollectionReference ref;
 
-  DocRef docRefWithId([String id]) {
+  DocRef docRefWithId([String? id]) {
     return docRef(ref.doc(id));
   }
 
@@ -175,8 +175,8 @@ abstract class CollectionRef<E, D extends Document<E>,
 class DocumentListResult<E, D extends Document<E>,
     DocRef extends DocumentRef<E, D>> {
   DocumentListResult({
-    @required this.list,
-    @required this.map,
+    required this.list,
+    required this.map,
   });
   DocumentListResult.empty() : this(list: [], map: {});
 

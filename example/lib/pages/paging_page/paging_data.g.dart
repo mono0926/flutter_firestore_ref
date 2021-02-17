@@ -8,11 +8,11 @@ part of 'paging_data.dart';
 
 _$_PagingData _$_$_PagingDataFromJson(Map<String, dynamic> json) {
   return _$_PagingData(
-    count: json['count'] as int ?? 0,
+    count: json['count'] as int? ?? 0,
     createdAt:
-        const TimestampConverter().fromJson(json['createdAt'] as Timestamp),
+        const TimestampConverter().fromJson(json['createdAt'] as Timestamp?),
     updatedAt:
-        const TimestampConverter().fromJson(json['updatedAt'] as Timestamp),
+        const TimestampConverter().fromJson(json['updatedAt'] as Timestamp?),
   );
 }
 

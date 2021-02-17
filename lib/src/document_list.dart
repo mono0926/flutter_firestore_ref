@@ -1,10 +1,9 @@
 import 'package:firestore_ref/firestore_ref.dart';
-import 'package:flutter/foundation.dart';
 
 class DocumentList<E, D extends Document<E>, DocRef extends DocumentRef<E, D>> {
   DocumentList({
-    @required this.docRefCreator,
-    @required this.decoder,
+    required this.docRefCreator,
+    required this.decoder,
   });
 
   final DocRefCreator<E, D, DocRef> docRefCreator;
@@ -40,6 +39,7 @@ class DocumentList<E, D extends Document<E>, DocRef extends DocumentRef<E, D>> {
           break;
         case DocumentChangeType.modified:
           final oldDoc = _documents.removeAt(change.oldIndex);
+          // ignore: cast_nullable_to_non_nullable
           final docRef = oldDoc.ref as DocRef;
           final decoded = decoder(
             doc,

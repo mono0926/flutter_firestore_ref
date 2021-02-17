@@ -10,7 +10,7 @@ abstract class PagingPageState with _$PagingPageState {
     @Default(<PagingDataDoc>[]) List<PagingDataDoc> docs,
     @Default(true) bool hasMore,
   }) = _PagingPageState;
+  PagingPageState._();
 
-  @late
-  String get info => '${docs.length} / ${hasMore ? '?' : docs.length}';
+  late final String info = '${docs.length} / ${hasMore ? '?' : docs.length}';
 }
