@@ -93,13 +93,13 @@ class _DropdownButton extends HookWidget {
     return PopupMenuButton<String>(
       itemBuilder: (context) => [
         PopupMenuItem(
+          value: 'deleteAll',
           child: Text(
             'Delete All',
             style: TextStyle(
               color: colorScheme.error,
             ),
           ),
-          value: 'deleteAll',
         ),
       ],
       onSelected: (value) {

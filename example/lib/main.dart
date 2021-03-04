@@ -27,10 +27,6 @@ Future<void> main() async {
       persistenceEnabled: true,
     );
   }
-  // TODO: https://github.com/FirebaseExtended/flutterfire/issues/4948#issuecomment-779636797
-  else {
-    FirebaseFirestore.instance.settings = const Settings();
-  }
 
   runApp(
     ProviderScope(

@@ -63,13 +63,13 @@ class _DropdownButton extends StatelessWidget {
     return PopupMenuButton<String>(
       itemBuilder: (context) => [
         PopupMenuItem(
+          value: 'deleteAll',
           child: Text(
             'Delete All',
             style: TextStyle(
               color: colorScheme.error,
             ),
           ),
-          value: 'deleteAll',
         ),
       ],
       onSelected: (value) {
