@@ -64,10 +64,10 @@ class DocumentReferenceListConverter
   const DocumentReferenceListConverter();
 
   @override
-  List<DocumentReference> fromJson(List json) => json.cast();
+  List<DocumentReference> fromJson(List? json) => json?.cast() ?? [];
 
   @override
-  List toJson(List<DocumentReference> refs) => refs;
+  List toJson(List<DocumentReference>? refs) => refs ?? <dynamic>[];
 }
 
 class DocumentReferenceListNullableConverter
