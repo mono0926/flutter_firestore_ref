@@ -9,7 +9,8 @@ import 'paging_page_state.dart';
 
 export 'paging_page_state.dart';
 
-final pagingPageController = StateNotifierProvider.autoDispose(
+final pagingPageController =
+    StateNotifierProvider.autoDispose<PagingPageController, PagingPageState>(
   (ref) => PagingPageController(),
 );
 

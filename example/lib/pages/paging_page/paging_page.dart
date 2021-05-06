@@ -13,7 +13,7 @@ class PagingPage extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = useProvider(pagingPageController);
+    final controller = useProvider(pagingPageController.notifier);
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -33,7 +33,7 @@ class PagingPage extends HookWidget {
           ListTile(
             title: Center(
               child: Text(
-                useProvider(pagingPageController.state.select((s) => s.info)),
+                useProvider(pagingPageController.select((s) => s.info)),
               ),
             ),
           ),
@@ -51,9 +51,9 @@ class _ListView extends HookWidget {
   const _ListView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    final controller = useProvider(pagingPageController);
-    final docs = useProvider(pagingPageController.state.select((s) => s.docs));
-    final count = useProvider(pagingPageController.state.select(
+    final controller = useProvider(pagingPageController.notifier);
+    final docs = useProvider(pagingPageController.select((s) => s.docs));
+    final count = useProvider(pagingPageController.select(
       (s) => docs.length + (s.hasMore ? 1 : 0),
     ));
     final theme = Theme.of(context);
@@ -89,7 +89,7 @@ class _DropdownButton extends HookWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
-    final controller = useProvider(pagingPageController);
+    final controller = useProvider(pagingPageController.notifier);
     return PopupMenuButton<String>(
       itemBuilder: (context) => [
         PopupMenuItem(
