@@ -20,22 +20,22 @@ class UsersNotifier extends ChangeNotifier {
 //        decoder: usersRef.decoder,
 //        encoder: usersRef.encoder,
 //      )
-          .documents((r) => r
-              .orderBy(
-                TimestampField.updatedAt,
-                descending: true,
-              )
-              .limit(100))
-          .listen((docs) {
-        _userDocs = docs;
+          .orderBy(
+            TimestampField.updatedAt,
+            descending: true,
+          )
+          .limit(100)
+          .snapshots()
+          .listen((snapshot) {
+        _userDocs = snapshot.docs;
         notifyListeners();
       }),
     );
   }
 
   final _subscriptionHolder = SubscriptionHolder();
-  List<UserDoc> _userDocs = [];
-  List<UserDoc> get userDocs => UnmodifiableListView(_userDocs);
+  List<DocumentSnapshot<User>> _userDocs = [];
+  List<DocumentSnapshot<User>> get userDocs => UnmodifiableListView(_userDocs);
 
   Future<void> deleteAll() async {
     logger.info('[Start] deleteAll');

@@ -20,47 +20,10 @@ class UserField {
   static const count = 'count';
 }
 
-final usersRef = UsersRef();
-
-class UsersRef extends CollectionRef<User, UserDoc, UserRef> {
-  UsersRef() : super(FirebaseFirestore.instance.collection('users'));
-
-  @override
-  Map<String, dynamic> encode(User data) =>
-      replacingTimestamp(json: data.toJson());
-
-  @override
-  UserDoc decode(DocumentSnapshot snapshot, UserRef docRef) {
-    return UserDoc(
-      docRef,
-      User.fromJson(snapshot.data()!),
+final usersRef = FirebaseFirestore.instance.collection('users').withConverter(
+      fromFirestore: (snapshot, _) => User.fromJson(snapshot.data()!),
+      toFirestore: (user, _) => toFirestoreFromUser(user),
     );
-  }
 
-  @override
-  UserRef docRef(DocumentReference ref) => UserRef(
-        ref: ref,
-        usersRef: this,
-      );
-}
-
-class UserRef extends DocumentRef<User, UserDoc> {
-  const UserRef({
-    required DocumentReference ref,
-    required this.usersRef,
-  }) : super(
-          ref: ref,
-          collectionRef: usersRef,
-        );
-
-  final UsersRef usersRef;
-}
-
-class UserDoc extends Document<User> {
-  const UserDoc(
-    this.userRef,
-    User? entity,
-  ) : super(userRef, entity);
-
-  final UserRef userRef;
-}
+Map<String, dynamic> toFirestoreFromUser(User user) =>
+    replacingTimestamp(json: user.toJson());

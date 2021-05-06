@@ -135,7 +135,7 @@ class _Users extends HookWidget {
           color: myId == doc.id ? Colors.green[100] : null,
           child: ListTile(
             title: Text(doc.id),
-            subtitle: Text('count: ${doc.entity!.count}'),
+            subtitle: Text('count: ${doc.data()!.count}'),
           ),
         );
       },

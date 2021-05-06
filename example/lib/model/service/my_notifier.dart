@@ -18,15 +18,11 @@ class MyNotifier extends ChangeNotifier {
           .userStream
           .switchMap((user) {
             final userId = user?.uid;
-            final doc = userId == null
-                ? null
-                : UserDoc(usersRef.docRefWithId(userId), null);
-            _doc = doc;
-            return doc == null
-                ? const Stream<UserDoc>.empty()
-                : doc.userRef.document();
+            return userId == null
+                ? const Stream<DocumentSnapshot<User>>.empty()
+                : usersRef.doc(userId).snapshots();
           })
-          .where((doc) => doc != null && _doc != doc)
+          .where((doc) => _doc != doc)
           .listen((doc) {
             _doc = doc;
             notifyListeners();
@@ -45,29 +41,32 @@ class MyNotifier extends ChangeNotifier {
     }
     switch (updateType) {
       case UpdateType.add:
-        ref.merge(user.copyWith(count: count + 1));
-        break;
-      case UpdateType.increment:
-        ref.mergeData(
-          ref.collectionRef.encode(user)
-            ..[UserField.count] = FieldValue.increment(1),
+        ref.set(
+          user.copyWith(count: count + 1),
         );
         break;
+      case UpdateType.increment:
+        FirebaseFirestore.instance.doc(ref.path).set(
+              toFirestoreFromUser(user)
+                ..[UserField.count] = FieldValue.increment(1),
+              SetOptions(merge: true),
+            );
+        break;
       case UpdateType.batch:
-        runBatchWrite<void>((batch) {
-          return ref.merge(
+        runBatchWrite<void>((batch) async {
+          batch.set(
+            ref,
             user.copyWith(count: count + 1),
-            batch: batch,
           );
         });
         break;
       case UpdateType.transaction:
-        FirebaseFirestore.instance.runTransaction((transaction) {
+        FirebaseFirestore.instance.runTransaction((transaction) async {
           // TODO(mono): merge isn't supported
           // https://github.com/FirebaseExtended/flutterfire/issues/1212
-          return ref.update(
+          transaction.set(
+            ref,
             user.copyWith(count: count + 1),
-            transaction: transaction,
           );
         });
         break;
@@ -75,12 +74,12 @@ class MyNotifier extends ChangeNotifier {
   }
 
   final _subscriptionHolder = SubscriptionHolder();
-  UserDoc? _doc;
-  UserDoc? get doc => _doc;
+  DocumentSnapshot<User>? _doc;
+  DocumentSnapshot<User>? get doc => _doc;
   String? get id => doc?.id;
-  User get user => doc?.entity ?? const User(count: 0);
+  User get user => doc?.data() ?? const User(count: 0);
   int get count => user.count;
-  UserRef? get _ref => _doc?.userRef;
+  DocumentReference<User>? get _ref => _doc?.reference;
 
   @override
   void dispose() {

@@ -33,7 +33,6 @@ class PagingPageController extends StateNotifier<PagingPageState> {
       );
   }
 
-  static final _collectionRef = PagingDatasRef();
   // `_collectionGroup` can be used to access pagingController
 //  static final _collectionGroup = CollectionGroup(
 //    decoder: _collectionRef.decoder,
@@ -42,20 +41,19 @@ class PagingPageController extends StateNotifier<PagingPageState> {
 //  );
   final _sh = SubscriptionHolder();
 
-  final _pagingController = _collectionRef.pagingController(
-    // Can be omitted
-    queryBuilder: (r) => r.orderBy('createdAt'),
-    initialSize: 20,
-    defaultPagingSize: 10,
-  );
+  final _pagingController =
+      pagingDatasRef.orderBy('createdAt').pagingController(
+            initialSize: 20,
+            defaultPagingSize: 10,
+          );
 
   void addDocs(int count) {
     runBatchWrite<void>((batch) async {
       for (final _ in List.generate(count, (i) => i)) {
-        await _collectionRef.docRefWithId().set(
-              const PagingData(),
-              batch: batch,
-            );
+        batch.set(
+          pagingDatasRef.doc(),
+          const PagingData(),
+        );
       }
     });
   }
@@ -69,16 +67,17 @@ class PagingPageController extends StateNotifier<PagingPageState> {
 
   Future<void> deleteAll() async {
     logger.info('[Start] deleteAll');
-    final deletedIds = await _collectionRef.deleteAllDocuments();
+    final deletedIds = await pagingDatasRef.deleteAllDocuments();
     logger..info('[End] deleteAll')..info('Deleted ids: $deletedIds');
   }
 
-  void increment({required PagingDataDoc doc}) {
-    final data = doc.entity!;
-    doc.pagingDataRef.merge(
+  void increment({required DocumentSnapshot<PagingData> doc}) {
+    final data = doc.data()!;
+    doc.reference.set(
       data.copyWith(
         count: data.count + 1,
       ),
+      SetOptions(merge: true),
     );
   }
 

@@ -71,7 +71,7 @@ class _ListView extends HookWidget {
         }
         final doc = docs[index];
         return ListTile(
-          title: Text('${doc.entity!.count}'),
+          title: Text('${doc.data()!.count}'),
           trailing: IconButton(
             color: colorScheme.primaryVariant,
             icon: const Icon(Icons.add),

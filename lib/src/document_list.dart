@@ -1,17 +1,13 @@
 import 'package:firestore_ref/firestore_ref.dart';
 
-class DocumentList<E, D extends Document<E>, DocRef extends DocumentRef<E, D>> {
-  DocumentList({
-    required this.docRefCreator,
-    required this.decoder,
-  });
+class SnapshotHolder<E> {
+  SnapshotHolder();
 
-  final DocRefCreator<E, D, DocRef> docRefCreator;
-  final DocumentDecoder<E, D, DocRef> decoder;
-  final _documents = <D>[];
-  final _map = <DocRef, D>{};
+  final _documents = <DocumentSnapshot<E>>[];
+  // TODO(mono): After https://github.com/FirebaseExtended/flutterfire/pull/3263 fixed, change key type to DocumentReference<E>
+  final _map = <String, DocumentSnapshot<E>>{};
 
-  DocumentListResult<E, D, DocRef> applyingSnapshot(QuerySnapshot snapshot) {
+  SnapshotCollection<E> applyingSnapshot(QuerySnapshot<E> snapshot) {
     if (firestoreOperationCounter.enabled) {
       firestoreOperationCounter.recordRead(
         isFromCache: snapshot.metadata.isFromCache,
@@ -22,16 +18,12 @@ class DocumentList<E, D extends Document<E>, DocRef extends DocumentRef<E, D>> {
       final doc = change.doc;
       switch (change.type) {
         case DocumentChangeType.added:
-          final docRef = docRefCreator(doc.reference);
-          final decoded = decoder(
-            doc,
-            docRef,
-          );
+          final docRef = doc.reference;
           _documents.insert(
             change.newIndex,
-            decoded,
+            doc,
           );
-          _map[docRef] = decoded;
+          _map[docRef.path] = doc;
           break;
         case DocumentChangeType.removed:
           _documents.removeAt(change.oldIndex);
@@ -39,23 +31,31 @@ class DocumentList<E, D extends Document<E>, DocRef extends DocumentRef<E, D>> {
           break;
         case DocumentChangeType.modified:
           final oldDoc = _documents.removeAt(change.oldIndex);
-          // ignore: cast_nullable_to_non_nullable
-          final docRef = oldDoc.ref as DocRef;
-          final decoded = decoder(
-            doc,
-            docRef,
-          );
+          final docRef = oldDoc.reference;
           _documents.insert(
             change.newIndex,
-            decoded,
+            doc,
           );
-          _map[docRef] = decoded;
+          _map[docRef.path] = doc;
           break;
       }
     }
-    return DocumentListResult<E, D, DocRef>(
+    return SnapshotCollection<E>(
       list: List.unmodifiable(_documents),
       map: Map.unmodifiable(_map),
     );
   }
+}
+
+class SnapshotCollection<E> {
+  SnapshotCollection({
+    required this.list,
+    required this.map,
+  });
+  SnapshotCollection.empty() : this(list: [], map: {});
+
+  final List<DocumentSnapshot<E>> list;
+  final Map<String, DocumentSnapshot<E>> map;
+
+  bool get isEmpty => list.isEmpty && map.isEmpty;
 }
