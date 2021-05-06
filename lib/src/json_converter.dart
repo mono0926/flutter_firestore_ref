@@ -60,28 +60,6 @@ class DocumentReferenceSetNullableConverter
       refs == null ? null : List<dynamic>.from(refs);
 }
 
-class DocumentReferenceListConverter
-    implements JsonConverter<List<DocumentReference>, List> {
-  const DocumentReferenceListConverter();
-
-  @override
-  List<DocumentReference> fromJson(List? json) => json?.cast() ?? [];
-
-  @override
-  List toJson(List<DocumentReference>? refs) => refs ?? <dynamic>[];
-}
-
-class DocumentReferenceListNullableConverter
-    implements JsonConverter<List<DocumentReference>?, List?> {
-  const DocumentReferenceListNullableConverter();
-
-  @override
-  List<DocumentReference>? fromJson(List? json) => json?.cast();
-
-  @override
-  List? toJson(List<DocumentReference>? refs) => refs;
-}
-
 class DocumentReferenceConverter
     extends PassthroughConverter<DocumentReference<JsonMap>> {
   const DocumentReferenceConverter();
