@@ -36,33 +36,14 @@ class ISO8601Converter implements JsonConverter<DateTime?, String?> {
   String? toJson(DateTime? object) => object?.toIso8601String();
 }
 
-class DocumentReferenceSetConverter
-    implements JsonConverter<Set<DocumentReference>, List> {
-  const DocumentReferenceSetConverter();
-
-  @override
-  Set<DocumentReference> fromJson(List json) => Set.from(json);
-
-  @override
-  List toJson(Set<DocumentReference> refs) => List<dynamic>.from(refs);
-}
-
-class DocumentReferenceSetNullableConverter
-    implements JsonConverter<Set<DocumentReference>?, List?> {
-  const DocumentReferenceSetNullableConverter();
-
-  @override
-  Set<DocumentReference>? fromJson(List? json) =>
-      json == null ? null : Set.from(json);
-
-  @override
-  List? toJson(Set<DocumentReference>? refs) =>
-      refs == null ? null : List<dynamic>.from(refs);
-}
-
 class DocumentReferenceConverter
     extends PassthroughConverter<DocumentReference<JsonMap>> {
   const DocumentReferenceConverter();
+}
+
+class DocumentReferenceNullableConverter
+    extends PassthroughConverter<DocumentReference<JsonMap>?> {
+  const DocumentReferenceNullableConverter();
 }
 
 class ColorConverter implements JsonConverter<Color, int> {
