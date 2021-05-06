@@ -82,7 +82,7 @@ class DocumentReferenceListNullableConverter
 }
 
 class DocumentReferenceConverter
-    extends PassthroughConverter<DocumentReference> {
+    extends PassthroughConverter<DocumentReference<Map<String, dynamic>>> {
   const DocumentReferenceConverter();
 }
 
