@@ -34,7 +34,7 @@ class PagingDatasRef
         );
 
   @override
-  PagingDataRef docRef(DocumentReference ref) {
+  PagingDataRef docRef(DocumentReference<Map<String, dynamic>> ref) {
     return PagingDataRef(
       ref: ref,
       collectionRef: this,
@@ -42,7 +42,8 @@ class PagingDatasRef
   }
 
   @override
-  PagingDataDoc decode(DocumentSnapshot snapshot, PagingDataRef docRef) {
+  PagingDataDoc decode(
+      DocumentSnapshot<Map<String, dynamic>> snapshot, PagingDataRef docRef) {
     return PagingDataDoc(
       docRef,
       PagingData.fromJson(snapshot.data()!),
@@ -57,7 +58,7 @@ class PagingDatasRef
 
 class PagingDataRef extends DocumentRef<PagingData, PagingDataDoc> {
   const PagingDataRef({
-    required DocumentReference ref,
+    required DocumentReference<Map<String, dynamic>> ref,
     required PagingDatasRef collectionRef,
   }) : super(
           ref: ref,

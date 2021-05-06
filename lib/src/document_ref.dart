@@ -11,7 +11,7 @@ class DocumentRef<E, D extends Document<E>> {
   });
 
   final QueryRef<E, D, DocumentRef<E, D>> collectionRef;
-  final DocumentReference ref;
+  final DocumentReference<Map<String, dynamic>> ref;
   String get id => ref.id;
 
   Stream<D?> document() {

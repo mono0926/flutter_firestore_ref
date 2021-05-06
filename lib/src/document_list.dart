@@ -11,7 +11,8 @@ class DocumentList<E, D extends Document<E>, DocRef extends DocumentRef<E, D>> {
   final _documents = <D>[];
   final _map = <DocRef, D>{};
 
-  DocumentListResult<E, D, DocRef> applyingSnapshot(QuerySnapshot snapshot) {
+  DocumentListResult<E, D, DocRef> applyingSnapshot(
+      QuerySnapshot<Map<String, dynamic>> snapshot) {
     if (firestoreOperationCounter.enabled) {
       firestoreOperationCounter.recordRead(
         isFromCache: snapshot.metadata.isFromCache,

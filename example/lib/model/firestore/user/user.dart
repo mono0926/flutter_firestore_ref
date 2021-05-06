@@ -30,7 +30,8 @@ class UsersRef extends CollectionRef<User, UserDoc, UserRef> {
       replacingTimestamp(json: data.toJson());
 
   @override
-  UserDoc decode(DocumentSnapshot snapshot, UserRef docRef) {
+  UserDoc decode(
+      DocumentSnapshot<Map<String, dynamic>> snapshot, UserRef docRef) {
     return UserDoc(
       docRef,
       User.fromJson(snapshot.data()!),
@@ -38,7 +39,7 @@ class UsersRef extends CollectionRef<User, UserDoc, UserRef> {
   }
 
   @override
-  UserRef docRef(DocumentReference ref) => UserRef(
+  UserRef docRef(DocumentReference<Map<String, dynamic>> ref) => UserRef(
         ref: ref,
         usersRef: this,
       );
@@ -46,7 +47,7 @@ class UsersRef extends CollectionRef<User, UserDoc, UserRef> {
 
 class UserRef extends DocumentRef<User, UserDoc> {
   const UserRef({
-    required DocumentReference ref,
+    required DocumentReference<Map<String, dynamic>> ref,
     required this.usersRef,
   }) : super(
           ref: ref,

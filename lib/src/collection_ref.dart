@@ -7,31 +7,33 @@ import 'package:meta/meta.dart';
 import 'collection_paging_controller.dart';
 import 'document_list.dart';
 
-typedef QueryBuilder = Query Function(Query collectionRef);
+typedef QueryBuilder = Query<Map<String, dynamic>> Function(
+    Query<Map<String, dynamic>> collectionRef);
 typedef DocumentDecoder<E, D extends Document<E>,
         DocRef extends DocumentRef<E, D>>
     = D Function(
-  DocumentSnapshot snapshot,
+  DocumentSnapshot<Map<String, dynamic>> snapshot,
   DocRef docRef,
 );
 typedef DocRefCreator<E, D extends Document<E>,
         DocRef extends DocumentRef<E, D>>
-    = DocRef Function(DocumentReference ref);
+    = DocRef Function(DocumentReference<Map<String, dynamic>> ref);
 
 @immutable
 abstract class QueryRef<E, D extends Document<E>,
     DocRef extends DocumentRef<E, D>> {
   const QueryRef(this.query);
 
-  final Query query;
+  final Query<Map<String, dynamic>> query;
 
-  D decode(DocumentSnapshot snapshot, DocRef docRef);
+  D decode(DocumentSnapshot<Map<String, dynamic>> snapshot, DocRef docRef);
 
-  DocRef docRef(DocumentReference ref);
+  DocRef docRef(DocumentReference<Map<String, dynamic>> ref);
 
   Map<String, dynamic> encode(E data);
 
-  Stream<QuerySnapshot> snapshots([QueryBuilder? queryBuilder]) {
+  Stream<QuerySnapshot<Map<String, dynamic>>> snapshots(
+      [QueryBuilder? queryBuilder]) {
     return (queryBuilder ?? (r) => r)(query).snapshots();
   }
 
@@ -52,7 +54,7 @@ abstract class QueryRef<E, D extends Document<E>,
     return snapshots(queryBuilder).map(documentList.applyingSnapshot);
   }
 
-  Future<QuerySnapshot> getSnapshots([
+  Future<QuerySnapshot<Map<String, dynamic>>> getSnapshots([
     QueryBuilder? queryBuilder,
     GetOptions? options,
   ]) async {
@@ -160,7 +162,7 @@ abstract class CollectionRef<E, D extends Document<E>,
     DocRef extends DocumentRef<E, D>> extends QueryRef<E, D, DocRef> {
   const CollectionRef(this.ref) : super(ref);
 
-  final CollectionReference ref;
+  final CollectionReference<Map<String, dynamic>> ref;
 
   DocRef docRefWithId([String? id]) {
     return docRef(ref.doc(id));
