@@ -22,13 +22,13 @@ class CollectionPagingController<E, D extends Document<E>,
               final documentList = DocumentList<E, D, DocRef>(
                   docRefCreator: queryRef.docRef,
                   decoder: (snapshot, docRef) {
-                    final cached = _documentsCache[snapshot.reference];
+                    final cached = _documentsCache[snapshot.reference.path];
                     if (cached != null && snapshot.metadata.isFromCache) {
                       logger.fine('cache hit (id: ${cached.id})');
                       return cached;
                     }
                     final doc = queryRef.decode(snapshot, docRef);
-                    _documentsCache[snapshot.reference] = doc;
+                    _documentsCache[snapshot.reference.path] = doc;
                     return doc;
                   });
               return (queryBuilder ?? (q) => q)(queryRef.query)
@@ -52,7 +52,8 @@ class CollectionPagingController<E, D extends Document<E>,
 
   final _documentsController = BehaviorSubject<List<D>>.seeded([]);
   final _hasMoreController = BehaviorSubject<bool>.seeded(true);
-  final _documentsCache = <DocumentReference, D>{};
+  // After https://github.com/FirebaseExtended/flutterfire/pull/3263 fixed, change key type to DocumentReference
+  final _documentsCache = <String, D>{};
 
   ValueStream<List<D>> get documents => _documentsController.stream;
   ValueStream<bool> get hasMore => _hasMoreController.stream;
