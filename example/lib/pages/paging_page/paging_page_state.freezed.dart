@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
 
 part of 'paging_page_state.dart';
 
@@ -8,6 +8,9 @@ part of 'paging_page_state.dart';
 // **************************************************************************
 
 T _$identity<T>(T value) => value;
+
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 class _$PagingPageStateTearOff {
@@ -28,11 +31,12 @@ const $PagingPageState = _$PagingPageStateTearOff();
 
 /// @nodoc
 mixin _$PagingPageState {
-  List<PagingDataDoc> get docs;
-  bool get hasMore;
+  List<PagingDataDoc> get docs => throw _privateConstructorUsedError;
+  bool get hasMore => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $PagingPageStateCopyWith<PagingPageState> get copyWith;
+  $PagingPageStateCopyWith<PagingPageState> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -58,8 +62,14 @@ class _$PagingPageStateCopyWithImpl<$Res>
     Object? hasMore = freezed,
   }) {
     return _then(_value.copyWith(
-      docs: docs == freezed ? _value.docs : docs as List<PagingDataDoc>,
-      hasMore: hasMore == freezed ? _value.hasMore : hasMore as bool,
+      docs: docs == freezed
+          ? _value.docs
+          : docs // ignore: cast_nullable_to_non_nullable
+              as List<PagingDataDoc>,
+      hasMore: hasMore == freezed
+          ? _value.hasMore
+          : hasMore // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -91,13 +101,20 @@ class __$PagingPageStateCopyWithImpl<$Res>
     Object? hasMore = freezed,
   }) {
     return _then(_PagingPageState(
-      docs: docs == freezed ? _value.docs : docs as List<PagingDataDoc>,
-      hasMore: hasMore == freezed ? _value.hasMore : hasMore as bool,
+      docs: docs == freezed
+          ? _value.docs
+          : docs // ignore: cast_nullable_to_non_nullable
+              as List<PagingDataDoc>,
+      hasMore: hasMore == freezed
+          ? _value.hasMore
+          : hasMore // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
 
 /// @nodoc
+
 class _$_PagingPageState extends _PagingPageState with DiagnosticableTreeMixin {
   _$_PagingPageState({this.docs = const <PagingDataDoc>[], this.hasMore = true})
       : super._();
@@ -146,15 +163,16 @@ class _$_PagingPageState extends _PagingPageState with DiagnosticableTreeMixin {
 }
 
 abstract class _PagingPageState extends PagingPageState {
-  _PagingPageState._() : super._();
   factory _PagingPageState({List<PagingDataDoc> docs, bool hasMore}) =
       _$_PagingPageState;
+  _PagingPageState._() : super._();
 
   @override
-  List<PagingDataDoc> get docs;
+  List<PagingDataDoc> get docs => throw _privateConstructorUsedError;
   @override
-  bool get hasMore;
+  bool get hasMore => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$PagingPageStateCopyWith<_PagingPageState> get copyWith;
+  _$PagingPageStateCopyWith<_PagingPageState> get copyWith =>
+      throw _privateConstructorUsedError;
 }

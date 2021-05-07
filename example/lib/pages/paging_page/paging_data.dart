@@ -14,8 +14,7 @@ abstract class PagingData with _$PagingData {
     @TimestampConverter() DateTime? createdAt,
     @TimestampConverter() DateTime? updatedAt,
   }) = _PagingData;
-  factory PagingData.fromJson(Map<String, dynamic> json) =>
-      _$PagingDataFromJson(json);
+  factory PagingData.fromJson(JsonMap json) => _$PagingDataFromJson(json);
 }
 
 class PagingDataDoc extends Document<PagingData> {
@@ -35,7 +34,7 @@ class PagingDatasRef
         );
 
   @override
-  PagingDataRef docRef(DocumentReference<Map<String, dynamic>> ref) {
+  PagingDataRef docRef(DocumentReference<JsonMap> ref) {
     return PagingDataRef(
       ref: ref,
       collectionRef: this,
@@ -44,7 +43,7 @@ class PagingDatasRef
 
   @override
   PagingDataDoc decode(
-      DocumentSnapshot<Map<String, dynamic>> snapshot, PagingDataRef docRef) {
+      DocumentSnapshot<JsonMap> snapshot, PagingDataRef docRef) {
     logger.info('hoge');
     return PagingDataDoc(
       docRef,
@@ -53,14 +52,14 @@ class PagingDatasRef
   }
 
   @override
-  Map<String, dynamic> encode(PagingData data) {
+  JsonMap encode(PagingData data) {
     return replacingTimestamp(json: data.toJson());
   }
 }
 
 class PagingDataRef extends DocumentRef<PagingData, PagingDataDoc> {
   const PagingDataRef({
-    required DocumentReference<Map<String, dynamic>> ref,
+    required DocumentReference<JsonMap> ref,
     required PagingDatasRef collectionRef,
   }) : super(
           ref: ref,

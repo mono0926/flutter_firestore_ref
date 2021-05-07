@@ -13,7 +13,7 @@ abstract class User with _$User {
     @TimestampConverter() DateTime? createdAt,
     @TimestampConverter() DateTime? updatedAt,
   }) = _User;
-  factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
+  factory User.fromJson(JsonMap json) => _$UserFromJson(json);
 }
 
 class UserField {
@@ -26,12 +26,10 @@ class UsersRef extends CollectionRef<User, UserDoc, UserRef> {
   UsersRef() : super(FirebaseFirestore.instance.collection('users'));
 
   @override
-  Map<String, dynamic> encode(User data) =>
-      replacingTimestamp(json: data.toJson());
+  JsonMap encode(User data) => replacingTimestamp(json: data.toJson());
 
   @override
-  UserDoc decode(
-      DocumentSnapshot<Map<String, dynamic>> snapshot, UserRef docRef) {
+  UserDoc decode(DocumentSnapshot<JsonMap> snapshot, UserRef docRef) {
     return UserDoc(
       docRef,
       User.fromJson(snapshot.data()!),
@@ -39,7 +37,7 @@ class UsersRef extends CollectionRef<User, UserDoc, UserRef> {
   }
 
   @override
-  UserRef docRef(DocumentReference<Map<String, dynamic>> ref) => UserRef(
+  UserRef docRef(DocumentReference<JsonMap> ref) => UserRef(
         ref: ref,
         usersRef: this,
       );
@@ -47,7 +45,7 @@ class UsersRef extends CollectionRef<User, UserDoc, UserRef> {
 
 class UserRef extends DocumentRef<User, UserDoc> {
   const UserRef({
-    required DocumentReference<Map<String, dynamic>> ref,
+    required DocumentReference<JsonMap> ref,
     required this.usersRef,
   }) : super(
           ref: ref,
