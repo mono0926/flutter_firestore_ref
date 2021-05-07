@@ -280,7 +280,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "0.12.0-dev"
+    version: "0.12.0-dev+4"
   fixnum:
     dependency: transitive
     description:
