@@ -41,8 +41,7 @@ class CollectionPagingController<E, D extends Document<E>,
       )
       ..add(
         _documentsController
-            .map((documents) =>
-                documents.length >= _limitController.requireValue)
+            .map((documents) => documents.length >= _limitController.value)
             .listen(_hasMoreController.add),
       );
   }
@@ -62,7 +61,7 @@ class CollectionPagingController<E, D extends Document<E>,
     final hasMore = this.hasMore.hasValue;
     if (hasMore) {
       _limitController.add(
-        _limitController.requireValue + (pagingSize ?? defaultPagingSize),
+        _limitController.value + (pagingSize ?? defaultPagingSize),
       );
     }
     return hasMore;

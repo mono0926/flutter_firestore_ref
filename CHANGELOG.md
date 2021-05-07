@@ -1,3 +1,7 @@
+## 0.11.1
+
+- Update to rxdart 0.27.0
+
 ## 0.11.0
 
 - Upgrade cloud_firestore to ">=2.0.0 <3.0.0"

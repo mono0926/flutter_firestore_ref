@@ -197,7 +197,7 @@ packages:
       name: rxdart
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.26.0"
+    version: "0.27.0"
   simple_logger:
     dependency: "direct main"
     description:
@@ -251,7 +251,7 @@ packages:
       name: subscription_holder
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.1.0"
+    version: "2.1.1"
   term_glyph:
     dependency: transitive
     description:
