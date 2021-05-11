@@ -204,5 +204,5 @@ class DocumentRef<E, D extends Document<E>> {
 
   @override
   // TODO(mono): https://github.com/FirebaseExtended/flutterfire/issues/3262
-  int get hashCode => ref.path.hashCode ^ ref.firestore.app.name.hashCode;
+  int get hashCode => ref.hashCode;
 }

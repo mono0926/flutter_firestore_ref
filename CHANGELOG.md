@@ -1,3 +1,7 @@
+## 0.11.2
+
+- Update to firebase_core >=1.1.1 <2.0.0 and refactor hashCode of DocumentRef
+
 ## 0.11.1
 
 - Update to rxdart 0.27.0
