@@ -1,3 +1,7 @@
+## 0.12.0-dev
+
+- Depend on Dart 2.14.0-dev to use non-function type aliases for JsonMap
+
 ## 0.11.3
 
 - Change second type parameter of PassthroughConverter to `Object?` from `T` to suppress redundant cast and bug

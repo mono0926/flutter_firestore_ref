@@ -11,7 +11,7 @@ class DocumentRef<E, D extends Document<E>> {
   });
 
   final QueryRef<E, D, DocumentRef<E, D>> collectionRef;
-  final DocumentReference<Map<String, dynamic>> ref;
+  final DocumentReference<JsonMap> ref;
   String get id => ref.id;
 
   Stream<D?> document() {
@@ -71,7 +71,7 @@ class DocumentRef<E, D extends Document<E>> {
   /// すでにあるデータに対して
   /// マージと似ているがそのキーの配下のものは置き換わる
   Future<void> updateData(
-    Map<String, dynamic> data, {
+    JsonMap data, {
     WriteBatch? batch,
     Transaction? transaction,
   }) {
@@ -109,7 +109,7 @@ class DocumentRef<E, D extends Document<E>> {
 
   /// 全置き換え
   Future<void> setData(
-    Map<String, dynamic> data, {
+    JsonMap data, {
     WriteBatch? batch,
     Transaction? transaction,
   }) {
@@ -147,7 +147,7 @@ class DocumentRef<E, D extends Document<E>> {
 
   /// マージ
   Future<void> mergeData(
-    Map<String, dynamic> data, {
+    JsonMap data, {
     WriteBatch? batch,
     Transaction? transaction,
   }) {

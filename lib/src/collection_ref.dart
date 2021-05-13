@@ -7,33 +7,31 @@ import 'package:meta/meta.dart';
 import 'collection_paging_controller.dart';
 import 'document_list.dart';
 
-typedef QueryBuilder = Query<Map<String, dynamic>> Function(
-    Query<Map<String, dynamic>> collectionRef);
+typedef QueryBuilder = Query<JsonMap> Function(Query<JsonMap> collectionRef);
 typedef DocumentDecoder<E, D extends Document<E>,
         DocRef extends DocumentRef<E, D>>
     = D Function(
-  DocumentSnapshot<Map<String, dynamic>> snapshot,
+  DocumentSnapshot<JsonMap> snapshot,
   DocRef docRef,
 );
 typedef DocRefCreator<E, D extends Document<E>,
         DocRef extends DocumentRef<E, D>>
-    = DocRef Function(DocumentReference<Map<String, dynamic>> ref);
+    = DocRef Function(DocumentReference<JsonMap> ref);
 
 @immutable
 abstract class QueryRef<E, D extends Document<E>,
     DocRef extends DocumentRef<E, D>> {
   const QueryRef(this.query);
 
-  final Query<Map<String, dynamic>> query;
+  final Query<JsonMap> query;
 
-  D decode(DocumentSnapshot<Map<String, dynamic>> snapshot, DocRef docRef);
+  D decode(DocumentSnapshot<JsonMap> snapshot, DocRef docRef);
 
-  DocRef docRef(DocumentReference<Map<String, dynamic>> ref);
+  DocRef docRef(DocumentReference<JsonMap> ref);
 
-  Map<String, dynamic> encode(E data);
+  JsonMap encode(E data);
 
-  Stream<QuerySnapshot<Map<String, dynamic>>> snapshots(
-      [QueryBuilder? queryBuilder]) {
+  Stream<QuerySnapshot<JsonMap>> snapshots([QueryBuilder? queryBuilder]) {
     return (queryBuilder ?? (r) => r)(query).snapshots();
   }
 
@@ -54,7 +52,7 @@ abstract class QueryRef<E, D extends Document<E>,
     return snapshots(queryBuilder).map(documentList.applyingSnapshot);
   }
 
-  Future<QuerySnapshot<Map<String, dynamic>>> getSnapshots([
+  Future<QuerySnapshot<JsonMap>> getSnapshots([
     QueryBuilder? queryBuilder,
     GetOptions? options,
   ]) async {
@@ -162,7 +160,7 @@ abstract class CollectionRef<E, D extends Document<E>,
     DocRef extends DocumentRef<E, D>> extends QueryRef<E, D, DocRef> {
   const CollectionRef(this.ref) : super(ref);
 
-  final CollectionReference<Map<String, dynamic>> ref;
+  final CollectionReference<JsonMap> ref;
 
   DocRef docRefWithId([String? id]) {
     return docRef(ref.doc(id));

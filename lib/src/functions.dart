@@ -23,8 +23,8 @@ Future<void> deleteDocuments({
   );
 }
 
-Map<String, dynamic>? parseJson(
-  Map<String, dynamic> json, {
+JsonMap? parseJson(
+  JsonMap json, {
   required String key,
 }) {
   final value = json[key] as Map?;
@@ -32,9 +32,9 @@ Map<String, dynamic>? parseJson(
 }
 
 T? parse<T>(
-  Map<String, dynamic> json, {
+  JsonMap json, {
   required String key,
-  required T Function(Map<String, dynamic>) fromJson,
+  required T Function(JsonMap) fromJson,
 }) {
   final parsedJson = parseJson(json, key: key);
   return parsedJson == null ? null : fromJson(parsedJson);

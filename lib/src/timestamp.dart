@@ -6,8 +6,8 @@ class TimestampField {
   static const updatedAt = 'updatedAt';
 }
 
-Map<String, dynamic> replacingTimestamp({
-  required Map<String, dynamic> json,
+JsonMap replacingTimestamp({
+  required JsonMap json,
 }) =>
     <String, dynamic>{
       ...json,
@@ -17,7 +17,7 @@ Map<String, dynamic> replacingTimestamp({
     };
 
 DateTime? parseTimestamp({
-  required Map<String, dynamic> json,
+  required JsonMap json,
   required String key,
 }) {
   return (json[key] as Timestamp?)?.toDate();
