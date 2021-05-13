@@ -1,3 +1,7 @@
+## 0.11.3
+
+- Change second type parameter of PassthroughConverter to `Object?` from `T` to suppress redundant cast and bug
+
 ## 0.11.2
 
 - Update to firebase_core >=1.1.1 <2.0.0 and refactor hashCode of DocumentRef

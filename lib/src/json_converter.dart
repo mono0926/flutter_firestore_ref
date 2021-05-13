@@ -3,14 +3,14 @@ import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-class PassthroughConverter<T> implements JsonConverter<T, T> {
+class PassthroughConverter<T> implements JsonConverter<T, Object?> {
   const PassthroughConverter();
 
   @override
-  T fromJson(T json) => json;
+  T fromJson(Object? json) => json as T;
 
   @override
-  T toJson(T object) => object;
+  Object? toJson(T object) => object;
 }
 
 class TimestampConverter implements JsonConverter<DateTime?, Timestamp?> {
