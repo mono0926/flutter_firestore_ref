@@ -1,6 +1,6 @@
-## 0.12.0-dev
+## 0.12.0
 
-- Depend on Dart 2.14.0-dev to use non-function type aliases for JsonMap
+- Depend on Dart 2.13.0 to use non-function type aliases for JsonMap
 
 ## 0.11.3
 
