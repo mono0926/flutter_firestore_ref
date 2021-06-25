@@ -1,18 +1,16 @@
 import 'package:example/model/service/authenticator.dart';
 import 'package:example/router.dart';
 import 'package:flutter/material.dart' hide Router;
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class App extends HookWidget {
+class App extends ConsumerWidget {
   @override
-  Widget build(BuildContext context) {
-    return useProvider(
-            authenticator.select((Authenticator a) => a.user == null))
+  Widget build(BuildContext context, WidgetRef ref) {
+    return ref.watch(authenticator.select((Authenticator a) => a.user == null))
         ? const Center(child: CircularProgressIndicator())
         : MaterialApp(
-            title: useProvider(appInfo).title,
-            onGenerateRoute: useProvider(router).onGenerateRoute,
+            title: ref.watch(appInfo).title,
+            onGenerateRoute: ref.watch(router).onGenerateRoute,
             theme: ThemeData.from(
               colorScheme: const ColorScheme.light(),
             ).copyWith(

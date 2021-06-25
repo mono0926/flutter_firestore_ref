@@ -5,8 +5,8 @@ import 'package:example/util/util.dart';
 import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:subscription_holder/subscription_holder.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:subscription_holder/subscription_holder.dart';
 
 final myNotifier =
     ChangeNotifierProvider.autoDispose((ref) => MyNotifier(ref.read));
