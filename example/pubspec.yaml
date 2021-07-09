@@ -10,6 +10,7 @@ dependencies:
   cupertino_icons:
   firebase_auth:
   firebase_core:
+  firebase_storage:
   firestore_ref:
     path: ..
   flutter:
