@@ -1,5 +1,8 @@
+// import 'package:cloud_firestore_platform_interface/cloud_firestore_platform_interface.dart';
 import 'package:cloud_functions/cloud_functions.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' hide Router;
@@ -18,15 +21,19 @@ Future<void> main() async {
   await Firebase.initializeApp();
 
   if (isEmulator) {
-    FirebaseFunctions.instance.useFunctionsEmulator(
-      emulatorDomain,
-      5001,
+    const localhost = 'localhost';
+    FirebaseFunctions.instance.useFunctionsEmulator(localhost, 5001);
+    FirebaseFirestore.instance.useFirestoreEmulator(localhost, 8080);
+    await Future.wait(
+      [
+        FirebaseAuth.instance.useAuthEmulator(localhost, 9099),
+        FirebaseStorage.instance.useStorageEmulator(localhost, 9199),
+      ],
     );
-    useFirestoreEmulator();
   } else if (kIsWeb) {
-    FirebaseFirestore.instance.settings = const Settings(
-      persistenceEnabled: true,
-    );
+    await FirebaseFirestore.instance.enablePersistence(
+        // const PersistenceSettings(synchronizeTabs: true),
+        );
   }
 
   runApp(
