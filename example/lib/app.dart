@@ -4,6 +4,7 @@ import 'package:flutter/material.dart' hide Router;
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class App extends ConsumerWidget {
+  const App({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return ref.watch(authenticator.select((Authenticator a) => a.user == null))

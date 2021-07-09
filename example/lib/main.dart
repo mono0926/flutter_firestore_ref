@@ -19,7 +19,8 @@ Future<void> main() async {
 
   if (isEmulator) {
     FirebaseFunctions.instance.useFunctionsEmulator(
-      origin: 'http://$emulatorDomain:5001',
+      emulatorDomain,
+      5001,
     );
     useFirestoreEmulator();
   } else if (kIsWeb) {
@@ -29,7 +30,7 @@ Future<void> main() async {
   }
 
   runApp(
-    ProviderScope(
+    const ProviderScope(
       child: App(),
     ),
   );
