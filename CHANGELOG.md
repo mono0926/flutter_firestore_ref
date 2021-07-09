@@ -1,3 +1,7 @@
+## 0.12.1
+
+- Delete useFirestoreEmulator in favor of FirebaseFirestore.instance.useFirestoreEmulator
+
 ## 0.12.0
 
 - Depend on Dart 2.13.0 to use non-function type aliases for JsonMap
