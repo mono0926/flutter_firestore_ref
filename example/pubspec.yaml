@@ -20,13 +20,13 @@ dependencies:
   recase:
   rxdart:
   state_notifier:
-  subscription_holder: any
+  subscription_holder:
 dev_dependencies:
-  build_runner: any
+  build_runner:
   flutter_test:
     sdk: flutter
   freezed:
-  json_serializable: any
-  pedantic_mono: any
+  json_serializable:
+  pedantic_mono:
 flutter:
   uses-material-design: true
