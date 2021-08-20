@@ -86,10 +86,7 @@ class _AccountStatus extends ConsumerWidget {
     return ListTile(
       title: const Text('User ID'),
       subtitle: Text(
-        ref.watch(
-          authenticator
-              .select((authenticator) => authenticator.user?.uid ?? '0'),
-        ),
+        ref.watch(authenticator.select((user) => user?.uid ?? '0')),
       ),
     );
   }
@@ -125,7 +122,7 @@ class _Users extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final notifier = ref.watch(usersNotifier);
     final docs = notifier.userDocs;
-    final myId = ref.watch(authenticator).user?.uid;
+    final myId = ref.watch(authenticator.select((user) => user?.uid));
     return ListView.builder(
       itemBuilder: (context, index) {
         final doc = docs[index];

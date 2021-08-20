@@ -7,7 +7,7 @@ class App extends ConsumerWidget {
   const App({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return ref.watch(authenticator.select((Authenticator a) => a.user == null))
+    return ref.watch(authenticator) == null
         ? const Center(child: CircularProgressIndicator())
         : MaterialApp(
             title: ref.watch(appInfo).title,

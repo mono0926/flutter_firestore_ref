@@ -14,7 +14,7 @@ final myNotifier =
 class MyNotifier extends ChangeNotifier {
   MyNotifier(this._read) {
     _subscriptionHolder.add(
-      _read(authenticator)
+      _read(authenticator.notifier)
           .userStream
           .switchMap((user) {
             final userId = user?.uid;

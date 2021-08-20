@@ -1,19 +1,16 @@
-import 'dart:io';
-
 import 'package:firebase_auth/firebase_auth.dart' as auth;
-import 'package:flutter/foundation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:rxdart/rxdart.dart';
 
-final authenticator = ChangeNotifierProvider((ref) => Authenticator());
+final authenticator =
+    StateNotifierProvider<Authenticator, auth.User?>((ref) => Authenticator());
 
-class Authenticator extends ChangeNotifier {
-  Authenticator() {
+class Authenticator extends StateNotifier<auth.User?> {
+  Authenticator() : super(null) {
     signInAnonymously();
     _auth.userChanges().pipe(_userStream);
     _userStream.listen((user) {
       _user = user;
-      notifyListeners();
     });
   }
 
