@@ -7,21 +7,17 @@ import 'package:recase/recase.dart';
 
 import 'util/util.dart';
 
-typedef WidgetPageBuilder = Widget Function(
-  BuildContext context,
-  RouteSettings settings,
-);
+typedef WidgetPageBuilder = Widget Function();
 
 final router = Provider((_) => Router());
 
-// ignore: avoid_classes_with_only_static_members
 class Router {
   static const root = '/';
 
   final _routes = <String, WidgetPageBuilder>{
-    root: (_, __) => const HomePage(),
-    UserCounterPage.routeName: (_, __) => const UserCounterPage(),
-    PagingPage.routeName: (_, __) => const PagingPage(),
+    root: () => const HomePage(),
+    UserCounterPage.routeName: () => const UserCounterPage(),
+    PagingPage.routeName: () => const PagingPage(),
   };
   final _modalRoutes = <String, WidgetPageBuilder>{};
 
@@ -30,7 +26,7 @@ class Router {
     var pageBuilder = _routes[settings.name];
     if (pageBuilder != null) {
       return MaterialPageRoute<void>(
-        builder: (context) => pageBuilder!(context, settings),
+        builder: (context) => pageBuilder!(),
         settings: settings,
       );
     }
@@ -38,7 +34,7 @@ class Router {
     pageBuilder = _modalRoutes[settings.name];
     if (pageBuilder != null) {
       return MaterialPageRoute<void>(
-        builder: (context) => pageBuilder!(context, settings),
+        builder: (context) => pageBuilder!(),
         settings: settings,
         fullscreenDialog: true,
       );
