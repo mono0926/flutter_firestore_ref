@@ -33,7 +33,7 @@ class DocumentRef<E, D extends Document<E>> {
   }
 
   /// [options] doesn't work with [transaction]
-  Future<D> get({
+  Future<D?> get({
     GetOptions? options,
     Transaction? transaction,
   }) async {
