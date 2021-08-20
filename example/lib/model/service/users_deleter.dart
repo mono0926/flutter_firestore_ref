@@ -11,7 +11,7 @@ class UsersDeleter {
 
   Future<void> execute() async {
     logger.info('[Start] deleteAll');
-    final deletedIds = await _read(usersRef).deleteAllDocuments(
+    final deletedIds = await _read(usersRefProvider).deleteAllDocuments(
       batchSize: 2,
     );
     logger

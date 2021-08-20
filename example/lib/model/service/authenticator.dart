@@ -1,8 +1,8 @@
 import 'package:example/model/firestore/firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final _authProvider = Provider((_) => FirebaseAuth.instance);
+final _authProvider = Provider((_) => auth.FirebaseAuth.instance);
 
 final authUserProvider = StreamProvider(
   (ref) => ref.watch(_authProvider).userChanges(),
@@ -21,19 +21,20 @@ final signInAnonymouslyProvider = FutureProvider(
 );
 final myUserRefProvider = Provider(
   (ref) => ref.watch(userIdProvider).whenData(
-        (userId) => userId == null ? null : ref.watch(userRefs(userId)),
+        (userId) => userId == null ? null : ref.watch(userRefProviders(userId)),
       ),
 );
 
 final myUserDocProvider = Provider(
   (ref) {
+    const emptyUser = User();
     return ref.watch(myUserRefProvider).whenData(
       (userRef) {
         return userRef == null
             ? null
-            : ref.watch(userDocs(userRef.id)).maybeWhen(
-                  data: (doc) => doc,
-                  orElse: () => UserDoc(userRef, null),
+            : ref.watch(userDocProviders(userRef.id)).maybeWhen(
+                  data: (doc) => doc ?? UserDoc(userRef, emptyUser),
+                  orElse: () => UserDoc(userRef, emptyUser),
                 );
       },
     );

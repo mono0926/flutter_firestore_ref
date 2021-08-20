@@ -7,7 +7,7 @@ part of 'user.dart';
 // **************************************************************************
 
 _$_User _$$_UserFromJson(Map<String, dynamic> json) => _$_User(
-      count: json['count'] as int,
+      count: json['count'] as int? ?? 0,
       createdAt:
           const TimestampConverter().fromJson(json['createdAt'] as Timestamp?),
       updatedAt:

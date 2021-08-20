@@ -7,19 +7,19 @@ import 'package:json_annotation/json_annotation.dart';
 part 'user.freezed.dart';
 part 'user.g.dart';
 
-final usersRef = Provider((ref) => UsersRef());
-final userRefs = Provider.family(
-  (ref, String id) => ref.watch(usersRef).docRefWithId(id),
+final usersRefProvider = Provider((ref) => UsersRef());
+final userRefProviders = Provider.family(
+  (ref, String id) => ref.watch(usersRefProvider).docRefWithId(id),
 );
 
-final userDocs = StreamProvider.family(
-  (ref, String id) => ref.watch(userRefs(id)).document(),
+final userDocProviders = StreamProvider.family(
+  (ref, String id) => ref.watch(userRefProviders(id)).document(),
 );
 
 @freezed
 class User with _$User {
   const factory User({
-    required int count,
+    @Default(0) int count,
     @TimestampConverter() DateTime? createdAt,
     @TimestampConverter() DateTime? updatedAt,
   }) = _User;

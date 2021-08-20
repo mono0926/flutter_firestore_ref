@@ -22,7 +22,7 @@ class _$UserTearOff {
   const _$UserTearOff();
 
   _User call(
-      {required int count,
+      {int count = 0,
       @TimestampConverter() DateTime? createdAt,
       @TimestampConverter() DateTime? updatedAt}) {
     return _User(
@@ -141,13 +141,14 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_User extends _User with DiagnosticableTreeMixin {
   const _$_User(
-      {required this.count,
+      {this.count = 0,
       @TimestampConverter() this.createdAt,
       @TimestampConverter() this.updatedAt})
       : super._();
 
   factory _$_User.fromJson(Map<String, dynamic> json) => _$$_UserFromJson(json);
 
+  @JsonKey(defaultValue: 0)
   @override
   final int count;
   @override
@@ -206,7 +207,7 @@ class _$_User extends _User with DiagnosticableTreeMixin {
 
 abstract class _User extends User {
   const factory _User(
-      {required int count,
+      {int count,
       @TimestampConverter() DateTime? createdAt,
       @TimestampConverter() DateTime? updatedAt}) = _$_User;
   const _User._() : super._();
