@@ -15,7 +15,7 @@ class MyNotifier extends ChangeNotifier {
   MyNotifier(this._read) {
     _subscriptionHolder.add(
       _read(authenticator.notifier)
-          .userStream
+          .streamWithCurrent
           .switchMap((user) {
             final userId = user?.uid;
             final doc = userId == null
