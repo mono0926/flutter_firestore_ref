@@ -13,6 +13,7 @@ class UserCounterPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final updateType = ref.watch(selectedUpdateType);
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -33,10 +34,8 @@ class UserCounterPage extends ConsumerWidget {
                 UpdateType.batch: Text('Batch'),
                 UpdateType.transaction: Text('Tran'),
               },
-              onValueChanged: (type) {
-                ref.read(selectedUpdateType).state = type!;
-              },
-              groupValue: ref.watch(selectedUpdateType).state,
+              onValueChanged: (type) => updateType.state = type!,
+              groupValue: updateType.state,
             ),
           ),
           const Divider(height: 0),
