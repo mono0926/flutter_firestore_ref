@@ -1,3 +1,8 @@
+## 0.12.2
+
+- Change to `Future<D?>` from `Future<D>` of DocumentRef.get return value
+- Refactor example
+
 ## 0.12.1
 
 - Delete useFirestoreEmulator in favor of FirebaseFirestore.instance.useFirestoreEmulator
