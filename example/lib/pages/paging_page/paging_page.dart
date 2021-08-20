@@ -12,7 +12,6 @@ class PagingPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final controller = ref.watch(pagingPageController.notifier);
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -23,7 +22,7 @@ class PagingPage extends ConsumerWidget {
         ],
       ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () => controller.addDocs(10),
+        onPressed: () => ref.read(pagingDocsModifier).addDocs(10),
         label: const Text('10 DATA'),
         icon: const Icon(Icons.add),
       ),
@@ -31,9 +30,7 @@ class PagingPage extends ConsumerWidget {
         children: [
           ListTile(
             title: Center(
-              child: Text(
-                ref.watch(pagingPageController.select((s) => s.info)),
-              ),
+              child: Text(ref.watch(pagingPageInfoProvider)),
             ),
           ),
           const Divider(height: 0),
@@ -50,11 +47,9 @@ class _ListView extends ConsumerWidget {
   const _ListView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final controller = ref.watch(pagingPageController.notifier);
-    final docs = ref.watch(pagingPageController.select((s) => s.docs));
-    final count = ref.watch(pagingPageController.select(
-      (s) => docs.length + (s.hasMore ? 1 : 0),
-    ));
+    final controller = ref.watch(pagingController);
+    final docs = ref.watch(pagingDocsProvider).data?.value ?? [];
+    final count = ref.watch(pagingDocsLengthForWidgetProvider);
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
     return ListView.builder(
@@ -74,7 +69,7 @@ class _ListView extends ConsumerWidget {
           trailing: IconButton(
             color: colorScheme.primaryVariant,
             icon: const Icon(Icons.add),
-            onPressed: () => controller.increment(doc: doc),
+            onPressed: () => ref.read(pagingDocsModifier).increment(doc: doc),
           ),
         );
       },
@@ -88,7 +83,6 @@ class _DropdownButton extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
-    final controller = ref.watch(pagingPageController.notifier);
     return PopupMenuButton<String>(
       itemBuilder: (context) => [
         PopupMenuItem(
@@ -103,7 +97,7 @@ class _DropdownButton extends ConsumerWidget {
       ],
       onSelected: (value) {
         logger.info(value);
-        controller.deleteAll();
+        ref.read(pagingDocsModifier).deleteAll();
       },
     );
   }

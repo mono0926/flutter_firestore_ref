@@ -44,7 +44,6 @@ class PagingDatasRef
   @override
   PagingDataDoc decode(
       DocumentSnapshot<JsonMap> snapshot, PagingDataRef docRef) {
-    logger.info('hoge');
     return PagingDataDoc(
       docRef,
       PagingData.fromJson(snapshot.data()!),
