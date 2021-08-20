@@ -1,26 +1,38 @@
 import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'user.freezed.dart';
 part 'user.g.dart';
 
+final usersRef = Provider((ref) => UsersRef());
+final userRefs = Provider.family(
+  (ref, String id) => ref.watch(usersRef).docRefWithId(id),
+);
+
+final userDocs = StreamProvider.family(
+  (ref, String id) => ref.watch(userRefs(id)).document(),
+);
+
 @freezed
-abstract class User with _$User {
+class User with _$User {
   const factory User({
     required int count,
     @TimestampConverter() DateTime? createdAt,
     @TimestampConverter() DateTime? updatedAt,
   }) = _User;
   factory User.fromJson(JsonMap json) => _$UserFromJson(json);
+
+  const User._();
+
+  User incremented() => copyWith(count: count + 1);
 }
 
 class UserField {
   static const count = 'count';
 }
-
-final usersRef = UsersRef();
 
 class UsersRef extends CollectionRef<User, UserDoc, UserRef> {
   UsersRef() : super(FirebaseFirestore.instance.collection('users'));

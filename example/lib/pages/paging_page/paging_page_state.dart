@@ -5,7 +5,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'paging_page_state.freezed.dart';
 
 @freezed
-abstract class PagingPageState with _$PagingPageState {
+class PagingPageState with _$PagingPageState {
   factory PagingPageState({
     @Default(<PagingDataDoc>[]) List<PagingDataDoc> docs,
     @Default(true) bool hasMore,

@@ -8,7 +8,7 @@ part 'paging_data.freezed.dart';
 part 'paging_data.g.dart';
 
 @freezed
-abstract class PagingData with _$PagingData {
+class PagingData with _$PagingData {
   const factory PagingData({
     @Default(0) int count,
     @TimestampConverter() DateTime? createdAt,

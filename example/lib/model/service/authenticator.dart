@@ -1,17 +1,45 @@
-import 'package:firebase_auth/firebase_auth.dart' as auth;
+import 'package:example/model/firestore/firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final authenticator = StateNotifierProvider<Authenticator, auth.User?>(
-  (ref) => Authenticator(),
+final _authProvider = Provider((_) => FirebaseAuth.instance);
+
+final authUserProvider = StreamProvider(
+  (ref) => ref.watch(_authProvider).userChanges(),
 );
 
-class Authenticator extends StateNotifier<auth.User?> {
-  Authenticator() : super(null) {
-    _auth.userChanges().listen((user) {
-      state = user;
-    });
-    _auth.signInAnonymously();
-  }
+final userIdProvider = Provider(
+  (ref) => ref.watch(authUserProvider).whenData((user) => user?.uid),
+);
 
-  final _auth = auth.FirebaseAuth.instance;
-}
+final isSignedInProvider = Provider(
+  (ref) => ref.watch(userIdProvider).whenData((id) => id != null),
+);
+
+final signInAnonymouslyProvider = FutureProvider(
+  (ref) => ref.watch(_authProvider).signInAnonymously(),
+);
+final myUserRefProvider = Provider(
+  (ref) => ref.watch(userIdProvider).whenData(
+        (userId) => userId == null ? null : ref.watch(userRefs(userId)),
+      ),
+);
+
+final myUserDocProvider = Provider(
+  (ref) {
+    return ref.watch(myUserRefProvider).whenData(
+      (userRef) {
+        return userRef == null
+            ? null
+            : ref.watch(userDocs(userRef.id)).maybeWhen(
+                  data: (doc) => doc,
+                  orElse: () => UserDoc(userRef, null),
+                );
+      },
+    );
+  },
+);
+
+final myCountProvider = Provider(
+  (ref) => ref.watch(myUserDocProvider).whenData((doc) => doc?.entity?.count),
+);

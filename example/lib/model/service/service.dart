@@ -1,3 +1,4 @@
 export 'authenticator.dart';
-export 'my_notifier.dart';
-export 'users_notofier.dart';
+export 'count_incrementer.dart';
+export 'user_docs_provider.dart';
+export 'users_deleter.dart';

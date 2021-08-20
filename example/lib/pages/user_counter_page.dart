@@ -34,10 +34,9 @@ class UserCounterPage extends ConsumerWidget {
                 UpdateType.transaction: Text('Tran'),
               },
               onValueChanged: (type) {
-                ref.read(homePageController).changeUpdateType(type!);
+                ref.read(selectedUpdateType).state = type!;
               },
-              groupValue:
-                  ref.watch(homePageController.select((c) => c.updateType)),
+              groupValue: ref.watch(selectedUpdateType).state,
             ),
           ),
           const Divider(height: 0),
@@ -73,7 +72,7 @@ class _DropdownButton extends ConsumerWidget {
       ],
       onSelected: (value) {
         logger.info(value);
-        ref.read(usersNotifier).deleteAll();
+        ref.read(usersDeleter).execute();
       },
     );
   }
@@ -86,7 +85,7 @@ class _AccountStatus extends ConsumerWidget {
     return ListTile(
       title: const Text('User ID'),
       subtitle: Text(
-        ref.watch(authenticator.select((user) => user?.uid ?? '0')),
+        ref.watch(userIdProvider.select((id) => id.data?.value ?? '-')),
       ),
     );
   }
@@ -99,14 +98,12 @@ class _MyCounter extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return ListTile(
       title: const Text('My Count'),
-      subtitle: Text(
-        ref.watch(myNotifier.select((n) => '${n.count}')),
-      ),
+      subtitle: Text('${ref.watch(myCountProvider)}'),
       trailing: IconButton(
         color: Theme.of(context).primaryColor,
         icon: const Icon(Icons.add),
         onPressed: () async {
-          ref.read(myNotifier).increment();
+          ref.read(countIncrementer).execute();
           final result =
               await FirebaseFunctions.instance.httpsCallable('now').call<Map>();
           logger.info(result.data);
@@ -120,9 +117,8 @@ class _Users extends ConsumerWidget {
   const _Users({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final notifier = ref.watch(usersNotifier);
-    final docs = notifier.userDocs;
-    final myId = ref.watch(authenticator.select((user) => user?.uid));
+    final docs = ref.watch(userDocsProvider).data?.value ?? [];
+    final myId = ref.watch(userIdProvider).data?.value;
     return ListView.builder(
       itemBuilder: (context, index) {
         final doc = docs[index];
@@ -140,20 +136,7 @@ class _Users extends ConsumerWidget {
   }
 }
 
-final homePageController = ChangeNotifierProvider.autoDispose(
-  (ref) => HomePageController(),
-);
-
-class HomePageController with ChangeNotifier {
-  var _updateType = UpdateType.add;
-
-  UpdateType get updateType => _updateType;
-
-  void changeUpdateType(UpdateType type) {
-    _updateType = type;
-    notifyListeners();
-  }
-}
+final selectedUpdateType = StateProvider((ref) => UpdateType.add);
 
 enum UpdateType {
   add,
