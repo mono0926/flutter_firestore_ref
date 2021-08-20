@@ -21,7 +21,7 @@ class Authenticator extends ChangeNotifier {
   final _userStream = BehaviorSubject<auth.User?>();
   auth.User? _user;
 
-  auth.User? get user => (!kIsWeb && Platform.isMacOS == true) ? null : _user;
+  auth.User? get user => _user;
   ValueStream<auth.User?> get userStream => _userStream;
 
   Future<void> signInAnonymously() {
