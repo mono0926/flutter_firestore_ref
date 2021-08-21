@@ -71,7 +71,7 @@ class _DropdownButton extends ConsumerWidget {
       ],
       onSelected: (value) {
         logger.info(value);
-        ref.read(usersDeleter).execute();
+        ref.read(usersDeleter)();
       },
     );
   }
@@ -102,7 +102,7 @@ class _MyCounter extends ConsumerWidget {
         color: Theme.of(context).primaryColor,
         icon: const Icon(Icons.add),
         onPressed: () async {
-          ref.read(countIncrementer).execute();
+          ref.read(countIncrementer)();
           final result =
               await FirebaseFunctions.instance.httpsCallable('now').call<Map>();
           logger.info(result.data);
