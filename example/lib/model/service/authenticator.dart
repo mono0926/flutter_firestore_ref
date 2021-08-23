@@ -19,28 +19,32 @@ final isSignedInProvider = Provider(
 final signInAnonymouslyProvider = FutureProvider(
   (ref) => ref.watch(_authProvider).signInAnonymously(),
 );
-final myUserRefProvider = Provider(
-  (ref) => ref.watch(userIdProvider).whenData(
-        (userId) => userId == null ? null : ref.watch(userRefProviders(userId)),
-      ),
-);
 
-final myUserDocProvider = Provider(
+final myUserRefProvider = Provider(
   (ref) {
-    const emptyUser = User();
-    return ref.watch(myUserRefProvider).whenData(
-      (userRef) {
-        return userRef == null
-            ? null
-            : ref.watch(userDocProviders(userRef.id)).maybeWhen(
-                  data: (doc) => doc ?? UserDoc(userRef, emptyUser),
-                  orElse: () => UserDoc(userRef, emptyUser),
-                );
-      },
-    );
+    final userId = ref.watch(userIdProvider);
+    final usersRef = ref.watch(usersRefProvider);
+    return userId.whenData(usersRef.docRefWithId);
   },
 );
 
-final myCountProvider = Provider(
+final _myUserDocProvider = StreamProvider.autoDispose(
+  (ref) =>
+      ref.watch(myUserRefProvider).data?.value.document() ?? Stream.value(null),
+);
+
+final myUserDocProvider = Provider.autoDispose(
+  (ref) {
+    final doc = ref.watch(_myUserDocProvider).data?.value;
+    return ref.watch(myUserRefProvider).whenData((userRef) =>
+        doc ??
+        UserDoc(
+          userRef,
+          const User(),
+        ));
+  },
+);
+
+final myCountProvider = Provider.autoDispose(
   (ref) => ref.watch(myUserDocProvider).whenData((doc) => doc?.entity?.count),
 );

@@ -8,13 +8,6 @@ part 'user.freezed.dart';
 part 'user.g.dart';
 
 final usersRefProvider = Provider((ref) => UsersRef());
-final userRefProviders = Provider.family(
-  (ref, String id) => ref.watch(usersRefProvider).docRefWithId(id),
-);
-
-final userDocProviders = StreamProvider.family(
-  (ref, String id) => ref.watch(userRefProviders(id)).document(),
-);
 
 @freezed
 class User with _$User {
