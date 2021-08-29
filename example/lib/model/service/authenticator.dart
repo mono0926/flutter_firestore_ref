@@ -46,5 +46,5 @@ final myUserDocProvider = Provider.autoDispose(
 );
 
 final myCountProvider = Provider.autoDispose(
-  (ref) => ref.watch(myUserDocProvider).whenData((doc) => doc?.entity?.count),
+  (ref) => ref.watch(myUserDocProvider).whenData((doc) => doc.entity?.count),
 );
