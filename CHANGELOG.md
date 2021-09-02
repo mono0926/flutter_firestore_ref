@@ -1,3 +1,7 @@
+## 0.12.4
+
+- Enhance hasMore of CollectionPagingController
+
 ## 0.12.3
 
 - Fix hasMore of CollectionPagingController

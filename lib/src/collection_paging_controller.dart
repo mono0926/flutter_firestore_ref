@@ -40,8 +40,10 @@ class CollectionPagingController<E, D extends Document<E>,
             .listen(_documentsController.add),
       )
       ..add(
-        _documentsController
-            .map((documents) => documents.length >= _limitController.value)
+        Rx.combineLatest2(
+                _documentsController.map((docs) => docs.length),
+                _limitController,
+                (int docLength, int limit) => docLength >= limit)
             .listen(_hasMoreController.add),
       );
   }
