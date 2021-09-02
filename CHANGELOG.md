@@ -1,3 +1,7 @@
+## 0.12.3
+
+- Fix hasMore of CollectionPagingController
+
 ## 0.12.2
 
 - Change to `Future<D?>` from `Future<D>` of DocumentRef.get return value
