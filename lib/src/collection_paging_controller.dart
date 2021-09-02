@@ -59,7 +59,7 @@ class CollectionPagingController<E, D extends Document<E>,
   ValueStream<bool> get hasMore => _hasMoreController.stream;
 
   bool loadMore({int? pagingSize}) {
-    final hasMore = this.hasMore.hasValue;
+    final hasMore = this.hasMore.value;
     if (hasMore) {
       _limitController.add(
         _limitController.value + (pagingSize ?? defaultPagingSize),
