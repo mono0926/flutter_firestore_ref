@@ -24,7 +24,7 @@ class CollectionPagingController<E, D extends Document<E>,
                   decoder: (snapshot, docRef) {
                     final cached = _documentsCache[snapshot.reference.path];
                     if (cached != null && snapshot.metadata.isFromCache) {
-                      logger.fine('cache hit (id: ${cached.id})');
+                      // logger.fine('cache hit (id: ${cached.id})');
                       return cached;
                     }
                     final doc = queryRef.decode(snapshot, docRef);
