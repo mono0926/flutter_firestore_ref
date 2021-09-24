@@ -2,7 +2,11 @@ import 'dart:ui';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firestore_ref/firestore_ref.dart';
+import 'package:flutter/foundation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:json_annotation/json_annotation.dart';
+
+part 'json_converter.freezed.dart';
 
 class PassthroughConverter<T> implements JsonConverter<T, Object?> {
   const PassthroughConverter();
@@ -52,4 +56,29 @@ class ColorConverter implements JsonConverter<Color, int> {
   Color fromJson(int json) => Color(json);
   @override
   int toJson(Color object) => object.value;
+}
+
+class FirTimestampConverter implements JsonConverter<FirTimestamp?, Object?> {
+  const FirTimestampConverter();
+
+  @override
+  FirTimestamp? fromJson(Object? json) {
+    final timestamp = json as Timestamp?;
+    if (timestamp == null) {
+      return null;
+    }
+    return FirTimestamp.dateTime(timestamp.toDate());
+  }
+
+  @override
+  Object? toJson(FirTimestamp? object) => object?.map(
+        dateTime: (date) => Timestamp.fromDate(date.dateTime),
+        serverTimestamp: (_) => FieldValue.serverTimestamp(),
+      );
+}
+
+@freezed
+class FirTimestamp with _$FirTimestamp {
+  const factory FirTimestamp.dateTime(DateTime dateTime) = FirDateTime;
+  const factory FirTimestamp.serverTimestamp() = FirServerTimestamp;
 }
