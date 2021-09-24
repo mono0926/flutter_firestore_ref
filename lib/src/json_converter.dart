@@ -64,10 +64,7 @@ class FirTimestampConverter implements JsonConverter<FirTimestamp?, Object?> {
   @override
   FirTimestamp? fromJson(Object? json) {
     final timestamp = json as Timestamp?;
-    if (timestamp == null) {
-      return null;
-    }
-    return FirTimestamp.dateTime(timestamp.toDate());
+    return timestamp == null ? null : FirTimestamp.dateTime(timestamp.toDate());
   }
 
   @override
