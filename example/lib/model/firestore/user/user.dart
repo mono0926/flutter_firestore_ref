@@ -33,11 +33,11 @@ class UsersRef extends CollectionRef<User, UserDoc, UserRef> {
   @override
   JsonMap encode(User data) {
     var user = data.copyWith(
-      updatedAt: const FirTimestamp.serverTimestamp(),
+      updatedAt: FirTimestamp.serverTimestamp(),
     );
     if (user.createdAt == null) {
       user = user.copyWith(
-        createdAt: const FirTimestamp.serverTimestamp(),
+        createdAt: FirTimestamp.serverTimestamp(),
       );
     }
     return user.toJson();

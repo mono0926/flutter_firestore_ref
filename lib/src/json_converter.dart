@@ -76,6 +76,9 @@ class FirTimestampConverter implements JsonConverter<FirTimestamp?, Object?> {
 
 @freezed
 class FirTimestamp with _$FirTimestamp {
-  const factory FirTimestamp.dateTime(DateTime date) = FirDateTime;
-  const factory FirTimestamp.serverTimestamp() = FirServerTimestamp;
+  factory FirTimestamp.dateTime(DateTime date) = FirDateTime;
+  factory FirTimestamp.serverTimestamp() = FirServerTimestamp;
+  FirTimestamp._();
+
+  late final DateTime? date = mapOrNull(dateTime: (date) => date.date);
 }

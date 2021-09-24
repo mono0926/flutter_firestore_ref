@@ -24,7 +24,7 @@ class _$FirTimestampTearOff {
   }
 
   FirServerTimestamp serverTimestamp() {
-    return const FirServerTimestamp();
+    return FirServerTimestamp();
   }
 }
 
@@ -122,8 +122,8 @@ class _$FirDateTimeCopyWithImpl<$Res> extends _$FirTimestampCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$FirDateTime with DiagnosticableTreeMixin implements FirDateTime {
-  const _$FirDateTime(this.date);
+class _$FirDateTime extends FirDateTime with DiagnosticableTreeMixin {
+  _$FirDateTime(this.date) : super._();
 
   @override
   final DateTime date;
@@ -221,8 +221,9 @@ class _$FirDateTime with DiagnosticableTreeMixin implements FirDateTime {
   }
 }
 
-abstract class FirDateTime implements FirTimestamp {
-  const factory FirDateTime(DateTime date) = _$FirDateTime;
+abstract class FirDateTime extends FirTimestamp {
+  factory FirDateTime(DateTime date) = _$FirDateTime;
+  FirDateTime._() : super._();
 
   DateTime get date => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -251,10 +252,9 @@ class _$FirServerTimestampCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$FirServerTimestamp
-    with DiagnosticableTreeMixin
-    implements FirServerTimestamp {
-  const _$FirServerTimestamp();
+class _$FirServerTimestamp extends FirServerTimestamp
+    with DiagnosticableTreeMixin {
+  _$FirServerTimestamp() : super._();
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -339,6 +339,7 @@ class _$FirServerTimestamp
   }
 }
 
-abstract class FirServerTimestamp implements FirTimestamp {
-  const factory FirServerTimestamp() = _$FirServerTimestamp;
+abstract class FirServerTimestamp extends FirTimestamp {
+  factory FirServerTimestamp() = _$FirServerTimestamp;
+  FirServerTimestamp._() : super._();
 }
