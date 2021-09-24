@@ -1,6 +1,5 @@
 import 'package:disposable_provider/disposable_provider.dart';
 import 'package:firestore_ref/firestore_ref.dart';
-import 'package:firestore_ref/src/utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:subscription_holder/subscription_holder.dart';
