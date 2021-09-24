@@ -17,9 +17,9 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$FirTimestampTearOff {
   const _$FirTimestampTearOff();
 
-  FirDateTime dateTime(DateTime dateTime) {
+  FirDateTime dateTime(DateTime date) {
     return FirDateTime(
-      dateTime,
+      date,
     );
   }
 
@@ -35,19 +35,19 @@ const $FirTimestamp = _$FirTimestampTearOff();
 mixin _$FirTimestamp {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(DateTime dateTime) dateTime,
+    required TResult Function(DateTime date) dateTime,
     required TResult Function() serverTimestamp,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(DateTime dateTime)? dateTime,
+    TResult Function(DateTime date)? dateTime,
     TResult Function()? serverTimestamp,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(DateTime dateTime)? dateTime,
+    TResult Function(DateTime date)? dateTime,
     TResult Function()? serverTimestamp,
     required TResult orElse(),
   }) =>
@@ -94,7 +94,7 @@ abstract class $FirDateTimeCopyWith<$Res> {
   factory $FirDateTimeCopyWith(
           FirDateTime value, $Res Function(FirDateTime) then) =
       _$FirDateTimeCopyWithImpl<$Res>;
-  $Res call({DateTime dateTime});
+  $Res call({DateTime date});
 }
 
 /// @nodoc
@@ -109,12 +109,12 @@ class _$FirDateTimeCopyWithImpl<$Res> extends _$FirTimestampCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? dateTime = freezed,
+    Object? date = freezed,
   }) {
     return _then(FirDateTime(
-      dateTime == freezed
-          ? _value.dateTime
-          : dateTime // ignore: cast_nullable_to_non_nullable
+      date == freezed
+          ? _value.date
+          : date // ignore: cast_nullable_to_non_nullable
               as DateTime,
     ));
   }
@@ -123,14 +123,14 @@ class _$FirDateTimeCopyWithImpl<$Res> extends _$FirTimestampCopyWithImpl<$Res>
 /// @nodoc
 
 class _$FirDateTime with DiagnosticableTreeMixin implements FirDateTime {
-  const _$FirDateTime(this.dateTime);
+  const _$FirDateTime(this.date);
 
   @override
-  final DateTime dateTime;
+  final DateTime date;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'FirTimestamp.dateTime(dateTime: $dateTime)';
+    return 'FirTimestamp.dateTime(date: $date)';
   }
 
   @override
@@ -138,21 +138,20 @@ class _$FirDateTime with DiagnosticableTreeMixin implements FirDateTime {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'FirTimestamp.dateTime'))
-      ..add(DiagnosticsProperty('dateTime', dateTime));
+      ..add(DiagnosticsProperty('date', date));
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is FirDateTime &&
-            (identical(other.dateTime, dateTime) ||
-                const DeepCollectionEquality()
-                    .equals(other.dateTime, dateTime)));
+            (identical(other.date, date) ||
+                const DeepCollectionEquality().equals(other.date, date)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(dateTime);
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(date);
 
   @JsonKey(ignore: true)
   @override
@@ -162,30 +161,30 @@ class _$FirDateTime with DiagnosticableTreeMixin implements FirDateTime {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(DateTime dateTime) dateTime,
+    required TResult Function(DateTime date) dateTime,
     required TResult Function() serverTimestamp,
   }) {
-    return dateTime(this.dateTime);
+    return dateTime(date);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(DateTime dateTime)? dateTime,
+    TResult Function(DateTime date)? dateTime,
     TResult Function()? serverTimestamp,
   }) {
-    return dateTime?.call(this.dateTime);
+    return dateTime?.call(date);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(DateTime dateTime)? dateTime,
+    TResult Function(DateTime date)? dateTime,
     TResult Function()? serverTimestamp,
     required TResult orElse(),
   }) {
     if (dateTime != null) {
-      return dateTime(this.dateTime);
+      return dateTime(date);
     }
     return orElse();
   }
@@ -223,9 +222,9 @@ class _$FirDateTime with DiagnosticableTreeMixin implements FirDateTime {
 }
 
 abstract class FirDateTime implements FirTimestamp {
-  const factory FirDateTime(DateTime dateTime) = _$FirDateTime;
+  const factory FirDateTime(DateTime date) = _$FirDateTime;
 
-  DateTime get dateTime => throw _privateConstructorUsedError;
+  DateTime get date => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $FirDateTimeCopyWith<FirDateTime> get copyWith =>
       throw _privateConstructorUsedError;
@@ -280,7 +279,7 @@ class _$FirServerTimestamp
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(DateTime dateTime) dateTime,
+    required TResult Function(DateTime date) dateTime,
     required TResult Function() serverTimestamp,
   }) {
     return serverTimestamp();
@@ -289,7 +288,7 @@ class _$FirServerTimestamp
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(DateTime dateTime)? dateTime,
+    TResult Function(DateTime date)? dateTime,
     TResult Function()? serverTimestamp,
   }) {
     return serverTimestamp?.call();
@@ -298,7 +297,7 @@ class _$FirServerTimestamp
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(DateTime dateTime)? dateTime,
+    TResult Function(DateTime date)? dateTime,
     TResult Function()? serverTimestamp,
     required TResult orElse(),
   }) {

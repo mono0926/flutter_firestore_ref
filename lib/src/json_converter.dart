@@ -69,13 +69,13 @@ class FirTimestampConverter implements JsonConverter<FirTimestamp?, Object?> {
 
   @override
   Object? toJson(FirTimestamp? object) => object?.map(
-        dateTime: (date) => Timestamp.fromDate(date.dateTime),
+        dateTime: (date) => Timestamp.fromDate(date.date),
         serverTimestamp: (_) => FieldValue.serverTimestamp(),
       );
 }
 
 @freezed
 class FirTimestamp with _$FirTimestamp {
-  const factory FirTimestamp.dateTime(DateTime dateTime) = FirDateTime;
+  const factory FirTimestamp.dateTime(DateTime date) = FirDateTime;
   const factory FirTimestamp.serverTimestamp() = FirServerTimestamp;
 }
