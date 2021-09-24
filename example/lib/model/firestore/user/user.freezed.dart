@@ -23,8 +23,8 @@ class _$UserTearOff {
 
   _User call(
       {int count = 0,
-      @TimestampConverter() DateTime? createdAt,
-      @TimestampConverter() DateTime? updatedAt}) {
+      @FirTimestampConverter() FirTimestamp? createdAt,
+      @FirTimestampConverter() FirTimestamp? updatedAt}) {
     return _User(
       count: count,
       createdAt: createdAt,
@@ -43,10 +43,10 @@ const $User = _$UserTearOff();
 /// @nodoc
 mixin _$User {
   int get count => throw _privateConstructorUsedError;
-  @TimestampConverter()
-  DateTime? get createdAt => throw _privateConstructorUsedError;
-  @TimestampConverter()
-  DateTime? get updatedAt => throw _privateConstructorUsedError;
+  @FirTimestampConverter()
+  FirTimestamp? get createdAt => throw _privateConstructorUsedError;
+  @FirTimestampConverter()
+  FirTimestamp? get updatedAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -59,8 +59,11 @@ abstract class $UserCopyWith<$Res> {
       _$UserCopyWithImpl<$Res>;
   $Res call(
       {int count,
-      @TimestampConverter() DateTime? createdAt,
-      @TimestampConverter() DateTime? updatedAt});
+      @FirTimestampConverter() FirTimestamp? createdAt,
+      @FirTimestampConverter() FirTimestamp? updatedAt});
+
+  $FirTimestampCopyWith<$Res>? get createdAt;
+  $FirTimestampCopyWith<$Res>? get updatedAt;
 }
 
 /// @nodoc
@@ -85,12 +88,34 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
       createdAt: createdAt == freezed
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as FirTimestamp?,
       updatedAt: updatedAt == freezed
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as FirTimestamp?,
     ));
+  }
+
+  @override
+  $FirTimestampCopyWith<$Res>? get createdAt {
+    if (_value.createdAt == null) {
+      return null;
+    }
+
+    return $FirTimestampCopyWith<$Res>(_value.createdAt!, (value) {
+      return _then(_value.copyWith(createdAt: value));
+    });
+  }
+
+  @override
+  $FirTimestampCopyWith<$Res>? get updatedAt {
+    if (_value.updatedAt == null) {
+      return null;
+    }
+
+    return $FirTimestampCopyWith<$Res>(_value.updatedAt!, (value) {
+      return _then(_value.copyWith(updatedAt: value));
+    });
   }
 }
 
@@ -101,8 +126,13 @@ abstract class _$UserCopyWith<$Res> implements $UserCopyWith<$Res> {
   @override
   $Res call(
       {int count,
-      @TimestampConverter() DateTime? createdAt,
-      @TimestampConverter() DateTime? updatedAt});
+      @FirTimestampConverter() FirTimestamp? createdAt,
+      @FirTimestampConverter() FirTimestamp? updatedAt});
+
+  @override
+  $FirTimestampCopyWith<$Res>? get createdAt;
+  @override
+  $FirTimestampCopyWith<$Res>? get updatedAt;
 }
 
 /// @nodoc
@@ -128,11 +158,11 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
       createdAt: createdAt == freezed
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as FirTimestamp?,
       updatedAt: updatedAt == freezed
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as FirTimestamp?,
     ));
   }
 }
@@ -142,8 +172,8 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
 class _$_User extends _User with DiagnosticableTreeMixin {
   const _$_User(
       {this.count = 0,
-      @TimestampConverter() this.createdAt,
-      @TimestampConverter() this.updatedAt})
+      @FirTimestampConverter() this.createdAt,
+      @FirTimestampConverter() this.updatedAt})
       : super._();
 
   factory _$_User.fromJson(Map<String, dynamic> json) => _$$_UserFromJson(json);
@@ -152,11 +182,11 @@ class _$_User extends _User with DiagnosticableTreeMixin {
   @override
   final int count;
   @override
-  @TimestampConverter()
-  final DateTime? createdAt;
+  @FirTimestampConverter()
+  final FirTimestamp? createdAt;
   @override
-  @TimestampConverter()
-  final DateTime? updatedAt;
+  @FirTimestampConverter()
+  final FirTimestamp? updatedAt;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -208,8 +238,8 @@ class _$_User extends _User with DiagnosticableTreeMixin {
 abstract class _User extends User {
   const factory _User(
       {int count,
-      @TimestampConverter() DateTime? createdAt,
-      @TimestampConverter() DateTime? updatedAt}) = _$_User;
+      @FirTimestampConverter() FirTimestamp? createdAt,
+      @FirTimestampConverter() FirTimestamp? updatedAt}) = _$_User;
   const _User._() : super._();
 
   factory _User.fromJson(Map<String, dynamic> json) = _$_User.fromJson;
@@ -217,11 +247,11 @@ abstract class _User extends User {
   @override
   int get count => throw _privateConstructorUsedError;
   @override
-  @TimestampConverter()
-  DateTime? get createdAt => throw _privateConstructorUsedError;
+  @FirTimestampConverter()
+  FirTimestamp? get createdAt => throw _privateConstructorUsedError;
   @override
-  @TimestampConverter()
-  DateTime? get updatedAt => throw _privateConstructorUsedError;
+  @FirTimestampConverter()
+  FirTimestamp? get updatedAt => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$UserCopyWith<_User> get copyWith => throw _privateConstructorUsedError;

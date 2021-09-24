@@ -13,8 +13,8 @@ final usersRefProvider = Provider((ref) => UsersRef());
 class User with _$User {
   const factory User({
     @Default(0) int count,
-    @TimestampConverter() DateTime? createdAt,
-    @TimestampConverter() DateTime? updatedAt,
+    @FirTimestampConverter() FirTimestamp? createdAt,
+    @FirTimestampConverter() FirTimestamp? updatedAt,
   }) = _User;
   factory User.fromJson(JsonMap json) => _$UserFromJson(json);
 
@@ -31,7 +31,17 @@ class UsersRef extends CollectionRef<User, UserDoc, UserRef> {
   UsersRef() : super(FirebaseFirestore.instance.collection('users'));
 
   @override
-  JsonMap encode(User data) => replacingTimestamp(json: data.toJson());
+  JsonMap encode(User data) {
+    var user = data.copyWith(
+      updatedAt: const FirTimestamp.serverTimestamp(),
+    );
+    if (user.createdAt == null) {
+      user = user.copyWith(
+        createdAt: const FirTimestamp.serverTimestamp(),
+      );
+    }
+    return user.toJson();
+  }
 
   @override
   UserDoc decode(DocumentSnapshot<JsonMap> snapshot, UserRef docRef) {
