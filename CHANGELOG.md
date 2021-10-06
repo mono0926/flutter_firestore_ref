@@ -1,3 +1,7 @@
+## 0.12.4+1
+
+- Refactor ==/hashCode of DocumentRef
+
 ## 0.12.4
 
 - Enhance hasMore of CollectionPagingController

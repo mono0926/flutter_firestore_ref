@@ -198,11 +198,8 @@ class DocumentRef<E, D extends Document<E>> {
       identical(this, other) ||
       other is DocumentRef &&
           runtimeType == other.runtimeType &&
-          // TODO(mono): https://github.com/FirebaseExtended/flutterfire/issues/3262
-          ref.path == other.ref.path &&
-          ref.firestore.app.name == ref.firestore.app.name;
+          ref == other.ref;
 
   @override
-  // TODO(mono): https://github.com/FirebaseExtended/flutterfire/issues/3262
   int get hashCode => ref.hashCode;
 }
