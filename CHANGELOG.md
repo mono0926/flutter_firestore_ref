@@ -1,3 +1,7 @@
+## 0.13.0
+
+- Upgrade cloud_firestore dependency to ">=3.0.0 <4.0.0" from ">=2.0.0 <3.0.0"
+
 ## 0.12.4+1
 
 - Refactor ==/hashCode of DocumentRef
