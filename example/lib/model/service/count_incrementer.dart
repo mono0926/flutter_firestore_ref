@@ -9,9 +9,9 @@ final countIncrementer = Provider(
   (ref) {
     final read = ref.read;
     return () {
-      final updateType = read(selectedUpdateType).state;
+      final updateType = read(selectedUpdateType);
       logger.info('updateType: $updateType');
-      final doc = read(myUserDocProvider).data?.value;
+      final doc = read(myUserDocProvider).value;
       if (doc == null) {
         throw AssertionError('_doc should not be null');
       }

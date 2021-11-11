@@ -48,7 +48,7 @@ class _ListView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final controller = ref.watch(pagingController);
-    final docs = ref.watch(pagingDocsProvider).data?.value ?? [];
+    final docs = ref.watch(pagingDocsProvider).value ?? [];
     final count = ref.watch(pagingDocsLengthForWidgetProvider);
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;

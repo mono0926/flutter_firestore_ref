@@ -2,6 +2,7 @@ import 'package:cloud_functions/cloud_functions.dart';
 import 'package:example/model/service/service.dart';
 import 'package:example/router.dart';
 import 'package:example/util/util.dart';
+import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -34,8 +35,10 @@ class UserCounterPage extends ConsumerWidget {
                 UpdateType.batch: Text('Batch'),
                 UpdateType.transaction: Text('Tran'),
               },
-              onValueChanged: (type) => updateType.state = type!,
-              groupValue: updateType.state,
+              onValueChanged: (type) => ref
+                  .read(selectedUpdateType.notifier)
+                  .update((state) => type!),
+              groupValue: updateType,
             ),
           ),
           const Divider(height: 0),
@@ -84,7 +87,7 @@ class _AccountStatus extends ConsumerWidget {
     return ListTile(
       title: const Text('User ID'),
       subtitle: Text(
-        ref.watch(userIdProvider.select((id) => id.data?.value ?? '-')),
+        ref.watch(userIdProvider.select((id) => id.value ?? '-')),
       ),
     );
   }
@@ -103,8 +106,9 @@ class _MyCounter extends ConsumerWidget {
         icon: const Icon(Icons.add),
         onPressed: () async {
           ref.read(countIncrementer)();
-          final result =
-              await FirebaseFunctions.instance.httpsCallable('now').call<Map>();
+          final result = await FirebaseFunctions.instance
+              .httpsCallable('now')
+              .call<JsonMap>();
           logger.info(result.data);
         },
       ),
@@ -116,8 +120,8 @@ class _Users extends ConsumerWidget {
   const _Users({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final docs = ref.watch(userDocsProvider).data?.value ?? [];
-    final myId = ref.watch(userIdProvider).data?.value;
+    final docs = ref.watch(userDocsProvider).value ?? [];
+    final myId = ref.watch(userIdProvider).value;
     return ListView.builder(
       itemBuilder: (context, index) {
         final doc = docs[index];

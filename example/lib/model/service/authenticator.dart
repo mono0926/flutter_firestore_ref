@@ -29,13 +29,12 @@ final myUserRefProvider = Provider(
 );
 
 final _myUserDocProvider = StreamProvider.autoDispose(
-  (ref) =>
-      ref.watch(myUserRefProvider).data?.value.document() ?? Stream.value(null),
+  (ref) => ref.watch(myUserRefProvider).value?.document() ?? Stream.value(null),
 );
 
 final myUserDocProvider = Provider.autoDispose(
   (ref) {
-    final doc = ref.watch(_myUserDocProvider).data?.value;
+    final doc = ref.watch(_myUserDocProvider).value;
     return ref.watch(myUserRefProvider).whenData((userRef) =>
         doc ??
         UserDoc(

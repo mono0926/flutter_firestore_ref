@@ -8,7 +8,7 @@ class App extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     ref.watch(signInAnonymouslyProvider);
-    final isSignedIn = ref.watch(isSignedInProvider).data?.value ?? false;
+    final isSignedIn = ref.watch(isSignedInProvider).value ?? false;
     return !isSignedIn
         ? const Center(child: CircularProgressIndicator())
         : MaterialApp(
