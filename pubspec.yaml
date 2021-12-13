@@ -21,3 +21,7 @@ dev_dependencies:
     sdk: flutter
   pedantic_mono:
 flutter:
+false_secrets:
+  - google-services.json
+  - GoogleService-Info.plist
+  - example/web/index.html
