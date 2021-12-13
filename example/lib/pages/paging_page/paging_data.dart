@@ -1,7 +1,6 @@
 import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:json_annotation/json_annotation.dart';
 
 part 'paging_data.freezed.dart';
 part 'paging_data.g.dart';

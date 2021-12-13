@@ -1,6 +1,5 @@
 import 'package:example/app.dart';
 import 'package:example/router.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
