@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:disposable_provider/disposable_provider.dart';
 import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter/cupertino.dart';
@@ -31,26 +33,32 @@ class CollectionPagingController<E, D extends Document<E>,
                     return doc;
                   });
               return (queryBuilder ?? (q) => q)(queryRef.query)
-                  .limit(limit)
+                  .limit(limit + 1)
                   .snapshots()
                   .map(documentList.applyingSnapshot);
             })
             .map((r) => r.list)
-            .listen(_documentsController.add),
+            .listen(_documentsForHasMoreController.add),
       )
       ..add(
         Rx.combineLatest2(
-                _documentsController.map((docs) => docs.length),
+                _documentsForHasMoreController.map((docs) => docs.length),
                 _limitController,
-                (int docLength, int limit) => docLength >= limit)
+                (int docLength, int limit) => docLength > limit)
             .listen(_hasMoreController.add),
       );
+    _documentsForHasMoreController.map((docs) {
+      final docLength = docs.length;
+      final size = min(docLength, _limitController.value);
+      return size == docLength ? docs : docs.take(size).toList();
+    }).pipe(_documentsController);
   }
 
   final int defaultPagingSize;
   final BehaviorSubject<int> _limitController;
   final _sh = SubscriptionHolder();
 
+  final _documentsForHasMoreController = BehaviorSubject<List<D>>.seeded([]);
   final _documentsController = BehaviorSubject<List<D>>.seeded([]);
   final _hasMoreController = BehaviorSubject<bool>.seeded(true);
   // After https://github.com/FirebaseExtended/flutterfire/pull/3263 fixed, change key type to DocumentReference
