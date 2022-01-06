@@ -1,6 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'paging_data.dart';
 
@@ -32,7 +33,7 @@ class _$PagingDataTearOff {
     );
   }
 
-  PagingData fromJson(Map<String, Object> json) {
+  PagingData fromJson(Map<String, Object?> json) {
     return PagingData.fromJson(json);
   }
 }
@@ -152,7 +153,7 @@ class _$_PagingData with DiagnosticableTreeMixin implements _PagingData {
   factory _$_PagingData.fromJson(Map<String, dynamic> json) =>
       _$$_PagingDataFromJson(json);
 
-  @JsonKey(defaultValue: 0)
+  @JsonKey()
   @override
   final int count;
   @override
@@ -180,23 +181,19 @@ class _$_PagingData with DiagnosticableTreeMixin implements _PagingData {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _PagingData &&
-            (identical(other.count, count) ||
-                const DeepCollectionEquality().equals(other.count, count)) &&
-            (identical(other.createdAt, createdAt) ||
-                const DeepCollectionEquality()
-                    .equals(other.createdAt, createdAt)) &&
-            (identical(other.updatedAt, updatedAt) ||
-                const DeepCollectionEquality()
-                    .equals(other.updatedAt, updatedAt)));
+        (other.runtimeType == runtimeType &&
+            other is _PagingData &&
+            const DeepCollectionEquality().equals(other.count, count) &&
+            const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
+            const DeepCollectionEquality().equals(other.updatedAt, updatedAt));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(count) ^
-      const DeepCollectionEquality().hash(createdAt) ^
-      const DeepCollectionEquality().hash(updatedAt);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(count),
+      const DeepCollectionEquality().hash(createdAt),
+      const DeepCollectionEquality().hash(updatedAt));
 
   @JsonKey(ignore: true)
   @override
@@ -219,13 +216,13 @@ abstract class _PagingData implements PagingData {
       _$_PagingData.fromJson;
 
   @override
-  int get count => throw _privateConstructorUsedError;
+  int get count;
   @override
   @TimestampConverter()
-  DateTime? get createdAt => throw _privateConstructorUsedError;
+  DateTime? get createdAt;
   @override
   @TimestampConverter()
-  DateTime? get updatedAt => throw _privateConstructorUsedError;
+  DateTime? get updatedAt;
   @override
   @JsonKey(ignore: true)
   _$PagingDataCopyWith<_PagingData> get copyWith =>
