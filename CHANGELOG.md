@@ -1,3 +1,7 @@
+## 0.13.2
+
+- Fix the error when CollectionPagingController is closed
+
 ## 0.13.1
 
 - Enhance paging

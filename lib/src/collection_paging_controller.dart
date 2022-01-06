@@ -78,10 +78,11 @@ class CollectionPagingController<E, D extends Document<E>,
   }
 
   @override
-  void dispose() {
+  Future<void> dispose() async {
     _sh.dispose();
-    _limitController.close();
-    _documentsController.close();
-    _hasMoreController.close();
+    await _limitController.close();
+    await _documentsController.drain<void>();
+    await _documentsController.close();
+    await _hasMoreController.close();
   }
 }
