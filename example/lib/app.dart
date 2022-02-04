@@ -14,13 +14,16 @@ class App extends ConsumerWidget {
         : MaterialApp(
             title: ref.watch(appInfo).title,
             onGenerateRoute: ref.watch(router).onGenerateRoute,
-            theme: ThemeData.from(
-              colorScheme: const ColorScheme.light(),
+            theme: ThemeData(
+              colorSchemeSeed: Colors.green,
+              useMaterial3: true,
             ).copyWith(
               dividerColor: Colors.black54,
             ),
-            darkTheme: ThemeData.from(
-              colorScheme: const ColorScheme.dark(),
+            darkTheme: ThemeData(
+              colorSchemeSeed: Colors.green,
+              useMaterial3: true,
+              brightness: Brightness.dark,
             ),
           );
   }
