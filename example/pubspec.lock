@@ -7,14 +7,14 @@ packages:
       name: _fe_analyzer_shared
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "32.0.0"
+    version: "34.0.0"
   analyzer:
     dependency: transitive
     description:
       name: analyzer
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.0.0"
+    version: "3.2.0"
   args:
     dependency: transitive
     description:
@@ -91,7 +91,7 @@ packages:
       name: built_value
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "8.1.3"
+    version: "8.1.4"
   characters:
     dependency: transitive
     description:
@@ -133,42 +133,42 @@ packages:
       name: cloud_firestore
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.1.5"
+    version: "3.1.8"
   cloud_firestore_platform_interface:
     dependency: transitive
     description:
       name: cloud_firestore_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "5.4.10"
+    version: "5.4.13"
   cloud_firestore_web:
     dependency: transitive
     description:
       name: cloud_firestore_web
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.6.5"
+    version: "2.6.8"
   cloud_functions:
     dependency: "direct main"
     description:
       name: cloud_functions
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.2.4"
+    version: "3.2.7"
   cloud_functions_platform_interface:
     dependency: transitive
     description:
       name: cloud_functions_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "5.0.19"
+    version: "5.0.21"
   cloud_functions_web:
     dependency: transitive
     description:
       name: cloud_functions_web
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.2.5"
+    version: "4.2.7"
   code_builder:
     dependency: transitive
     description:
@@ -238,63 +238,63 @@ packages:
       name: firebase_auth
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.3.4"
+    version: "3.3.7"
   firebase_auth_platform_interface:
     dependency: transitive
     description:
       name: firebase_auth_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "6.1.9"
+    version: "6.1.11"
   firebase_auth_web:
     dependency: transitive
     description:
       name: firebase_auth_web
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.3.5"
+    version: "3.3.7"
   firebase_core:
     dependency: "direct main"
     description:
       name: firebase_core
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.10.6"
+    version: "1.12.0"
   firebase_core_platform_interface:
     dependency: transitive
     description:
       name: firebase_core_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.2.3"
+    version: "4.2.4"
   firebase_core_web:
     dependency: transitive
     description:
       name: firebase_core_web
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.5.3"
+    version: "1.5.4"
   firebase_storage:
     dependency: "direct main"
     description:
       name: firebase_storage
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "10.2.4"
+    version: "10.2.7"
   firebase_storage_platform_interface:
     dependency: transitive
     description:
       name: firebase_storage_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.0.11"
+    version: "4.0.14"
   firebase_storage_web:
     dependency: transitive
     description:
       name: firebase_storage_web
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.2.5"
+    version: "3.2.8"
   firestore_ref:
     dependency: "direct main"
     description:
@@ -320,7 +320,7 @@ packages:
       name: flutter_hooks
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.18.2"
+    version: "0.18.2+1"
   flutter_lints:
     dependency: transitive
     description:
@@ -400,7 +400,7 @@ packages:
       name: http_multi_server
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.0.1"
+    version: "3.2.0"
   http_parser:
     dependency: transitive
     description:
@@ -442,7 +442,7 @@ packages:
       name: json_serializable
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "6.1.3"
+    version: "6.1.4"
   lints:
     dependency: transitive
     description:
@@ -512,14 +512,14 @@ packages:
       name: pedantic_mono
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.15.0"
+    version: "1.17.0"
   plugin_platform_interface:
     dependency: transitive
     description:
       name: plugin_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.1.0"
+    version: "2.1.2"
   pool:
     dependency: transitive
     description:
@@ -636,7 +636,7 @@ packages:
       name: state_notifier
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.7.1"
+    version: "0.7.2+1"
   stream_channel:
     dependency: transitive
     description:

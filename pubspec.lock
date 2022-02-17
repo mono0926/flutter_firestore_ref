@@ -42,21 +42,21 @@ packages:
       name: cloud_firestore
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.1.7"
+    version: "3.1.8"
   cloud_firestore_platform_interface:
     dependency: transitive
     description:
       name: cloud_firestore_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "5.4.12"
+    version: "5.4.13"
   cloud_firestore_web:
     dependency: transitive
     description:
       name: cloud_firestore_web
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.6.7"
+    version: "2.6.8"
   collection:
     dependency: transitive
     description:
@@ -190,7 +190,7 @@ packages:
       name: pedantic_mono
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.16.0"
+    version: "1.17.0"
   plugin_platform_interface:
     dependency: transitive
     description:
