@@ -42,12 +42,11 @@ class CollectionPagingController<E, D extends Document<E>,
             .listen(_documentsForHasMoreController.add),
       )
       ..add(
-        Rx.combineLatest2(
-          _documentsForHasMoreController.map((docs) => docs.length),
-          _limitController,
-          (int docLength, int limit) => docLength > limit,
-        ).listen(_hasMoreController.add),
+        _documentsForHasMoreController.listen((docs) {
+          _hasMoreController.add(docs.length > _limitController.value);
+        }),
       );
+
     _documentsForHasMoreController.map((docs) {
       final docLength = docs.length;
       final size = min(docLength, _limitController.value);
