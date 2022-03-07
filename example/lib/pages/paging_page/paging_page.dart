@@ -56,9 +56,7 @@ class _ListView extends ConsumerWidget {
       itemCount: count,
       itemBuilder: (context, index) {
         if (index >= docs.length) {
-          if (index > 0) {
-            controller.loadMore();
-          }
+          controller.loadMore();
           return const ListTile(
             title: Center(child: CircularProgressIndicator()),
           );
