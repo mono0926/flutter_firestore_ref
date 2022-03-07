@@ -42,8 +42,9 @@ abstract class QueryRef<E, D extends Document<E>,
     return documentListResult(queryBuilder).map((r) => r.map);
   }
 
-  Stream<DocumentListResult<E, D, DocRef>> documentListResult(
-      [QueryBuilder? queryBuilder]) {
+  Stream<DocumentListResult<E, D, DocRef>> documentListResult([
+    QueryBuilder? queryBuilder,
+  ]) {
     final documentList = DocumentList<E, D, DocRef>(
       docRefCreator: docRef,
       decoder: decode,

@@ -45,7 +45,7 @@ class PagingDocsModifier {
 
   void addDocs(int count) {
     runBatchWrite<void>((batch) async {
-      for (final _ in List.generate(count, (i) => i)) {
+      for (var i = 0; i < count; i++) {
         await _read(pagingCollectionRef).docRefWithId().set(
               const PagingData(),
               batch: batch,

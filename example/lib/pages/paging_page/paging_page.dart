@@ -65,7 +65,7 @@ class _ListView extends ConsumerWidget {
         return ListTile(
           title: Text('${doc.entity!.count}'),
           trailing: IconButton(
-            color: colorScheme.primaryVariant,
+            color: colorScheme.secondary,
             icon: const Icon(Icons.add),
             onPressed: () => ref.read(pagingDocsModifier).increment(doc: doc),
           ),

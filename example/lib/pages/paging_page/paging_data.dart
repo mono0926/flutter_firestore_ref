@@ -41,7 +41,9 @@ class PagingDatasRef
 
   @override
   PagingDataDoc decode(
-      DocumentSnapshot<JsonMap> snapshot, PagingDataRef docRef) {
+    DocumentSnapshot<JsonMap> snapshot,
+    PagingDataRef docRef,
+  ) {
     return PagingDataDoc(
       docRef,
       PagingData.fromJson(snapshot.data()!),
