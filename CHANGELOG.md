@@ -1,3 +1,7 @@
+## 0.13.3
+
+- Fix CollectionPagingController hasMore flicking
+
 ## 0.13.2
 
 - Fix the error when CollectionPagingController is closed
@@ -99,7 +103,7 @@
 
 ## 0.8.14
 
-- Rename to documentListResult and make it public 
+- Rename to documentListResult and make it public
 
 ## 0.8.13
 
@@ -202,7 +206,7 @@
 
 - Support batch write.
 
-## 0.0.2 
+## 0.0.2
 
 - Add parseJson.
 
