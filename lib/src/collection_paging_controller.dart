@@ -21,17 +21,18 @@ class CollectionPagingController<E, D extends Document<E>,
         _limitController.stream
             .switchMap((limit) {
               final documentList = DocumentList<E, D, DocRef>(
-                  docRefCreator: queryRef.docRef,
-                  decoder: (snapshot, docRef) {
-                    final cached = _documentsCache[snapshot.reference.path];
-                    if (cached != null && snapshot.metadata.isFromCache) {
-                      // logger.fine('cache hit (id: ${cached.id})');
-                      return cached;
-                    }
-                    final doc = queryRef.decode(snapshot, docRef);
-                    _documentsCache[snapshot.reference.path] = doc;
-                    return doc;
-                  });
+                docRefCreator: queryRef.docRef,
+                decoder: (snapshot, docRef) {
+                  final cached = _documentsCache[snapshot.reference.path];
+                  if (cached != null && snapshot.metadata.isFromCache) {
+                    // logger.fine('cache hit (id: ${cached.id})');
+                    return cached;
+                  }
+                  final doc = queryRef.decode(snapshot, docRef);
+                  _documentsCache[snapshot.reference.path] = doc;
+                  return doc;
+                },
+              );
               return (queryBuilder ?? (q) => q)(queryRef.query)
                   .limit(limit + 1)
                   .snapshots()
@@ -42,10 +43,10 @@ class CollectionPagingController<E, D extends Document<E>,
       )
       ..add(
         Rx.combineLatest2(
-                _documentsForHasMoreController.map((docs) => docs.length),
-                _limitController,
-                (int docLength, int limit) => docLength > limit)
-            .listen(_hasMoreController.add),
+          _documentsForHasMoreController.map((docs) => docs.length),
+          _limitController,
+          (int docLength, int limit) => docLength > limit,
+        ).listen(_hasMoreController.add),
       );
     _documentsForHasMoreController.map((docs) {
       final docLength = docs.length;
