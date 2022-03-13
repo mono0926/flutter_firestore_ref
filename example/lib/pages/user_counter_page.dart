@@ -106,6 +106,7 @@ class _MyCounter extends ConsumerWidget {
         icon: const Icon(Icons.add),
         onPressed: () async {
           ref.read(countIncrementer)();
+          // 適当にどこかで雑に呼びたかっただけでサンプルとは関係なし(無視してください)
           final result = await FirebaseFunctions.instance
               .httpsCallable('now')
               .call<JsonMap>();
