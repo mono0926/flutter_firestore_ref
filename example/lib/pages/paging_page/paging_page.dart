@@ -58,7 +58,7 @@ class _ListView extends ConsumerWidget {
         if (index >= docs.length) {
           controller.loadMore();
           return const ListTile(
-            title: Center(child: CircularProgressIndicator()),
+            title: Center(child: CircularProgressIndicator.adaptive()),
           );
         }
         final doc = docs[index];
