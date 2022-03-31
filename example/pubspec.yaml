@@ -4,7 +4,7 @@ version: 1.0.0+1
 publish_to: none
 
 environment:
-  sdk: ">=2.16.0 <3.0.0"
+  sdk: '>=2.16.0 <3.0.0'
 dependencies:
   cloud_firestore:
   cloud_functions:
@@ -18,7 +18,9 @@ dependencies:
     sdk: flutter
   flutter_hooks:
   freezed_annotation:
+  go_router:
   hooks_riverpod:
+  mono_kit:
   recase:
   rxdart:
   simple_logger:
@@ -31,5 +33,8 @@ dev_dependencies:
   freezed:
   json_serializable:
   pedantic_mono:
+dependency_overrides:
+  hooks_riverpod: '>=2.0.0-0'
+  mono_kit: '>=0.26.0-0'
 flutter:
   uses-material-design: true

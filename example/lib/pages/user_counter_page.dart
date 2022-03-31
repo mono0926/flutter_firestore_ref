@@ -10,7 +10,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 class UserCounterPage extends ConsumerWidget {
   const UserCounterPage({Key? key}) : super(key: key);
 
-  static const routeName = '/user_counter';
+  static const routeName = 'user_counter';
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

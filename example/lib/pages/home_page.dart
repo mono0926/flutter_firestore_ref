@@ -1,6 +1,7 @@
 import 'package:example/app.dart';
 import 'package:example/router.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class HomePage extends ConsumerWidget {
@@ -17,7 +18,7 @@ class HomePage extends ConsumerWidget {
           return ListTile(
             title: Text(pascalCaseFromRouteName(routeName)),
             trailing: const Icon(Icons.chevron_right),
-            onTap: () => Navigator.of(context).pushNamed(routeName),
+            onTap: () => GoRouter.of(context).goNamed(routeName),
           );
         }).toList(),
       ),

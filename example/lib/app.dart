@@ -9,11 +9,11 @@ class App extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     ref.watch(signInAnonymouslyProvider);
     final isSignedIn = ref.watch(isSignedInProvider).value ?? false;
+    final router = ref.watch(routerProvider);
     return !isSignedIn
         ? const Center(child: CircularProgressIndicator())
-        : MaterialApp(
+        : MaterialApp.router(
             title: ref.watch(appInfo).title,
-            onGenerateRoute: ref.watch(router).onGenerateRoute,
             theme: ThemeData(
               colorSchemeSeed: Colors.green,
               useMaterial3: true,
@@ -25,6 +25,8 @@ class App extends ConsumerWidget {
               useMaterial3: true,
               brightness: Brightness.dark,
             ),
+            routeInformationParser: router.routeInformationParser,
+            routerDelegate: router.routerDelegate,
           );
   }
 }

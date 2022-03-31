@@ -8,7 +8,7 @@ import 'paging_page_controller.dart';
 class PagingPage extends ConsumerWidget {
   const PagingPage({Key? key}) : super(key: key);
 
-  static const routeName = '/paging_page';
+  static const routeName = 'paging';
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
