@@ -1,5 +1,6 @@
 // import 'package:cloud_firestore_platform_interface/cloud_firestore_platform_interface.dart';
 import 'package:cloud_functions/cloud_functions.dart';
+import 'package:example/firebase_options.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -18,7 +19,7 @@ Future<void> main() async {
   firestoreOperationCounter.enabled = true;
 
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   if (isEmulator) {
     const localhost = 'localhost';
