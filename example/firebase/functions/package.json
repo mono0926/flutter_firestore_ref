@@ -10,17 +10,17 @@
     "logs": "firebase functions:log"
   },
   "engines": {
-    "node": "14"
+    "node": "16"
   },
   "main": "lib/index.js",
   "dependencies": {
-    "firebase-admin": "^9.10.0",
-    "firebase-functions": "^3.14.1"
+    "firebase-admin": "^10.1.0",
+    "firebase-functions": "^3.20.1"
   },
   "devDependencies": {
-    "firebase-functions-test": "^0.3.0",
+    "firebase-functions-test": "^0.3.3",
     "tslint": "^5.20.1",
-    "typescript": "^4.3.5"
+    "typescript": "^4.6.4"
   },
   "private": true
 }
