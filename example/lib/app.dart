@@ -2,6 +2,7 @@ import 'package:example/model/service/authenticator.dart';
 import 'package:example/router.dart';
 import 'package:flutter/material.dart' hide Router;
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:mono_kit/mono_kit.dart';
 
 class App extends ConsumerWidget {
   const App({Key? key}) : super(key: key);
@@ -14,17 +15,10 @@ class App extends ConsumerWidget {
         ? const Center(child: CircularProgressIndicator())
         : MaterialApp.router(
             title: ref.watch(appInfo).title,
-            theme: ThemeData(
-              colorSchemeSeed: Colors.green,
-              useMaterial3: true,
-            ).copyWith(
+            theme: lightTheme().copyWith(
               dividerColor: Colors.black54,
             ),
-            darkTheme: ThemeData(
-              colorSchemeSeed: Colors.green,
-              useMaterial3: true,
-              brightness: Brightness.dark,
-            ),
+            darkTheme: darkTheme(),
             routeInformationParser: router.routeInformationParser,
             routerDelegate: router.routerDelegate,
           );
