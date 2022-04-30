@@ -1,8 +1,6 @@
-import 'package:cloud_functions/cloud_functions.dart';
 import 'package:example/model/service/service.dart';
 import 'package:example/router.dart';
 import 'package:example/util/util.dart';
-import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -107,10 +105,10 @@ class _MyCounter extends ConsumerWidget {
         onPressed: () async {
           ref.read(countIncrementer)();
           // 適当にどこかで雑に呼びたかっただけでサンプルとは関係なし(無視してください)
-          final result = await FirebaseFunctions.instance
-              .httpsCallable('now')
-              .call<JsonMap>();
-          logger.info(result.data);
+          // final result = await FirebaseFunctions.instance
+          //     .httpsCallable('now')
+          //     .call<JsonMap>();
+          // logger.info(result.data);
         },
       ),
     );
