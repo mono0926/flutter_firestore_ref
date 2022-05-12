@@ -46,7 +46,7 @@ class DocumentRef<E, D extends Document<E>> {
     }
     if (!snapshot.exists) {
       logger.warning('$D not found(id: ${ref.id})');
-      return Future.value(null);
+      return Future.value();
     }
     return collectionRef.decode(
       snapshot,
@@ -84,14 +84,14 @@ class DocumentRef<E, D extends Document<E>> {
     }
     if (batch != null) {
       batch.update(ref, data);
-      return Future.value(null);
+      return Future.value();
     }
     if (transaction != null) {
       transaction.update(ref, data);
-      return Future.value(null);
+      return Future.value();
     }
     assert(false);
-    return Future.value(null);
+    return Future.value();
   }
 
   /// 全置き換え
@@ -122,14 +122,14 @@ class DocumentRef<E, D extends Document<E>> {
     }
     if (batch != null) {
       batch.set(ref, data);
-      return Future.value(null);
+      return Future.value();
     }
     if (transaction != null) {
       transaction.set(ref, data);
-      return Future.value(null);
+      return Future.value();
     }
     assert(false);
-    return Future.value(null);
+    return Future.value();
   }
 
   /// マージ
@@ -160,14 +160,14 @@ class DocumentRef<E, D extends Document<E>> {
     }
     if (batch != null) {
       batch.set(ref, data, SetOptions(merge: true));
-      return Future.value(null);
+      return Future.value();
     }
     if (transaction != null) {
       transaction.set(ref, data, SetOptions(merge: true));
-      return Future.value(null);
+      return Future.value();
     }
     assert(false);
-    return Future.value(null);
+    return Future.value();
   }
 
   Future<void> delete({
@@ -183,14 +183,14 @@ class DocumentRef<E, D extends Document<E>> {
     }
     if (batch != null) {
       batch.delete(ref);
-      return Future.value(null);
+      return Future.value();
     }
     if (transaction != null) {
       transaction.delete(ref);
-      return Future.value(null);
+      return Future.value();
     }
     assert(false);
-    return Future.value(null);
+    return Future.value();
   }
 
   @override
