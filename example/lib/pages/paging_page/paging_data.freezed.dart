@@ -22,6 +22,7 @@ PagingData _$PagingDataFromJson(Map<String, dynamic> json) {
 mixin _$PagingData {
   int get count => throw _privateConstructorUsedError;
   UnionTimestamp get createdAt => throw _privateConstructorUsedError;
+  @UnionTimestampConverter.alwaysServerTimestampConverter
   UnionTimestamp get updatedAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -35,7 +36,11 @@ abstract class $PagingDataCopyWith<$Res> {
   factory $PagingDataCopyWith(
           PagingData value, $Res Function(PagingData) then) =
       _$PagingDataCopyWithImpl<$Res>;
-  $Res call({int count, UnionTimestamp createdAt, UnionTimestamp updatedAt});
+  $Res call(
+      {int count,
+      UnionTimestamp createdAt,
+      @UnionTimestampConverter.alwaysServerTimestampConverter
+          UnionTimestamp updatedAt});
 
   $UnionTimestampCopyWith<$Res> get createdAt;
   $UnionTimestampCopyWith<$Res> get updatedAt;
@@ -93,7 +98,11 @@ abstract class _$$_PagingDataCopyWith<$Res>
           _$_PagingData value, $Res Function(_$_PagingData) then) =
       __$$_PagingDataCopyWithImpl<$Res>;
   @override
-  $Res call({int count, UnionTimestamp createdAt, UnionTimestamp updatedAt});
+  $Res call(
+      {int count,
+      UnionTimestamp createdAt,
+      @UnionTimestampConverter.alwaysServerTimestampConverter
+          UnionTimestamp updatedAt});
 
   @override
   $UnionTimestampCopyWith<$Res> get createdAt;
@@ -141,7 +150,8 @@ class _$_PagingData with DiagnosticableTreeMixin implements _PagingData {
   const _$_PagingData(
       {this.count = 0,
       this.createdAt = const UnionTimestamp.serverTimestamp(),
-      this.updatedAt = const UnionTimestamp.serverTimestamp()});
+      @UnionTimestampConverter.alwaysServerTimestampConverter
+          this.updatedAt = const UnionTimestamp.serverTimestamp()});
 
   factory _$_PagingData.fromJson(Map<String, dynamic> json) =>
       _$$_PagingDataFromJson(json);
@@ -154,6 +164,7 @@ class _$_PagingData with DiagnosticableTreeMixin implements _PagingData {
   final UnionTimestamp createdAt;
   @override
   @JsonKey()
+  @UnionTimestampConverter.alwaysServerTimestampConverter
   final UnionTimestamp updatedAt;
 
   @override
@@ -204,7 +215,8 @@ abstract class _PagingData implements PagingData {
   const factory _PagingData(
       {final int count,
       final UnionTimestamp createdAt,
-      final UnionTimestamp updatedAt}) = _$_PagingData;
+      @UnionTimestampConverter.alwaysServerTimestampConverter
+          final UnionTimestamp updatedAt}) = _$_PagingData;
 
   factory _PagingData.fromJson(Map<String, dynamic> json) =
       _$_PagingData.fromJson;
@@ -214,6 +226,7 @@ abstract class _PagingData implements PagingData {
   @override
   UnionTimestamp get createdAt;
   @override
+  @UnionTimestampConverter.alwaysServerTimestampConverter
   UnionTimestamp get updatedAt;
   @override
   @JsonKey(ignore: true)

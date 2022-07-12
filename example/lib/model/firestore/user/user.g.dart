@@ -16,12 +16,13 @@ _$_User _$$_UserFromJson(Map json) => _$_User(
               .fromJson(json['createdAt'] as Object),
       updatedAt: json['updatedAt'] == null
           ? const UnionTimestamp.serverTimestamp()
-          : const UnionTimestampConverter()
+          : UnionTimestampConverter.alwaysServerTimestampConverter
               .fromJson(json['updatedAt'] as Object),
     );
 
 Map<String, dynamic> _$$_UserToJson(_$_User instance) => <String, dynamic>{
       'count': instance.count,
       'createdAt': const UnionTimestampConverter().toJson(instance.createdAt),
-      'updatedAt': const UnionTimestampConverter().toJson(instance.updatedAt),
+      'updatedAt': UnionTimestampConverter.alwaysServerTimestampConverter
+          .toJson(instance.updatedAt),
     };

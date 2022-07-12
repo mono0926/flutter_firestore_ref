@@ -12,7 +12,9 @@ class PagingData with _$PagingData {
   const factory PagingData({
     @Default(0) int count,
     @Default(UnionTimestamp.serverTimestamp()) UnionTimestamp createdAt,
-    @Default(UnionTimestamp.serverTimestamp()) UnionTimestamp updatedAt,
+    @UnionTimestampConverter.alwaysServerTimestampConverter
+    @Default(UnionTimestamp.serverTimestamp())
+        UnionTimestamp updatedAt,
   }) = _PagingData;
   factory PagingData.fromJson(JsonMap json) => _$PagingDataFromJson(json);
 }
@@ -53,13 +55,7 @@ class PagingDatasRef
   }
 
   @override
-  JsonMap encode(PagingData data) {
-    return data
-        .copyWith(
-          updatedAt: const UnionTimestamp.serverTimestamp(),
-        )
-        .toJson();
-  }
+  JsonMap encode(PagingData data) => data.toJson();
 }
 
 class PagingDataRef extends DocumentRef<PagingData, PagingDataDoc> {

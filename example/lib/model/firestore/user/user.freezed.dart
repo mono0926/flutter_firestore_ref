@@ -22,6 +22,7 @@ User _$UserFromJson(Map<String, dynamic> json) {
 mixin _$User {
   int get count => throw _privateConstructorUsedError;
   UnionTimestamp get createdAt => throw _privateConstructorUsedError;
+  @UnionTimestampConverter.alwaysServerTimestampConverter
   UnionTimestamp get updatedAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -33,7 +34,11 @@ mixin _$User {
 abstract class $UserCopyWith<$Res> {
   factory $UserCopyWith(User value, $Res Function(User) then) =
       _$UserCopyWithImpl<$Res>;
-  $Res call({int count, UnionTimestamp createdAt, UnionTimestamp updatedAt});
+  $Res call(
+      {int count,
+      UnionTimestamp createdAt,
+      @UnionTimestampConverter.alwaysServerTimestampConverter
+          UnionTimestamp updatedAt});
 
   $UnionTimestampCopyWith<$Res> get createdAt;
   $UnionTimestampCopyWith<$Res> get updatedAt;
@@ -89,7 +94,11 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
   factory _$$_UserCopyWith(_$_User value, $Res Function(_$_User) then) =
       __$$_UserCopyWithImpl<$Res>;
   @override
-  $Res call({int count, UnionTimestamp createdAt, UnionTimestamp updatedAt});
+  $Res call(
+      {int count,
+      UnionTimestamp createdAt,
+      @UnionTimestampConverter.alwaysServerTimestampConverter
+          UnionTimestamp updatedAt});
 
   @override
   $UnionTimestampCopyWith<$Res> get createdAt;
@@ -136,7 +145,8 @@ class _$_User extends _User with DiagnosticableTreeMixin {
   const _$_User(
       {this.count = 0,
       this.createdAt = const UnionTimestamp.serverTimestamp(),
-      this.updatedAt = const UnionTimestamp.serverTimestamp()})
+      @UnionTimestampConverter.alwaysServerTimestampConverter
+          this.updatedAt = const UnionTimestamp.serverTimestamp()})
       : super._();
 
   factory _$_User.fromJson(Map<String, dynamic> json) => _$$_UserFromJson(json);
@@ -149,6 +159,7 @@ class _$_User extends _User with DiagnosticableTreeMixin {
   final UnionTimestamp createdAt;
   @override
   @JsonKey()
+  @UnionTimestampConverter.alwaysServerTimestampConverter
   final UnionTimestamp updatedAt;
 
   @override
@@ -199,7 +210,8 @@ abstract class _User extends User {
   const factory _User(
       {final int count,
       final UnionTimestamp createdAt,
-      final UnionTimestamp updatedAt}) = _$_User;
+      @UnionTimestampConverter.alwaysServerTimestampConverter
+          final UnionTimestamp updatedAt}) = _$_User;
   const _User._() : super._();
 
   factory _User.fromJson(Map<String, dynamic> json) = _$_User.fromJson;
@@ -209,6 +221,7 @@ abstract class _User extends User {
   @override
   UnionTimestamp get createdAt;
   @override
+  @UnionTimestampConverter.alwaysServerTimestampConverter
   UnionTimestamp get updatedAt;
   @override
   @JsonKey(ignore: true)

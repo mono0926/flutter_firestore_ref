@@ -16,7 +16,7 @@ _$_PagingData _$$_PagingDataFromJson(Map json) => _$_PagingData(
               .fromJson(json['createdAt'] as Object),
       updatedAt: json['updatedAt'] == null
           ? const UnionTimestamp.serverTimestamp()
-          : const UnionTimestampConverter()
+          : UnionTimestampConverter.alwaysServerTimestampConverter
               .fromJson(json['updatedAt'] as Object),
     );
 
@@ -24,5 +24,6 @@ Map<String, dynamic> _$$_PagingDataToJson(_$_PagingData instance) =>
     <String, dynamic>{
       'count': instance.count,
       'createdAt': const UnionTimestampConverter().toJson(instance.createdAt),
-      'updatedAt': const UnionTimestampConverter().toJson(instance.updatedAt),
+      'updatedAt': UnionTimestampConverter.alwaysServerTimestampConverter
+          .toJson(instance.updatedAt),
     };
