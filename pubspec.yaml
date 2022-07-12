@@ -26,3 +26,4 @@ false_secrets:
   - google-services.json
   - GoogleService-Info.plist
   - example/web/index.html
+  - example/lib/firebase_options.dart
