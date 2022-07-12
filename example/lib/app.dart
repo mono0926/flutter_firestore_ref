@@ -5,7 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mono_kit/mono_kit.dart';
 
 class App extends ConsumerWidget {
-  const App({Key? key}) : super(key: key);
+  const App({super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     ref.watch(signInAnonymouslyProvider);
@@ -21,6 +21,7 @@ class App extends ConsumerWidget {
             darkTheme: darkTheme(),
             routeInformationParser: router.routeInformationParser,
             routerDelegate: router.routerDelegate,
+            routeInformationProvider: router.routeInformationProvider,
           );
   }
 }

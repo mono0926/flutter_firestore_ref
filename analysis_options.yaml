@@ -2,7 +2,9 @@
 include: package:pedantic_mono/analysis_options.yaml
 analyzer:
   exclude:
-    - lib/**/*.g.dart
     - lib/generated_plugin_registrant.dart
     - lib/firebase_options.dart
     - example/lib/firebase_options.dart
+  errors:
+    # https://github.com/rrousselGit/freezed/issues/488
+    invalid_annotation_target: ignore

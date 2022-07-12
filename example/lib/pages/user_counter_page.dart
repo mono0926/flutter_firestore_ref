@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class UserCounterPage extends ConsumerWidget {
-  const UserCounterPage({Key? key}) : super(key: key);
+  const UserCounterPage({super.key});
 
   static const routeName = 'user_counter';
 
@@ -53,7 +53,7 @@ class UserCounterPage extends ConsumerWidget {
 }
 
 class _DropdownButton extends ConsumerWidget {
-  const _DropdownButton({Key? key}) : super(key: key);
+  const _DropdownButton();
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
@@ -79,7 +79,7 @@ class _DropdownButton extends ConsumerWidget {
 }
 
 class _AccountStatus extends ConsumerWidget {
-  const _AccountStatus({Key? key}) : super(key: key);
+  const _AccountStatus();
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return ListTile(
@@ -92,7 +92,7 @@ class _AccountStatus extends ConsumerWidget {
 }
 
 class _MyCounter extends ConsumerWidget {
-  const _MyCounter({Key? key}) : super(key: key);
+  const _MyCounter();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -116,7 +116,7 @@ class _MyCounter extends ConsumerWidget {
 }
 
 class _Users extends ConsumerWidget {
-  const _Users({Key? key}) : super(key: key);
+  const _Users();
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final docs = ref.watch(userDocsProvider).value ?? [];
@@ -124,6 +124,7 @@ class _Users extends ConsumerWidget {
     return ListView.builder(
       itemBuilder: (context, index) {
         final doc = docs[index];
+        // ignore: use_colored_box
         return Container(
           key: ValueKey(doc.id),
           color: myId == doc.id ? Colors.green[100] : null,

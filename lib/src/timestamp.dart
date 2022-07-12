@@ -1,10 +1,12 @@
 import 'package:firestore_ref/firestore_ref.dart';
+import 'package:json_converter_helper/json_converter_helper.dart';
 
 class TimestampField {
   static const createdAt = 'createdAt';
   static const updatedAt = 'updatedAt';
 }
 
+@Deprecated('Use UnionTimestamp instead.')
 JsonMap replacingTimestamp({
   required JsonMap json,
 }) =>

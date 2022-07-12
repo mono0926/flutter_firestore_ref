@@ -1,4 +1,5 @@
 import 'package:firestore_ref/firestore_ref.dart';
+import 'package:json_converter_helper/json_converter_helper.dart';
 
 class DocumentList<E, D extends Document<E>, DocRef extends DocumentRef<E, D>> {
   DocumentList({
