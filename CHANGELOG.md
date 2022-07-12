@@ -1,3 +1,8 @@
+## 0.14.0
+
+- Delete JsonConveters
+  - Use [json_converter_helper](https://pub.dev/packages/json_converter_helper) instead.
+
 ## 0.13.3
 
 - Fix CollectionPagingController hasMore flicking

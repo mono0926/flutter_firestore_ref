@@ -12,42 +12,17 @@ part of 'paging_data.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 PagingData _$PagingDataFromJson(Map<String, dynamic> json) {
   return _PagingData.fromJson(json);
 }
 
 /// @nodoc
-class _$PagingDataTearOff {
-  const _$PagingDataTearOff();
-
-  _PagingData call(
-      {int count = 0,
-      @TimestampConverter() DateTime? createdAt,
-      @TimestampConverter() DateTime? updatedAt}) {
-    return _PagingData(
-      count: count,
-      createdAt: createdAt,
-      updatedAt: updatedAt,
-    );
-  }
-
-  PagingData fromJson(Map<String, Object?> json) {
-    return PagingData.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $PagingData = _$PagingDataTearOff();
-
-/// @nodoc
 mixin _$PagingData {
   int get count => throw _privateConstructorUsedError;
-  @TimestampConverter()
-  DateTime? get createdAt => throw _privateConstructorUsedError;
-  @TimestampConverter()
-  DateTime? get updatedAt => throw _privateConstructorUsedError;
+  UnionTimestamp get createdAt => throw _privateConstructorUsedError;
+  UnionTimestamp get updatedAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -60,10 +35,10 @@ abstract class $PagingDataCopyWith<$Res> {
   factory $PagingDataCopyWith(
           PagingData value, $Res Function(PagingData) then) =
       _$PagingDataCopyWithImpl<$Res>;
-  $Res call(
-      {int count,
-      @TimestampConverter() DateTime? createdAt,
-      @TimestampConverter() DateTime? updatedAt});
+  $Res call({int count, UnionTimestamp createdAt, UnionTimestamp updatedAt});
+
+  $UnionTimestampCopyWith<$Res> get createdAt;
+  $UnionTimestampCopyWith<$Res> get updatedAt;
 }
 
 /// @nodoc
@@ -88,36 +63,53 @@ class _$PagingDataCopyWithImpl<$Res> implements $PagingDataCopyWith<$Res> {
       createdAt: createdAt == freezed
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as UnionTimestamp,
       updatedAt: updatedAt == freezed
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as UnionTimestamp,
     ));
+  }
+
+  @override
+  $UnionTimestampCopyWith<$Res> get createdAt {
+    return $UnionTimestampCopyWith<$Res>(_value.createdAt, (value) {
+      return _then(_value.copyWith(createdAt: value));
+    });
+  }
+
+  @override
+  $UnionTimestampCopyWith<$Res> get updatedAt {
+    return $UnionTimestampCopyWith<$Res>(_value.updatedAt, (value) {
+      return _then(_value.copyWith(updatedAt: value));
+    });
   }
 }
 
 /// @nodoc
-abstract class _$PagingDataCopyWith<$Res> implements $PagingDataCopyWith<$Res> {
-  factory _$PagingDataCopyWith(
-          _PagingData value, $Res Function(_PagingData) then) =
-      __$PagingDataCopyWithImpl<$Res>;
+abstract class _$$_PagingDataCopyWith<$Res>
+    implements $PagingDataCopyWith<$Res> {
+  factory _$$_PagingDataCopyWith(
+          _$_PagingData value, $Res Function(_$_PagingData) then) =
+      __$$_PagingDataCopyWithImpl<$Res>;
   @override
-  $Res call(
-      {int count,
-      @TimestampConverter() DateTime? createdAt,
-      @TimestampConverter() DateTime? updatedAt});
+  $Res call({int count, UnionTimestamp createdAt, UnionTimestamp updatedAt});
+
+  @override
+  $UnionTimestampCopyWith<$Res> get createdAt;
+  @override
+  $UnionTimestampCopyWith<$Res> get updatedAt;
 }
 
 /// @nodoc
-class __$PagingDataCopyWithImpl<$Res> extends _$PagingDataCopyWithImpl<$Res>
-    implements _$PagingDataCopyWith<$Res> {
-  __$PagingDataCopyWithImpl(
-      _PagingData _value, $Res Function(_PagingData) _then)
-      : super(_value, (v) => _then(v as _PagingData));
+class __$$_PagingDataCopyWithImpl<$Res> extends _$PagingDataCopyWithImpl<$Res>
+    implements _$$_PagingDataCopyWith<$Res> {
+  __$$_PagingDataCopyWithImpl(
+      _$_PagingData _value, $Res Function(_$_PagingData) _then)
+      : super(_value, (v) => _then(v as _$_PagingData));
 
   @override
-  _PagingData get _value => super._value as _PagingData;
+  _$_PagingData get _value => super._value as _$_PagingData;
 
   @override
   $Res call({
@@ -125,7 +117,7 @@ class __$PagingDataCopyWithImpl<$Res> extends _$PagingDataCopyWithImpl<$Res>
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
-    return _then(_PagingData(
+    return _then(_$_PagingData(
       count: count == freezed
           ? _value.count
           : count // ignore: cast_nullable_to_non_nullable
@@ -133,35 +125,36 @@ class __$PagingDataCopyWithImpl<$Res> extends _$PagingDataCopyWithImpl<$Res>
       createdAt: createdAt == freezed
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as UnionTimestamp,
       updatedAt: updatedAt == freezed
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as UnionTimestamp,
     ));
   }
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@allConverters
 class _$_PagingData with DiagnosticableTreeMixin implements _PagingData {
   const _$_PagingData(
       {this.count = 0,
-      @TimestampConverter() this.createdAt,
-      @TimestampConverter() this.updatedAt});
+      this.createdAt = const UnionTimestamp.serverTimestamp(),
+      this.updatedAt = const UnionTimestamp.serverTimestamp()});
 
   factory _$_PagingData.fromJson(Map<String, dynamic> json) =>
       _$$_PagingDataFromJson(json);
 
-  @JsonKey()
   @override
+  @JsonKey()
   final int count;
   @override
-  @TimestampConverter()
-  final DateTime? createdAt;
+  @JsonKey()
+  final UnionTimestamp createdAt;
   @override
-  @TimestampConverter()
-  final DateTime? updatedAt;
+  @JsonKey()
+  final UnionTimestamp updatedAt;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -182,12 +175,13 @@ class _$_PagingData with DiagnosticableTreeMixin implements _PagingData {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _PagingData &&
+            other is _$_PagingData &&
             const DeepCollectionEquality().equals(other.count, count) &&
             const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
             const DeepCollectionEquality().equals(other.updatedAt, updatedAt));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -197,8 +191,8 @@ class _$_PagingData with DiagnosticableTreeMixin implements _PagingData {
 
   @JsonKey(ignore: true)
   @override
-  _$PagingDataCopyWith<_PagingData> get copyWith =>
-      __$PagingDataCopyWithImpl<_PagingData>(this, _$identity);
+  _$$_PagingDataCopyWith<_$_PagingData> get copyWith =>
+      __$$_PagingDataCopyWithImpl<_$_PagingData>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -208,9 +202,9 @@ class _$_PagingData with DiagnosticableTreeMixin implements _PagingData {
 
 abstract class _PagingData implements PagingData {
   const factory _PagingData(
-      {int count,
-      @TimestampConverter() DateTime? createdAt,
-      @TimestampConverter() DateTime? updatedAt}) = _$_PagingData;
+      {final int count,
+      final UnionTimestamp createdAt,
+      final UnionTimestamp updatedAt}) = _$_PagingData;
 
   factory _PagingData.fromJson(Map<String, dynamic> json) =
       _$_PagingData.fromJson;
@@ -218,13 +212,11 @@ abstract class _PagingData implements PagingData {
   @override
   int get count;
   @override
-  @TimestampConverter()
-  DateTime? get createdAt;
+  UnionTimestamp get createdAt;
   @override
-  @TimestampConverter()
-  DateTime? get updatedAt;
+  UnionTimestamp get updatedAt;
   @override
   @JsonKey(ignore: true)
-  _$PagingDataCopyWith<_PagingData> get copyWith =>
+  _$$_PagingDataCopyWith<_$_PagingData> get copyWith =>
       throw _privateConstructorUsedError;
 }

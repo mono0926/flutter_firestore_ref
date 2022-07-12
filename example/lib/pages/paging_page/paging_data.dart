@@ -1,16 +1,18 @@
 import 'package:firestore_ref/firestore_ref.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:json_converter_helper/json_converter_helper.dart';
 
 part 'paging_data.freezed.dart';
 part 'paging_data.g.dart';
 
 @freezed
 class PagingData with _$PagingData {
+  @allConverters
   const factory PagingData({
     @Default(0) int count,
-    @TimestampConverter() DateTime? createdAt,
-    @TimestampConverter() DateTime? updatedAt,
+    @Default(UnionTimestamp.serverTimestamp()) UnionTimestamp createdAt,
+    @Default(UnionTimestamp.serverTimestamp()) UnionTimestamp updatedAt,
   }) = _PagingData;
   factory PagingData.fromJson(JsonMap json) => _$PagingDataFromJson(json);
 }
@@ -52,7 +54,11 @@ class PagingDatasRef
 
   @override
   JsonMap encode(PagingData data) {
-    return replacingTimestamp(json: data.toJson());
+    return data
+        .copyWith(
+          updatedAt: const UnionTimestamp.serverTimestamp(),
+        )
+        .toJson();
   }
 }
 

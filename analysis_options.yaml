@@ -5,3 +5,6 @@ analyzer:
     - lib/generated_plugin_registrant.dart
     - lib/firebase_options.dart
     - example/lib/firebase_options.dart
+  errors:
+    # https://github.com/rrousselGit/freezed/issues/488
+    invalid_annotation_target: ignore
