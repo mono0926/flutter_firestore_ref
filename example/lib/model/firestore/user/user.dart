@@ -49,10 +49,9 @@ class UsersRef extends CollectionRef<User, UserDoc, UserRef> {
 
 class UserRef extends DocumentRef<User, UserDoc> {
   const UserRef({
-    required DocumentReference<JsonMap> ref,
+    required super.ref,
     required this.usersRef,
   }) : super(
-          ref: ref,
           collectionRef: usersRef,
         );
 

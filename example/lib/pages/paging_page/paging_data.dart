@@ -58,10 +58,9 @@ class PagingDatasRef
 
 class PagingDataRef extends DocumentRef<PagingData, PagingDataDoc> {
   const PagingDataRef({
-    required DocumentReference<JsonMap> ref,
+    required super.ref,
     required PagingDatasRef collectionRef,
   }) : super(
-          ref: ref,
           collectionRef: collectionRef,
         );
 }

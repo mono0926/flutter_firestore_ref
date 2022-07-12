@@ -6,7 +6,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'paging_page_controller.dart';
 
 class PagingPage extends ConsumerWidget {
-  const PagingPage({Key? key}) : super(key: key);
+  const PagingPage({super.key});
 
   static const routeName = 'paging';
 
@@ -44,7 +44,7 @@ class PagingPage extends ConsumerWidget {
 }
 
 class _ListView extends ConsumerWidget {
-  const _ListView({Key? key}) : super(key: key);
+  const _ListView();
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final controller = ref.watch(pagingController);
@@ -76,7 +76,7 @@ class _ListView extends ConsumerWidget {
 }
 
 class _DropdownButton extends ConsumerWidget {
-  const _DropdownButton({Key? key}) : super(key: key);
+  const _DropdownButton();
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
