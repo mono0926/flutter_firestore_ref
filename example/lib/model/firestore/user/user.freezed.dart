@@ -131,7 +131,7 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
 
 /// @nodoc
 
-@allConverters
+@allJsonConvertersSerializable
 class _$_User extends _User with DiagnosticableTreeMixin {
   const _$_User(
       {this.count = 0,

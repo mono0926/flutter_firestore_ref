@@ -136,7 +136,7 @@ class __$$_PagingDataCopyWithImpl<$Res> extends _$PagingDataCopyWithImpl<$Res>
 
 /// @nodoc
 
-@allConverters
+@allJsonConvertersSerializable
 class _$_PagingData with DiagnosticableTreeMixin implements _PagingData {
   const _$_PagingData(
       {this.count = 0,

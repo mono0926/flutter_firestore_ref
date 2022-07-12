@@ -11,7 +11,7 @@ final usersRefProvider = Provider((ref) => UsersRef());
 
 @freezed
 class User with _$User {
-  @allConverters
+  @allJsonConvertersSerializable
   const factory User({
     @Default(0) int count,
     @Default(UnionTimestamp.serverTimestamp()) UnionTimestamp createdAt,

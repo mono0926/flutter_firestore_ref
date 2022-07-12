@@ -8,7 +8,7 @@ part 'paging_data.g.dart';
 
 @freezed
 class PagingData with _$PagingData {
-  @allConverters
+  @allJsonConvertersSerializable
   const factory PagingData({
     @Default(0) int count,
     @Default(UnionTimestamp.serverTimestamp()) UnionTimestamp createdAt,
