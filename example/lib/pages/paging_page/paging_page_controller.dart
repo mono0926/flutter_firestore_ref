@@ -17,23 +17,15 @@ final pagingController = Provider.autoDispose(
   },
 );
 
-final pagingDocsProvider = StreamProvider.autoDispose(
-  (ref) => ref.watch(pagingController).documents,
-);
-
 final pagingDocsLengthProvider = Provider.autoDispose(
-  (ref) => ref.watch(pagingDocsProvider).value?.length ?? 0,
+  (ref) => ref.watch(pagingController).documents.value.length,
 );
 
 final pagingDocsLengthForWidgetProvider = Provider.autoDispose(
   (ref) {
-    final hasMore = ref.watch(pagingHasMoreProvider).value ?? false;
+    final hasMore = ref.watch(pagingController.select((s) => s.hasMore)).value;
     return ref.watch(pagingDocsLengthProvider) + (hasMore ? 1 : 0);
   },
-);
-
-final pagingHasMoreProvider = StreamProvider.autoDispose(
-  (ref) => ref.watch(pagingController).hasMore,
 );
 
 final pagingDocsModifier = Provider((ref) => PagingDocsModifier(ref.read));
@@ -74,6 +66,6 @@ class PagingDocsModifier {
 
 final pagingPageInfoProvider = Provider.autoDispose((ref) {
   final length = ref.watch(pagingDocsLengthProvider);
-  final hasMore = ref.watch(pagingHasMoreProvider).value ?? false;
+  final hasMore = ref.watch(pagingController.select((s) => s.hasMore)).value;
   return '$length / ${hasMore ? '?' : length}';
 });
