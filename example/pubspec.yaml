@@ -36,6 +36,5 @@ dev_dependencies:
   pedantic_mono:
 dependency_overrides:
   hooks_riverpod: '>=2.0.0-0'
-  mono_kit: '>=0.26.0-0'
 flutter:
   uses-material-design: true
