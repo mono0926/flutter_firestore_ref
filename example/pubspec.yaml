@@ -34,7 +34,5 @@ dev_dependencies:
   freezed:
   json_serializable: '>=4.6.0'
   pedantic_mono:
-dependency_overrides:
-  hooks_riverpod: '>=2.0.0-0'
 flutter:
   uses-material-design: true

@@ -1,3 +1,7 @@
+## 0.14.1
+
+- Upgrade cloud_firestore
+
 ## 0.14.0
 
 - Delete JsonConveters
@@ -170,8 +174,8 @@
 ## 0.5.1
 
 - Fix updateData
-    - https://github.com/mono0926/flutter_firestore_ref/pull/2
-    - Thanks to @takuyaohashi(https://github.com/takuyaohashi)
+  - https://github.com/mono0926/flutter_firestore_ref/pull/2
+  - Thanks to @takuyaohashi(https://github.com/takuyaohashi)
 
 ## 0.5.0
 

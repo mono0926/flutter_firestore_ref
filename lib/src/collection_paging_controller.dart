@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:disposable_provider/disposable_provider.dart';
 import 'package:firestore_ref/firestore_ref.dart';
+import 'package:firestore_ref/src/utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:subscription_holder/subscription_holder.dart';
@@ -33,6 +34,7 @@ class CollectionPagingController<E, D extends Document<E>,
                   return doc;
                 },
               );
+              logger.info('hoge: $documentList');
               return (queryBuilder ?? (q) => q)(queryRef.query)
                   .limit(limit + 1)
                   .snapshots()
