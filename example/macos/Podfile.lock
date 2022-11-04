@@ -113,7 +113,7 @@ DEPENDENCIES:
   - firebase_auth (from `Flutter/ephemeral/.symlinks/plugins/firebase_auth/macos`)
   - firebase_core (from `Flutter/ephemeral/.symlinks/plugins/firebase_core/macos`)
   - firebase_storage (from `Flutter/ephemeral/.symlinks/plugins/firebase_storage/macos`)
-  - FirebaseFirestore/WithLeveldb (from `https://github.com/invertase/firestore-ios-sdk-frameworks.git`, tag `10.0.0`)
+  - "FirebaseFirestore/WithLeveldb (from `https://github.com/invertase/firestore-ios-sdk-frameworks.git`, tag `@russell/ios-10`)"
   - FlutterMacOS (from `Flutter/ephemeral`)
   - macos_ui (from `Flutter/ephemeral/.symlinks/plugins/macos_ui/macos`)
   - url_launcher_macos (from `Flutter/ephemeral/.symlinks/plugins/url_launcher_macos/macos`)
@@ -151,7 +151,7 @@ EXTERNAL SOURCES:
     :path: Flutter/ephemeral/.symlinks/plugins/firebase_storage/macos
   FirebaseFirestore:
     :git: https://github.com/invertase/firestore-ios-sdk-frameworks.git
-    :tag: 10.0.0
+    :tag: "@russell/ios-10"
   FlutterMacOS:
     :path: Flutter/ephemeral
   macos_ui:
@@ -162,7 +162,7 @@ EXTERNAL SOURCES:
 CHECKOUT OPTIONS:
   FirebaseFirestore:
     :git: https://github.com/invertase/firestore-ios-sdk-frameworks.git
-    :tag: 10.0.0
+    :tag: "@russell/ios-10"
 
 SPEC CHECKSUMS:
   cloud_firestore: 74062ccfd34d272ba0b1c18e3f315e48da5e1ef8
@@ -178,7 +178,7 @@ SPEC CHECKSUMS:
   FirebaseCore: 97f48a3a567a72b8d4daa0f03c3aadb78df4e995
   FirebaseCoreExtension: 69b966c399abc4ca6dc75006ab87160f81512725
   FirebaseCoreInternal: 96d75228e10fd369564da51bd898414eb0f54df5
-  FirebaseFirestore: d1b97d497a6e6c31bb38dff714af8e606395b959
+  FirebaseFirestore: cc7918beafb37938ad111d1eff32060af7619296
   FirebaseFunctions: 3e3ae1fba2feab088c9acc043aa0d094e711988b
   FirebaseMessagingInterop: 26c3bf82c7697d8fbfb13216541423bc2c93e8fc
   FirebaseSharedSwift: 6966c4de41fba13a4270de1e421e6eee2cf90113
@@ -191,6 +191,6 @@ SPEC CHECKSUMS:
   PromisesObjC: ab77feca74fa2823e7af4249b8326368e61014cb
   url_launcher_macos: 597e05b8e514239626bcf4a850fcf9ef5c856ec3
 
-PODFILE CHECKSUM: 9d7fa45cdda4222676a1e66f79e903c4469d9bb6
+PODFILE CHECKSUM: 8e7e81169e2570c0ebf09dc568f4b9dcece3ed1e
 
 COCOAPODS: 1.11.3
