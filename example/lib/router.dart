@@ -32,7 +32,7 @@ final routerProvider = Provider(
             ],
           ),
         ],
-      )
+      ),
     ],
   ),
 );

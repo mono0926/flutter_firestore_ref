@@ -35,11 +35,9 @@ class DocumentList<E, D extends Document<E>, DocRef extends DocumentRef<E, D>> {
             decoded,
           );
           _map[docRef] = decoded;
-          break;
         case DocumentChangeType.removed:
           _documents.removeAt(change.oldIndex);
           _map.remove(doc.reference);
-          break;
         case DocumentChangeType.modified:
           final oldDoc = _documents.removeAt(change.oldIndex);
           // ignore: cast_nullable_to_non_nullable
@@ -53,7 +51,6 @@ class DocumentList<E, D extends Document<E>, DocRef extends DocumentRef<E, D>> {
             decoded,
           );
           _map[docRef] = decoded;
-          break;
       }
     }
     return DocumentListResult<E, D, DocRef>(

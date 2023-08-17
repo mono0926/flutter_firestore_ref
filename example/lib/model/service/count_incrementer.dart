@@ -23,13 +23,11 @@ final countIncrementer = Provider(
       switch (updateType) {
         case UpdateType.add:
           ref.merge(user.incremented());
-          break;
         case UpdateType.increment:
           ref.mergeData(
             ref.collectionRef.encode(user)
               ..[UserField.count] = FieldValue.increment(1),
           );
-          break;
         case UpdateType.batch:
           runBatchWrite<void>((batch) {
             return ref.merge(
@@ -37,7 +35,6 @@ final countIncrementer = Provider(
               batch: batch,
             );
           });
-          break;
         case UpdateType.transaction:
           FirebaseFirestore.instance.runTransaction((transaction) {
             return ref.update(
@@ -45,7 +42,6 @@ final countIncrementer = Provider(
               transaction: transaction,
             );
           });
-          break;
       }
     };
   },
