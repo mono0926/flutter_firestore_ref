@@ -31,6 +31,9 @@ Future<void> main() async {
         FirebaseStorage.instance.useStorageEmulator(localhost, 9199),
       ],
     );
+    FirebaseFirestore.instance.settings = const Settings(
+      persistenceEnabled: false,
+    );
   } else if (kIsWeb) {
     FirebaseFirestore.instance.settings = const Settings(
       persistenceEnabled: true,
