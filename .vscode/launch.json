@@ -11,6 +11,13 @@
       "cwd": "example"
     },
     {
+      "name": "Release",
+      "request": "launch",
+      "type": "dart",
+      "cwd": "example",
+      "flutterMode": "release"
+    },
+    {
       "name": "Emulator",
       "request": "launch",
       "type": "dart",
