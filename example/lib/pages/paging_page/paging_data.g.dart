@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-// ignore_for_file: type=lint, implicit_dynamic_parameter, implicit_dynamic_type, implicit_dynamic_method, strict_raw_type
+// ignore_for_file: type=lint, implicit_dynamic_parameter, implicit_dynamic_type, implicit_dynamic_method, strict_raw_type, unused_field, unused_element
 
 part of 'paging_data.dart';
 
@@ -8,8 +8,8 @@ part of 'paging_data.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_PagingData _$$_PagingDataFromJson(Map json) => _$_PagingData(
-      count: json['count'] as int? ?? 0,
+_$PagingDataImpl _$$PagingDataImplFromJson(Map json) => _$PagingDataImpl(
+      count: (json['count'] as num?)?.toInt() ?? 0,
       createdAt: json['createdAt'] == null
           ? const UnionTimestamp.serverTimestamp()
           : const UnionTimestampConverter()
@@ -20,7 +20,13 @@ _$_PagingData _$$_PagingDataFromJson(Map json) => _$_PagingData(
               .fromJson(json['updatedAt'] as Object),
     );
 
-Map<String, dynamic> _$$_PagingDataToJson(_$_PagingData instance) =>
+abstract final class _$$PagingDataImplJsonKeys {
+  static const String count = 'count';
+  static const String createdAt = 'createdAt';
+  static const String updatedAt = 'updatedAt';
+}
+
+Map<String, dynamic> _$$PagingDataImplToJson(_$PagingDataImpl instance) =>
     <String, dynamic>{
       'count': instance.count,
       'createdAt': const UnionTimestampConverter().toJson(instance.createdAt),

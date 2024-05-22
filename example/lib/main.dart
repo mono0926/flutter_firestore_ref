@@ -32,8 +32,8 @@ Future<void> main() async {
       ],
     );
   } else if (kIsWeb) {
-    await FirebaseFirestore.instance.enablePersistence(
-      const PersistenceSettings(synchronizeTabs: true),
+    FirebaseFirestore.instance.settings = const Settings(
+      persistenceEnabled: true,
     );
   }
 

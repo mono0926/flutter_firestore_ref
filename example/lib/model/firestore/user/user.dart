@@ -1,4 +1,4 @@
-import 'package:firestore_ref/firestore_ref.dart';
+import 'package:firestore_ref/firestore_ref.dart' hide count;
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -17,7 +17,7 @@ class User with _$User {
     @Default(UnionTimestamp.serverTimestamp()) UnionTimestamp createdAt,
     @UnionTimestampConverter.alwaysServerTimestampConverter
     @Default(UnionTimestamp.serverTimestamp())
-        UnionTimestamp updatedAt,
+    UnionTimestamp updatedAt,
   }) = _User;
   factory User.fromJson(JsonMap json) => _$UserFromJson(json);
 

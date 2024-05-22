@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-// ignore_for_file: type=lint, implicit_dynamic_parameter, implicit_dynamic_type, implicit_dynamic_method, strict_raw_type
+// ignore_for_file: type=lint, implicit_dynamic_parameter, implicit_dynamic_type, implicit_dynamic_method, strict_raw_type, unused_field, unused_element
 
 part of 'user.dart';
 
@@ -8,8 +8,8 @@ part of 'user.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_User _$$_UserFromJson(Map json) => _$_User(
-      count: json['count'] as int? ?? 0,
+_$UserImpl _$$UserImplFromJson(Map json) => _$UserImpl(
+      count: (json['count'] as num?)?.toInt() ?? 0,
       createdAt: json['createdAt'] == null
           ? const UnionTimestamp.serverTimestamp()
           : const UnionTimestampConverter()
@@ -20,7 +20,14 @@ _$_User _$$_UserFromJson(Map json) => _$_User(
               .fromJson(json['updatedAt'] as Object),
     );
 
-Map<String, dynamic> _$$_UserToJson(_$_User instance) => <String, dynamic>{
+abstract final class _$$UserImplJsonKeys {
+  static const String count = 'count';
+  static const String createdAt = 'createdAt';
+  static const String updatedAt = 'updatedAt';
+}
+
+Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
+    <String, dynamic>{
       'count': instance.count,
       'createdAt': const UnionTimestampConverter().toJson(instance.createdAt),
       'updatedAt': UnionTimestampConverter.alwaysServerTimestampConverter
