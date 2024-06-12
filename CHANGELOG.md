@@ -1,3 +1,7 @@
+## 0.14.2
+
+- Upgrade cloud_firestore
+
 ## 0.14.1
 
 - Upgrade cloud_firestore
