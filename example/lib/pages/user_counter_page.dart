@@ -102,7 +102,7 @@ class _MyCounter extends ConsumerWidget {
       trailing: IconButton(
         color: Theme.of(context).primaryColor,
         icon: const Icon(Icons.add),
-        onPressed: () async {
+        onPressed: () {
           ref.read(countIncrementer)();
           // 適当にどこかで雑に呼びたかっただけでサンプルとは関係なし(無視してください)
           // final result = await FirebaseFunctions.instance

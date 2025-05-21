@@ -4,6 +4,7 @@ import 'package:simple_logger/simple_logger.dart';
 final firestoreOperationCounter = _FirestoreOperationCounter();
 
 class _FirestoreOperationCounter {
+  // ignore: omit_obvious_property_types
   bool enabled = false;
   Level traceLogLevel = Level.FINE;
 

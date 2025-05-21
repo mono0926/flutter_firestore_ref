@@ -8,19 +8,23 @@ import 'collection_paging_controller.dart';
 import 'document_list.dart';
 
 typedef QueryBuilder = Query<JsonMap> Function(Query<JsonMap> collectionRef);
-typedef DocumentDecoder<E, D extends Document<E>,
-        DocRef extends DocumentRef<E, D>>
-    = D Function(
-  DocumentSnapshot<JsonMap> snapshot,
-  DocRef docRef,
-);
-typedef DocRefCreator<E, D extends Document<E>,
-        DocRef extends DocumentRef<E, D>>
-    = DocRef Function(DocumentReference<JsonMap> ref);
+typedef DocumentDecoder<
+  E,
+  D extends Document<E>,
+  DocRef extends DocumentRef<E, D>
+> = D Function(DocumentSnapshot<JsonMap> snapshot, DocRef docRef);
+typedef DocRefCreator<
+  E,
+  D extends Document<E>,
+  DocRef extends DocumentRef<E, D>
+> = DocRef Function(DocumentReference<JsonMap> ref);
 
 @immutable
-abstract class QueryRef<E, D extends Document<E>,
-    DocRef extends DocumentRef<E, D>> {
+abstract class QueryRef<
+  E,
+  D extends Document<E>,
+  DocRef extends DocumentRef<E, D>
+> {
   const QueryRef(this.query);
 
   final Query<JsonMap> query;
@@ -92,9 +96,7 @@ abstract class QueryRef<E, D extends Document<E>,
   ///
   /// Default value of [batchSize] is 500, which is max limit of Batch Write.
   /// Return value is deleted document references.
-  Future<List<DocumentReference>> deleteAllDocuments({
-    int batchSize = 500,
-  }) async {
+  Future<List<DocumentReference>> deleteAllDocuments({int batchSize = 500}) {
     return _deleteQueryBatch(
       query: query.orderBy(FieldPath.documentId).limit(batchSize),
       batchSize: batchSize,
@@ -114,9 +116,7 @@ abstract class QueryRef<E, D extends Document<E>,
     }
 
     if (firestoreOperationCounter.enabled) {
-      firestoreOperationCounter.recordDelete(
-        count: docs.length,
-      );
+      firestoreOperationCounter.recordDelete(count: docs.length);
     }
 
     await runBatchWrite<void>((batch) {
@@ -131,10 +131,7 @@ abstract class QueryRef<E, D extends Document<E>,
     return _deleteQueryBatch(
       query: query,
       batchSize: batchSize,
-      deletedRefs: [
-        ...deletedRefs,
-        ...docs.map((d) => d.reference),
-      ],
+      deletedRefs: [...deletedRefs, ...docs.map((d) => d.reference)],
     );
   }
 
@@ -150,15 +147,23 @@ abstract class QueryRef<E, D extends Document<E>,
 }
 
 @immutable
-abstract class CollectionGroupRef<E, D extends Document<E>,
-    DocRef extends DocumentRef<E, D>> extends QueryRef<E, D, DocRef> {
+abstract class CollectionGroupRef<
+  E,
+  D extends Document<E>,
+  DocRef extends DocumentRef<E, D>
+>
+    extends QueryRef<E, D, DocRef> {
   CollectionGroupRef(String collectionPath)
-      : super(FirebaseFirestore.instance.collectionGroup(collectionPath));
+    : super(FirebaseFirestore.instance.collectionGroup(collectionPath));
 }
 
 @immutable
-abstract class CollectionRef<E, D extends Document<E>,
-    DocRef extends DocumentRef<E, D>> extends QueryRef<E, D, DocRef> {
+abstract class CollectionRef<
+  E,
+  D extends Document<E>,
+  DocRef extends DocumentRef<E, D>
+>
+    extends QueryRef<E, D, DocRef> {
   const CollectionRef(this.ref) : super(ref);
 
   final CollectionReference<JsonMap> ref;
@@ -173,12 +178,12 @@ abstract class CollectionRef<E, D extends Document<E>,
   }
 }
 
-class DocumentListResult<E, D extends Document<E>,
-    DocRef extends DocumentRef<E, D>> {
-  DocumentListResult({
-    required this.list,
-    required this.map,
-  });
+class DocumentListResult<
+  E,
+  D extends Document<E>,
+  DocRef extends DocumentRef<E, D>
+> {
+  DocumentListResult({required this.list, required this.map});
   DocumentListResult.empty() : this(list: [], map: {});
 
   final List<D> list;

@@ -1,9 +1,9 @@
 name: firestore_ref
 description: Firestore reference/document typed access helpers. You can write organized safe code by this.
-version: 0.14.2
+version: 0.15.0
 homepage: https://github.com/mono0926/flutter_firestore_ref
 environment:
-  sdk: ^3.0.0
+  sdk: ^3.8.0
 dependencies:
   cloud_firestore: ^5.0.0
   disposable_provider: ^2.3.0
@@ -21,7 +21,6 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   pedantic_mono:
-flutter:
 false_secrets:
   - google-services.json
   - GoogleService-Info.plist
