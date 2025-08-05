@@ -1,3 +1,7 @@
+## 0.16.0
+
+- Upgrade cloud_firestore dependency to ^6.0.0
+
 ## 0.15.0
 
 - Upgrade to Flutter 3.32/Dart 3.8
