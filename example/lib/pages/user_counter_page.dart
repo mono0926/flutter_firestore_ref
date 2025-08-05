@@ -124,7 +124,6 @@ class _Users extends ConsumerWidget {
     return ListView.builder(
       itemBuilder: (context, index) {
         final doc = docs[index];
-        // ignore: use_colored_box
         return Container(
           key: ValueKey(doc.id),
           color: myId == doc.id ? Colors.green[100] : null,

@@ -40,7 +40,6 @@ class DocumentList<E, D extends Document<E>, DocRef extends DocumentRef<E, D>> {
           _map.remove(doc.reference);
         case DocumentChangeType.modified:
           final oldDoc = _documents.removeAt(change.oldIndex);
-          // ignore: cast_nullable_to_non_nullable
           final docRef = oldDoc.ref as DocRef;
           final decoded = decoder(
             doc,
