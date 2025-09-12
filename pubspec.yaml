@@ -3,7 +3,7 @@ description: Firestore reference/document typed access helpers. You can write or
 version: 0.16.0
 homepage: https://github.com/mono0926/flutter_firestore_ref
 environment:
-  sdk: ^3.8.0
+  sdk: ^3.9.0
 dependencies:
   cloud_firestore: ^6.0.0
   disposable_provider: ^2.3.0

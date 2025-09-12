@@ -33,9 +33,8 @@ class UserCounterPage extends ConsumerWidget {
                 UpdateType.batch: Text('Batch'),
                 UpdateType.transaction: Text('Tran'),
               },
-              onValueChanged: (type) => ref
-                  .read(selectedUpdateType.notifier)
-                  .update((state) => type!),
+              onValueChanged: (type) =>
+                  ref.read(selectedUpdateType.notifier).update(type!),
               groupValue: updateType,
             ),
           ),
@@ -138,7 +137,19 @@ class _Users extends ConsumerWidget {
   }
 }
 
-final selectedUpdateType = StateProvider((ref) => UpdateType.add);
+final selectedUpdateType =
+    NotifierProvider<SelectedUpdateTypeNotifier, UpdateType>(
+        SelectedUpdateTypeNotifier.new);
+
+class SelectedUpdateTypeNotifier extends Notifier<UpdateType> {
+  @override
+  UpdateType build() => UpdateType.add;
+
+  // ignore: use_setters_to_change_properties
+  void update(UpdateType type) {
+    state = type;
+  }
+}
 
 enum UpdateType {
   add,

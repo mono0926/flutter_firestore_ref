@@ -19,7 +19,7 @@ dependencies:
   flutter_hooks:
   freezed_annotation:
   go_router:
-  hooks_riverpod:
+  hooks_riverpod: ^3.0.0
   json_converter_helper:
   mono_kit:
   recase:
