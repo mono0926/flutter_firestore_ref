@@ -128,7 +128,7 @@ abstract class QueryRef<
 
     logger.fine('deleted count: ${docs.length}');
 
-    return _deleteQueryBatch(
+    return await _deleteQueryBatch(
       query: query,
       batchSize: batchSize,
       deletedRefs: [...deletedRefs, ...docs.map((d) => d.reference)],
