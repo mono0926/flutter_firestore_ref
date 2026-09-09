@@ -2,7 +2,6 @@ import 'dart:math';
 
 import 'package:disposable_provider/disposable_provider.dart';
 import 'package:firestore_ref/firestore_ref.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:subscription_holder/subscription_holder.dart';
 
@@ -12,7 +11,7 @@ class CollectionPagingController<E, D extends Document<E>,
     DocRef extends DocumentRef<E, D>> with Disposable {
   CollectionPagingController({
     required QueryRef<E, D, DocRef> queryRef,
-    @required QueryBuilder? queryBuilder,
+    required QueryBuilder? queryBuilder,
     required int initialSize,
     required this.defaultPagingSize,
   }) : _limitController = BehaviorSubject.seeded(initialSize) {
