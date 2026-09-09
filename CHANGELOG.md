@@ -1,3 +1,8 @@
+## 0.16.1
+
+- Add AI Agent Skill (`firestore_ref-crud`)
+- Replace deprecated `@required`, await recursive `deleteAll`, and resolve analyzer issues
+
 ## 0.16.0
 
 - Upgrade cloud_firestore dependency to ^6.0.0
