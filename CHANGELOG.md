@@ -1,3 +1,10 @@
+## 0.17.0 - 2026-10-27
+
+### Breaking Changes
+- Remove unused `package:flutter/cupertino.dart` import from `collection_ref.dart`
+- Require Dart `^3.13.0` and Flutter `>=3.47.0`
+- Migrate example app to standalone `package:material_ui/material_ui.dart` (`^1.0.0`) and `mono_kit` (`^0.50.0`)
+
 ## 0.16.1
 
 - Add AI Agent Skill (`firestore_ref-crud`)
