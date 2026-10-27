@@ -17,4 +17,5 @@ analyzer:
 linter:
   rules:
     specify_nonobvious_property_types: false
+    remove_deprecations_in_breaking_versions: false
 

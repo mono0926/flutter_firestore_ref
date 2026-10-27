@@ -439,7 +439,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "0.16.1"
+    version: "0.17.0"
   fixnum:
     dependency: transitive
     description:
