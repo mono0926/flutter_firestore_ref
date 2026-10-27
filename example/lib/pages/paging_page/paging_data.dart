@@ -9,31 +9,31 @@ part 'paging_data.g.dart';
 @freezed
 class PagingData with _$PagingData {
   @allJsonConvertersSerializable
-  const factory PagingData({
+  const factory({
     @Default(0) int count,
     @Default(UnionTimestamp.serverTimestamp()) UnionTimestamp createdAt,
     @UnionTimestampConverter.alwaysServerTimestampConverter
     @Default(UnionTimestamp.serverTimestamp())
-        UnionTimestamp updatedAt,
+    UnionTimestamp updatedAt,
   }) = _PagingData;
-  factory PagingData.fromJson(JsonMap json) => _$PagingDataFromJson(json);
+  factory fromJson(JsonMap json) => _$PagingDataFromJson(json);
 }
 
-class PagingDataDoc extends Document<PagingData> {
-  const PagingDataDoc(
-    this.pagingDataRef,
-    PagingData entity,
-  ) : super(pagingDataRef, entity);
-
-  final PagingDataRef pagingDataRef;
+// ignore: use_super_parameters
+class const PagingDataDoc(
+  final PagingDataRef pagingDataRef,
+  PagingData entity,
+) extends Document<PagingData> {
+  this : super(pagingDataRef, entity);
 }
 
-class PagingDatasRef
+// ignore: prefer_const_constructors_in_immutables
+class PagingDatasRef()
     extends CollectionRef<PagingData, PagingDataDoc, PagingDataRef> {
-  PagingDatasRef()
-      : super(
-          FirebaseFirestore.instance.collection('pagings'),
-        );
+  this
+    : super(
+        FirebaseFirestore.instance.collection('pagings'),
+      );
 
   @override
   PagingDataRef docRef(DocumentReference<JsonMap> ref) {
@@ -58,11 +58,12 @@ class PagingDatasRef
   JsonMap encode(PagingData data) => data.toJson();
 }
 
-class PagingDataRef extends DocumentRef<PagingData, PagingDataDoc> {
-  const PagingDataRef({
-    required super.ref,
-    required PagingDatasRef collectionRef,
-  }) : super(
-          collectionRef: collectionRef,
-        );
+class const PagingDataRef({
+  required super.ref,
+  required PagingDatasRef collectionRef,
+}) extends DocumentRef<PagingData, PagingDataDoc> {
+  this
+    : super(
+        collectionRef: collectionRef,
+      );
 }

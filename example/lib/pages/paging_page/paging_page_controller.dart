@@ -7,7 +7,9 @@ final pagingCollectionRef = Provider((ref) => PagingDatasRef());
 
 final pagingController = Provider.autoDispose(
   (ref) {
-    final controller = ref.watch(pagingCollectionRef).pagingController(
+    final controller = ref
+        .watch(pagingCollectionRef)
+        .pagingController(
           queryBuilder: (r) => r.orderBy('createdAt'),
           initialSize: 20,
           defaultPagingSize: 10,
@@ -35,15 +37,14 @@ final pagingDocsLengthForWidgetProvider = Provider.autoDispose(
 
 final pagingDocsModifier = Provider(PagingDocsModifier.new);
 
-class PagingDocsModifier {
-  PagingDocsModifier(this._ref);
-
-  final Ref _ref;
-
+class PagingDocsModifier(final Ref _ref) {
   void addDocs(int count) {
     runBatchWrite<void>((batch) async {
       for (var i = 0; i < count; i++) {
-        await _ref.read(pagingCollectionRef).docRefWithId().set(
+        await _ref
+            .read(pagingCollectionRef)
+            .docRefWithId()
+            .set(
               const PagingData(),
               batch: batch,
             );
@@ -62,8 +63,9 @@ class PagingDocsModifier {
 
   Future<void> deleteAll() async {
     logger.info('[Start] deleteAll');
-    final deletedIds =
-        await _ref.read(pagingCollectionRef).deleteAllDocuments();
+    final deletedIds = await _ref
+        .read(pagingCollectionRef)
+        .deleteAllDocuments();
     logger
       ..info('[End] deleteAll')
       ..info('Deleted ids: $deletedIds');

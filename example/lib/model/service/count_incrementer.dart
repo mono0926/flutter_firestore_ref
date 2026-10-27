@@ -36,7 +36,7 @@ final countIncrementer = Provider(
             );
           });
         case UpdateType.transaction:
-          FirebaseFirestore.instance.runTransaction((transaction) {
+          FirebaseFirestore.instance.runTransaction<void>((transaction) {
             return ref.update(
               user.incremented(),
               transaction: transaction,

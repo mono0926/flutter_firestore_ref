@@ -1,4 +1,3 @@
-
 export 'package:cloud_firestore/cloud_firestore.dart';
 
 export 'src/collection_ref.dart';

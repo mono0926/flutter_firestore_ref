@@ -1,13 +1,11 @@
 import 'package:example/router.dart';
 import 'package:example/util/util.dart';
-import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:material_ui/material_ui.dart';
 
 import 'paging_page_controller.dart';
 
-class PagingPage extends ConsumerWidget {
-  const PagingPage({super.key});
-
+class const PagingPage({super.key}) extends ConsumerWidget {
   static const routeName = 'paging';
 
   @override
@@ -43,8 +41,7 @@ class PagingPage extends ConsumerWidget {
   }
 }
 
-class _ListView extends ConsumerWidget {
-  const _ListView();
+class const _ListView() extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final controller = ref.watch(pagingController);
@@ -75,8 +72,7 @@ class _ListView extends ConsumerWidget {
   }
 }
 
-class _DropdownButton extends ConsumerWidget {
-  const _DropdownButton();
+class const _DropdownButton() extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);

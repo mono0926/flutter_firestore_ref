@@ -1,9 +1,9 @@
 import 'package:example/pages/home_page.dart';
 import 'package:example/pages/paging_page/paging_page.dart';
 import 'package:example/pages/user_counter_page.dart';
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:mono_kit/mono_kit.dart';
 import 'package:recase/recase.dart';
 
@@ -17,17 +17,17 @@ final routerProvider = Provider(
         routes: [
           GoRoute(
             path: '/',
-            builder: (_, __) => const HomePage(),
+            builder: (_, _) => const HomePage(),
             routes: [
               GoRoute(
                 path: 'user-counter',
                 name: UserCounterPage.routeName,
-                builder: (_, __) => const UserCounterPage(),
+                builder: (_, _) => const UserCounterPage(),
               ),
               GoRoute(
                 path: 'paging',
                 name: PagingPage.routeName,
-                builder: (_, __) => const PagingPage(),
+                builder: (_, _) => const PagingPage(),
               ),
             ],
           ),
@@ -40,13 +40,9 @@ final routerProvider = Provider(
 String pascalCaseFromRouteName(String name) => name.pascalCase;
 
 @immutable
-class PageInfo {
-  const PageInfo({
-    required this.routeName,
-  });
-
-  final String routeName;
-
+class const PageInfo({
+  required final String routeName,
+}) {
   static const all = [
     PageInfo(routeName: UserCounterPage.routeName),
     PageInfo(routeName: PagingPage.routeName),

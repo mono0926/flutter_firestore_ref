@@ -12,7 +12,8 @@ part of 'paging_data.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 PagingData _$PagingDataFromJson(Map<String, dynamic> json) {
   return _PagingData.fromJson(json);
@@ -34,14 +35,16 @@ mixin _$PagingData {
 /// @nodoc
 abstract class $PagingDataCopyWith<$Res> {
   factory $PagingDataCopyWith(
-          PagingData value, $Res Function(PagingData) then) =
-      _$PagingDataCopyWithImpl<$Res, PagingData>;
+    PagingData value,
+    $Res Function(PagingData) then,
+  ) = _$PagingDataCopyWithImpl<$Res, PagingData>;
   @useResult
-  $Res call(
-      {int count,
-      UnionTimestamp createdAt,
-      @UnionTimestampConverter.alwaysServerTimestampConverter
-      UnionTimestamp updatedAt});
+  $Res call({
+    int count,
+    UnionTimestamp createdAt,
+    @UnionTimestampConverter.alwaysServerTimestampConverter
+    UnionTimestamp updatedAt,
+  });
 
   $UnionTimestampCopyWith<$Res> get createdAt;
   $UnionTimestampCopyWith<$Res> get updatedAt;
@@ -64,20 +67,22 @@ class _$PagingDataCopyWithImpl<$Res, $Val extends PagingData>
     Object? createdAt = null,
     Object? updatedAt = null,
   }) {
-    return _then(_value.copyWith(
-      count: null == count
-          ? _value.count
-          : count // ignore: cast_nullable_to_non_nullable
-              as int,
-      createdAt: null == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as UnionTimestamp,
-      updatedAt: null == updatedAt
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
-              as UnionTimestamp,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+        count: null == count
+            ? _value.count
+            : count // ignore: cast_nullable_to_non_nullable
+                  as int,
+        createdAt: null == createdAt
+            ? _value.createdAt
+            : createdAt // ignore: cast_nullable_to_non_nullable
+                  as UnionTimestamp,
+        updatedAt: null == updatedAt
+            ? _value.updatedAt
+            : updatedAt // ignore: cast_nullable_to_non_nullable
+                  as UnionTimestamp,
+      ) as $Val,
+    );
   }
 
   @override
@@ -101,15 +106,17 @@ class _$PagingDataCopyWithImpl<$Res, $Val extends PagingData>
 abstract class _$$PagingDataImplCopyWith<$Res>
     implements $PagingDataCopyWith<$Res> {
   factory _$$PagingDataImplCopyWith(
-          _$PagingDataImpl value, $Res Function(_$PagingDataImpl) then) =
-      __$$PagingDataImplCopyWithImpl<$Res>;
+    _$PagingDataImpl value,
+    $Res Function(_$PagingDataImpl) then,
+  ) = __$$PagingDataImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {int count,
-      UnionTimestamp createdAt,
-      @UnionTimestampConverter.alwaysServerTimestampConverter
-      UnionTimestamp updatedAt});
+  $Res call({
+    int count,
+    UnionTimestamp createdAt,
+    @UnionTimestampConverter.alwaysServerTimestampConverter
+    UnionTimestamp updatedAt,
+  });
 
   @override
   $UnionTimestampCopyWith<$Res> get createdAt;
@@ -122,8 +129,9 @@ class __$$PagingDataImplCopyWithImpl<$Res>
     extends _$PagingDataCopyWithImpl<$Res, _$PagingDataImpl>
     implements _$$PagingDataImplCopyWith<$Res> {
   __$$PagingDataImplCopyWithImpl(
-      _$PagingDataImpl _value, $Res Function(_$PagingDataImpl) _then)
-      : super(_value, _then);
+    _$PagingDataImpl _value,
+    $Res Function(_$PagingDataImpl) _then,
+  ) : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -132,20 +140,22 @@ class __$$PagingDataImplCopyWithImpl<$Res>
     Object? createdAt = null,
     Object? updatedAt = null,
   }) {
-    return _then(_$PagingDataImpl(
-      count: null == count
-          ? _value.count
-          : count // ignore: cast_nullable_to_non_nullable
-              as int,
-      createdAt: null == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as UnionTimestamp,
-      updatedAt: null == updatedAt
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
-              as UnionTimestamp,
-    ));
+    return _then(
+      _$PagingDataImpl(
+        count: null == count
+            ? _value.count
+            : count // ignore: cast_nullable_to_non_nullable
+                  as int,
+        createdAt: null == createdAt
+            ? _value.createdAt
+            : createdAt // ignore: cast_nullable_to_non_nullable
+                  as UnionTimestamp,
+        updatedAt: null == updatedAt
+            ? _value.updatedAt
+            : updatedAt // ignore: cast_nullable_to_non_nullable
+                  as UnionTimestamp,
+      ),
+    );
   }
 }
 
@@ -153,11 +163,12 @@ class __$$PagingDataImplCopyWithImpl<$Res>
 
 @allJsonConvertersSerializable
 class _$PagingDataImpl with DiagnosticableTreeMixin implements _PagingData {
-  const _$PagingDataImpl(
-      {this.count = 0,
-      this.createdAt = const UnionTimestamp.serverTimestamp(),
-      @UnionTimestampConverter.alwaysServerTimestampConverter
-      this.updatedAt = const UnionTimestamp.serverTimestamp()});
+  const _$PagingDataImpl({
+    this.count = 0,
+    this.createdAt = const UnionTimestamp.serverTimestamp(),
+    @UnionTimestampConverter.alwaysServerTimestampConverter
+    this.updatedAt = const UnionTimestamp.serverTimestamp(),
+  });
 
   factory _$PagingDataImpl.fromJson(Map<String, dynamic> json) =>
       _$$PagingDataImplFromJson(json);
@@ -219,11 +230,12 @@ class _$PagingDataImpl with DiagnosticableTreeMixin implements _PagingData {
 }
 
 abstract class _PagingData implements PagingData {
-  const factory _PagingData(
-      {final int count,
-      final UnionTimestamp createdAt,
-      @UnionTimestampConverter.alwaysServerTimestampConverter
-      final UnionTimestamp updatedAt}) = _$PagingDataImpl;
+  const factory _PagingData({
+    int count,
+    UnionTimestamp createdAt,
+    @UnionTimestampConverter.alwaysServerTimestampConverter
+    UnionTimestamp updatedAt,
+  }) = _$PagingDataImpl;
 
   factory _PagingData.fromJson(Map<String, dynamic> json) =
       _$PagingDataImpl.fromJson;

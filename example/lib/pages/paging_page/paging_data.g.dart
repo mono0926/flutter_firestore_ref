@@ -9,16 +9,16 @@ part of 'paging_data.dart';
 // **************************************************************************
 
 _$PagingDataImpl _$$PagingDataImplFromJson(Map json) => _$PagingDataImpl(
-      count: (json['count'] as num?)?.toInt() ?? 0,
-      createdAt: json['createdAt'] == null
-          ? const UnionTimestamp.serverTimestamp()
-          : const UnionTimestampConverter()
-              .fromJson(json['createdAt'] as Object),
-      updatedAt: json['updatedAt'] == null
-          ? const UnionTimestamp.serverTimestamp()
-          : UnionTimestampConverter.alwaysServerTimestampConverter
-              .fromJson(json['updatedAt'] as Object),
-    );
+  count: (json['count'] as num?)?.toInt() ?? 0,
+  createdAt: json['createdAt'] == null
+      ? const UnionTimestamp.serverTimestamp()
+      : const UnionTimestampConverter().fromJson(json['createdAt'] as Object),
+  updatedAt: json['updatedAt'] == null
+      ? const UnionTimestamp.serverTimestamp()
+      : UnionTimestampConverter.alwaysServerTimestampConverter.fromJson(
+          json['updatedAt'] as Object,
+        ),
+);
 
 abstract final class _$$PagingDataImplJsonKeys {
   static const String count = 'count';

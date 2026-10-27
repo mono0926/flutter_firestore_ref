@@ -7,14 +7,17 @@ import 'package:subscription_holder/subscription_holder.dart';
 
 import 'document_list.dart';
 
-class CollectionPagingController<E, D extends Document<E>,
-    DocRef extends DocumentRef<E, D>> with Disposable {
-  CollectionPagingController({
-    required QueryRef<E, D, DocRef> queryRef,
-    required QueryBuilder? queryBuilder,
-    required int initialSize,
-    required this.defaultPagingSize,
-  }) : _limitController = BehaviorSubject.seeded(initialSize) {
+class CollectionPagingController<
+  E,
+  D extends Document<E>,
+  DocRef extends DocumentRef<E, D>
+>({
+  required QueryRef<E, D, DocRef> queryRef,
+  required QueryBuilder? queryBuilder,
+  required int initialSize,
+  required final int defaultPagingSize,
+}) with Disposable {
+  this {
     _sh
       ..add(
         _limitController.stream
@@ -32,10 +35,9 @@ class CollectionPagingController<E, D extends Document<E>,
                   return doc;
                 },
               );
-              return (queryBuilder ?? (q) => q)(queryRef.query)
-                  .limit(limit + 1)
-                  .snapshots()
-                  .map(documentList.applyingSnapshot);
+              return (queryBuilder ?? (q) => q)(
+                queryRef.query,
+              ).limit(limit + 1).snapshots().map(documentList.applyingSnapshot);
             })
             .map((r) => r.list)
             .listen(_documentsForHasMoreController.add),
@@ -46,15 +48,18 @@ class CollectionPagingController<E, D extends Document<E>,
         }),
       );
 
-    _documentsForHasMoreController.map((docs) {
-      final docLength = docs.length;
-      final size = min(docLength, _limitController.value);
-      return size == docLength ? docs : docs.take(size).toList();
-    }).pipe(_documentsController);
+    _documentsForHasMoreController
+        .map((docs) {
+          final docLength = docs.length;
+          final size = min(docLength, _limitController.value);
+          return size == docLength ? docs : docs.take(size).toList();
+        })
+        .pipe(_documentsController);
   }
 
-  final int defaultPagingSize;
-  final BehaviorSubject<int> _limitController;
+  final BehaviorSubject<int> _limitController = BehaviorSubject.seeded(
+    initialSize,
+  );
   final _sh = SubscriptionHolder();
 
   final _documentsForHasMoreController = BehaviorSubject<List<D>>.seeded([]);

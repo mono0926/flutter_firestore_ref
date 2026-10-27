@@ -3,7 +3,7 @@ import 'package:simple_logger/simple_logger.dart';
 
 final firestoreOperationCounter = _FirestoreOperationCounter();
 
-class _FirestoreOperationCounter {
+class _FirestoreOperationCounter() {
   bool enabled = false;
   Level traceLogLevel = Level.FINE;
 

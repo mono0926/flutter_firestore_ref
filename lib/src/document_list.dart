@@ -1,14 +1,10 @@
 import 'package:firestore_ref/firestore_ref.dart';
 import 'package:json_converter_helper/json_converter_helper.dart';
 
-class DocumentList<E, D extends Document<E>, DocRef extends DocumentRef<E, D>> {
-  DocumentList({
-    required this.docRefCreator,
-    required this.decoder,
-  });
-
-  final DocRefCreator<E, D, DocRef> docRefCreator;
-  final DocumentDecoder<E, D, DocRef> decoder;
+class DocumentList<E, D extends Document<E>, DocRef extends DocumentRef<E, D>>({
+  required final DocRefCreator<E, D, DocRef> docRefCreator,
+  required final DocumentDecoder<E, D, DocRef> decoder,
+}) {
   final _documents = <D>[];
   final _map = <DocRef, D>{};
 

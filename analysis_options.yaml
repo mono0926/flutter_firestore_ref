@@ -6,11 +6,15 @@ analyzer:
     - lib/firebase_options.dart
     - example/lib/firebase_options.dart
     - build/**
+    - android/**
+    - ios/**
+    - web/**
+    - windows/**
+    - macos/**
   errors:
     # https://github.com/rrousselGit/freezed/issues/488
     invalid_annotation_target: ignore
 linter:
   rules:
     specify_nonobvious_property_types: false
-    unnecessary_await_in_return: false
 

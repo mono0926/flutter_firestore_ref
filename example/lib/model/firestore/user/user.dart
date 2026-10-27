@@ -10,28 +10,27 @@ part 'user.g.dart';
 final usersRefProvider = Provider((ref) => UsersRef());
 
 @freezed
-class User with _$User {
+class const User._() with _$User {
   @allJsonConvertersSerializable
-  const factory User({
+  const factory({
     @Default(0) int count,
     @Default(UnionTimestamp.serverTimestamp()) UnionTimestamp createdAt,
     @UnionTimestampConverter.alwaysServerTimestampConverter
     @Default(UnionTimestamp.serverTimestamp())
     UnionTimestamp updatedAt,
   }) = _User;
-  factory User.fromJson(JsonMap json) => _$UserFromJson(json);
-
-  const User._();
+  factory fromJson(JsonMap json) => _$UserFromJson(json);
 
   User incremented() => copyWith(count: count + 1);
 }
 
-class UserField {
+class UserField() {
   static const count = 'count';
 }
 
-class UsersRef extends CollectionRef<User, UserDoc, UserRef> {
-  UsersRef() : super(FirebaseFirestore.instance.collection('users'));
+// ignore: prefer_const_constructors_in_immutables
+class UsersRef() extends CollectionRef<User, UserDoc, UserRef> {
+  this : super(FirebaseFirestore.instance.collection('users'));
 
   @override
   JsonMap encode(User data) => data.toJson();
@@ -46,27 +45,25 @@ class UsersRef extends CollectionRef<User, UserDoc, UserRef> {
 
   @override
   UserRef docRef(DocumentReference<JsonMap> ref) => UserRef(
-        ref: ref,
-        usersRef: this,
+    ref: ref,
+    usersRef: this,
+  );
+}
+
+class const UserRef({
+  required super.ref,
+  required final UsersRef usersRef,
+}) extends DocumentRef<User, UserDoc> {
+  this
+    : super(
+        collectionRef: usersRef,
       );
 }
 
-class UserRef extends DocumentRef<User, UserDoc> {
-  const UserRef({
-    required super.ref,
-    required this.usersRef,
-  }) : super(
-          collectionRef: usersRef,
-        );
-
-  final UsersRef usersRef;
-}
-
-class UserDoc extends Document<User> {
-  const UserDoc(
-    this.userRef,
-    User? entity,
-  ) : super(userRef, entity);
-
-  final UserRef userRef;
+// ignore: use_super_parameters
+class const UserDoc(
+  final UserRef userRef,
+  User? entity,
+) extends Document<User> {
+  this : super(userRef, entity);
 }

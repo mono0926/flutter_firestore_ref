@@ -1,13 +1,11 @@
+import 'package:cupertino_ui/cupertino_ui.dart';
 import 'package:example/model/service/service.dart';
 import 'package:example/router.dart';
 import 'package:example/util/util.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:material_ui/material_ui.dart';
 
-class UserCounterPage extends ConsumerWidget {
-  const UserCounterPage({super.key});
-
+class const UserCounterPage({super.key}) extends ConsumerWidget {
   static const routeName = 'user_counter';
 
   @override
@@ -51,8 +49,7 @@ class UserCounterPage extends ConsumerWidget {
   }
 }
 
-class _DropdownButton extends ConsumerWidget {
-  const _DropdownButton();
+class const _DropdownButton() extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
@@ -77,8 +74,7 @@ class _DropdownButton extends ConsumerWidget {
   }
 }
 
-class _AccountStatus extends ConsumerWidget {
-  const _AccountStatus();
+class const _AccountStatus() extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return ListTile(
@@ -90,9 +86,7 @@ class _AccountStatus extends ConsumerWidget {
   }
 }
 
-class _MyCounter extends ConsumerWidget {
-  const _MyCounter();
-
+class const _MyCounter() extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return ListTile(
@@ -114,8 +108,7 @@ class _MyCounter extends ConsumerWidget {
   }
 }
 
-class _Users extends ConsumerWidget {
-  const _Users();
+class const _Users() extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final docs = ref.watch(userDocsProvider).value ?? [];
@@ -139,9 +132,10 @@ class _Users extends ConsumerWidget {
 
 final selectedUpdateType =
     NotifierProvider<SelectedUpdateTypeNotifier, UpdateType>(
-        SelectedUpdateTypeNotifier.new);
+      SelectedUpdateTypeNotifier.new,
+    );
 
-class SelectedUpdateTypeNotifier extends Notifier<UpdateType> {
+class SelectedUpdateTypeNotifier() extends Notifier<UpdateType> {
   @override
   UpdateType build() => UpdateType.add;
 
@@ -151,7 +145,7 @@ class SelectedUpdateTypeNotifier extends Notifier<UpdateType> {
   }
 }
 
-enum UpdateType {
+enum UpdateType() {
   add,
   increment,
   batch,

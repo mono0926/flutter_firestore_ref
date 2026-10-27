@@ -12,7 +12,8 @@ part of 'user.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 User _$UserFromJson(Map<String, dynamic> json) {
   return _User.fromJson(json);
@@ -35,11 +36,12 @@ abstract class $UserCopyWith<$Res> {
   factory $UserCopyWith(User value, $Res Function(User) then) =
       _$UserCopyWithImpl<$Res, User>;
   @useResult
-  $Res call(
-      {int count,
-      UnionTimestamp createdAt,
-      @UnionTimestampConverter.alwaysServerTimestampConverter
-      UnionTimestamp updatedAt});
+  $Res call({
+    int count,
+    UnionTimestamp createdAt,
+    @UnionTimestampConverter.alwaysServerTimestampConverter
+    UnionTimestamp updatedAt,
+  });
 
   $UnionTimestampCopyWith<$Res> get createdAt;
   $UnionTimestampCopyWith<$Res> get updatedAt;
@@ -62,20 +64,22 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? createdAt = null,
     Object? updatedAt = null,
   }) {
-    return _then(_value.copyWith(
-      count: null == count
-          ? _value.count
-          : count // ignore: cast_nullable_to_non_nullable
-              as int,
-      createdAt: null == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as UnionTimestamp,
-      updatedAt: null == updatedAt
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
-              as UnionTimestamp,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+        count: null == count
+            ? _value.count
+            : count // ignore: cast_nullable_to_non_nullable
+                  as int,
+        createdAt: null == createdAt
+            ? _value.createdAt
+            : createdAt // ignore: cast_nullable_to_non_nullable
+                  as UnionTimestamp,
+        updatedAt: null == updatedAt
+            ? _value.updatedAt
+            : updatedAt // ignore: cast_nullable_to_non_nullable
+                  as UnionTimestamp,
+      ) as $Val,
+    );
   }
 
   @override
@@ -98,15 +102,17 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
 /// @nodoc
 abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
   factory _$$UserImplCopyWith(
-          _$UserImpl value, $Res Function(_$UserImpl) then) =
-      __$$UserImplCopyWithImpl<$Res>;
+    _$UserImpl value,
+    $Res Function(_$UserImpl) then,
+  ) = __$$UserImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {int count,
-      UnionTimestamp createdAt,
-      @UnionTimestampConverter.alwaysServerTimestampConverter
-      UnionTimestamp updatedAt});
+  $Res call({
+    int count,
+    UnionTimestamp createdAt,
+    @UnionTimestampConverter.alwaysServerTimestampConverter
+    UnionTimestamp updatedAt,
+  });
 
   @override
   $UnionTimestampCopyWith<$Res> get createdAt;
@@ -119,7 +125,7 @@ class __$$UserImplCopyWithImpl<$Res>
     extends _$UserCopyWithImpl<$Res, _$UserImpl>
     implements _$$UserImplCopyWith<$Res> {
   __$$UserImplCopyWithImpl(_$UserImpl _value, $Res Function(_$UserImpl) _then)
-      : super(_value, _then);
+    : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -128,20 +134,22 @@ class __$$UserImplCopyWithImpl<$Res>
     Object? createdAt = null,
     Object? updatedAt = null,
   }) {
-    return _then(_$UserImpl(
-      count: null == count
-          ? _value.count
-          : count // ignore: cast_nullable_to_non_nullable
-              as int,
-      createdAt: null == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as UnionTimestamp,
-      updatedAt: null == updatedAt
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
-              as UnionTimestamp,
-    ));
+    return _then(
+      _$UserImpl(
+        count: null == count
+            ? _value.count
+            : count // ignore: cast_nullable_to_non_nullable
+                  as int,
+        createdAt: null == createdAt
+            ? _value.createdAt
+            : createdAt // ignore: cast_nullable_to_non_nullable
+                  as UnionTimestamp,
+        updatedAt: null == updatedAt
+            ? _value.updatedAt
+            : updatedAt // ignore: cast_nullable_to_non_nullable
+                  as UnionTimestamp,
+      ),
+    );
   }
 }
 
@@ -149,12 +157,12 @@ class __$$UserImplCopyWithImpl<$Res>
 
 @allJsonConvertersSerializable
 class _$UserImpl extends _User with DiagnosticableTreeMixin {
-  const _$UserImpl(
-      {this.count = 0,
-      this.createdAt = const UnionTimestamp.serverTimestamp(),
-      @UnionTimestampConverter.alwaysServerTimestampConverter
-      this.updatedAt = const UnionTimestamp.serverTimestamp()})
-      : super._();
+  const _$UserImpl({
+    this.count = 0,
+    this.createdAt = const UnionTimestamp.serverTimestamp(),
+    @UnionTimestampConverter.alwaysServerTimestampConverter
+    this.updatedAt = const UnionTimestamp.serverTimestamp(),
+  }) : super._();
 
   factory _$UserImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserImplFromJson(json);
@@ -216,11 +224,12 @@ class _$UserImpl extends _User with DiagnosticableTreeMixin {
 }
 
 abstract class _User extends User {
-  const factory _User(
-      {final int count,
-      final UnionTimestamp createdAt,
-      @UnionTimestampConverter.alwaysServerTimestampConverter
-      final UnionTimestamp updatedAt}) = _$UserImpl;
+  const factory _User({
+    int count,
+    UnionTimestamp createdAt,
+    @UnionTimestampConverter.alwaysServerTimestampConverter
+    UnionTimestamp updatedAt,
+  }) = _$UserImpl;
   const _User._() : super._();
 
   factory _User.fromJson(Map<String, dynamic> json) = _$UserImpl.fromJson;

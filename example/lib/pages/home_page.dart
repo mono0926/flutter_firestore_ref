@@ -1,11 +1,10 @@
 import 'package:example/app.dart';
 import 'package:example/router.dart';
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:material_ui/material_ui.dart';
 
-class HomePage extends ConsumerWidget {
-  const HomePage({super.key});
+class const HomePage({super.key}) extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(

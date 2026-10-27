@@ -35,7 +35,9 @@ final _myUserDocProvider = StreamProvider.autoDispose(
 final myUserDocProvider = Provider.autoDispose(
   (ref) {
     final doc = ref.watch(_myUserDocProvider).value;
-    return ref.watch(myUserRefProvider).whenData(
+    return ref
+        .watch(myUserRefProvider)
+        .whenData(
           (userRef) =>
               doc ??
               UserDoc(

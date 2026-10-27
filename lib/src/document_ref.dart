@@ -5,14 +5,10 @@ import 'package:meta/meta.dart';
 import 'utils.dart';
 
 @immutable
-class DocumentRef<E, D extends Document<E>> {
-  const DocumentRef({
-    required this.ref,
-    required this.collectionRef,
-  });
-
-  final QueryRef<E, D, DocumentRef<E, D>> collectionRef;
-  final DocumentReference<JsonMap> ref;
+class const DocumentRef<E, D extends Document<E>>({
+  required final DocumentReference<JsonMap> ref,
+  required final QueryRef<E, D, DocumentRef<E, D>> collectionRef,
+}) {
   String get id => ref.id;
 
   Stream<D?> document() {
@@ -38,8 +34,9 @@ class DocumentRef<E, D extends Document<E>> {
     GetOptions? options,
     Transaction? transaction,
   }) async {
-    final snapshot =
-        await (transaction == null ? ref.get(options) : transaction.get(ref));
+    final snapshot = await (transaction == null
+        ? ref.get(options)
+        : transaction.get(ref));
     if (firestoreOperationCounter.enabled) {
       firestoreOperationCounter.recordRead(
         isFromCache: snapshot.metadata.isFromCache,
@@ -47,7 +44,7 @@ class DocumentRef<E, D extends Document<E>> {
     }
     if (!snapshot.exists) {
       logger.warning('$D not found(id: ${ref.id})');
-      return Future.value();
+      return null;
     }
     return collectionRef.decode(
       snapshot,

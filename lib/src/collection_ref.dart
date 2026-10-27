@@ -1,6 +1,5 @@
 import 'package:firestore_ref/firestore_ref.dart';
 import 'package:firestore_ref/src/utils.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:json_converter_helper/json_converter_helper.dart';
 import 'package:meta/meta.dart';
 
@@ -20,15 +19,11 @@ typedef DocRefCreator<
 > = DocRef Function(DocumentReference<JsonMap> ref);
 
 @immutable
-abstract class QueryRef<
+abstract class const QueryRef<
   E,
   D extends Document<E>,
   DocRef extends DocumentRef<E, D>
-> {
-  const QueryRef(this.query);
-
-  final Query<JsonMap> query;
-
+>(final Query<JsonMap> query) {
   D decode(DocumentSnapshot<JsonMap> snapshot, DocRef docRef);
 
   DocRef docRef(DocumentReference<JsonMap> ref);
@@ -147,27 +142,23 @@ abstract class QueryRef<
 }
 
 @immutable
+// ignore: prefer_const_constructors_in_immutables
 abstract class CollectionGroupRef<
   E,
   D extends Document<E>,
   DocRef extends DocumentRef<E, D>
->
-    extends QueryRef<E, D, DocRef> {
-  CollectionGroupRef(String collectionPath)
-    : super(FirebaseFirestore.instance.collectionGroup(collectionPath));
+>(String collectionPath) extends QueryRef<E, D, DocRef> {
+  this : super(FirebaseFirestore.instance.collectionGroup(collectionPath));
 }
 
 @immutable
-abstract class CollectionRef<
+// ignore: use_super_parameters
+abstract class const CollectionRef<
   E,
   D extends Document<E>,
   DocRef extends DocumentRef<E, D>
->
-    extends QueryRef<E, D, DocRef> {
-  const CollectionRef(this.ref) : super(ref);
-
-  final CollectionReference<JsonMap> ref;
-
+>(final CollectionReference<JsonMap> ref) extends QueryRef<E, D, DocRef> {
+  this : super(ref);
   DocRef docRefWithId([String? id]) {
     return docRef(ref.doc(id));
   }
@@ -182,12 +173,8 @@ class DocumentListResult<
   E,
   D extends Document<E>,
   DocRef extends DocumentRef<E, D>
-> {
-  DocumentListResult({required this.list, required this.map});
-  DocumentListResult.empty() : this(list: [], map: {});
-
-  final List<D> list;
-  final Map<DocRef, D> map;
+>({required final List<D> list, required final Map<DocRef, D> map}) {
+  new empty() : this(list: [], map: {});
 
   bool get isEmpty => list.isEmpty && map.isEmpty;
 }

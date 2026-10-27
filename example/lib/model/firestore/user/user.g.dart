@@ -9,16 +9,16 @@ part of 'user.dart';
 // **************************************************************************
 
 _$UserImpl _$$UserImplFromJson(Map json) => _$UserImpl(
-      count: (json['count'] as num?)?.toInt() ?? 0,
-      createdAt: json['createdAt'] == null
-          ? const UnionTimestamp.serverTimestamp()
-          : const UnionTimestampConverter()
-              .fromJson(json['createdAt'] as Object),
-      updatedAt: json['updatedAt'] == null
-          ? const UnionTimestamp.serverTimestamp()
-          : UnionTimestampConverter.alwaysServerTimestampConverter
-              .fromJson(json['updatedAt'] as Object),
-    );
+  count: (json['count'] as num?)?.toInt() ?? 0,
+  createdAt: json['createdAt'] == null
+      ? const UnionTimestamp.serverTimestamp()
+      : const UnionTimestampConverter().fromJson(json['createdAt'] as Object),
+  updatedAt: json['updatedAt'] == null
+      ? const UnionTimestamp.serverTimestamp()
+      : UnionTimestampConverter.alwaysServerTimestampConverter.fromJson(
+          json['updatedAt'] as Object,
+        ),
+);
 
 abstract final class _$$UserImplJsonKeys {
   static const String count = 'count';

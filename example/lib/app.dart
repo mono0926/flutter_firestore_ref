@@ -1,11 +1,10 @@
 import 'package:example/model/service/authenticator.dart';
 import 'package:example/router.dart';
-import 'package:flutter/material.dart' hide Router;
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:material_ui/material_ui.dart' hide Router;
 import 'package:mono_kit/mono_kit.dart';
 
-class App extends ConsumerWidget {
-  const App({super.key});
+class const App({super.key}) extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     ref.watch(signInAnonymouslyProvider);
@@ -28,6 +27,6 @@ class App extends ConsumerWidget {
 
 final appInfo = Provider((_) => AppInfo());
 
-class AppInfo {
+class AppInfo() {
   String get title => 'firestore_ref example';
 }

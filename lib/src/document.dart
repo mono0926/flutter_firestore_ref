@@ -2,14 +2,10 @@ import 'package:firestore_ref/firestore_ref.dart';
 import 'package:meta/meta.dart';
 
 @immutable
-class Document<E> {
-  const Document(
-    this.ref,
-    this.entity,
-  );
-
-  final DocumentRef<E, Document<E>> ref;
-  final E? entity;
+class const Document<E>(
+  final DocumentRef<E, Document<E>> ref,
+  final E? entity,
+) {
   String get id => ref.ref.id;
 
   @override
