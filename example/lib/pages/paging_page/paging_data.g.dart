@@ -8,7 +8,7 @@ part of 'paging_data.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$PagingDataImpl _$$PagingDataImplFromJson(Map json) => _$PagingDataImpl(
+_PagingData _$PagingDataFromJson(Map json) => _PagingData(
   count: (json['count'] as num?)?.toInt() ?? 0,
   createdAt: json['createdAt'] == null
       ? const UnionTimestamp.serverTimestamp()
@@ -20,13 +20,13 @@ _$PagingDataImpl _$$PagingDataImplFromJson(Map json) => _$PagingDataImpl(
         ),
 );
 
-abstract final class _$$PagingDataImplJsonKeys {
+abstract final class _$PagingDataJsonKeys {
   static const String count = 'count';
   static const String createdAt = 'createdAt';
   static const String updatedAt = 'updatedAt';
 }
 
-Map<String, dynamic> _$$PagingDataImplToJson(_$PagingDataImpl instance) =>
+Map<String, dynamic> _$PagingDataToJson(_PagingData instance) =>
     <String, dynamic>{
       'count': instance.count,
       'createdAt': const UnionTimestampConverter().toJson(instance.createdAt),

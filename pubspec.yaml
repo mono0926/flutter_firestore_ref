@@ -3,25 +3,25 @@ description: Firestore reference/document typed access helpers. You can write or
 version: 0.17.1
 homepage: https://github.com/mono0926/flutter_firestore_ref
 environment:
-  sdk: ^3.13.0
-  flutter: '>=3.47.0'
+  sdk: ^3.14.0
+  flutter: '>=3.50.0'
 dependencies:
-  cloud_firestore: ^6.0.0
-  disposable_provider: ^2.3.0
-  firebase_core: ^4.0.0
+  cloud_firestore: '>=6.0.0 <8.0.0'
+  disposable_provider: ^2.5.0
+  firebase_core: '>=4.0.0 <6.0.0'
   flutter:
     sdk: flutter
-  json_annotation: ^4.6.0
-  json_converter_helper: '>=0.1.1 <2.0.0'
+  json_annotation: ^4.12.0
+  json_converter_helper: ^0.2.0
   meta: ^1.3.0
   quiver: ^3.0.0
   rxdart: '>=0.27.0 <1.0.0'
-  simple_logger: ^1.8.0
-  subscription_holder: ^2.1.0
+  simple_logger: ^1.11.0
+  subscription_holder: ^2.3.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  pedantic_mono: ^1.38.1
+  pedantic_mono: ^1.39.0
 false_secrets:
   - google-services.json
   - GoogleService-Info.plist

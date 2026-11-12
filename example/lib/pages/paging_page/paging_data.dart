@@ -7,7 +7,7 @@ part 'paging_data.freezed.dart';
 part 'paging_data.g.dart';
 
 @freezed
-class PagingData with _$PagingData {
+abstract class PagingData with _$PagingData {
   @allJsonConvertersSerializable
   const factory({
     @Default(0) int count,

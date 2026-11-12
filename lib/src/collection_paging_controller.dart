@@ -16,7 +16,7 @@ class CollectionPagingController<
   required QueryBuilder? queryBuilder,
   required int initialSize,
   required final int defaultPagingSize,
-}) with Disposable {
+}) implements Disposable {
   this {
     _sh
       ..add(
