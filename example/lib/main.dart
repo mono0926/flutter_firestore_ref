@@ -1,5 +1,4 @@
 // import 'package:cloud_firestore_platform_interface/cloud_firestore_platform_interface.dart';
-import 'package:cloud_functions/cloud_functions.dart';
 import 'package:example/firebase_options.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -23,7 +22,6 @@ Future<void> main() async {
 
   if (isEmulator) {
     const localhost = 'localhost';
-    FirebaseFunctions.instance.useFunctionsEmulator(localhost, 5001);
     FirebaseFirestore.instance.useFirestoreEmulator(localhost, 8080);
     await Future.wait(
       [
