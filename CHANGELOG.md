@@ -1,3 +1,13 @@
+## 0.18.0 - 2026-11-12
+
+### Breaking Changes
+- Require Dart `^3.14.0` and Flutter `>=3.50.0`
+
+### Maintenance
+- Upgrade dependencies (`disposable_provider: ^2.5.0`, `json_converter_helper: ^0.2.0`, `simple_logger: ^1.11.0`, `subscription_holder: ^2.3.0`, `json_annotation: ^4.12.0`, `pedantic_mono: ^1.39.0`)
+- Widen `cloud_firestore` (`>=6.0.0 <8.0.0`) and `firebase_core` (`>=4.0.0 <6.0.0`) constraints to support the latest major versions
+- Update `CollectionPagingController` to implement `Disposable`
+
 ## 0.17.1 - 2026-10-27
 
 ### Maintenance
