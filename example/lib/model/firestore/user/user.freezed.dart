@@ -1,6 +1,6 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: type=lint
+// coverage:ignore-file
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'user.dart';
@@ -9,240 +9,332 @@ part of 'user.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// dart format off
 T _$identity<T>(T value) => value;
 
-final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
+/// @nodoc
+mixin _$User implements DiagnosticableTreeMixin {
 
-User _$UserFromJson(Map<String, dynamic> json) {
-  return _User.fromJson(json);
+ int get count; UnionTimestamp get createdAt;@UnionTimestampConverter.alwaysServerTimestampConverter UnionTimestamp get updatedAt;
+/// Create a copy of User
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$UserCopyWith<User> get copyWith => _$UserCopyWithImpl<User>(this as User, _$identity);
+
+  /// Serializes this User to a JSON map.
+  Map<String, dynamic> toJson();
+
+@override
+void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+  final _this = this as User;
+  properties
+    ..add(DiagnosticsProperty('type', 'User'))
+    ..add(DiagnosticsProperty('count', _this.count))..add(DiagnosticsProperty('createdAt', _this.createdAt))..add(DiagnosticsProperty('updatedAt', _this.updatedAt));
+}
+
+@override
+bool operator ==(Object other) {
+  final _this = this as User;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is User&&(identical(other.count, _this.count) || other.count == _this.count)&&(identical(other.createdAt, _this.createdAt) || other.createdAt == _this.createdAt)&&(identical(other.updatedAt, _this.updatedAt) || other.updatedAt == _this.updatedAt));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode {
+  final _this = this as User;
+  return Object.hash(runtimeType,_this.count,_this.createdAt,_this.updatedAt);
+}
+
+@override
+String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
+  final _this = this as User;
+  return 'User(count: ${_this.count}, createdAt: ${_this.createdAt}, updatedAt: ${_this.updatedAt})';
+}
+
+
 }
 
 /// @nodoc
-mixin _$User {
-  int get count => throw _privateConstructorUsedError;
-  UnionTimestamp get createdAt => throw _privateConstructorUsedError;
-  @UnionTimestampConverter.alwaysServerTimestampConverter
-  UnionTimestamp get updatedAt => throw _privateConstructorUsedError;
+abstract mixin class $UserCopyWith<$Res>  {
+  factory $UserCopyWith(User value, $Res Function(User) _then) = _$UserCopyWithImpl;
+@useResult
+$Res call({
+ int count, UnionTimestamp createdAt,@UnionTimestampConverter.alwaysServerTimestampConverter UnionTimestamp updatedAt
+});
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $UserCopyWith<User> get copyWith => throw _privateConstructorUsedError;
+
+$UnionTimestampCopyWith<$Res> get createdAt;$UnionTimestampCopyWith<$Res> get updatedAt;
+
 }
-
 /// @nodoc
-abstract class $UserCopyWith<$Res> {
-  factory $UserCopyWith(User value, $Res Function(User) then) =
-      _$UserCopyWithImpl<$Res, User>;
-  @useResult
-  $Res call({
-    int count,
-    UnionTimestamp createdAt,
-    @UnionTimestampConverter.alwaysServerTimestampConverter
-    UnionTimestamp updatedAt,
-  });
-
-  $UnionTimestampCopyWith<$Res> get createdAt;
-  $UnionTimestampCopyWith<$Res> get updatedAt;
-}
-
-/// @nodoc
-class _$UserCopyWithImpl<$Res, $Val extends User>
+class _$UserCopyWithImpl<$Res>
     implements $UserCopyWith<$Res> {
-  _$UserCopyWithImpl(this._value, this._then);
+  _$UserCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final User _self;
+  final $Res Function(User) _then;
 
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? count = null,
-    Object? createdAt = null,
-    Object? updatedAt = null,
-  }) {
-    return _then(
-      _value.copyWith(
-        count: null == count
-            ? _value.count
-            : count // ignore: cast_nullable_to_non_nullable
-                  as int,
-        createdAt: null == createdAt
-            ? _value.createdAt
-            : createdAt // ignore: cast_nullable_to_non_nullable
-                  as UnionTimestamp,
-        updatedAt: null == updatedAt
-            ? _value.updatedAt
-            : updatedAt // ignore: cast_nullable_to_non_nullable
-                  as UnionTimestamp,
-      ) as $Val,
-    );
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $UnionTimestampCopyWith<$Res> get createdAt {
-    return $UnionTimestampCopyWith<$Res>(_value.createdAt, (value) {
-      return _then(_value.copyWith(createdAt: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $UnionTimestampCopyWith<$Res> get updatedAt {
-    return $UnionTimestampCopyWith<$Res>(_value.updatedAt, (value) {
-      return _then(_value.copyWith(updatedAt: value) as $Val);
-    });
-  }
+/// Create a copy of User
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? count = null,Object? createdAt = null,Object? updatedAt = null,}) {
+  return _then(User(
+count: null == count ? _self.count : count // ignore: cast_nullable_to_non_nullable
+as int,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
+as UnionTimestamp,updatedAt: null == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
+as UnionTimestamp,
+  ));
 }
-
-/// @nodoc
-abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
-  factory _$$UserImplCopyWith(
-    _$UserImpl value,
-    $Res Function(_$UserImpl) then,
-  ) = __$$UserImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({
-    int count,
-    UnionTimestamp createdAt,
-    @UnionTimestampConverter.alwaysServerTimestampConverter
-    UnionTimestamp updatedAt,
+/// Create a copy of User
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$UnionTimestampCopyWith<$Res> get createdAt {
+  
+  return $UnionTimestampCopyWith<$Res>(_self.createdAt, (value) {
+    return _then(_self.copyWith(createdAt: value));
   });
-
-  @override
-  $UnionTimestampCopyWith<$Res> get createdAt;
-  @override
-  $UnionTimestampCopyWith<$Res> get updatedAt;
+}/// Create a copy of User
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$UnionTimestampCopyWith<$Res> get updatedAt {
+  
+  return $UnionTimestampCopyWith<$Res>(_self.updatedAt, (value) {
+    return _then(_self.copyWith(updatedAt: value));
+  });
+}
 }
 
-/// @nodoc
-class __$$UserImplCopyWithImpl<$Res>
-    extends _$UserCopyWithImpl<$Res, _$UserImpl>
-    implements _$$UserImplCopyWith<$Res> {
-  __$$UserImplCopyWithImpl(_$UserImpl _value, $Res Function(_$UserImpl) _then)
-    : super(_value, _then);
 
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? count = null,
-    Object? createdAt = null,
-    Object? updatedAt = null,
-  }) {
-    return _then(
-      _$UserImpl(
-        count: null == count
-            ? _value.count
-            : count // ignore: cast_nullable_to_non_nullable
-                  as int,
-        createdAt: null == createdAt
-            ? _value.createdAt
-            : createdAt // ignore: cast_nullable_to_non_nullable
-                  as UnionTimestamp,
-        updatedAt: null == updatedAt
-            ? _value.updatedAt
-            : updatedAt // ignore: cast_nullable_to_non_nullable
-                  as UnionTimestamp,
-      ),
-    );
-  }
+/// Adds pattern-matching-related methods to [User].
+extension UserPatterns on User {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _User value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _User() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _User value)  $default,){
+final _that = this;
+switch (_that) {
+case _User():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _User value)?  $default,){
+final _that = this;
+switch (_that) {
+case _User() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int count,  UnionTimestamp createdAt, @UnionTimestampConverter.alwaysServerTimestampConverter  UnionTimestamp updatedAt)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _User() when $default != null:
+return $default(_that.count,_that.createdAt,_that.updatedAt);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int count,  UnionTimestamp createdAt, @UnionTimestampConverter.alwaysServerTimestampConverter  UnionTimestamp updatedAt)  $default,) {final _that = this;
+switch (_that) {
+case _User():
+return $default(_that.count,_that.createdAt,_that.updatedAt);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int count,  UnionTimestamp createdAt, @UnionTimestampConverter.alwaysServerTimestampConverter  UnionTimestamp updatedAt)?  $default,) {final _that = this;
+switch (_that) {
+case _User() when $default != null:
+return $default(_that.count,_that.createdAt,_that.updatedAt);case _:
+  return null;
+
+}
+}
+
 }
 
 /// @nodoc
 
 @allJsonConvertersSerializable
-class _$UserImpl extends _User with DiagnosticableTreeMixin {
-  const _$UserImpl({
-    this.count = 0,
-    this.createdAt = const UnionTimestamp.serverTimestamp(),
-    @UnionTimestampConverter.alwaysServerTimestampConverter
-    this.updatedAt = const UnionTimestamp.serverTimestamp(),
-  }) : super._();
+class _User extends User with DiagnosticableTreeMixin {
+  const _User({this.count = 0, this.createdAt = const UnionTimestamp.serverTimestamp(), @UnionTimestampConverter.alwaysServerTimestampConverter this.updatedAt = const UnionTimestamp.serverTimestamp()}): super._();
+  factory _User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 
-  factory _$UserImpl.fromJson(Map<String, dynamic> json) =>
-      _$$UserImplFromJson(json);
+@override@JsonKey() final  int count;
+@override@JsonKey() final  UnionTimestamp createdAt;
+@override@JsonKey()@UnionTimestampConverter.alwaysServerTimestampConverter final  UnionTimestamp updatedAt;
 
-  @override
-  @JsonKey()
-  final int count;
-  @override
-  @JsonKey()
-  final UnionTimestamp createdAt;
-  @override
-  @JsonKey()
-  @UnionTimestampConverter.alwaysServerTimestampConverter
-  final UnionTimestamp updatedAt;
+/// Create a copy of User
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$UserCopyWith<_User> get copyWith => __$UserCopyWithImpl<_User>(this, _$identity);
 
-  @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'User(count: $count, createdAt: $createdAt, updatedAt: $updatedAt)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
+@override
+Map<String, dynamic> toJson() {
+  return _$UserToJson(this, );
+}
+@override
+void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     properties
-      ..add(DiagnosticsProperty('type', 'User'))
-      ..add(DiagnosticsProperty('count', count))
-      ..add(DiagnosticsProperty('createdAt', createdAt))
-      ..add(DiagnosticsProperty('updatedAt', updatedAt));
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$UserImpl &&
-            (identical(other.count, count) || other.count == count) &&
-            (identical(other.createdAt, createdAt) ||
-                other.createdAt == createdAt) &&
-            (identical(other.updatedAt, updatedAt) ||
-                other.updatedAt == updatedAt));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(runtimeType, count, createdAt, updatedAt);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$UserImplCopyWith<_$UserImpl> get copyWith =>
-      __$$UserImplCopyWithImpl<_$UserImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$UserImplToJson(
-      this,
-    );
-  }
+    ..add(DiagnosticsProperty('type', 'User'))
+    ..add(DiagnosticsProperty('count', count))..add(DiagnosticsProperty('createdAt', createdAt))..add(DiagnosticsProperty('updatedAt', updatedAt));
 }
 
-abstract class _User extends User {
-  const factory _User({
-    int count,
-    UnionTimestamp createdAt,
-    @UnionTimestampConverter.alwaysServerTimestampConverter
-    UnionTimestamp updatedAt,
-  }) = _$UserImpl;
-  const _User._() : super._();
-
-  factory _User.fromJson(Map<String, dynamic> json) = _$UserImpl.fromJson;
-
-  @override
-  int get count;
-  @override
-  UnionTimestamp get createdAt;
-  @override
-  @UnionTimestampConverter.alwaysServerTimestampConverter
-  UnionTimestamp get updatedAt;
-  @override
-  @JsonKey(ignore: true)
-  _$$UserImplCopyWith<_$UserImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+@override
+bool operator ==(Object other) {
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _User&&(identical(other.count, count) || other.count == count)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
 }
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode {
+    return Object.hash(runtimeType,count,createdAt,updatedAt);
+}
+
+@override
+String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
+    return 'User(count: $count, createdAt: $createdAt, updatedAt: $updatedAt)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$UserCopyWith<$Res> implements $UserCopyWith<$Res> {
+  factory _$UserCopyWith(_User value, $Res Function(_User) _then) = __$UserCopyWithImpl;
+@override @useResult
+$Res call({
+ int count, UnionTimestamp createdAt,@UnionTimestampConverter.alwaysServerTimestampConverter UnionTimestamp updatedAt
+});
+
+
+@override $UnionTimestampCopyWith<$Res> get createdAt;@override $UnionTimestampCopyWith<$Res> get updatedAt;
+
+}
+/// @nodoc
+class __$UserCopyWithImpl<$Res>
+    implements _$UserCopyWith<$Res> {
+  __$UserCopyWithImpl(this._self, this._then);
+
+  final _User _self;
+  final $Res Function(_User) _then;
+
+/// Create a copy of User
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? count = null,Object? createdAt = null,Object? updatedAt = null,}) {
+  return _then(_User(
+count: null == count ? _self.count : count // ignore: cast_nullable_to_non_nullable
+as int,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
+as UnionTimestamp,updatedAt: null == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
+as UnionTimestamp,
+  ));
+}
+
+/// Create a copy of User
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$UnionTimestampCopyWith<$Res> get createdAt {
+  
+  return $UnionTimestampCopyWith<$Res>(_self.createdAt, (value) {
+    return _then(_self.copyWith(createdAt: value));
+  });
+}/// Create a copy of User
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$UnionTimestampCopyWith<$Res> get updatedAt {
+  
+  return $UnionTimestampCopyWith<$Res>(_self.updatedAt, (value) {
+    return _then(_self.copyWith(updatedAt: value));
+  });
+}
+}
+
+// dart format on

@@ -10,7 +10,7 @@ part 'user.g.dart';
 final usersRefProvider = Provider((ref) => UsersRef());
 
 @freezed
-class const User._() with _$User {
+abstract class const User._() with _$User {
   @allJsonConvertersSerializable
   const factory({
     @Default(0) int count,

@@ -8,7 +8,7 @@ part of 'user.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$UserImpl _$$UserImplFromJson(Map json) => _$UserImpl(
+_User _$UserFromJson(Map json) => _User(
   count: (json['count'] as num?)?.toInt() ?? 0,
   createdAt: json['createdAt'] == null
       ? const UnionTimestamp.serverTimestamp()
@@ -20,16 +20,16 @@ _$UserImpl _$$UserImplFromJson(Map json) => _$UserImpl(
         ),
 );
 
-abstract final class _$$UserImplJsonKeys {
+abstract final class _$UserJsonKeys {
   static const String count = 'count';
   static const String createdAt = 'createdAt';
   static const String updatedAt = 'updatedAt';
 }
 
-Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
-    <String, dynamic>{
-      'count': instance.count,
-      'createdAt': const UnionTimestampConverter().toJson(instance.createdAt),
-      'updatedAt': UnionTimestampConverter.alwaysServerTimestampConverter
-          .toJson(instance.updatedAt),
-    };
+Map<String, dynamic> _$UserToJson(_User instance) => <String, dynamic>{
+  'count': instance.count,
+  'createdAt': const UnionTimestampConverter().toJson(instance.createdAt),
+  'updatedAt': UnionTimestampConverter.alwaysServerTimestampConverter.toJson(
+    instance.updatedAt,
+  ),
+};
